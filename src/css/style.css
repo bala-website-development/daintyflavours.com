@@ -221,7 +221,8 @@ html {
 }
 body {
   background-color: #fff;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
+  font-family: "Saira", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #0a0a0a;
@@ -346,7 +347,7 @@ h4,
 h5,
 h6 {
   color: #282828;
-  font-family: "Amita", sans-serif;
+  /* font-family: "Amita", sans-serif; */
 }
 h1 a,
 h2 a,
@@ -3358,7 +3359,7 @@ blockquote cite {
   font-weight: 700;
   line-height: 20px;
   display: inline-block;
-  font-family: roboto;
+  /* font-family: roboto; */
   text-transform: capitalize;
 }
 .header-nav .nav > li > a:hover {
@@ -11166,7 +11167,7 @@ footer .widget_services ul li {
   font-weight: 700;
   color: #242425;
   margin-bottom: 25px;
-  font-family: "Amita", sans-serif;
+  /* font-family: "Amita", sans-serif; */
 }
 .widget_services .list-2 li {
   padding: 0;
@@ -11400,7 +11401,7 @@ footer.footer-white .footer-bottom a {
 .section-head h2,
 .section-head h3 {
   margin-top: 0;
-  font-family: "Amita", sans-serif;
+  /* font-family: "Amita", sans-serif; */
 }
 .title-small {
   display: block;
@@ -11466,7 +11467,7 @@ footer.footer-white .footer-bottom a {
   font-weight: 900;
   display: block;
   line-height: 1;
-  font-family: "Amita", sans-serif;
+  /* font-family: "Amita", sans-serif; */
 }
 .page-notfound .searchform {
   position: relative;

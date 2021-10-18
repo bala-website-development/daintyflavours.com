@@ -129,7 +129,7 @@ h4,
 h5,
 h6 {
   color: #282828;
-  font-family: "Amita", sans-serif !important;
+  /* font-family: "Amita", sans-serif !important; */
 }
 h1 a,
 h2 a,
