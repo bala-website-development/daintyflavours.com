@@ -114,7 +114,7 @@ const Index1 = () => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
-                    <h2 className="text-white">ABOUT QUILTING?</h2>
+                    <h2 className="text-white">ABOUT SUKHA?</h2>
                     <div className="dlab-separator style1 bg-primary"></div>
                   </div>
                 </div>
