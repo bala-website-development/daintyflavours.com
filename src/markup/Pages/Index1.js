@@ -73,7 +73,7 @@ const Index1 = () => {
             </div>
           </div>
           <p className="main-text"> </p>
-          <div className="section-full mb-5" style={{ backgroundImage: "url(" + img1 + ")", backgroundSize: "100%" }}>
+          <div className="section-full mb-5">
             <div className="container">
               <div className="row service-area1">
                 {latestCat &&
@@ -169,7 +169,7 @@ const Index1 = () => {
               </div>
             </div>
           </div>
-          <div className="section-full my-5 bg-gray" style={{ backgroundImage: "url(" + img2 + ")", backgroundSize: "100%" }}>
+          <div className="section-full my-5 ">
             <div className="container">
               <div className="row faq-area1">
                 <div className="col-lg-12 m-b20">
@@ -264,7 +264,7 @@ const Index1 = () => {
             </div>
           </div>
 
-          <div className="section-full bg-white" style={{ backgroundImage: "url(" + img3 + ")", backgroundSize: "100%" }}>
+          <div className="section-full bg-white">
             <div className="container ">
               <div className="row">
                 <div className="col-lg-12">

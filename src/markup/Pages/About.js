@@ -68,7 +68,7 @@ class About extends Component {
           </div>
 
           <div className="content-block">
-            <div className="section-full bg-white content-inner" style={{ backgroundImage: "url(" + img3 + ")", backgroundSize: "100%" }}>
+            <div className="section-full bg-white content-inner">
               <div className="container">
                 <div className="row">
                   <div className="col-lg-12">

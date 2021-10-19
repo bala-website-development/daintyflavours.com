@@ -74,7 +74,7 @@ const Contact = () => {
           </div>
         </div>
         <div className="content-block">
-          <div className="section-full content-inner-2 contact-form bg-white" style={{ backgroundImage: "url(" + bgimg2 + ")", backgroundSize: "100%" }}>
+          <div className="section-full content-inner-2 contact-form bg-white">
             <div className="container">
               <div className="row">
                 <div className="col-xl-6 col-lg-6 col-md-6 d-flex m-md-b30 m-lg-b30">
