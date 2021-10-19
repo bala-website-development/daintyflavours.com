@@ -4,12 +4,13 @@
 
 :root {
   --color-primary: #d34b6f;
-  --color-secondry: #f4bb41;
-  --color-button: #f4bb41;
+  --color-secondry: #e7d2f0;
+  --color-button: #e7d2f0;
   --color-hover: #f0557f;
   --color-primary-opacity: rgba(246, 22, 70, 0.303);
 }
 .main-bar {
+  /* background-color: #f4bb41 !important; */
   background-color: #e7d2f0 !important;
 }
 /* Hex */
@@ -82,6 +83,7 @@
 .fc-button.fc-state-default {
   background-color: var(--color-button);
   border-radius: 1px !important;
+  color: #141719;
 }
 
 /*Hex color :hover */
