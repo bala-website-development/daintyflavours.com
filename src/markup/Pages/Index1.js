@@ -114,7 +114,7 @@ const Index1 = () => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
-                    <h2 className="text-white">ABOUT QUILTING?</h2>
+                    <h2 className="text-white">ABOUT SUKHA?</h2>
                     <div className="dlab-separator style1 bg-primary"></div>
                   </div>
                 </div>
@@ -172,7 +172,7 @@ const Index1 = () => {
           <div className="section-full my-5 bg-gray" style={{ backgroundImage: "url(" + img2 + ")", backgroundSize: "100%" }}>
             <div className="container">
               <div className="row faq-area1">
-                <div className="col-lg-6 m-b20">
+                <div className="col-lg-12 m-b20">
                   <div className="m-r20">
                     <div className="section-head text-left">
                       <h2>Why Tsala..?</h2>
@@ -205,13 +205,13 @@ const Index1 = () => {
                         </div>
                       </div>
 
-                      <Link to={"/our-services"} className="btn btn-md btnhover shadow m-t30">
+                      <Link to={"/our-services"} className="btn btn-md btnhover shadow m-t30 d-none">
                         <i className="fa fa-angle-right m-r10"></i>Get Started
                       </Link>
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 m-b30">
+                <div className="col-lg-6 m-b30 d-none">
                   <Accord />
                 </div>
               </div>

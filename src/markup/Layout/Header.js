@@ -42,10 +42,9 @@ const Header = (props) => {
       <div className="sticky-header main-bar-wraper navbar-expand-lg">
         <div className="main-bar clearfix ">
           <div className="container clearfix d-flex align-items-center justify-content-end">
-            <div className="logo-header mostion ">
+            <div className="logo-header mostion shadow ">
               <Link to={"/"} className="dez-page">
-                <img src={config.logo} alt="" class="d-none" />
-                <b>SUKHA</b>
+                <img src={config.logo} alt="sukhaa" />
               </Link>
             </div>
             <button className="navbar-toggler collapsed navicon justify-content-end" type="button" onClick={toggle} data-toggle="collapse" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,10 +55,9 @@ const Header = (props) => {
 
             <div className={`header-nav navbar-collapse navbar myNavbar collapse justify-content-between ${toggleShow ? "show" : "hide"}`} id="navbarNavDropdown">
               {toggleShow === true && (
-                <div className="logo-header mostion">
+                <div className="logo-header mostion shadow">
                   <Link to={"/"} className="dez-page">
-                    <img src={config.logo} alt="" class="d-none" />
-                    <b>SUKHA</b>
+                    <img src={config.logo} alt="sukhaa" />
                   </Link>
                 </div>
               )}
