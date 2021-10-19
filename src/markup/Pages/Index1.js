@@ -114,16 +114,16 @@ const Index1 = () => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
-                    <h2 className="text-white">ABOUT SUKHA?</h2>
+                    <h2 className="text-white">Our Service</h2>
                     <div className="dlab-separator style1 bg-primary"></div>
                   </div>
                 </div>
               </div>
               <div className="row">
-                <div className="col-lg-4 m-b30">
+                <div className="col-lg-4 m-b30 d-none">
                   <img src={pic1} className="img-cover1 radius-sm" alt="tsalastudio" />
                 </div>
-                <div className="col-lg-8">
+                <div className="col-lg-12">
                   <div className="row p-l30">
                     <div className="col-lg-6 col-sm-6 m-b30">
                       <div className="icon-bx-wraper text-white service-box2">
@@ -175,7 +175,7 @@ const Index1 = () => {
                 <div className="col-lg-12 m-b20">
                   <div className="m-r20">
                     <div className="section-head text-left">
-                      <h2>Why Tsala..?</h2>
+                      <h2>Our Latest Prodcuts</h2>
                       <p className="text-bold">At Tsala, we conduct classes for the craft enthusiasts to learn:</p>
                       <div className="dlab-separator style1 bg-primary"></div>
                     </div>
