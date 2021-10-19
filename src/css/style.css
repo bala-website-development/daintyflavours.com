@@ -3176,7 +3176,7 @@ blockquote cite {
 ---------------------------------------------------------------*/
 /*=== >logo for header ===*/
 .logo-header {
-  display: table;
+  /* display: table; */
   float: left;
   vertical-align: middle;
   padding: 0;

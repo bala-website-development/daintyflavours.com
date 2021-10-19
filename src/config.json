@@ -1,6 +1,6 @@
 {
-  "domain": "sukha",
-  "storage": "sukha",
+  "domain": "SUKHAA",
+  "storage": "SUKHAA",
   "service_url": "https://asia-south1-tucfbclouddb.cloudfunctions.net/tuc_shop_node_api/api/",
   "admin_url": "https://www.theuniquecreations.com/login/",
   "email_service_url": "https://asia-south1-tucfbclouddb.cloudfunctions.net/tuc_shop_node_api/email/",
@@ -8,18 +8,18 @@
   "service_url_dev": "https://asia-south1-tuc-shopping-dev.cloudfunctions.net/tuc_shop_node_api/api/",
   "admin_url_local": "http://localhost:3001/login/",
   "service_url_local": "http://localhost:8000/api/",
-  "logo": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/tsalastudio.com%2Flogo%2Flogo.jpeg?alt=media&token=2a0ea36d-d6b0-4ad3-8701-a4daa8dda261",
+  "logo": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fsukhaalogo.png?alt=media&token=6bf3b1af-a5f1-4d24-b3d8-2725caa38e70",
   "slider": [
     {
       "title": "Sukha",
-      "prefix": "Bengaluru",
-      "description": "Quilting | Craft Classes | Hobby Studio | Studio Rent Out | Longarm Services",
+      "prefix": "Maharastra",
+      "description": "Variety or sarees",
       "image_url": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/tsalastudio.com%2Fslider%2Fslide1.jpg?alt=media&token=0e2cb2a5-d187-4086-ae43-52d92d417544"
     },
     {
-      "title": "Join our Course",
-      "prefix": "Bengaluru",
-      "description": "Quilting | Craft Classes | Hobby Studio | Studio Rent Out | Longarm Services",
+      "title": "Sukha",
+      "prefix": "Maharastra",
+      "description": "Variety or sarees",
       "image_url": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/tsalastudio.com%2Fslider%2Fslide2.jpg?alt=media&token=3ecce1a6-e10a-4649-bac9-cc81d3a7e882"
     }
   ],

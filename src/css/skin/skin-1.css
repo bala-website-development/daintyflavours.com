@@ -3,14 +3,14 @@
 =====================*/
 
 :root {
-  --color-primary: #a25502;
+  --color-primary: #d34b6f;
   --color-secondry: #f4bb41;
   --color-button: #f4bb41;
-  --color-hover: #a25502;
-  --color-primary-opacity: rgba(41, 148, 174, 0.15);
+  --color-hover: #f0557f;
+  --color-primary-opacity: rgba(246, 22, 70, 0.303);
 }
 .main-bar {
-  background-color: #f4bb41 !important;
+  background-color: #e7d2f0 !important;
 }
 /* Hex */
 .bg-primary,
@@ -81,6 +81,7 @@
 .fc-button.fc-state-active,
 .fc-button.fc-state-default {
   background-color: var(--color-button);
+  border-radius: 1px !important;
 }
 
 /*Hex color :hover */
