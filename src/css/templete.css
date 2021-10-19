@@ -19,7 +19,7 @@
 }
 
 .main-slider .slide {
-  height: 650px;
+  height: 550px;
   background-position: center;
   position: relative;
   background-size: cover;
@@ -372,7 +372,8 @@
 /* Service Box 1 */
 .service-area1 {
   position: relative;
-  top: -80px;
+  /* top: -80px; */
+  margin-top: 20px;
 }
 .service-box1 {
   margin-bottom: 20px;
@@ -380,7 +381,7 @@
   box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
-  height: 500px;
+  height: 300px;
   display: flex;
   align-items: flex-end;
   transition: all 0.2s ease-in-out;

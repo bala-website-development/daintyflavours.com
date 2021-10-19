@@ -1,6 +1,6 @@
 {
-  "domain": "sakhi",
-  "storage": "sakhi",
+  "domain": "sukha",
+  "storage": "sukha",
   "service_url": "https://asia-south1-tucfbclouddb.cloudfunctions.net/tuc_shop_node_api/api/",
   "admin_url": "https://www.theuniquecreations.com/login/",
   "email_service_url": "https://asia-south1-tucfbclouddb.cloudfunctions.net/tuc_shop_node_api/email/",
@@ -11,7 +11,7 @@
   "logo": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/tsalastudio.com%2Flogo%2Flogo.jpeg?alt=media&token=2a0ea36d-d6b0-4ad3-8701-a4daa8dda261",
   "slider": [
     {
-      "title": "Sakhi",
+      "title": "Sukha",
       "prefix": "Bengaluru",
       "description": "Quilting | Craft Classes | Hobby Studio | Studio Rent Out | Longarm Services",
       "image_url": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/tsalastudio.com%2Fslider%2Fslide1.jpg?alt=media&token=0e2cb2a5-d187-4086-ae43-52d92d417544"
@@ -23,7 +23,7 @@
       "image_url": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/tsalastudio.com%2Fslider%2Fslide2.jpg?alt=media&token=3ecce1a6-e10a-4649-bac9-cc81d3a7e882"
     }
   ],
-  "aboutustitle": "About Sakhi",
+  "aboutustitle": "About Sukha",
   "aboutus1": "Quilting | Craft Classes | Hobby Studio | Studio Rent Out | Longarm Services",
   "aboutus2": "Join us to learn the craft of Quilting, Stitching, Tailoring, Bag Making, Knitting, Crocheting, Hand Embroidery, Tatting and many other craft classes in Bengaluru.",
   "aboutus_aboutpage": "Set up in Dec 2015 by Vatsala Kamat, Tsala literally means F.R.I.E.N.D.S…! And thats what Tsala Studio is for, an idealistic adda located in the heart of Bengaluru for all hobby enthusiasts & quilting friends to get together!",
@@ -35,8 +35,8 @@
   "contact_phone1": "+91 96662 64571",
   "contact_phone2": "+91 96662 64571",
   "contact_address": "301, Vespers, Eagle Street,Langford Town, Bengaluru, KA 560025",
-  "contact_email": "tsalastudio@gmail.com",
+  "contact_email": "deepikajain256@gmail.com",
   "contact_name": "Deepika Jain",
   "fromemail": "info@theuniquecreations.com",
-  "subject": "Sakhi - Contact Us - "
+  "subject": "Sukha - Contact Us - "
 }

@@ -3,12 +3,15 @@
 =====================*/
 
 :root {
-  --color-primary: #2994ae;
-  --color-secondry: #2994ae;
-  --color-hover: #185261;
+  --color-primary: #a25502;
+  --color-secondry: #f4bb41;
+  --color-button: #f4bb41;
+  --color-hover: #a25502;
   --color-primary-opacity: rgba(41, 148, 174, 0.15);
 }
-
+.main-bar {
+  background-color: #f4bb41 !important;
+}
 /* Hex */
 .bg-primary,
 .about-bx,
@@ -77,7 +80,7 @@
 .fc-button.fc-state-down,
 .fc-button.fc-state-active,
 .fc-button.fc-state-default {
-  background-color: var(--color-primary);
+  background-color: var(--color-button);
 }
 
 /*Hex color :hover */

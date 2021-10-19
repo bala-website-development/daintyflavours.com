@@ -67,6 +67,12 @@ const Index1 = () => {
       <div className="page-content bg-white">
         <div className="content-block">
           <Slider />
+          <div className="section-head mb-0 text-center">
+            <div className="my-4">
+              <h3 className="text-primary">Product Categories</h3>
+            </div>
+          </div>
+          <p className="main-text"> </p>
           <div className="section-full mb-5" style={{ backgroundImage: "url(" + img1 + ")", backgroundSize: "100%" }}>
             <div className="container">
               <div className="row service-area1">
@@ -87,7 +93,7 @@ const Index1 = () => {
                   ))}
               </div>
               <div className="row">
-                <div className="col-lg-8">
+                <div className="col-lg-12">
                   <div className="section-head mb-0 text-center">
                     <div className="my-4">
                       <img className="rounded" width="200px" src={config.logo} alt="" />
@@ -95,13 +101,11 @@ const Index1 = () => {
                     <h3 className="text-primary">{config.aboutustitle}</h3>
                     <p className="main-text">{config.aboutus1} </p>
                     <p>{config.aboutus2}</p>
-                    <div>
+                    <div className="d-none">
                       <A_Newsletter />
                     </div>
                   </div>
                 </div>
-
-                <SideBar fromhome={true}></SideBar>
               </div>
             </div>
           </div>
