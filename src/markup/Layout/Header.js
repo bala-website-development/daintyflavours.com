@@ -44,7 +44,8 @@ const Header = (props) => {
           <div className="container clearfix d-flex align-items-center justify-content-end">
             <div className="logo-header mostion ">
               <Link to={"/"} className="dez-page">
-                <img className="" src={config.logo} alt="" />
+                <img src={config.logo} alt="" class="d-none" />
+                <b>SUKHA</b>
               </Link>
             </div>
             <button className="navbar-toggler collapsed navicon justify-content-end" type="button" onClick={toggle} data-toggle="collapse" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +58,8 @@ const Header = (props) => {
               {toggleShow === true && (
                 <div className="logo-header mostion">
                   <Link to={"/"} className="dez-page">
-                    <img src={config.logo} alt="" />
+                    <img src={config.logo} alt="" class="d-none" />
+                    <b>SUKHA</b>
                   </Link>
                 </div>
               )}
@@ -94,16 +96,16 @@ const Header = (props) => {
                   <li className={props?.active === "about" ? "active" : ""}>
                     <Link to={"/about-1"}>About Us</Link>
                   </li>
-                  <li className={props?.active === "service" ? "active" : ""}>
+                  {/* <li className={props?.active === "service" ? "active" : ""}>
                     <Link to={"/our-services"}>Course</Link>
-                  </li>
+                  </li> */}
                   {/* <li className={props?.active === "menu" ? "active" : ""}>
                     <Link to={"/our-menu-1"}>Menu</Link>
                   </li> */}
 
-                  <li className={props?.active === "shop" ? "active" : ""}>
+                  {/* <li className={props?.active === "shop" ? "active" : ""}>
                     <Link to={"/blog-half-img-sidebar"}>Blog</Link>
-                  </li>
+                  </li> */}
                   <li className={props?.active === "shop" ? "active" : ""}>
                     <Link to={"/shop"}>Products</Link>
                     {/* <ul className="sub-menu">
@@ -182,16 +184,16 @@ const Header = (props) => {
                     </li>
                   </ul> */}
                     </li>
-                    <li className={props?.active === "service" ? "active" : ""}>
+                    {/* <li className={props?.active === "service" ? "active" : ""}>
                       <Link to={"/our-services"}>Course</Link>
-                    </li>
+                    </li> */}
                     {/* <li className={props?.active === "menu" ? "active" : ""}>
                       <Link to={"/our-menu-1"}>Menu</Link>
                     </li> */}
 
-                    <li className={props?.active === "blog" ? "active" : ""}>
+                    {/* <li className={props?.active === "blog" ? "active" : ""}>
                       <Link to={"/blog-half-img-sidebar"}>Blog</Link>
-                    </li>
+                    </li> */}
                     <li className={props?.active === "shop" ? "active" : ""}>
                       <Link to={"/shop"}>Products</Link>
                     </li>

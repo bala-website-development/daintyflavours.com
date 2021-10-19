@@ -19,7 +19,7 @@
 }
 
 .main-slider .slide {
-  height: 650px;
+  height: 550px;
   background-position: center;
   position: relative;
   background-size: cover;
@@ -39,7 +39,7 @@
   margin-bottom: 15px;
   display: block;
   color: #fff;
-  font-family: "Amita", sans-serif;
+  /* font-family: "Amita", sans-serif; */
   font-weight: 700;
 }
 .main-slider .title {
@@ -128,11 +128,11 @@
 
 /* Header */
 .header-style-2 .header-nav .nav > li > a {
-  font-family: "Amita", sans-serif;
+  font-family: "Saira", sans-serif;
 }
 .header-style-2 .main-bar:after {
   content: "";
-  background-image: url(../images/border.png);
+  /* background-image: url(../images/border.png); */
   position: absolute;
   bottom: -18px;
   width: 100%;
@@ -316,7 +316,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  background-image: url(../images/bg1.png);
+  /* background-image: url(../images/bg1.png); */
   background-size: 99px;
   height: 20px;
   background-position: top;
@@ -334,7 +334,7 @@
   top: -5px;
   left: 0;
   width: 100%;
-  background-image: url(../images/bg1.png);
+  /* background-image: url(../images/bg1.png); */
   height: 20px;
   background-position: top;
   background-repeat: repeat-x;
@@ -347,7 +347,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  background-image: url(../images/bg1.png);
+  /* background-image: url(../images/bg1.png); */
   background-size: 95px;
   height: 20px;
   background-position: top;
@@ -372,7 +372,8 @@
 /* Service Box 1 */
 .service-area1 {
   position: relative;
-  top: -80px;
+  /* top: -80px; */
+  margin-top: 20px;
 }
 .service-box1 {
   margin-bottom: 20px;
@@ -380,7 +381,7 @@
   box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
-  height: 500px;
+  height: 300px;
   display: flex;
   align-items: flex-end;
   transition: all 0.2s ease-in-out;

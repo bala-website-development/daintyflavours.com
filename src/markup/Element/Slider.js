@@ -19,9 +19,7 @@ const Slider = () => {
                   <span>{slider.prefix}</span>
                   <h3 className="title">{slider.title}</h3>
                   <h4 className="sub-title">{slider.description}</h4>
-                  <Link to={"/our-services"} className="btn btnhover border">
-                    Our Courses
-                  </Link>
+
                   <Link to={"/shop"} className="btn btnhover border">
                     Shop now
                   </Link>

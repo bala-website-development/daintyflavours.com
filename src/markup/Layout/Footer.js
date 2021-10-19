@@ -44,13 +44,13 @@ class Footer extends Component {
                     <li>
                       <Link to={"/about-1"}>About</Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link to={"/our-services"}>Our Courses</Link>
-                    </li>
+                    </li> */}
 
-                    <li>
+                    {/* <li>
                       <Link to={"/blog-half-img-sidebar"}>Blog</Link>
-                    </li>
+                    </li> */}
                     <li>
                       <Link to={"/shop"}>Products</Link>
                     </li>
