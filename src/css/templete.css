@@ -1503,8 +1503,9 @@
 }
 .shop-item .item-img {
   background-color: #fff;
-  padding: 20px 5px;
-  border-radius: 6px;
+  /* padding: 20px 5px; */
+  margin-top: 10px;
+  border-radius: 2px;
   box-shadow: 0px 30px 30px -10px rgba(0, 0, 0, 0.1);
 }
 .shop-item .sale,

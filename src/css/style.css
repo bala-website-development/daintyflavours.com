@@ -2928,7 +2928,7 @@ blockquote cite {
   left: 0;
   background-color: #030e22 !important;
   width: 100%;
-  height: 80px;
+  /* height: 80px; */
   -webkit-animation: headerSlideDown 0.95s ease forwards;
   animation: headerSlideDown 0.95s ease forwards;
   -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);

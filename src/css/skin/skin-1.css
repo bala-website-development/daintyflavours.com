@@ -3,15 +3,15 @@
 =====================*/
 
 :root {
-  --color-primary: #d34b6f;
-  --color-secondry: #e7d2f0;
-  --color-button: #e7d2f0;
-  --color-hover: #f0557f;
-  --color-primary-opacity: rgba(246, 22, 70, 0.303);
+  --color-primary: #5c913b;
+  --color-secondry: #ffe4e1;
+  --color-button: #5c913b;
+  --color-hover: #3f5c2c;
+  --color-primary-opacity: rgba(246, 22, 70, 0.201);
 }
 .main-bar {
   /* background-color: #f4bb41 !important; */
-  background-color: #e7d2f0 !important;
+  background-color: #ffe4e1 !important;
 }
 /* Hex */
 .bg-primary,
@@ -83,7 +83,7 @@
 .fc-button.fc-state-default {
   background-color: var(--color-button);
   border-radius: 1px !important;
-  color: #141719;
+  color: #ffffff;
 }
 
 /*Hex color :hover */
