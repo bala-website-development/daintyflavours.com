@@ -8,19 +8,19 @@
   "service_url_dev": "https://asia-south1-tuc-shopping-dev.cloudfunctions.net/tuc_shop_node_api/api/",
   "admin_url_local": "http://localhost:3001/login/",
   "service_url_local": "http://localhost:8000/api/",
-  "logo": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fsukhaalogo.png?alt=media&token=6bf3b1af-a5f1-4d24-b3d8-2725caa38e70",
+  "logo": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fsukhaalogo.jpg?alt=media&token=703e02fd-91cb-4c7a-964f-b862c4522b9a",
   "slider": [
     {
-      "title": "Sukha",
+      "title": "Sukhaa",
       "prefix": "Sarees",
       "description": "Variety of hand picked sarees collection in friendly place",
-      "image_url": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fslider%2Fsukhaaslider1.jpg?alt=media&token=72de9d24-cda4-4b70-ade9-c44d4d0b733c"
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fslider%2Fsukhaaslider2.jpg?alt=media&token=8cf31386-7311-42c6-ba13-00460904a826"
     },
     {
-      "title": "Sukha",
+      "title": "Sukhaa",
       "prefix": "Sarees",
       "description": "Get a colorfull collections with us",
-      "image_url": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fslider%2Fsukhaaslider2.jpg?alt=media&token=8cf31386-7311-42c6-ba13-00460904a826"
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fslider%2Fsukhaaslider1.jpg?alt=media&token=72de9d24-cda4-4b70-ade9-c44d4d0b733c"
     }
   ],
   "aboutustitle": "About Sukha",
@@ -34,9 +34,9 @@
   "about_ABOUTQUILTING3": "Quilting can be done by hand, or by sewing machine, or by a specialised longarm quilting machine.",
   "contact_phone1": "+91 96662 64571",
   "contact_phone2": "+91 96662 64571",
-  "contact_address": "301, Vespers, Eagle Street,Langford Town, Bengaluru, KA 560025",
+  "contact_address": "301, Address1 , Maharastra, KA 560025",
   "contact_email": "deepikajain256@gmail.com",
   "contact_name": "Deepika Jain",
   "fromemail": "deepikajain256@gmail.com",
-  "subject": "Sukha - Contact Us - "
+  "subject": "Sukhaa - Contact Us - "
 }

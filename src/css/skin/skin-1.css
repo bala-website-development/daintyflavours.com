@@ -3,15 +3,15 @@
 =====================*/
 
 :root {
-  --color-primary: #b68e89;
+  --color-primary: #f61645;
   --color-secondry: #ffe4e1;
-  --color-button: #b68e89;
-  --color-hover: #80615d;
-  --color-primary-opacity: rgba(246, 22, 70, 0.303);
+  --color-button: #5c913b;
+  --color-hover: #3f5c2c;
+  --color-primary-opacity: rgba(246, 22, 70, 0.201);
 }
 .main-bar {
   /* background-color: #f4bb41 !important; */
-  background-color: #ffe4e1 !important;
+  background-color: #e7d2f0 !important;
 }
 /* Hex */
 .bg-primary,
