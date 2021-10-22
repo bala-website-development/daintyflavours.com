@@ -11,7 +11,7 @@ const Featured_Product = (props) => {
   const [products, setProducts] = useState([]);
   const [galleryimage, setGalleryImage] = useState([]);
   const [networkError, setNetworkError] = useState("");
-  const getPostDetails = async () => {
+  const getFeaturedProducts = async () => {
     console.log("recentpost", products);
     await fetch(config.service_url + "getFeaturedProducts")
       .then((response) => response.json())
@@ -22,32 +22,16 @@ const Featured_Product = (props) => {
             return data;
           });
         setProducts(active);
-        console.log("recentpost", products);
+        console.log("featuredproduct", products);
       })
       .catch((err) => {
         setNetworkError("Something went wrong, Please try again later!!");
         // console.log(networkError);
       });
   };
-  const getGalleryDetails = async () => {
-    await fetch(config.service_url + "getgallery")
-      .then((response) => response.json())
-      .then((data1) => {
-        let active1 = data1
-          .filter((filter1) => filter1.viewingallery === 1)
-          .map((data1) => {
-            return data1;
-          });
-        setGalleryImage(active1);
-        console.log("galleryimages", galleryimage);
-      })
-      .catch((err) => {
-        setNetworkError("Something went wrong, Please try again later!!");
-        // console.log(networkError);
-      });
-  };
+
   useEffect(() => {
-    // getPostDetails();
+    getFeaturedProducts();
     // getGalleryDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -57,7 +41,7 @@ const Featured_Product = (props) => {
       {products.length > 0 &&
         products.map((product) => (
           <div className="col-lg-3 col-md-6 col-sm-6 ">
-            <div className="port-box1 text-white my-2">
+            <div className="port-box1 homeimagerecent text-white my-2">
               <div className="dlab-media">
                 <img className="homeimagerecent" src={product.p_image} alt="sukhaa" />
               </div>
