@@ -252,7 +252,7 @@ const Index1 = () => {
                       <h4 className="text-white">For More Offer</h4>
                       <p>Contact us</p>
                       <div className="icon-bx icon-bx-xxl">
-                        <img src={config.logo} alt="sukahha" />
+                        <img src={config.logo} className="fluid" alt="sukhaa" />
                       </div>
                     </div>
                     <p>{config.contact_email}</p>
