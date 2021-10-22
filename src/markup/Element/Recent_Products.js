@@ -49,8 +49,26 @@ const Recent_Products = () => {
                 <h4 className="title ">
                   <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                     <div>
-                      <i class="fa fa-inr"> {"   "} </i>
-                      {"   "} {product.p_price}
+                      {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
+                        <>
+                          <div className="price text-light">
+                            <span style={{ "text-decoration": "line-through" }}>
+                              {" "}
+                              <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                            </span>
+                            {"   |  "}
+                            <span className="text-light">
+                              {"   "} <i class="fa fa-inr"></i> {product.p_price}
+                            </span>{" "}
+                            <span className="px-1 sale bg-primary text-light">Sale</span>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="price text-light ">
+                          <i class="fa fa-inr"> {"   "} </i>
+                          {"   "} {product.p_price}
+                        </div>
+                      )}
                     </div>
                     <div>{product.p_name}</div>
                   </Link>

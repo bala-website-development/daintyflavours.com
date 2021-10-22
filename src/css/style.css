@@ -133,7 +133,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 .homeimagerecent {
   height: 250px !important;
-  width: 250px !important;
+  /* width: 250px !important; */
 }
 .thumbnailimage {
   height: 250px;
