@@ -131,6 +131,10 @@ select.form-control:not([size]):not([multiple]) {
   width: 70px;
   border-radius: 3px;
 }
+.dlab-media .homeimagerecent {
+  width: 245px !important;
+  height: 245px !important;
+}
 .thumbnailimage {
   height: 250px;
 }
