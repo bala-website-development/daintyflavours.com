@@ -8,21 +8,21 @@ import work_pic2 from "./../../images/our-work/pic1.jpg";
 import work_pic3 from "./../../images/our-work/pic1.jpg";
 import config from "../../config.json";
 const Featured_Product = (props) => {
-  const [posts, setPosts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [galleryimage, setGalleryImage] = useState([]);
   const [networkError, setNetworkError] = useState("");
   const getPostDetails = async () => {
-    console.log("recentpost", posts);
-    await fetch(config.service_url + "getrecentposts")
+    console.log("recentpost", products);
+    await fetch(config.service_url + "getFeaturedProducts")
       .then((response) => response.json())
       .then((data) => {
         let active = data
-          .filter((filter) => filter.isactive === 1 && filter.published === 1 && filter.posttypevalue === "Blog")
+          .filter((filter) => filter.isactive === "1" && filter.isfeatured === 1)
           .map((data) => {
             return data;
           });
-        setPosts(active);
-        console.log("recentpost", posts);
+        setProducts(active);
+        console.log("recentpost", products);
       })
       .catch((err) => {
         setNetworkError("Something went wrong, Please try again later!!");
@@ -54,42 +54,27 @@ const Featured_Product = (props) => {
 
   return (
     <div className="row ">
-      <div className="col-lg-3 col-md-6 col-sm-6 ">
-        <div className="port-box1 text-white my-2">
-          <div className="dlab-media">
-            <img src={work_pic1} alt="" />
+      {products.length > 0 &&
+        products.map((product) => (
+          <div className="col-lg-3 col-md-6 col-sm-6 ">
+            <div className="port-box1 text-white my-2">
+              <div className="dlab-media">
+                <img className="homeimagerecent" src={product.p_image} alt="sukhaa" />
+              </div>
+              <div className="dlab-info">
+                <h4 className="title ">
+                  <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
+                    <div>
+                      <i class="fa fa-inr"> {"   "} </i>
+                      {"   "} {product.p_price}
+                    </div>
+                    <div>{product.p_name}</div>
+                  </Link>
+                </h4>
+              </div>
+            </div>
           </div>
-          <div className="dlab-info">
-            <h4 className="title ">
-              <Link className="text-light" to={{ pathname: `/shop-product-details/${"product.p_id"}` }}>
-                <div>
-                  <i class="fa fa-inr"> {"   "} </i>
-                  {"   "} {20}
-                </div>
-                <div>Name</div>
-              </Link>
-            </h4>
-          </div>
-        </div>
-      </div>
-      <div className="col-lg-3 col-md-6 col-sm-6 ">
-        <div className="port-box1 text-white my-2">
-          <div className="dlab-media">
-            <img src={work_pic1} alt="" />
-          </div>
-          <div className="dlab-info">
-            <h4 className="title ">
-              <Link className="text-light" to={{ pathname: `/shop-product-details/${"product.p_id"}` }}>
-                <div>
-                  <i class="fa fa-inr"> {"   "} </i>
-                  {"   "} {20}
-                </div>
-                <div>Name</div>
-              </Link>
-            </h4>
-          </div>
-        </div>
-      </div>
+        ))}
     </div>
   );
 };
