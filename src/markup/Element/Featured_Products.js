@@ -47,8 +47,8 @@ const Featured_Product = (props) => {
       });
   };
   useEffect(() => {
-    getPostDetails();
-    getGalleryDetails();
+    // getPostDetails();
+    // getGalleryDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
