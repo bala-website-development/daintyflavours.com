@@ -112,7 +112,7 @@ const Index1 = () => {
             </div>
           </div>
           <div className="section-full content-inner service-area2 bg-img-fix bg-line-top bg-line-bottom" style={{ backgroundImage: "url(" + img4 + ")", backgroundSize: "cover" }}>
-            <div className="container">
+            <div className="container ">
               <div className="row ">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
