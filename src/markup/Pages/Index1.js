@@ -23,6 +23,8 @@ import work_pic2 from "./../../images/our-work/pic2.jpg";
 import work_pic3 from "./../../images/our-work/pic3.jpg";
 import pic3 from "./../../images/about/pic3.jpg";
 import A_Newsletter from "./A_Newsletter";
+import Recent_Product from "./../Element/Recent_Products";
+import Featured_Products from "./../Element/Featured_Products";
 import SideBar from "./../Element/SideBar";
 //Images
 // var img1 = require("./../../images/background/bg5.jpg");
@@ -152,130 +154,25 @@ const Index1 = () => {
                       <p className="text-bold">Dont miss our new arrivals</p>
                       <div className="dlab-separator style1 bg-primary"></div>
                     </div>
-                    <div className="clearfix">
-                      <div className="section-full bg-white ">
-                        <div className="container-fluid">
-                          <div className="row">
-                            <div className="col-lg-3 col-md-6 col-sm-6">
-                              <div className="port-box1 text-white">
-                                <div className="dlab-media">
-                                  <img src={work_pic1} alt="" />
-                                </div>
-                                <div className="dlab-info">
-                                  <h2 className="title">vegan pie</h2>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-lg-3 col-md-6 col-sm-6">
-                              <div className="port-box1 text-white">
-                                <div className="dlab-media">
-                                  <img src={work_pic2} alt="" />
-                                </div>
-                                <div className="dlab-info">
-                                  <h2 className="title">lemon cake</h2>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-lg-3 col-md-6 col-sm-6">
-                              <div className="port-box1 text-white">
-                                <div className="dlab-media">
-                                  <img src={work_pic3} alt="" />
-                                </div>
-                                <div className="dlab-info">
-                                  <h2 className="title">wedding cake</h2>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="col-lg-3 col-md-6 col-sm-6">
-                              <div className="port-box1 text-white m-md-b0 m-sm-b0">
-                                <div className="dlab-media">
-                                  <img src={work_pic2} alt="" />
-                                </div>
-                                <div className="dlab-info">
-                                  <h2 className="title">fruit cake</h2>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
-                          <i className="fa fa-angle-right m-r10"></i>Shop all
-                        </Link>
-                      </div>
+                    <Recent_Product></Recent_Product>
+                  </div>
+                  <div className="text-center mt-2">
+                    <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
+                      <i className="fa fa-angle-right m-r10"></i>Shop all
+                    </Link>
+                  </div>
+                  <div className="m-r20 mt-5">
+                    <div className="section-head text-left">
+                      <h2>Our Featured Prodcuts</h2>
+                      <div className="dlab-separator style1 bg-primary"></div>
                     </div>
-
-                    <div className="m-r20">
-                      <div className="section-head text-left">
-                        <h2>Our Featured Prodcuts</h2>
-
-                        <div className="dlab-separator style1 bg-primary"></div>
-                      </div>
-                      <div className="clearfix">
-                        <div className="section-full bg-white ">
-                          <div className="container-fluid">
-                            <div className="row ">
-                              <div className="col-lg-3 col-md-6 col-sm-6 ">
-                                <div className="port-box1 text-white my-2">
-                                  <div className="dlab-media">
-                                    <img src={work_pic1} alt="" />
-                                  </div>
-                                  <div className="dlab-info">
-                                    <h2 className="title">vegan pie</h2>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-lg-3 col-md-6 col-sm-6">
-                                <div className="port-box1 text-white">
-                                  <div className="dlab-media">
-                                    <img src={work_pic1} alt="" />
-                                  </div>
-                                  <div className="dlab-info">
-                                    <h2 className="title">vegan pie</h2>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-lg-3 col-md-6 col-sm-6">
-                                <div className="port-box1 text-white">
-                                  <div className="dlab-media">
-                                    <img src={work_pic2} alt="" />
-                                  </div>
-                                  <div className="dlab-info">
-                                    <h2 className="title">lemon cake</h2>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-lg-3 col-md-6 col-sm-6">
-                                <div className="port-box1 text-white">
-                                  <div className="dlab-media">
-                                    <img src={work_pic3} alt="" />
-                                  </div>
-                                  <div className="dlab-info">
-                                    <h2 className="title">wedding cake</h2>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-lg-3 col-md-6 col-sm-6">
-                                <div className="port-box1 text-white m-md-b0 m-sm-b0">
-                                  <div className="dlab-media">
-                                    <img src={work_pic2} alt="" />
-                                  </div>
-                                  <div className="dlab-info">
-                                    <h2 className="title">fruit cake</h2>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="text-center">
-                          <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
-                            <i className="fa fa-angle-right m-r10"></i>Shop all
-                          </Link>
-                        </div>
-                      </div>
+                    <div className="">
+                      <Featured_Products></Featured_Products>
+                    </div>
+                    <div className="text-center mt-2">
+                      <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
+                        <i className="fa fa-angle-right m-r10"></i>Shop all
+                      </Link>
                     </div>
                   </div>
                 </div>
