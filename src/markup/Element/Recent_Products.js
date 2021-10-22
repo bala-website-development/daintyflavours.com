@@ -73,7 +73,7 @@ const Recent_Products = (props) => {
         </div>
       </div>
       <div className="col-lg-3 col-md-6 col-sm-6">
-        <div className="port-box1 text-white">
+        <div className="port-box1 text-white my-2">
           <div className="dlab-media">
             <img src={work_pic1} alt="" />
           </div>
@@ -86,36 +86,6 @@ const Recent_Products = (props) => {
                 <div>Name</div>
               </Link>
             </h4>
-          </div>
-        </div>
-      </div>
-      <div className="col-lg-3 col-md-6 col-sm-6">
-        <div className="port-box1 text-white">
-          <div className="dlab-media">
-            <img src={work_pic2} alt="" />
-          </div>
-          <div className="dlab-info">
-            <h2 className="title">lemon cake</h2>
-          </div>
-        </div>
-      </div>
-      <div className="col-lg-3 col-md-6 col-sm-6">
-        <div className="port-box1 text-white">
-          <div className="dlab-media">
-            <img src={work_pic3} alt="" />
-          </div>
-          <div className="dlab-info">
-            <h2 className="title">wedding cake</h2>
-          </div>
-        </div>
-      </div>
-      <div className="col-lg-3 col-md-6 col-sm-6">
-        <div className="port-box1 text-white m-md-b0 m-sm-b0">
-          <div className="dlab-media">
-            <img src={work_pic2} alt="" />
-          </div>
-          <div className="dlab-info">
-            <h2 className="title">fruit cake</h2>
           </div>
         </div>
       </div>
