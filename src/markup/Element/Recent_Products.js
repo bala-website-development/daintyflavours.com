@@ -20,8 +20,9 @@ const Recent_Products = () => {
           .map((data) => {
             return data;
           });
+        setProducts([]);
         setProducts(active);
-        console.log("recentpost2", products);
+        console.log("recentpost2", data);
       })
       .catch((err) => {
         setNetworkError("Something went wrong, Please try again later!!");

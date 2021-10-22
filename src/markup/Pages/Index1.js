@@ -246,13 +246,13 @@ const Index1 = () => {
                 <div className="col-lg-6 p-lr0">
                   <img className="img-cover" src={pic3} alt="" />
                 </div>
-                <div className="col-lg-6 p-lr0 d-flex align-items-center text-center">
+                <div className="col-lg-6 p-lr0 d-flex about-bx align-items-center text-center">
                   <div className="about-bx">
                     <div className="section-head text-center text-white">
                       <h4 className="text-white">For More Offer</h4>
                       <p>Contact us</p>
                       <div className="icon-bx icon-bx-xxl">
-                        <img src={config.logo} className="fluid" alt="sukhaa" />
+                        <h1> SUKHAA </h1>
                       </div>
                     </div>
                     <p>{config.contact_email}</p>
