@@ -60,7 +60,15 @@ const Recent_Products = (props) => {
             <img src={work_pic1} alt="" />
           </div>
           <div className="dlab-info">
-            <h2 className="title">vegan pie</h2>
+            <h4 className="title ">
+              <Link className="text-light" to={{ pathname: `/shop-product-details/${"product.p_id"}` }}>
+                <div>
+                  <i class="fa fa-inr"> {"   "} </i>
+                  {"   "} {20}
+                </div>
+                <div>Name</div>
+              </Link>
+            </h4>
           </div>
         </div>
       </div>
@@ -69,8 +77,15 @@ const Recent_Products = (props) => {
           <div className="dlab-media">
             <img src={work_pic1} alt="" />
           </div>
+
           <div className="dlab-info">
-            <h2 className="title">vegan pie</h2>
+            <h4 className="title ">
+              <Link className="text-light" to={{ pathname: `/shop-product-details/${"product.p_id"}` }}>
+                <i class="fa fa-inr"> {"   "} </i>
+                {"   "} {20}
+                <div>Name</div>
+              </Link>
+            </h4>
           </div>
         </div>
       </div>

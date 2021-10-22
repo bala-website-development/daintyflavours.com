@@ -62,13 +62,13 @@ class Footer extends Component {
                 <div className="m-t20">
                   <ul className="dlab-social-icon dlab-social-icon-lg">
                     <li>
-                      <a href={"https://www.facebook.com/tsalastudio/"} target="_blank" className="fa fa-facebook bg-primary mr-1"></a>
+                      <a href={config.fb} target="_blank" className="fa fa-facebook bg-primary mr-1"></a>
                     </li>
                     <li>
-                      <a href={"https://www.instagram.com/tsalastudio/"} target="_blank" className="fa fa-instagram bg-primary mr-1"></a>
+                      <a href={config.insta} target="_blank" className="fa fa-instagram bg-primary mr-1"></a>
                     </li>
                     <li>
-                      <a href={"https://www.pinterest.com/tsalaquiltingstudio/"} target="_blank" className="fa fa-pinterest-p bg-primary mr-1"></a>
+                      <a href={config.pins} target="_blank" className="fa fa-pinterest-p bg-primary mr-1"></a>
                     </li>
                   </ul>
                 </div>
