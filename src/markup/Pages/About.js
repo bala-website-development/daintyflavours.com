@@ -76,8 +76,7 @@ class About extends Component {
                       <div className="my-4">
                         <img src={config.logo} width="250px" className="rounded" alt="tsalastudio" />
                       </div>
-                      <h3>About Our tsalastudio</h3>
-                      <p>{config.aboutus_aboutpage}</p>
+                      <h3>About Sukaa</h3>
                     </div>
                   </div>
                 </div>
@@ -88,12 +87,13 @@ class About extends Component {
                     </div>
                   </div>
                   <div className="col-lg-6 col-md-6 m-b30">
-                    <div className="about-thumb">
-                      <img src={config.aboutus_imageurl2} alt="" />
+                    <div className="">
+                      <p>{config.aboutus_aboutpage}</p>
+                      <p>{config.aboutus_aboutpage2}</p>
                     </div>
                   </div>
                 </div>
-                <div className="row">
+                <div className="row d-none">
                   <div className="col-lg-12">
                     <div className="section-head">
                       <h3 className="text-primary">Tsala Studio Offerings:</h3>
@@ -129,21 +129,14 @@ class About extends Component {
                       <div className="my-4 d-none">
                         <img src={config.logo} width="250px" className="rounded" alt="tsalastudio" />
                       </div>
-                      <h3 className="title text-primary">ABOUT Vatsala Kamat</h3>
+                      <h3 className="title text-primary">Contact us</h3>
                       <div>
                         <blockquote>
+                          <p>Founder: Deepika </p>
+                          <p>Address : Jagadale colony, Pratibha Nagar, Kolhapur, Maharashtra, 416008 </p>
+                          <p>Contact : +91 9666264571 </p>
                           <p>
-                            Hi..! I am <strong>Vatsala Kamat</strong> and Crafting is my Art of Living. It all started during my childhood at <strong>Mysore</strong>, I observed my mother engrossed in various handicrafts and picked up her artistic traits.
-                          </p>
-                          <p>
-                            Although I studied life science for my graduation followed by a course in law and interior designing, the law of destiny always <string>directed my life towards crafting</string>. Knitting ,Tatting, Sewing, Patchwork, Macrame Art, Various types of Hand Embroidery, English Paper Piecing, Crochet, Tasselling and Hand Applique are some of the art forms that I enjoy handcrafting for more than <strong>40 years.</strong>
-                          </p>
-                          <p>Travelling around the globe introduced me to varied local crafts and also influenced my urge to try something different leading to Quilting. My Family, Friends, Gardening and Music are the other captivating aspects of my life that keeps me young at heart.</p>
-                          <p>
-                            <strong>Tsala Studio </strong>is my brain child, It is an exclusive creative space for all women like me who have experienced or would like to experience the <strong>magic of our own handmade creations</strong>.
-                          </p>
-                          <p>
-                            Email : <a href="mailto:tsalastudio@gmail.com">tsalastudio@gmail.com</a>
+                            Email : <a href="mailto:deepikajain256@gmail.com">deepikajain256@gmail.com</a>
                           </p>
                         </blockquote>
                       </div>

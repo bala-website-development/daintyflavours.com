@@ -10,7 +10,7 @@ import config from "../../config.json";
 import img1 from "./../../images/background/bg5.jpg";
 import img2 from "./../../images/background/bg1.jpg";
 import img3 from "./../../images/background/bg5.jpg";
-import img4 from "./../../images/background/bg4.jpg";
+import img4 from "./../../images/banner/bnr1.jpg";
 import cake1 from "./../../images/cake1.jpg";
 import pic1 from "./../../images/about/picbanket.png";
 import icon2 from "./../../images/icons/service-icon/icon2.png";
@@ -111,10 +111,10 @@ const Index1 = () => {
           </div>
           <div className="section-full content-inner service-area2 bg-img-fix bg-line-top bg-line-bottom" style={{ backgroundImage: "url(" + img4 + ")", backgroundSize: "cover" }}>
             <div className="container">
-              <div className="row">
+              <div className="row ">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
-                    <h2 className="text-white">Our Service</h2>
+                    <h2 className="text-white">Our Journey</h2>
                     <div className="dlab-separator style1 bg-primary"></div>
                   </div>
                 </div>
@@ -125,42 +125,15 @@ const Index1 = () => {
                 </div>
                 <div className="col-lg-12">
                   <div className="row p-l30">
-                    <div className="col-lg-6 col-sm-6 m-b30">
+                    <div className="col-lg-12 col-sm-12 m-b30">
                       <div className="icon-bx-wraper text-white service-box2">
                         <div className="icon-bx icon-bx-lg">
-                          <Link to={""} className="icon-cell">
+                          <Link to={""} className="icon-cell d-none">
                             <img src={icon2} alt="" />
                           </Link>
                         </div>
-                        <div className="icon-content">
-                          <h5 className="dlab-tilte">QUILTING</h5>
-                          <p>{config.about_ABOUTQUILTING1}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6 col-sm-6 m-b30">
-                      <div className="icon-bx-wraper text-white service-box2">
-                        <div className="icon-bx">
-                          <Link to={""} className="icon-cell">
-                            <img src={icon3} alt="" />
-                          </Link>
-                        </div>
-                        <div className="icon-content">
-                          <h5 className="dlab-tilte">QUILTING</h5>
-                          <p>{config.about_ABOUTQUILTING2}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6 col-sm-6 m-b30">
-                      <div className="icon-bx-wraper text-white service-box2">
-                        <div className="icon-bx">
-                          <Link to={""} className="icon-cell">
-                            <img src={icon4} alt="" />
-                          </Link>
-                        </div>
-                        <div className="icon-content">
-                          <h5 className="dlab-tilte">QUILTING</h5>
-                          <p>{config.about_ABOUTQUILTING3}</p>
+                        <div className="">
+                          <p>{config.about_service}</p>
                         </div>
                       </div>
                     </div>
@@ -176,89 +149,138 @@ const Index1 = () => {
                   <div className="m-r20">
                     <div className="section-head text-left">
                       <h2>Our Latest Prodcuts</h2>
-                      <p className="text-bold">At Tsala, we conduct classes for the craft enthusiasts to learn:</p>
+                      <p className="text-bold">Dont miss our new arrivals</p>
                       <div className="dlab-separator style1 bg-primary"></div>
                     </div>
                     <div className="clearfix">
-                      <div className="row">
-                        <div className="col">
-                          <ul className="list-check mb-0 primary">
-                            <li>Quilting</li>
-                            <li>Stitching &amp; Tailoring</li>
-                            <li>Bag Making</li>
-                            <li>Kids Sewing Workshop</li>
-                            <li>Knitting</li>
-                            <li>Crochet</li>
-                            <li>Tatting</li>
-                          </ul>{" "}
-                        </div>
-                        <div className="col">
-                          <ul className="list-check mb-0 primary">
-                            <li>Hand Embroidery</li>
-                            <li>Weaving</li>
-                            <li>Natural Dying</li>
-                            <li>Paper Crafts</li>
-                            <li>Quilling</li>
-                            <li>Macrame</li>
-                            <li>Decoupage and many more...</li>
-                          </ul>{" "}
+                      <div className="section-full bg-white ">
+                        <div className="container-fluid">
+                          <div className="row">
+                            <div className="col-lg-3 col-md-6 col-sm-6">
+                              <div className="port-box1 text-white">
+                                <div className="dlab-media">
+                                  <img src={work_pic1} alt="" />
+                                </div>
+                                <div className="dlab-info">
+                                  <h2 className="title">vegan pie</h2>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-lg-3 col-md-6 col-sm-6">
+                              <div className="port-box1 text-white">
+                                <div className="dlab-media">
+                                  <img src={work_pic2} alt="" />
+                                </div>
+                                <div className="dlab-info">
+                                  <h2 className="title">lemon cake</h2>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-lg-3 col-md-6 col-sm-6">
+                              <div className="port-box1 text-white">
+                                <div className="dlab-media">
+                                  <img src={work_pic3} alt="" />
+                                </div>
+                                <div className="dlab-info">
+                                  <h2 className="title">wedding cake</h2>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-lg-3 col-md-6 col-sm-6">
+                              <div className="port-box1 text-white m-md-b0 m-sm-b0">
+                                <div className="dlab-media">
+                                  <img src={work_pic2} alt="" />
+                                </div>
+                                <div className="dlab-info">
+                                  <h2 className="title">fruit cake</h2>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
+                      <div className="text-center">
+                        <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
+                          <i className="fa fa-angle-right m-r10"></i>Shop all
+                        </Link>
+                      </div>
+                    </div>
 
-                      <Link to={"/our-services"} className="btn btn-md btnhover shadow m-t30 d-none">
-                        <i className="fa fa-angle-right m-r10"></i>Get Started
-                      </Link>
+                    <div className="m-r20">
+                      <div className="section-head text-left">
+                        <h2>Our Featured Prodcuts</h2>
+
+                        <div className="dlab-separator style1 bg-primary"></div>
+                      </div>
+                      <div className="clearfix">
+                        <div className="section-full bg-white ">
+                          <div className="container-fluid">
+                            <div className="row ">
+                              <div className="col-lg-3 col-md-6 col-sm-6 ">
+                                <div className="port-box1 text-white my-2">
+                                  <div className="dlab-media">
+                                    <img src={work_pic1} alt="" />
+                                  </div>
+                                  <div className="dlab-info">
+                                    <h2 className="title">vegan pie</h2>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-6 col-sm-6">
+                                <div className="port-box1 text-white">
+                                  <div className="dlab-media">
+                                    <img src={work_pic1} alt="" />
+                                  </div>
+                                  <div className="dlab-info">
+                                    <h2 className="title">vegan pie</h2>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-6 col-sm-6">
+                                <div className="port-box1 text-white">
+                                  <div className="dlab-media">
+                                    <img src={work_pic2} alt="" />
+                                  </div>
+                                  <div className="dlab-info">
+                                    <h2 className="title">lemon cake</h2>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-6 col-sm-6">
+                                <div className="port-box1 text-white">
+                                  <div className="dlab-media">
+                                    <img src={work_pic3} alt="" />
+                                  </div>
+                                  <div className="dlab-info">
+                                    <h2 className="title">wedding cake</h2>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-lg-3 col-md-6 col-sm-6">
+                                <div className="port-box1 text-white m-md-b0 m-sm-b0">
+                                  <div className="dlab-media">
+                                    <img src={work_pic2} alt="" />
+                                  </div>
+                                  <div className="dlab-info">
+                                    <h2 className="title">fruit cake</h2>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="text-center">
+                          <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
+                            <i className="fa fa-angle-right m-r10"></i>Shop all
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-6 m-b30 d-none">
                   <Accord />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="section-full bg-white d-none">
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-lg-3 col-md-6 col-sm-6">
-                  <div className="port-box1 text-white">
-                    <div className="dlab-media">
-                      <img src={work_pic1} alt="" />
-                    </div>
-                    <div className="dlab-info">
-                      <h2 className="title">vegan pie</h2>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6 col-sm-6">
-                  <div className="port-box1 text-white">
-                    <div className="dlab-media">
-                      <img src={work_pic2} alt="" />
-                    </div>
-                    <div className="dlab-info">
-                      <h2 className="title">lemon cake</h2>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6 col-sm-6">
-                  <div className="port-box1 text-white">
-                    <div className="dlab-media">
-                      <img src={work_pic3} alt="" />
-                    </div>
-                    <div className="dlab-info">
-                      <h2 className="title">wedding cake</h2>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6 col-sm-6">
-                  <div className="port-box1 text-white m-md-b0 m-sm-b0">
-                    <div className="dlab-media">
-                      <img src={work_pic2} alt="" />
-                    </div>
-                    <div className="dlab-info">
-                      <h2 className="title">fruit cake</h2>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -269,7 +291,7 @@ const Index1 = () => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
-                    <div className="icon-bx icon-bx-lg">
+                    <div className="icon-bx icon-bx-lg d-none">
                       <img src={cake1} alt="" />
                     </div>
                     <h3>We Are Professional at Our Skills</h3>
@@ -330,15 +352,16 @@ const Index1 = () => {
                 <div className="col-lg-6 p-lr0 d-flex align-items-center text-center">
                   <div className="about-bx">
                     <div className="section-head text-center text-white">
-                      <h4 className="text-white">Limited Time Offer</h4>
-                      <p>Join our course</p>
+                      <h4 className="text-white">For More Offer</h4>
+                      <p>Contact us</p>
                       <div className="icon-bx icon-bx-xxl">
-                        <img src={icon2} alt="" />
+                        <img src={config.logo} alt="sukahha" />
                       </div>
                     </div>
-                    <p>The beauty of Quilting is that the product to be quilted can range from as small as a coin purse, scissor case, denim pouch, wallet, laptop cover, tote bag to as big as crazy patch sling bag, bed quilts etc etc.. that you want it to be.</p>
-                    <Link to={"our-services"} className="btn-secondry border white btn btnhover btn-md">
-                      <i className="fas fas-cart"></i>Join now
+                    <p>{config.contact_email}</p>
+                    <p>{config.contact_phone1}</p>
+                    <Link to={"contact"} className="btn-secondry border white btn btnhover btn-md">
+                      <i className="fas fas-cart"></i>Contact
                     </Link>
                   </div>
                 </div>
@@ -350,7 +373,7 @@ const Index1 = () => {
                 <div className="col-lg-12">
                   <div className="section-head text-center">
                     <div className="icon-bx icon-bx-lg">
-                      <img src={cake1} alt="" />
+                      <img src={config.logo} alt="" />
                     </div>
                     <h3>Thanks for reaching us.</h3>
                   </div>
