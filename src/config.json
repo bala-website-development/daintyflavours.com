@@ -41,5 +41,7 @@
   "fb": "https://www.facebook.com/sukhaa/",
   "insta": "https://www.instagram.com/sukhaa/",
   "twitter": "https://www.twiter.com/sukhaa/",
-  "pins": "https://www.pinterest.com/sukhaa/"
+  "pins": "https://www.pinterest.com/sukhaa/",
+  "recentproduct": 10,
+  "featuredproduct": 10
 }

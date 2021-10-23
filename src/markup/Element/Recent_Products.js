@@ -15,13 +15,16 @@ const Recent_Products = () => {
     await fetch(config.service_url + "getLatestProducts")
       .then((response) => response.json())
       .then((data) => {
-        let active = data
-          .filter((filter) => filter.isactive === "1")
-          .map((data) => {
-            return data;
-          });
-        setProducts([]);
-        setProducts(active);
+        if (data.status === 200) {
+          let active = data.data
+            .filter((filter, index) => filter.isactive === "1" && index < config.recentproduct)
+            .map((data) => {
+              return data;
+            });
+          setProducts([]);
+          setProducts(active);
+        }
+
         console.log("recentpost2", data);
       })
       .catch((err) => {
@@ -54,7 +57,9 @@ const Recent_Products = () => {
                           <div className="price text-light">
                             <span style={{ "text-decoration": "line-through" }}>
                               {" "}
-                              <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                              <span className="text-light">
+                                <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                              </span>
                             </span>
                             {"   |  "}
                             <span className="text-light">
@@ -65,8 +70,11 @@ const Recent_Products = () => {
                         </>
                       ) : (
                         <div className="price text-light ">
-                          <i class="fa fa-inr"> {"   "} </i>
-                          {"   "} {product.p_price}
+                          <span className="text-light ">
+                            <i class="fa fa-inr"> {"   "} </i>
+                            {"   "}
+                            {product.p_price}
+                          </span>
                         </div>
                       )}
                     </div>

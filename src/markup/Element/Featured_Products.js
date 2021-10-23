@@ -8,21 +8,23 @@ import work_pic2 from "./../../images/our-work/pic1.jpg";
 import work_pic3 from "./../../images/our-work/pic1.jpg";
 import config from "../../config.json";
 const Featured_Product = (props) => {
-  const [featuredproducts, setFeaturedProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [galleryimage, setGalleryImage] = useState([]);
   const [networkError, setNetworkError] = useState("");
   const getFeaturedProducts = async () => {
-    console.log("recentpost", featuredproducts);
+    console.log("recentpost", products);
     await fetch(config.service_url + "getFeaturedProducts")
       .then((response) => response.json())
       .then((data1) => {
-        let active1 = data1
-          .filter((filter1) => filter1.isactive === "1" && filter1.isfeatured === 1)
-          .map((data1) => {
-            return data1;
-          });
-        setFeaturedProducts(active1);
-        console.log("featuredproduct", featuredproducts);
+        if (data1.status === 200) {
+          let active1 = data1.data
+            .filter((filter1, index) => filter1.isactive === "1" && filter1.isfeatured === 1 && index < config.featuredproduct)
+            .map((data) => {
+              return data;
+            });
+          setProducts(active1);
+          console.log("featuredproduct", active1);
+        }
       })
       .catch((err) => {
         setNetworkError("Something went wrong, Please try again later!!");
@@ -38,8 +40,8 @@ const Featured_Product = (props) => {
 
   return (
     <div className="row ">
-      {featuredproducts.length > 0 &&
-        featuredproducts.map((product) => (
+      {products.length > 0 &&
+        products.map((product) => (
           <div className="col-lg-3 col-md-6 col-sm-6 ">
             <div className="port-box1 homeimagerecent text-white my-2">
               <div className="dlab-media">
@@ -54,7 +56,9 @@ const Featured_Product = (props) => {
                           <div className="price text-light">
                             <span style={{ "text-decoration": "line-through" }}>
                               {" "}
-                              <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                              <span className="text-light">
+                                <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                              </span>
                             </span>
                             {"   |  "}
                             <span className="text-light">
@@ -65,8 +69,11 @@ const Featured_Product = (props) => {
                         </>
                       ) : (
                         <div className="price text-light ">
-                          <i class="fa fa-inr"> {"   "} </i>
-                          {"   "} {product.p_price}
+                          <span className="text-light ">
+                            <i class="fa fa-inr"> {"   "} </i>
+                            {"   "}
+                            {product.p_price}
+                          </span>
                         </div>
                       )}
                     </div>
