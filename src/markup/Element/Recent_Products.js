@@ -15,13 +15,16 @@ const Recent_Products = () => {
     await fetch(config.service_url + "getLatestProducts")
       .then((response) => response.json())
       .then((data) => {
-        let active = data
-          .filter((filter) => filter.isactive === "1")
-          .map((data) => {
-            return data;
-          });
-        setProducts([]);
-        setProducts(active);
+        if (data.status === 200) {
+          let active = data.data
+            .filter((filter, index) => filter.isactive === "1" && index < 10)
+            .map((data) => {
+              return data;
+            });
+          setProducts([]);
+          setProducts(active);
+        }
+
         console.log("recentpost2", data);
       })
       .catch((err) => {

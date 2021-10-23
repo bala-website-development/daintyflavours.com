@@ -16,13 +16,15 @@ const Featured_Product = (props) => {
     await fetch(config.service_url + "getFeaturedProducts")
       .then((response) => response.json())
       .then((data1) => {
-        let active1 = data1
-          .filter((filter1) => filter1.isactive === "1" && filter1.isfeatured === 1)
-          .map((data1) => {
-            return data1;
-          });
-        setFeaturedProducts(active1);
-        console.log("featuredproduct", featuredproducts);
+        if (data1.status === 200) {
+          let active1 = data1.data
+            .filter((filter1) => filter1.isactive === "1" && filter1.isfeatured === 1)
+            .map((data) => {
+              return data;
+            });
+          setFeaturedProducts(active1);
+          console.log("featuredproduct", active1);
+        }
       })
       .catch((err) => {
         setNetworkError("Something went wrong, Please try again later!!");
