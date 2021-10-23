@@ -192,7 +192,7 @@ const Index1 = () => {
                       <img src={cake1} alt="" />
                     </div>
                     <h3>We Are Professional at Our Skills</h3>
-                    <p>More than 1000+ customers trusted us</p>
+                    <p>More than 100+ customers trusted us</p>
                   </div>
                 </div>
               </div>
@@ -241,22 +241,20 @@ const Index1 = () => {
                 </div>
               </div>
             </div>
-            <div className="container">
+            <div className="container ">
               <div className="row m-lr0 about-area1">
                 <div className="col-lg-6 p-lr0">
                   <img className="img-cover" src={pic3} alt="" />
                 </div>
-                <div className="col-lg-6 p-lr0 d-flex about-bx align-items-center text-center">
+                <div className="col-lg-6 p-lr0 d-flex about-bx align-items-center text-center text-dark">
                   <div className="about-bx">
-                    <div className="section-head text-center text-white">
-                      <h4 className="text-white">For More Offer</h4>
-                      <p>Contact us</p>
-                      <div className="icon-bx icon-bx-xxl">
-                        <h1> SUKHAA </h1>
-                      </div>
+                    <div className="section-head text-center text-dark">
+                      <h4 className="text-dark">For More Offer</h4>
+                      Contact us
+                      <h1> SUKHAA </h1>
                     </div>
-                    <p>{config.contact_email}</p>
-                    <p>{config.contact_phone1}</p>
+                    <p className="text-dark">{config.contact_email}</p>
+                    <p className="text-dark">{config.contact_phone1}</p>
                     <Link to={"contact"} className="btn-secondry border white btn btnhover btn-md">
                       <i className="fas fas-cart"></i>Contact
                     </Link>

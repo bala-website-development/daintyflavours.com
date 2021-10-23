@@ -17,7 +17,7 @@ const Recent_Products = () => {
       .then((data) => {
         if (data.status === 200) {
           let active = data.data
-            .filter((filter, index) => filter.isactive === "1" && index < 10)
+            .filter((filter, index) => filter.isactive === "1" && index < config.recentproduct)
             .map((data) => {
               return data;
             });
@@ -57,7 +57,9 @@ const Recent_Products = () => {
                           <div className="price text-light">
                             <span style={{ "text-decoration": "line-through" }}>
                               {" "}
-                              <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                              <span className="text-light">
+                                <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                              </span>
                             </span>
                             {"   |  "}
                             <span className="text-light">
@@ -68,8 +70,11 @@ const Recent_Products = () => {
                         </>
                       ) : (
                         <div className="price text-light ">
-                          <i class="fa fa-inr"> {"   "} </i>
-                          {"   "} {product.p_price}
+                          <span className="text-light ">
+                            <i class="fa fa-inr"> {"   "} </i>
+                            {"   "}
+                            {product.p_price}
+                          </span>
                         </div>
                       )}
                     </div>
