@@ -8,7 +8,7 @@
   "service_url_dev": "https://asia-south1-tuc-shopping-dev.cloudfunctions.net/tuc_shop_node_api/api/",
   "admin_url_local": "http://localhost:3001/login/",
   "service_url_local": "http://localhost:8000/api/",
-  "logo": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fsukhaalogo.jpg?alt=media&token=703e02fd-91cb-4c7a-964f-b862c4522b9a",
+  "logo": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fsukhaalogo.png?alt=media&token=9f7a605a-fae1-434b-bbd5-0487e16fddb7",
   "slider": [
     {
       "title": "Sukhaa",
