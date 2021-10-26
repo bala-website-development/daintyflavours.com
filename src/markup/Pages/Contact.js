@@ -80,7 +80,7 @@ const Contact = () => {
                 <div className="col-xl-6 col-lg-6 col-md-6 d-flex m-md-b30 m-lg-b30">
                   <div className="p-a30 border contact-area border-1 align-self-stretch radius-sm bg-white">
                     <h3 className="m-b5">Quick Contact</h3>
-                    <p> Better yet, see us in person! We love our customers, so feel free to visit during normal business hours.</p>
+                    <p className="d-none"> Better yet, see us in person! We love our customers, so feel free to visit during normal business hours.</p>
                     <p>If you have any questions simply use the following contact details.</p>
                     <ul className="no-margin">
                       <li className="icon-bx-wraper left m-b30">
