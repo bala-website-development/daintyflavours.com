@@ -50,8 +50,7 @@ const Header = (props) => {
             <button className="navbar-toggler collapsed navicon justify-content-end" type="button" onClick={toggle} data-toggle="collapse" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               {toggleShow === true ? (
                 <>
-                  {" "}
-                  <span></span>
+                  <i class="fa fa-times"></i>
                 </>
               ) : (
                 <>
@@ -62,16 +61,23 @@ const Header = (props) => {
               )}
             </button>
 
-            <div className={`header-nav navbar-collapse navbar myNavbar collapse ${toggleShow ? "show" : "hide"}`} id="navbarNavDropdown">
+            <div className={`header-nav navbar-collapse aligntopsidebar navbar myNavbar collapse ${toggleShow ? "show" : "hide"}`} id="navbarNavDropdown">
               {toggleShow === true && (
                 <div className="logo-header mostion d-none">
                   <Link to={"/"} className="dez-page">
-                    <img src={config.logo} alt="sukhaa" />
+                    <li>
+                      <img src={config.logo} alt="sukhaa" />
+                    </li>
                   </Link>
                 </div>
               )}
               {toggleShow === true ? (
                 <ul className="nav navbar-nav nav1">
+                  <li>
+                    <div className="logo-header mostion ">
+                      <img src={config.logo} alt="sukhaa" className="w-50" />
+                    </div>
+                  </li>
                   <li>
                     {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? (
                       <></>
@@ -103,6 +109,11 @@ const Header = (props) => {
                   <li className={props?.active === "about" ? "active" : ""}>
                     <Link to={"/about-1"}>About Us</Link>
                   </li>
+                  <li>
+                    <Link className="text-nowrap" to={"/our-journey"}>
+                      Our Journey
+                    </Link>
+                  </li>
                   {/* <li className={props?.active === "service" ? "active" : ""}>
                     <Link to={"/our-services"}>Course</Link>
                   </li> */}
@@ -114,7 +125,7 @@ const Header = (props) => {
                     <Link to={"/blog-half-img-sidebar"}>Blog</Link>
                   </li> */}
                   <li className={props?.active === "shop" ? "active" : ""}>
-                    <Link to={"/shop"}>Products</Link>
+                    <Link to={"/shop"}>Collections</Link>
                     {/* <ul className="sub-menu">
                       <li>
                         <Link to={"/shop"}>Shop</Link>
@@ -169,8 +180,21 @@ const Header = (props) => {
                   </ul> */}
                     </li>
                     <li className={props?.active === "about" ? "active" : ""}>
-                      <Link to={"/about-1"}>About Us</Link>
-
+                      <Link to={"#"}>
+                        About <i className="fa fa-chevron-down"></i>
+                      </Link>
+                      <ul className="sub-menu">
+                        <li>
+                          <Link className="text-nowrap" to={"/about-1"}>
+                            About Us
+                          </Link>
+                        </li>
+                        <li>
+                          <Link className="text-nowrap" to={"/our-journey"}>
+                            Our Journey
+                          </Link>
+                        </li>
+                      </ul>
                       {/* <ul className="sub-menu">
                     <li>
                       <Link to={"/about-1"}>About Us</Link>
@@ -202,7 +226,7 @@ const Header = (props) => {
                       <Link to={"/blog-half-img-sidebar"}>Blog</Link>
                     </li> */}
                     <li className={props?.active === "shop" ? "active" : ""}>
-                      <Link to={"/shop"}>Products</Link>
+                      <Link to={"/shop"}>Collections</Link>
                     </li>
                     {/* <li className={props?.active === "shop" ? "active" : ""}>
                       <Link to={""}>

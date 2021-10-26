@@ -29,7 +29,7 @@
   "aboutus_aboutpage": "Sukhaa is a Sanskrit word meaning 'JOY'. Here at Sukhaa, the purpose is to spread joy with every single product, that is quality assured as well as making it as affordable as possible. Also trying to support & spread joy to Indian Artisans with every product we sell. Our founder Deepika is an enthusiast for Indian Handloom and food of course! Bringing to you her handpicked collection of the rich and diverse heritage of Indian handloom from across the country right here at one place. Here at Sukhaa we proudly bring to you the handcrafted magic of India, its traditional creativity, and the craftsmanship of Indian artisans.",
   "aboutus_aboutpage2": "This piece of grace and elegance called 'SARI' which can also be transformed into a stylish piece of clothing is so diverse, every state in India has its handloom variety. There is so much to a sari, you can get as creative you wish to and style it in any way you name it like traditional, formal, indo-western, and so on. Sari is a style statement that's never going to go out of fashion whatsoever. This piece of clothing has been passed on from generation to generation and still can be styled to your liking.",
   "aboutus_imageurl1": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Faboutus%2Fsukhaa-deepika.jpg?alt=media&token=c1f162f7-f35f-4a77-9839-de2f98fd2811",
-  "aboutus_imageurl2": "#",
+  "aboutus_imageurl2": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Faboutus%2Fourjouney.jpg?alt=media&token=3248fb79-043a-4acb-ad46-4014e3f28009",
   "about_service": "MBA, to an Interior designer, to a Home Baker, to a Mindset coach now, and the founder of Sukhaa. It's a whole lot of journey for our founder Deepika. In her own words, I have always been a passionate person and an avid learner. I have never shied away from learning about things that I felt most passionate about and on the way stumbled, got back up, and learned again. I always believe, only when you try out various things in life, can you reach your true calling. And that's how I have become a Mindset coach. And the journey of Sukhaa was always with me but I realized about it a little late. I have always been passionate and picky about the choice of my clothing and styling, which always grabbed eyeballs and appreciation. Also, I am a lover of Indian handloom and handcrafted pieces of our Indian artisans and weavers and food, of course!! So that's how one day I realized to follow this passion and started Sukhaa, wherein I bring to you handpicked pieces from across India.' Every piece at Sukhaa is handpicked by the founder herself so there is total quality assurance. ",
   "contact_phone1": "+91 96662 64571",
   "contact_phone2": "+91 96662 64571",
@@ -38,10 +38,12 @@
   "contact_name": "Deepika Jain",
   "fromemail": "deepikajain256@gmail.com",
   "subject": "Sukhaa - Contact Us - ",
-  "fb": "https://www.facebook.com/sukhaa/",
-  "insta": "https://www.instagram.com/sukhaa/",
-  "twitter": "https://www.twiter.com/sukhaa/",
-  "pins": "https://www.pinterest.com/sukhaa/",
-  "recentproduct": 10,
-  "featuredproduct": 10
+  "fb": "https://www.facebook.com/FBsukhaa.in/",
+  "insta": "https://www.instagram.com/sukhaa.in/",
+  "twitter": "https://www.twiter.com/",
+  "pins": "https://www.pinterest.com/",
+  "qrurl": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fdeepikaqr.png?alt=media&token=f8659817-c1e5-4c1f-94ac-f5a859c91855",
+  "recentproduct": 8,
+  "featuredproduct": 8,
+  "freeshippingcost": "1000. Pay after Order payement"
 }

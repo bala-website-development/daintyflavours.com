@@ -51,7 +51,7 @@ class About extends Component {
           <div className="dlab-bnr-inr overlay-black-middle" style={{ backgroundImage: "url(" + img1 + ")" }}>
             <div className="container">
               <div className="dlab-bnr-inr-entry">
-                <h1 className="text-white">About Us</h1>
+                <h1 className="text-white">Our Journey</h1>
 
                 <div className="breadcrumb-row">
                   <ul className="list-inline">
@@ -60,7 +60,7 @@ class About extends Component {
                         <i className="fa fa-home"></i>
                       </Link>
                     </li>
-                    <li>About Us</li>
+                    <li>Our Journey</li>
                   </ul>
                 </div>
               </div>
@@ -76,53 +76,23 @@ class About extends Component {
                       <div className="my-4">
                         <img src={config.logo} width="250px" className="rounded" alt="tsalastudio" />
                       </div>
-                      <h3>About Sukaa</h3>
+                      <h3>Our Journey</h3>
                     </div>
                   </div>
                 </div>
                 <div className="row sp30">
                   <div className="col-lg-6 col-md-6 m-b30">
                     <div className="about-thumb">
-                      <img src={config.aboutus_imageurl1} alt="" />
+                      <img src={config.aboutus_imageurl2} alt="deepika sukhaa" />
                     </div>
                   </div>
                   <div className="col-lg-6 col-md-6 m-b30">
                     <div className="">
-                      <p>{config.aboutus_aboutpage}</p>
-                      <p>{config.aboutus_aboutpage2}</p>
+                      <p>{config.about_service}</p>
                     </div>
                   </div>
                 </div>
-                <div className="row d-none">
-                  <div className="col-lg-12">
-                    <div className="section-head">
-                      <h3 className="text-primary">Tsala Studio Offerings:</h3>
-                      <div>
-                        <blockquote>
-                          <p>
-                            <ul className="list-check mb-0 primary">
-                              <li>
-                                Regular in-house <strong>quilting &amp; hobby classes</strong>
-                              </li>
-                              <li>Hobby Classes &amp; Workshops are held periodically by well known artisans, quilters, crochet, embroidery and knitting experts from across the country&nbsp;</li>
-                              <li>
-                                The store also sells and services Swiss-based Bernina &amp; Bernette <strong>sewing machines</strong>
-                              </li>
-                              <li>We undertake orders for quilts, bags, home decor and almost any fabric that you might want to custom make</li>
-                              <li>
-                                Studio <strong>rent out</strong> option available
-                              </li>
-                              <li>We sell various kinds of quilt fabrics, batting, thread, bobbins, needles, cutting mats, rotary cutters, scissors, rulers, basting pins, tapes, buttons. We also sell supplies such as zippers, bag feet, D rings, magnetic buttons, bag handles (leather and faux leather), bag straps and much more..</li>
-                            </ul>
-                          </p>
-                        </blockquote>
-                        <Link to="/our-services" className="btn btnhover">
-                          Click here for more Hobby Clases
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="section-head">

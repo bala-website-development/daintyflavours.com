@@ -52,7 +52,7 @@ class Footer extends Component {
                       <Link to={"/blog-half-img-sidebar"}>Blog</Link>
                     </li> */}
                     <li>
-                      <Link to={"/shop"}>Products</Link>
+                      <Link to={"/shop"}>Collections</Link>
                     </li>
                     <li>
                       <Link to={"/contact-1"}>Contact</Link>
@@ -75,9 +75,15 @@ class Footer extends Component {
               </div>
               <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                 <div className="widget border-0">
-                  <h4 className="footer-title">Opening Hours</h4>
+                  <h4 className="footer-title">Order Online</h4>
                   <p className="m-b20">Our support available to help you.</p>
-                  <ul className="work-hour-list">
+                  <div>
+                    <a href={config.qrurl} target="_blank">
+                      <h5>Payment</h5>
+                    </a>
+                  </div>
+
+                  <ul className="work-hour-list d-none">
                     <li>
                       <span className="day">
                         <span>Monday to Friday</span>
@@ -121,7 +127,7 @@ class Footer extends Component {
                   <ul>
                     <li>
                       <a href="https://www.theuniquecreations.com/contact" className="font-weight-light" target="blank">
-                        Contact us
+                        Contact developer
                       </a>{" "}
                     </li>
                   </ul>
