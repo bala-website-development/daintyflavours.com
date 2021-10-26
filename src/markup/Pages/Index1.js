@@ -141,6 +141,11 @@ const Index1 = () => {
                         </div>
                         <div className="">
                           <p>{config.about_service}</p>
+                          <div className="text-center mt-2">
+                            <Link to={"/our-journey"} className="btn btn-md btnhover shadow m-t30">
+                              <i className="fa fa-angle-right m-r10"></i>More..
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -121,7 +121,9 @@ select.form-control:not([size]):not([multiple]) {
 .dangerous p {
   margin: 0 0 5px 0 !important;
 }
-
+.aligntopsidebar {
+  align-items: baseline !important;
+}
 .smallimage {
   height: 50px;
   width: 50px;

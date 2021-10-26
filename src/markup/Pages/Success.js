@@ -4,6 +4,7 @@ import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 import img1 from "./../../images/banner/bnr1.jpg";
 import img2 from "./../../images/background/bg5.jpg";
+import config from "../../config.json";
 
 const Success = () => {
   return (
@@ -31,7 +32,7 @@ const Success = () => {
           </div>
 
           <div className="content-block">
-            <div className="section-full content-inner-2 contact-form bg-white" style={{ backgroundImage: "url(" + img2 + ")", backgroundSize: "100%" }}>
+            <div className="section-full content-inner-2 contact-form bg-white">
               <div className="container">
                 <div className="row">
                   <div className="col-lg-12">
@@ -41,6 +42,10 @@ const Success = () => {
                           <i className="fa fa-check text-primary"></i>
                         </strong>
                         <h5 className="sub-title">Order successfully placed.</h5>
+                        <div>
+                          <h5>Pay Here</h5>
+                          <img src={config.qrurl} className="border rounded" />
+                        </div>
                         <Link to={"./orderhistory"} className="btn btnhover">
                           Go To Order History
                         </Link>

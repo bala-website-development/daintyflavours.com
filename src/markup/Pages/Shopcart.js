@@ -235,7 +235,9 @@ const Shopcart = () => {
                       </tr>
                       <tr>
                         <td>Shipping</td>
-                        <td>Free Shipping</td>
+                        <td>
+                          Free Shipping for Order more than <i class="fa fa-inr"></i> {config.freeshippingcost}{" "}
+                        </td>
                       </tr>
                       <tr>
                         <td>Tax</td>
