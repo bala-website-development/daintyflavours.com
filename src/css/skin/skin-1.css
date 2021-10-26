@@ -4,10 +4,10 @@
 
 :root {
   --color-primary: #f61645;
-  --color-secondry: #ffe4e1;
-  --color-button: #ffe4e1;
-  --color-hover: #e4b5af;
-  --color-primary-opacity: #ffe4e179;
+  --color-secondry: #f2e3f8;
+  --color-button: #f2e3f8;
+  --color-hover: #f61645;
+  --color-primary-opacity: rgba(242, 227, 248, 0.455);
 }
 .main-bar {
   /* background-color: #f4bb41 !important; */
