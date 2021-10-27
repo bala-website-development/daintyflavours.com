@@ -6,6 +6,7 @@ import CountUp from "react-countup";
 import OurPartners from "./../Element/OurPartners";
 import Slider from "./../Element/Slider";
 import Accord from "./../Element/Accord";
+import ScrollToTop from "./../Element/ScrollToTop";
 import config from "../../config.json";
 import img1 from "./../../images/background/bg5.jpg";
 import img2 from "./../../images/background/bg1.jpg";
@@ -288,6 +289,7 @@ const Index1 = () => {
           </div>
         </div>
       </div>
+      <ScrollToTop />
       <Footer />
     </div>
   );
