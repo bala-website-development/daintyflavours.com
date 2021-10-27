@@ -67,8 +67,11 @@ class Footer extends Component {
                     <li>
                       <a href={config.insta} target="_blank" className="fa fa-instagram bg-primary mr-1"></a>
                     </li>
-                    <li>
+                    <li className="d-none">
                       <a href={config.pins} target="_blank" className="fa fa-pinterest-p bg-primary mr-1"></a>
+                    </li>
+                    <li>
+                      <a href={config.whatsappurl} target="_blank" className="fa fa-whatsapp bg-success mr-1"></a>
                     </li>
                   </ul>
                 </div>
