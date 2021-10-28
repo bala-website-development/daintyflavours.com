@@ -70,47 +70,49 @@ const Index1 = () => {
       <div className="page-content bg-white">
         <div className="content-block">
           <Slider />
-          <div className="section-head mb-0 text-center">
-            <div className="my-4">
-              <h3 className="text-primary">Product Categories</h3>
+          <div>
+            <div className="section-head mb-0 text-center">
+              <div className="my-4">
+                <h3 className="text-primary">Product Categories</h3>
+              </div>
             </div>
-          </div>
-          <p className="main-text"> </p>
-          <div className="section-full mb-5">
-            <div className="container">
-              <div className="row service-area1">
-                {latestCat &&
-                  latestCat.map((cat) => (
-                    <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                      <div className="icon-bx-wraper text-center service-box1" style={{ backgroundImage: "url(" + cat.imageurl + ")" }}>
-                        <div className="icon-content">
-                          <h2 className="dlab-tilte text-white">{cat.title}</h2>
-                          <p>{cat.subtitle}</p>
-                          <div className="dlab-separator style1 bg-primary"></div>
-                          <Link to={{ pathname: "/shop", category: cat.category }} className="btn btnhover">
-                            More details <i className="fa fa-angle-double-right m-l5"></i>
-                          </Link>
+            <p className="main-text"> </p>
+            <div className="section-full mb-5">
+              <div className="container">
+                <div className="row service-area1">
+                  {latestCat &&
+                    latestCat.map((cat) => (
+                      <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                        <div className="icon-bx-wraper text-center service-box1" style={{ backgroundImage: "url(" + cat.imageurl + ")" }}>
+                          <div className="icon-content">
+                            <h2 className="dlab-tilte text-white">{cat.title}</h2>
+                            <p>{cat.subtitle}</p>
+                            <div className="dlab-separator style1 bg-primary"></div>
+                            <Link to={{ pathname: "/shop", category: cat.category }} className="btn btnhover">
+                              More details <i className="fa fa-angle-double-right m-l5"></i>
+                            </Link>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-              </div>
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="section-head mb-0 text-center">
-                    <div className="my-4">
-                      <img className="rounded" width="200px" src={config.logo} alt="" />
-                    </div>
-                    <h3 className="text-primary">{config.aboutustitle}</h3>
-                    <p className="main-text">{config.aboutus1} </p>
-                    <p>{config.aboutus2}</p>
-                    <div className="text-center mt-2">
-                      <Link to={"/about-1"} className="btn btn-md btnhover shadow m-t30">
-                        <i className="fa fa-angle-right m-r10"></i>More..
-                      </Link>
-                    </div>
-                    <div className="d-none">
-                      <A_Newsletter />
+                    ))}
+                </div>
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="section-head mb-0 text-center">
+                      <div className="my-4">
+                        <img className="rounded" width="200px" src={config.logo} alt="" />
+                      </div>
+                      <h3 className="text-primary">{config.aboutustitle}</h3>
+                      <p className="main-text">{config.aboutus1} </p>
+                      <p>{config.aboutus2}</p>
+                      <div className="text-center mt-2">
+                        <Link to={"/about-1"} className="btn btn-md btnhover shadow m-t30">
+                          <i className="fa fa-angle-right m-r10"></i>More..
+                        </Link>
+                      </div>
+                      <div className="d-none">
+                        <A_Newsletter />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -159,33 +161,8 @@ const Index1 = () => {
             <div className="container">
               <div className="row faq-area1">
                 <div className="col-lg-12 m-b20">
-                  <div className="m-r20">
-                    <div className="section-head text-left">
-                      <h2>Our Latest Prodcuts</h2>
-                      <p className="text-bold">Dont miss our new arrivals</p>
-                      <div className="dlab-separator style1 bg-primary"></div>
-                    </div>
-                    <Recent_Product></Recent_Product>
-                  </div>
-                  <div className="text-center mt-2">
-                    <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
-                      <i className="fa fa-angle-right m-r10"></i>Shop all
-                    </Link>
-                  </div>
-                  <div className="m-r20 mt-5">
-                    <div className="section-head text-left">
-                      <h2>Our Featured Prodcuts</h2>
-                      <div className="dlab-separator style1 bg-primary"></div>
-                    </div>
-                    <div className="">
-                      <Featured_Products></Featured_Products>
-                    </div>
-                    <div className="text-center mt-2">
-                      <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
-                        <i className="fa fa-angle-right m-r10"></i>Shop all
-                      </Link>
-                    </div>
-                  </div>
+                  <Recent_Product></Recent_Product>
+                  <Featured_Products></Featured_Products>
                 </div>
                 <div className="col-lg-6 m-b30 d-none">
                   <Accord />
@@ -195,7 +172,7 @@ const Index1 = () => {
           </div>
 
           <div className="section-full bg-white">
-            <div className="container ">
+            <div className="container d-none">
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
