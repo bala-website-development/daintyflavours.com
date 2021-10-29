@@ -91,6 +91,11 @@ const Orderhistory = (props) => {
                             Order Status
                           </Link>
                         </li>
+                        <li>
+                          <Link className="nav-link" id="pills-payment-tab" data-bs-toggle="pill" data-bs-target="#pills-payment">
+                            Payment
+                          </Link>
+                        </li>
                       </ul>
 
                       <div className="tab-content">
@@ -126,6 +131,23 @@ const Orderhistory = (props) => {
 
                                   <div className="p-1">
                                     <b>Order Status:</b> {dtl.orderstatus}{" "}
+                                  </div>
+                                  <div className="p-1">
+                                    <b>Tax:</b> <i class="fa fa-inr"></i> {dtl.tax}{" "}
+                                  </div>
+                                  <div className="p-1">
+                                    <b>Shipping:</b> <i class="fa fa-inr"></i> {dtl.shipping}{" "}
+                                  </div>
+                                  <div className="p-1">
+                                    <b>
+                                      Total(Tax+Shipping): <i class="fa fa-inr"></i> {dtl.grosstotal}{" "}
+                                    </b>
+                                  </div>
+                                  <div className="p-1">
+                                    <b>Payment Method:</b> {dtl.paymentmethod}
+                                  </div>
+                                  <div className="p-1">
+                                    <b>Payment Status:</b> {dtl.paymentstatus}
                                   </div>
 
                                   <div className="p-1">
@@ -186,8 +208,8 @@ const Orderhistory = (props) => {
                                           <th>Order Date</th>
                                           <th>Order status</th>
                                           <th>Delivery Status</th>
-                                          <th>Delivery Date</th>
-                                          <th>Payemnt Method/Status</th>
+                                          <th className="d-none">Delivery Date</th>
+                                          <th>Payment Status</th>
                                           <th>Total</th>
                                         </tr>
                                       </thead>
@@ -198,10 +220,8 @@ const Orderhistory = (props) => {
                                             <td className="font-weight-light">{orderhistory.orderdate}</td>
                                             <td className="font-weight-light">{orderhistory.orderstatus}</td>
                                             <td className="font-weight-light">{orderhistory.deliverystatus}</td>
-                                            <td className="font-weight-light">{orderhistory.deliverydate}</td>
-                                            <td className="font-weight-light">
-                                              {orderhistory.paymentmethod}/ {orderhistory.paymentstatus}
-                                            </td>
+                                            <td className="font-weight-light d-none">{orderhistory.deliverydate}</td>
+                                            <td className="font-weight-light">{orderhistory.paymentstatus}</td>
                                             <td className="font-weight-light ">
                                               <span className="float-left">
                                                 <i class="fa fa-inr"></i> {orderhistory.grosstotal}
@@ -215,6 +235,13 @@ const Orderhistory = (props) => {
                                 </div>
                               </div>
                             </div>
+                          </div>
+                        </div>
+
+                        <div className="tab-pane" id="pills-payment">
+                          <div className="mb-2">
+                            <h5>Pay Here</h5>
+                            <img src={config.qrurl} className="border rounded w-50" />
                           </div>
                         </div>
                       </div>
