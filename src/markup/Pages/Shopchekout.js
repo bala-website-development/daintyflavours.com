@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 const Shopchekout = () => {
   const [cartDetails, setCartDetails] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
+
   const [networkError, setNetworkError] = useState("");
   const [loading, setLoading] = useState(false);
   const [smShow, setSmShow] = useState(false);
@@ -47,6 +48,7 @@ const Shopchekout = () => {
             })
             .reduce((a, b) => a + b, 0)
         );
+
         setLoading((loading) => !loading);
         console.log("cart details", data);
       })
@@ -103,11 +105,13 @@ const Shopchekout = () => {
       orderid: uuid(),
       orderstatus: "Ordered",
       paymentstatus: "NotReceived",
-      paymentmethod: "CashOnDelivery",
+      paymentmethod: "",
       deliverystatus: "InProgress",
       deliverydate: "",
       orderdate: new Date(),
-      grosstotal: subTotal,
+      tax: (subTotal * config.taxpercentage) / 100,
+      shipping: subTotal < config.freeshippingcost ? config.shippingcost : 0,
+      grosstotal: subTotal + (subTotal * config.taxpercentage) / 100 + (subTotal < config.freeshippingcost ? config.shippingcost : 0),
       userid: localStorage.getItem("uuid"),
       usernotes: notes,
       billingaddress: userAddress[0],
@@ -133,11 +137,9 @@ const Shopchekout = () => {
             setCartDetails([]);
             setStatus(true);
             history.push("/success");
-          }
-          else if (data?.status === 499) {
+          } else if (data?.status === 499) {
             history.push("/shop-login");
-          }
-          else {
+          } else {
             setMessage(data.message);
             setStatus(true);
           }
@@ -201,23 +203,29 @@ const Shopchekout = () => {
                   </div> */}
                   <div className="row">
                     <div className="form-group col-md-6">
+                      First Name
                       <input type="text" className="form-control" placeholder="First Name" defaultValue={userAddress[0]?.name} />
                     </div>
                     <div className="form-group col-md-6">
+                      Last Name
                       <input type="text" className="form-control" placeholder="Last Name" defaultValue={userAddress[0]?.name} />
                     </div>
                   </div>
                   <div className="form-group">
+                    Billing/Shipping Address
                     <input type="text" name="address" placeholder="Full Address" defaultValue={userAddress[0]?.address} className="form-control" {...register("address")} required />
                   </div>
                   <div className="form-group">
+                    City/Town
                     <input type="text" name="city" placeholder="Village/Town/City" defaultValue={userAddress[0]?.city} className="form-control" {...register("city")} required />
                   </div>
                   <div className="row">
                     <div className="form-group col-md-6">
+                      State
                       <input type="text" className="form-control" placeholder="State" defaultValue={userAddress[0]?.state} name="state" {...register("state")} required />
                     </div>
                     <div className="form-group col-md-6">
+                      Pincode
                       <input type="text" className="form-control" placeholder="Pincode" defaultValue={userAddress[0]?.pincode} name="pincode" {...register("pincode")} required />
                     </div>
                   </div>
@@ -248,10 +256,11 @@ const Shopchekout = () => {
                 </div>
                 <div className="col-lg-6 col-md-12 m-b30 m-md-b0">
                   <h3>
-                    <button className="btn-link text-black" type="button" data-toggle="collapse" data-target="#different-address">
+                    <button className="btn-link text-black d-none" type="button" data-toggle="collapse" data-target="#different-address">
                       {/* Ship to a different address <i className="fa fa-angle-down"></i> */}
-                      User notes <i className="fa fa-angle-down"></i>
+                      User notes / Instructions <i className="fa fa-angle-down"></i>
                     </button>
+                    User notes / Instructions
                   </h3>
                   <div id="different-address" className="collapse">
                     <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing & Shipping section.</p>
@@ -380,24 +389,29 @@ const Shopchekout = () => {
                           </tr>
                           <tr>
                             <td>Shipping</td>
-                            <td>Free Shipping</td>
+                            <td>
+                              <i class="fa fa-inr"></i> {subTotal < config.freeshippingcost ? config.shippingcost : 0}
+                              <div className={subTotal < config.freeshippingcost ? "small" : "d-none"}>
+                                {config.freeshippingmessage} <i class="fa fa-inr"></i> {config.freeshippingcost}
+                              </div>
+                            </td>
                           </tr>
                           <tr>
-                            <td>Tax</td>
-                            <td className="product-price">
-                              <i class="fa fa-inr"></i> 0.00
+                            <td>Tax({config.taxpercentage}%)</td>
+                            <td>
+                              <i class="fa fa-inr"></i> {subTotal * (config.taxpercentage / 100)}
                             </td>
                           </tr>
                           <tr>
                             <td>Total</td>
-                            <td className="product-price-total">
-                              <i class="fa fa-inr"></i> {subTotal}
+                            <td>
+                              <i class="fa fa-inr"></i> {subTotal + (subTotal * config.taxpercentage) / 100 + (subTotal < config.freeshippingcost ? config.shippingcost : 0)}
                             </td>
                           </tr>
                         </tbody>
                       </table>
                       <h4>Payment Method</h4>
-                      <h6>Contact Owner</h6>
+                      <h6>Please place the order and scan QR code to pay in the next screen.</h6>
                       <div className="d-none">
                         <div className="form-group">
                           <input type="text" className="form-control" placeholder="Name on Card" />

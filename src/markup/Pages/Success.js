@@ -42,9 +42,9 @@ const Success = () => {
                           <i className="fa fa-check text-primary"></i>
                         </strong>
                         <h5 className="sub-title">Order successfully placed.</h5>
-                        <div>
+                        <div className="mb-2">
                           <h5>Pay Here</h5>
-                          <img src={config.qrurl} className="border rounded" />
+                          <img src={config.qrurl} className="border rounded w-50" />
                         </div>
                         <Link to={"./orderhistory"} className="btn btnhover">
                           Go To Order History
