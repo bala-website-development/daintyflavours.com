@@ -237,9 +237,10 @@ const Shopcart = () => {
                         <td>Shipping</td>
                         <td>
                           <i class="fa fa-inr"></i> {subTotal < config.freeshippingcost ? config.shippingcost : 0}
-                          <div className={subTotal < config.freeshippingcost ? "small" : "d-none"}>
+                          <br />
+                          <span className={subTotal < config.freeshippingcost ? "small" : "d-none"}>
                             {config.freeshippingmessage} <i class="fa fa-inr"></i> {config.freeshippingcost}
-                          </div>
+                          </span>
                         </td>
                       </tr>
                       <tr>
