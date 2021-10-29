@@ -385,7 +385,7 @@ const Shopproduct = (props) => {
                               <Link to={`/shop-product-details/${rel.p_id}`}>{rel.p_name}</Link>
                             </h4>
                             <Link to={`/shop-product-details/${rel.p_id}`} class="btn btnhover">
-                              <i class="ti-shopping-cart m-r5"></i> Add To Cart
+                              View
                             </Link>
                           </div>
                         </div>
