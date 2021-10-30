@@ -399,10 +399,10 @@ const Shopchekout = () => {
                           <tr>
                             <td>Tax({config.taxpercentage}%)</td>
                             <td>
-                              <i class="fa fa-inr"></i> {subTotal * (config.taxpercentage / 100)}
+                              <i class="fa fa-inr"></i> {(subTotal * (config.taxpercentage / 100)).toFixed(2)}
                             </td>
                           </tr>
-                          <tr>
+                          <tr className="bg-primary text-light">
                             <td>Total</td>
                             <td>
                               <i class="fa fa-inr"></i> {subTotal + (subTotal * config.taxpercentage) / 100 + (subTotal < config.freeshippingcost ? config.shippingcost : 0)}
