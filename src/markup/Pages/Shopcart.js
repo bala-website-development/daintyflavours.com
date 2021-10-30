@@ -130,46 +130,54 @@ const Shopcart = () => {
                 <div className="table-responsive m-b50">
                   <table className="table check-tbl">
                     <thead>
-                      <tr>
-                        <th>Product</th>
-                        <th>Product name</th>
-                        <th>Unit Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th></th>
-                      </tr>
+                      <div className="d-flex justify-content-between font-weigth-bold my-1 p-2 border-bottom">
+                        <div className="w-25">
+                          <b>Product</b>
+                        </div>
+                        <div className="w-30">
+                          <b>Name</b>
+                        </div>
+                        <div className="w-25">
+                          <b>Price</b>
+                        </div>
+                        <div className="w-25">
+                          <b>Qty.</b>
+                        </div>
+                        <div className="w-25">
+                          <b>Total</b>
+                        </div>
+                        <div className="w-10"></div>
+                      </div>
                     </thead>
                     <tbody>
                       {!loading ? (
                         cartDetails.length > 0 ? (
                           cartDetails.map((cart, key) => (
-                            <tr className="alert">
-                              <td className="product-item-img">
-                                <img src={cart.p_image} alt="" />
-                              </td>
-                              <td className="product-item-name">{cart.p_name}</td>
-                              <td className="product-item-price">{cart.p_price}</td>
-                              <td className="product-item-quantity">
-                                <div className="quantity btn-quantity max-w80">
-                                  {/* <Form> */}
-                                  <select id={key} className="drpquantity" onChange={(e) => updateCartQuantity(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
-                                    <option value={1}>1</option>
-                                    <option value={2}>2</option>
-                                    <option value={3}>3</option>
-                                    <option value={4}>4</option>
-                                    <option value={5}>5</option>
-                                    <option value={6}>6</option>
-                                    <option value={7}>7</option>
-                                    <option value={8}>8</option>
-                                    <option value={9}>9</option>
-                                    <option value={10}>10</option>
-                                  </select>
-                                </div>
-                              </td>
-                              <td className="product-item-totle">
+                            <div className="d-flex justify-content-between align-items-center p-1 my-1 border-bottom">
+                              <div className="w-25">
+                                <img src={cart.p_image} className="rounded" alt="" />
+                              </div>
+                              <div className="w-30">{cart.p_name}</div>
+                              <div className="w-25">{cart.p_price}</div>
+                              <div className="w-25">
+                                <select id={key} className="drpquantity" onChange={(e) => updateCartQuantity(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
+                                  <option value={1}>1</option>
+                                  <option value={2}>2</option>
+                                  <option value={3}>3</option>
+                                  <option value={4}>4</option>
+                                  <option value={5}>5</option>
+                                  <option value={6}>6</option>
+                                  <option value={7}>7</option>
+                                  <option value={8}>8</option>
+                                  <option value={9}>9</option>
+                                  <option value={10}>10</option>
+                                </select>
+                              </div>
+                              <div className="w-25 text-nowrap">
+                                {" "}
                                 <i class="fa fa-inr"></i> {cart.p_price * cart.p_quantity}
-                              </td>
-                              <td className="product-item-close">
+                              </div>
+                              <div className="w-10">
                                 <Link
                                   onClick={(e) => {
                                     deleteCart([cart.id]);
@@ -178,8 +186,8 @@ const Shopcart = () => {
                                   aria-label="close"
                                   className="ti-close"
                                 ></Link>
-                              </td>
-                            </tr>
+                              </div>
+                            </div>
                           ))
                         ) : (
                           "No Items in your Cart"
@@ -254,7 +262,7 @@ const Shopcart = () => {
                           <i class="fa fa-inr"></i> {(subTotal * config.taxpercentage) / 100}
                         </td>
                       </tr>
-                      <tr>
+                      <tr className="bg-primary text-light">
                         <td>Total</td>
                         <td>
                           <i class="fa fa-inr"></i> {subTotal + (subTotal * config.taxpercentage) / 100 + (subTotal < config.freeshippingcost ? config.shippingcost : 0)}

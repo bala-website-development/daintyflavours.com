@@ -90,8 +90,7 @@ const Header = (props) => {
                   <li>
                     {localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null && (
                       <Link to={"/shop-cart"}>
-                        {" "}
-                        <div className="btn bg-white">
+                        <div className="btn">
                           <div className="text-small">
                             <span className="position-relative">
                               <img height="10" src={cart} alt="" />

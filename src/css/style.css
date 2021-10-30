@@ -137,6 +137,12 @@ select.form-control:not([size]):not([multiple]) {
   height: 250px !important;
   /* width: 250px !important; */
 }
+.w-10 {
+  width: 10%;
+}
+.w-30 {
+  width: 30%;
+}
 .thumbnailimage {
   height: 250px;
 }
