@@ -204,17 +204,21 @@ const Shopproduct = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div className="row">
+                  <div className={"widget widget_gallery gallery-grid-4"}>
                     <SimpleReactLightbox>
                       <SRLWrapper>
                         <ul id="lightgallery" className="lightgallery">
-                          {productReviews.map((url, index) => (
-                            <li>
-                              <div className="dlab-post-thum dlab-img-effect">
-                                <img src={url.url} className="galarythumbnailimage" alt="sukhaa" />
-                              </div>
-                            </li>
-                          ))}
+                          {productDtl.moreimageurl &&
+                            productDtl.moreimageurl.length > 0 &&
+                            productDtl.moreimageurl.map((url, index) => (
+                              <>
+                                <li>
+                                  <div className="dlab-post-thum dlab-img-effect">
+                                    <img src={url.url} className="galarythumbnailimage" alt="sukhaa" />
+                                  </div>
+                                </li>
+                              </>
+                            ))}
                         </ul>
                       </SRLWrapper>
                     </SimpleReactLightbox>
