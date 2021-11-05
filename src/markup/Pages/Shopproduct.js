@@ -12,7 +12,8 @@ import { useForm } from "react-hook-form";
 import * as moment from "moment";
 import img1 from "./../../images/banner/bnr1.jpg";
 import { Modal } from "react-bootstrap";
-
+import SimpleReactLightbox from "simple-react-lightbox";
+import { SRLWrapper } from "simple-react-lightbox";
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -199,12 +200,28 @@ const Shopproduct = (props) => {
                   <div className="product-gallery on-show-slider lightgallery" id="lightgallery">
                     <div className="dlab-box">
                       <div className="dlab-thum-bx">
-                        <img src={productDtl.p_image} alt="" />
-                        <span data-exthumbimage="images/product/item2.jpg" data-src={productDtl.p_image} className="check-km" title={productDtl.p_name}>
-                          <i className="fa fa-search"></i>
-                        </span>
+                        <img src={productDtl.p_image} alt="sukhaa" />
                       </div>
                     </div>
+                  </div>
+                  <div className={"widget widget_gallery gallery-grid-4"}>
+                    <SimpleReactLightbox>
+                      <SRLWrapper>
+                        <ul id="lightgallery" className="lightgallery">
+                          {productDtl.moreimageurl &&
+                            productDtl.moreimageurl.length > 0 &&
+                            productDtl.moreimageurl.map((url, index) => (
+                              <>
+                                <li>
+                                  <div className="dlab-post-thum dlab-img-effect">
+                                    <img src={url} className="galarythumbnailimage" alt="sukhaa" />
+                                  </div>
+                                </li>
+                              </>
+                            ))}
+                        </ul>
+                      </SRLWrapper>
+                    </SimpleReactLightbox>
                   </div>
                 </div>
                 <div className="col-lg-6 m-b30">
