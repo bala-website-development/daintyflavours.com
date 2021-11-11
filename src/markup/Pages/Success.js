@@ -32,7 +32,7 @@ const Success = () => {
           </div>
 
           <div className="content-block">
-            <div className="section-full content-inner-2 contact-form bg-white">
+            <div className="section-fullcontact-form bg-white">
               <div className="container">
                 <div className="row">
                   <div className="col-lg-12">
@@ -43,7 +43,10 @@ const Success = () => {
                         </strong>
                         <h5 className="sub-title">Order successfully placed.</h5>
                         <div className="mb-2">
-                          <h5>Pay Here</h5>
+                          <a href={config.razorpaylink} target="_blank" className="btn  btnhover">
+                            Pay Here
+                          </a>
+                          <div className="p-3">Or Scan the QR</div>
                           <img src={config.qrurl} className="border rounded w-50" />
                         </div>
                         <Link to={"./orderhistory"} className="btn btnhover">
