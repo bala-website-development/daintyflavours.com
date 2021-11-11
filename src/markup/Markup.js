@@ -62,7 +62,7 @@ class Markup extends Component {
           {/* <Route path="/admin" exact component={Admin} /> */}
           <Route path="/myprofile" exact component={Myprofile} />
           <Route path="/orderhistory" exact component={Orderhistory} />
-          <Route path="/about-1" exact component={About} />
+          <Route path="/about" exact component={About} />
           <Route path="/our-journey" exact component={OurJourney} />
           <Route path="/our-services" exact component={Ourservices} />
           <Route path="/faq" exact component={Faq} />
@@ -104,7 +104,7 @@ class Markup extends Component {
           <Route path="/shop-login" exact component={Shoplogin} />
           <Route path="/shop-register" exact component={Shopregister} />
 
-          <Route path="/contact-1" exact component={Contact} />
+          <Route path="/contact" exact component={Contact} />
           <Route path="/contact-2" exact component={Contact2} />
         </Switch>
       </BrowserRouter>

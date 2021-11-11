@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Allow: /about-1
-Allow: /contact-1
+Allow: /about
+Allow: /contact
 Allow: /shop
 Sitemap: https://www.sukhaa.in/sitemap.txt

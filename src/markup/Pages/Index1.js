@@ -106,7 +106,7 @@ const Index1 = () => {
                       <p className="main-text">{config.aboutus1} </p>
                       <p>{config.aboutus2}</p>
                       <div className="text-center mt-2">
-                        <Link to={"/about-1"} className="btn btn-md btnhover shadow m-t30">
+                        <Link to={"/about"} className="btn btn-md btnhover shadow m-t30">
                           <i className="fa fa-angle-right m-r10"></i>More..
                         </Link>
                       </div>

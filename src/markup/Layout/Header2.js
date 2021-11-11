@@ -121,7 +121,7 @@ class Header2 extends Component {
                     </Link>
                     <ul className="sub-menu">
                       <li>
-                        <Link to={"/about-1"}>About Us</Link>
+                        <Link to={"/about"}>About Us</Link>
                       </li>
                       <li>
                         <Link to={"/our-services"}>Our Services</Link>
@@ -269,7 +269,7 @@ class Header2 extends Component {
                     </Link>
                     <ul className="sub-menu left">
                       <li>
-                        <Link to={"/contact-1"}>Contact Us 1</Link>
+                        <Link to={"/contact"}>Contact Us 1</Link>
                       </li>
                       <li>
                         <Link to={"/contact-2"}>Contact Us 2</Link>
