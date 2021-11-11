@@ -42,7 +42,7 @@ class Footer extends Component {
                       <Link to={"/"}>Home</Link>
                     </li>
                     <li>
-                      <Link to={"/about-1"}>About</Link>
+                      <Link to={"/about"}>About</Link>
                     </li>
                     {/* <li>
                       <Link to={"/our-services"}>Our Courses</Link>
@@ -55,7 +55,7 @@ class Footer extends Component {
                       <Link to={"/shop"}>Collections</Link>
                     </li>
                     <li>
-                      <Link to={"/contact-1"}>Contact</Link>
+                      <Link to={"/contact"}>Contact</Link>
                     </li>
                   </ul>
                 </div>
@@ -82,10 +82,14 @@ class Footer extends Component {
                   <p className="m-b20">Our support available to help you.</p>
                   <div>
                     <a href={config.qrurl} target="_blank">
-                      <h5>Payment</h5>
+                      <h5>QR Payment</h5>
                     </a>
                   </div>
-
+                  <div>
+                    <a href={"/termsandcondition"}>
+                      <h5>Terms and Condition</h5>
+                    </a>
+                  </div>
                   <ul className="work-hour-list d-none">
                     <li>
                       <span className="day">

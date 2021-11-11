@@ -106,7 +106,7 @@ const Header = (props) => {
                     <Link to={"/"}>Home</Link>
                   </li>
                   <li className={props?.active === "about" ? "active" : ""}>
-                    <Link to={"/about-1"}>About Us</Link>
+                    <Link to={"/about"}>About Us</Link>
                   </li>
                   <li>
                     <Link className="text-nowrap" to={"/our-journey"}>
@@ -141,7 +141,7 @@ const Header = (props) => {
                    */}
                   </li>
                   <li className={props?.active === "contact" ? "active" : ""}>
-                    <Link to={"/contact-1"}>Contact Us</Link>
+                    <Link to={"/contact"}>Contact Us</Link>
                   </li>
                   {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? (
                     <li>
@@ -184,7 +184,7 @@ const Header = (props) => {
                       </Link>
                       <ul className="sub-menu">
                         <li>
-                          <Link className="text-nowrap" to={"/about-1"}>
+                          <Link className="text-nowrap" to={"/about"}>
                             About Us
                           </Link>
                         </li>
@@ -196,7 +196,7 @@ const Header = (props) => {
                       </ul>
                       {/* <ul className="sub-menu">
                     <li>
-                      <Link to={"/about-1"}>About Us</Link>
+                      <Link to={"/about"}>About Us</Link>
                     </li>
 
                     <li>
@@ -255,10 +255,10 @@ const Header = (props) => {
                       </ul>
                     </li>*/}
                     <li className={props?.active === "contact" ? "active" : ""}>
-                      <Link to={"/contact-1"}>Contact Us</Link>
+                      <Link to={"/contact"}>Contact Us</Link>
                       {/* <ul className="sub-menu left">
                     <li>
-                      <Link to={"/contact-1"}>Contact Us 1</Link>
+                      <Link to={"/contact"}>Contact Us 1</Link>
                     </li>
                     <li>
                       <Link to={"/contact-2"}>Contact Us 2</Link>

@@ -52,9 +52,14 @@
   "qrurl": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fdeepikaqr.png?alt=media&token=f8659817-c1e5-4c1f-94ac-f5a859c91855",
   "recentproduct": 8,
   "featuredproduct": 8,
-  "freeshippingcost": 2000,
+  "freeshippingcost": 3000,
   "freeshippingmessage": "Free shipping for the order over",
   "whatsappurl": "https://wa.me/919666264571",
-  "taxpercentage": 5,
-  "shippingcost": 50
+  "taxpercentage": 0,
+  "shippingcost": 150,
+  "razorpaylink": "https://pages.razorpay.com/sukhaa",
+  "tc1": "Terms:",
+  "tc2": "Return Policy: ",
+  "tc3": "Cancellation Policy: ",
+  "tc4": "Shipping Policy: "
 }
