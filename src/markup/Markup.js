@@ -5,6 +5,7 @@ import Index1 from "./Pages/Index1";
 //import Index2 from './Pages/Index2';
 
 import About from "./Pages/About";
+import TermsandCondition from "./Pages/TermsandCondition";
 import OurJourney from "./Pages/OurJourney";
 import Ourservices from "./Pages/Ourservices";
 import Faq from "./Pages/Faq";
@@ -63,6 +64,7 @@ class Markup extends Component {
           <Route path="/myprofile" exact component={Myprofile} />
           <Route path="/orderhistory" exact component={Orderhistory} />
           <Route path="/about" exact component={About} />
+          <Route path="/termsandcondition" exact component={TermsandCondition} />
           <Route path="/our-journey" exact component={OurJourney} />
           <Route path="/our-services" exact component={Ourservices} />
           <Route path="/faq" exact component={Faq} />

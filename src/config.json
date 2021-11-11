@@ -57,5 +57,9 @@
   "whatsappurl": "https://wa.me/919666264571",
   "taxpercentage": 0,
   "shippingcost": 150,
-  "razorpaylink": "https://pages.razorpay.com/sukhaa"
+  "razorpaylink": "https://pages.razorpay.com/sukhaa",
+  "tc1": "Terms:",
+  "tc2": "Return Policy: ",
+  "tc3": "Cancellation Policy: ",
+  "tc4": "Shipping Policy: "
 }
