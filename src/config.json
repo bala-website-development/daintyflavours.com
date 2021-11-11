@@ -58,8 +58,8 @@
   "taxpercentage": 0,
   "shippingcost": 150,
   "razorpaylink": "https://pages.razorpay.com/sukhaa",
-  "tc1": "Terms:",
-  "tc2": "Return Policy: ",
-  "tc3": "Cancellation Policy: ",
-  "tc4": "Shipping Policy: "
+  "tc1": "",
+  "tc2": "",
+  "tc3": "Cancellation/Return policy: The product can only be canceled before the product gets shipped. Once the product is shipped there won't be any cancellation or return.",
+  "tc4": "Product quality : Each product is handpicked and checked several times before dispatching. We want a hastle free experience for our customers. Making it the least case of receiving defects in the product. Little rare glitches of handloom sarees are what makes them unique & beautiful. Embrace the little imperfections of handloom."
 }
