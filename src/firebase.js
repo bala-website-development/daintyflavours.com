@@ -2,14 +2,12 @@ import firebase from "firebase";
 
 const configfb = {
   /////new//// Jan 3 2021
-  apiKey: "AIzaSyB4JcU0HlqeG9Z4L1PVuzHSbwu5IIsGQXE",
-  authDomain: "tucfbclouddb.firebaseapp.com",
-  databaseURL: "https://tucfbclouddb-default-rtdb.firebaseio.com",
-  projectId: "tucfbclouddb",
-  storageBucket: "tucfbclouddb.appspot.com",
-  messagingSenderId: "630144356084",
-  appId: "1:630144356084:web:cd09fed36cb2bcac2758a1",
-  measurementId: "G-H3YBW1GSN8",
+  apiKey: "AIzaSyAXxp-cmzN2zEcVxGuDiIQUVSis2JSNcFI",
+  authDomain: "tuc-shopping-dev.firebaseapp.com",
+  projectId: "tuc-shopping-dev",
+  storageBucket: "tuc-shopping-dev.appspot.com",
+  messagingSenderId: "56861130108",
+  appId: "1:56861130108:web:e2a2a5f50d9d29dd9ef8f9",
 };
 firebase.initializeApp(configfb);
 
