@@ -18,7 +18,7 @@ const Featured_Product = (props) => {
       .then((data1) => {
         if (data1.status === 200) {
           let active1 = data1.data
-            .filter((filter1, index) => filter1.isactive === "1" && filter1.isfeatured === 1 && index < config.featuredproduct)
+            .filter((filter1, index) => filter1.isactive === 1 && filter1.isfeatured === 1 && index < config.featuredproduct)
             .map((data) => {
               return data;
             });
