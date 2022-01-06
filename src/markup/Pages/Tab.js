@@ -61,7 +61,7 @@ const Popupss = (props) => {
                   }}
                 >
                   <i className="flaticon-cola"></i>
-                  <span>TOOLS/ACCESSORIES</span>
+                  <span>ACCESSORIES</span>
                 </Link>
               </li>
               <li className="nav-item item">
@@ -97,7 +97,7 @@ const Popupss = (props) => {
                   }}
                 >
                   <i className="flaticon-sandwich"></i>
-                  <span>DISPLAY/DECORATION</span>
+                  <span>DECORATION</span>
                 </Link>
               </li>
             </ul>

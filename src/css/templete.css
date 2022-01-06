@@ -26,7 +26,8 @@
   background-position: center;
   position: relative;
   background-size: cover;
-  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  background-color: #ffecef;
+  /* background-color: rgba(0, 0, 0, 0.5); Black background with opacity */
 }
 .main-slider .slide .content {
   width: 100%;
@@ -41,7 +42,7 @@
   line-height: 1.1;
   margin-bottom: 15px;
   display: block;
-  color: #fff;
+
   /* font-family: "Amita", sans-serif; */
   font-weight: 700;
 }

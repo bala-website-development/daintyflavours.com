@@ -14,16 +14,19 @@ const Slider = () => {
           slider_content.map((slider) => (
             <Carousel.Item>
               <div className="slide" style={{ backgroundImage: "url(" + slider.image_url + ")" }}>
+                {/* <div className="slide" style={{ backgroundColor: "#FFECEF" }}> */}
                 <div className="slideroverlay">
-                  {/* <img className="d-block w-100 slider" src={require('./../../images/main-slider/slide1.jpg')}	alt="Second slide"	/> */}
-                  <div className="content">
-                    <span>{slider.prefix}</span>
-                    <h3 className="title">{slider.title}</h3>
-                    <h4 className="sub-title">{slider.description}</h4>
+                  {/* <img className="w-50 float-right bottom-0" src={"https://firebasestorage.googleapis.com/v0/b/tuc-shopping-dev.appspot.com/o/daintyflavour%2Fpngegg.png?alt=media&token=392f4d59-f387-445b-aea0-fb297ba68023"} alt="Dainty Flavour" /> */}
+                  <div className="content text-left px-5">
+                    <div className="">
+                      <span className="prefix">{slider.prefix}</span>
+                      <h3 className="title">{slider.title}</h3>
+                      <h4 className="sub-title">{slider.description}</h4>
 
-                    <Link to={"/shop"} className="btn btnhover border">
-                      Shop now
-                    </Link>
+                      <Link to={"/shop"} className="btn btnhover border">
+                        Shop now
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

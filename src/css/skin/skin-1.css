@@ -3,10 +3,10 @@
 =====================*/
 
 :root {
-  --color-primary: #c49a2a;
-  --color-secondry: #e3b32f;
+  --color-primary: #9b0641;
+  --color-secondry: #9b0641;
   --color-button: #e3b32f;
-  --color-hover: #c49a2a;
+  --color-hover: #9b0641;
   --color-primary-opacity: rgba(242, 227, 248, 0.455);
 }
 .main-bar,
@@ -14,6 +14,22 @@
   /* background-color: #f4bb41 !important; */
   /* background-color: #f2e3f8 !important; */
   background-color: transparent;
+}
+.header-nav .nav > li > a {
+  color: #e3b32f;
+}
+.titlename {
+  color: var(--color-primary) !important;
+}
+.title,
+.sub-title {
+  color: var(--color-primary) !important;
+}
+.prefix {
+  color: #e3b32f;
+}
+.bg-primarytab {
+  background-color: var(--color-button);
 }
 /* Hex */
 .bg-primary,

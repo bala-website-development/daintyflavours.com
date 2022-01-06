@@ -123,10 +123,9 @@ select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 5px) !important;
 }
 .main-slider .slideroverlay {
-  background: rgb(0, 0, 0);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.413) 0%, rgba(0, 0, 8, 0) 43%);
-  z-index: 999999;
+  background: none;
   height: 100%;
+  vertical-align: middle;
 }
 .dangerous p {
   margin: 0 0 5px 0 !important;
