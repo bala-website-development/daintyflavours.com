@@ -17,7 +17,7 @@ const Recent_Products = () => {
       .then((data) => {
         if (data.status === 200) {
           let active = data.data
-            .filter((filter, index) => filter.isactive === "1" && index < config.recentproduct)
+            .filter((filter, index) => filter.isactive === 1 && index < config.recentproduct)
             .map((data) => {
               return data;
             });

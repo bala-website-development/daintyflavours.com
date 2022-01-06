@@ -61,7 +61,7 @@ const Index1 = () => {
         .then((data) => setLatestCat(data));
       console.log("latestCat", latestCat);
     };
-    fetchCategories();
+    //fetchCategories();
   }, []);
   return (
     <div>
