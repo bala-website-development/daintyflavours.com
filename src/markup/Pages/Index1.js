@@ -59,9 +59,10 @@ const Index1 = () => {
       await fetch(config.service_url + "getHomePageCategory")
         .then((response) => response.json())
         .then((data) => setLatestCat(data));
+      //add filer type=home
       console.log("latestCat", latestCat);
     };
-    //fetchCategories();
+    fetchCategories();
   }, []);
   return (
     <div>
