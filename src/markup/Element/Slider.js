@@ -14,15 +14,17 @@ const Slider = () => {
           slider_content.map((slider) => (
             <Carousel.Item>
               <div className="slide" style={{ backgroundImage: "url(" + slider.image_url + ")" }}>
-                {/* <img className="d-block w-100 slider" src={require('./../../images/main-slider/slide1.jpg')}	alt="Second slide"	/> */}
-                <div className="content">
-                  <span>{slider.prefix}</span>
-                  <h3 className="title">{slider.title}</h3>
-                  <h4 className="sub-title">{slider.description}</h4>
+                <div className="slideroverlay">
+                  {/* <img className="d-block w-100 slider" src={require('./../../images/main-slider/slide1.jpg')}	alt="Second slide"	/> */}
+                  <div className="content">
+                    <span>{slider.prefix}</span>
+                    <h3 className="title">{slider.title}</h3>
+                    <h4 className="sub-title">{slider.description}</h4>
 
-                  <Link to={"/shop"} className="btn btnhover border">
-                    Shop now
-                  </Link>
+                    <Link to={"/shop"} className="btn btnhover border">
+                      Shop now
+                    </Link>
+                  </div>
                 </div>
               </div>
             </Carousel.Item>

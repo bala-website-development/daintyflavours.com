@@ -115,14 +115,26 @@
 1. GENERAL
 
 ---------------------------------------------------------------*/
+@font-face {
+  font-family: daintytitle;
+  src: url("/src/css/fonts/Ageritta.ttf");
+}
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 5px) !important;
+}
+.main-slider .slideroverlay {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.413) 0%, rgba(0, 0, 8, 0) 43%);
+  z-index: 999999;
+  height: 100%;
 }
 .dangerous p {
   margin: 0 0 5px 0 !important;
 }
 .titlename {
-  font-size: 60px !important;
+  font-size: 35px !important;
+  color: white !important;
+  font-family: daintytitle;
 }
 .aligntopsidebar {
   align-items: baseline !important;
@@ -313,7 +325,7 @@ html {
 body {
   background-color: #fff;
   /* font-family: "Poppins", sans-serif; */
-  font-family: "Saira", sans-serif;
+  font-family: "Abel", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #0a0a0a;
@@ -5292,7 +5304,7 @@ blockquote cite {
   font-size: 14px;
   font-weight: 400;
   background: #fff;
-  font-family: poppins;
+  font-family: Abel;
 }
 .dlab-post-tags .post-tags a:hover {
   text-decoration: underline;

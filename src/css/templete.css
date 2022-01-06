@@ -3,7 +3,10 @@
 ==========================*/
 
 /* Body */
-
+@font-face {
+  font-family: daintysildertitle;
+  src: url("/src/css/fonts/Ageritta.ttf");
+}
 .container {
   max-width: 1270px;
 }
@@ -43,12 +46,13 @@
   font-weight: 700;
 }
 .main-slider .title {
-  font-size: 100px;
+  font-size: 70px;
   color: #fff;
   line-height: 1;
   margin-bottom: 0;
   text-transform: capitalize;
-  font-weight: 900;
+
+  font-family: daintysildertitle;
   text-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
 }
 .main-slider .sub-title {
@@ -127,9 +131,7 @@
 }
 
 /* Header */
-.header-style-2 .header-nav .nav > li > a {
-  font-family: "Saira", sans-serif;
-}
+
 .header-style-2 .main-bar:after {
   content: "";
   /* background-image: url(../images/border.png); */
@@ -2171,7 +2173,7 @@ ol.comment-list li.comment .reply a {
   margin-bottom: 5px;
 }
 .menu-list-2 li .info-price .title {
-  font-family: Barlow, sans-serif;
+  font-family: Abel, sans-serif;
 }
 
 .section-head.style-2 {
@@ -2471,7 +2473,7 @@ td.fc-event-container {
     height: 650px;
   }
   .main-slider .title {
-    font-size: 80px;
+    font-size: 40px;
     line-height: 1.1;
   }
   .banner .title {

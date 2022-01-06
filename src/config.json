@@ -12,14 +12,14 @@
   "logo": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Flogo%2Fdainty-logo-gold_web.png?alt=media&token=073f95e5-6676-4529-b886-d333042a693e",
   "slider": [
     {
-      "title": ".",
-      "prefix": "15% off on the launch collection - Launch sale",
-      "description": ".",
+      "title": "Dainty Falvours",
+      "prefix": "One Stop Shop for Baking",
+      "description": "",
       "image_url": " https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fslider%2Fslider1.jpg?alt=media&token=4aca011b-e4fe-4b2c-9a41-7525da9cbf80"
     },
     {
       "title": "Dainty Falvours",
-      "prefix": "Sarees",
+      "prefix": "One Stop Shop for Baking",
       "description": "Variety of hand picked sarees collection in friendly place",
       "image_url": "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/SUKHAA%2Fslider%2Fsukhaaslider2.jpg?alt=media&token=8cf31386-7311-42c6-ba13-00460904a826"
     },
