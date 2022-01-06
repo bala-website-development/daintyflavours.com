@@ -3,10 +3,10 @@
 =====================*/
 
 :root {
-  --color-primary: #f61645;
-  --color-secondry: #f2e3f8;
-  --color-button: #f2e3f8;
-  --color-hover: #f61645;
+  --color-primary: #c49a2a;
+  --color-secondry: #e3b32f;
+  --color-button: #e3b32f;
+  --color-hover: #c49a2a;
   --color-primary-opacity: rgba(242, 227, 248, 0.455);
 }
 .main-bar,
