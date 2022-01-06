@@ -12,7 +12,8 @@
 .main-bar,
 .mo-left .header-nav.show {
   /* background-color: #f4bb41 !important; */
-  background-color: #f2e3f8 !important;
+  /* background-color: #f2e3f8 !important; */
+  background-color: transparent;
 }
 /* Hex */
 .bg-primary,

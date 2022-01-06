@@ -3005,8 +3005,9 @@ blockquote cite {
 ---------------------------------------------------------------*/
 
 .site-header {
-  position: relative;
+  position: absolute;
   z-index: 99999;
+  background-color: transparent;
 }
 
 .site-header {
@@ -3014,13 +3015,13 @@ blockquote cite {
   z-index: 99999;
   top: 0;
   left: 0;
-  background-color: #030e22 !important;
+  /* background-color: #030e22 !important; */
   width: 100%;
   /* height: 80px; */
   -webkit-animation: headerSlideDown 0.95s ease forwards;
   animation: headerSlideDown 0.95s ease forwards;
-  -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
+  /* -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1); */
+  /* box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1); */
 }
 
 .site-header ul,
@@ -3369,9 +3370,9 @@ blockquote cite {
 ---------------------------------------------------------------*/
 
 .main-bar {
-  background: #ffffff;
+  background-color: transparent;
   width: 100%;
-  position: relative;
+  position: absolute;
 }
 .header-curve .logo-header:before,
 .header-curve .logo-header:after {
@@ -3455,7 +3456,7 @@ blockquote cite {
 }
 .header-nav .nav > li > a {
   border-radius: 0px;
-  color: #2b2d2e;
+  color: #ffffff;
   font-size: 18px;
   padding: 42px 12px 38px 12px;
   cursor: pointer;

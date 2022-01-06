@@ -27,6 +27,7 @@ import A_Newsletter from "./A_Newsletter";
 import Recent_Product from "./../Element/Recent_Products";
 import Featured_Products from "./../Element/Featured_Products";
 import SideBar from "./../Element/SideBar";
+import Tab from "./../Pages/Tab";
 //Images
 // var img1 = require("./../../images/background/bg5.jpg");
 // var serblog1 = require("./../../images/our-services/pic1.jpg");
@@ -79,6 +80,7 @@ const Index1 = () => {
       <div className="page-content bg-white">
         <div className="content-block">
           <Slider />
+          <Tab />
           <div>
             <div className="section-head mb-0 text-center">
               <div className="my-4">
