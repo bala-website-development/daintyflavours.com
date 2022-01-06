@@ -58,7 +58,15 @@ const Index1 = () => {
     const fetchCategories = async () => {
       await fetch(config.service_url + "getHomePageCategory")
         .then((response) => response.json())
-        .then((data) => setLatestCat(data));
+        .then((data) => {
+          let active = data
+            .filter((filter, index) => filter.isactive === 1 && filter.type === "home")
+            .map((data) => {
+              return data;
+            });
+
+          setLatestCat(active);
+        });
       //add filer type=home
       console.log("latestCat", latestCat);
     };
