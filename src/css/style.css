@@ -121,6 +121,9 @@ select.form-control:not([size]):not([multiple]) {
 .dangerous p {
   margin: 0 0 5px 0 !important;
 }
+.titlename {
+  font-size: 60px !important;
+}
 .aligntopsidebar {
   align-items: baseline !important;
 }
@@ -3279,6 +3282,10 @@ blockquote cite {
 16. LOGO ( company identify  symbol )
 ---------------------------------------------------------------*/
 /*=== >logo for header ===*/
+.logoimage {
+  height: 70px !important;
+  width: auto !important;
+}
 .logo-header {
   /* display: table; */
   float: left;
@@ -3314,6 +3321,7 @@ blockquote cite {
 .logo-footer > a {
   display: table-cell;
   vertical-align: middle;
+  font-size: 20px;
 }
 .logo-header.center-block {
   margin-left: auto;
@@ -3348,8 +3356,8 @@ blockquote cite {
   .is-fixed.header-curve .logo-header,
   .is-fixed .logo-header,
   .is-fixed.header-curve .logo-header {
-    width: 120px;
-    max-width: 120px;
+    width: 220px;
+    max-width: 220px;
     height: 70px;
   }
   .is-fixed .logo-header a img,
@@ -13609,7 +13617,7 @@ ol.commentlist li .star-rating {
 ================================================ */
 /* Header Box */
 .logo-header {
-  width: 120px;
+  width: 220px;
 }
 .header-full .main-bar {
   padding: 30px 0;

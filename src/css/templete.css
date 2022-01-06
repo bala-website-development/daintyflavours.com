@@ -2465,7 +2465,7 @@ td.fc-event-container {
     margin-right: 20px;
   }
   .logo-header {
-    width: 150px;
+    width: 250px;
   }
   .main-slider .slide {
     height: 650px;
@@ -3036,8 +3036,8 @@ td.fc-event-container {
     height: 450px;
   }
   .logo-header {
-    width: 150px;
-    left: 45% !important;
+    width: 250px;
+    left: 30% !important;
     /* top: 10%; */
   }
   .header-style-2 .main-bar:after {
