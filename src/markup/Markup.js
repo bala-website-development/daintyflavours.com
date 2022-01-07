@@ -110,6 +110,7 @@ class Markup extends Component {
 
           <Route path="/contact" exact component={Contact} />
           <Route path="/contact-2" exact component={Contact2} />
+          <Route path="*" component={Error} />
         </Switch>
       </BrowserRouter>
     );

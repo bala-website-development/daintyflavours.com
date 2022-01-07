@@ -129,29 +129,21 @@ const Index1 = () => {
               </div>
             </div>
           </div>
-          <div className="section-full my-4 service-area2 bg-img-fix bg-line-top bg-line-bottom" style={{ backgroundImage: "url(" + img4 + ")", backgroundSize: "cover" }}>
+          <div className="section-full my-4 service-area2 bg-img-fix bg-line-top bg-line-bottom" style={{ backgroundImage: "url(" + config.servicebgimage + ")", backgroundSize: "cover" }}>
             <div className="container ">
               <div className="row ">
                 <div className="col-lg-12">
-                  <div className="section-head text-center">
-                    <h2 className="text-white">Our Journey</h2>
+                  <div className="text-center">
+                    <h2 className="text-white mt-4">Our Journey</h2>
                     <div className="dlab-separator style1 bg-primary"></div>
                   </div>
                 </div>
               </div>
               <div className="row">
-                <div className="col-lg-4 m-b30 d-none">
-                  <img src={pic1} className="img-cover1 radius-sm" alt="tsalastudio" />
-                </div>
                 <div className="col-lg-12">
-                  <div className="row p-l30">
+                  <div className="row">
                     <div className="col-lg-12 col-sm-12 m-b30">
                       <div className="icon-bx-wraper text-white service-box2">
-                        <div className="icon-bx icon-bx-lg">
-                          <Link to={""} className="icon-cell d-none">
-                            <img src={icon2} alt="" />
-                          </Link>
-                        </div>
                         <div className="">
                           <p>{config.about_service}</p>
                           <div className="text-center mt-2">
@@ -174,7 +166,7 @@ const Index1 = () => {
                   <Featured_Products></Featured_Products>
                   <Recent_Product></Recent_Product>
                 </div>
-                <div className="col-lg-12 m-b30">
+                <div className="col-lg-12 m-b30 d-none">
                   <Accord />
                 </div>
               </div>
@@ -244,14 +236,14 @@ const Index1 = () => {
             <div className="container ">
               <div className="row m-lr0 about-area1">
                 <div className="col-lg-6 p-lr0">
-                  <img className="img-cover" src={pic3} alt="" />
+                  <img className="img-cover" src={config.aboutus_imageurl2} alt="" />
                 </div>
                 <div className="col-lg-6 p-lr0 d-flex about-bx align-items-center text-center text-dark">
                   <div className="about-bx">
                     <div className="section-head text-center text-dark">
                       <h4 className="text-dark">For More Offer</h4>
                       Contact us
-                      <h1> SUKHAA </h1>
+                      <h1 className="titlename font-weight-normal title"> {config.websitetitle} </h1>
                     </div>
                     <p className="text-dark">{config.contact_email}</p>
                     <p className="text-dark">{config.contact_phone1}</p>
@@ -267,9 +259,6 @@ const Index1 = () => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
-                    <div className="icon-bx icon-bx-lg">
-                      <img src={config.logo} alt="" />
-                    </div>
                     <h3>Thanks for reaching us.</h3>
                   </div>
                 </div>

@@ -67,7 +67,7 @@ const Testimonial = (props) => {
                   products.map((course) => (
                     <div className="p-a15">
                       <div class="item-img">
-                        <img src={course.t_image} alt="rover" />
+                        <img className="thumbnailimage" src={course.t_image ? course.t_image : config.defaultimage} alt={config.websitetitle} />
                       </div>
                       <div class="card-body dangerous bg-white">
                         <h5>{course.t_title}</h5>

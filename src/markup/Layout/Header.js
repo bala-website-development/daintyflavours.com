@@ -116,7 +116,10 @@ const Header = (props) => {
                   <li className={props?.active === "shop" ? "active" : ""}>
                     <Link to={"/shop"}>Shop</Link>
                   </li>
-                  <li className={props?.active === "shop" ? "active" : ""}>
+                  <li className={props?.active === "gallery" ? "active" : ""}>
+                    <Link to={"/gallery"}> Gallery</Link>
+                  </li>
+                  <li className={props?.active === "category" ? "active" : ""}>
                     <Link to={"#"}> Categories</Link>
                   </li>
                   <li className={props?.active === "contact" ? "active" : ""}>
@@ -170,35 +173,46 @@ const Header = (props) => {
                         </li>
                       </ul>
                     </li>
-
+                    <li className={props?.active === "gallery" ? "active" : ""}>
+                      <Link to={"/gallery"}> Gallery</Link>
+                    </li>
                     <li className={props?.active === "shop" ? "active" : ""}>
                       <Link to={"/shop"}>Shop</Link>
                     </li>
-                    <li className={props?.active === "shop" ? "active" : ""}>
+                    <li className={props?.active === "category" ? "active" : ""}>
                       <Link to={"#"}>
                         {" "}
                         Categories <i className="fa fa-chevron-down"></i>
                       </Link>
                       <ul className="sub-menu">
                         <li>
-                          <Link to={"/shop?cat1"}>cat1</Link>
+                          <Link to={"/shop?INGREDIENTS"}>INGREDIENTS</Link>
                         </li>
 
                         <li>
-                          <Link to={"/shop"}>cat2</Link>
+                          <Link to={"/shop?BAKEWARE"}>BAKEWARE</Link>
                         </li>
 
                         <li>
-                          <Link to={"/shop"}>cat2</Link>
+                          <Link to={"/shop?CHOCOLATE"}>CHOCOLATE</Link>
                         </li>
                         <li>
-                          <Link to={"/shop"}>cat2</Link>
+                          <Link to={"/shop?ACCESSORIES"}>ACCESSORIES</Link>
                         </li>
                         <li>
-                          <Link to={"/shop"}>cat2</Link>
+                          <Link to={"/shop?CAKECRAFT"}>CAKECRAFT</Link>
                         </li>
                         <li>
-                          <Link to={"/shop"}>cat2</Link>
+                          <Link to={"/shop?PACKAGING"}>PACKAGING</Link>
+                        </li>
+                        <li>
+                          <Link to={"/shop?DECORATION"}>DECORATION</Link>
+                        </li>
+                        <li>
+                          <Link to={"/shop?EQUIPMENTS"}>EQUIPMENTS</Link>
+                        </li>
+                        <li>
+                          <Link to={"/shop?BRANDS"}>BRANDS</Link>
                         </li>
                       </ul>
                     </li>

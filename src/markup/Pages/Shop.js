@@ -393,7 +393,7 @@ const Shop = (props) => {
                           <div className="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
                             <div className="item-box shop-item">
                               <div className="item-img">
-                                <img className="thumbnailimage" src={product.p_image} alt="" />
+                                <img className="thumbnailimage" src={product.p_image ? product.p_image : config.defaultimage} alt="" />
                                 {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
                                   <>
                                     <div className="price bg-white">

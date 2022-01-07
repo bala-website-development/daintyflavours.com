@@ -200,7 +200,7 @@ const Shopproduct = (props) => {
                   <div className="product-gallery on-show-slider lightgallery" id="lightgallery">
                     <div className="dlab-box">
                       <div className="dlab-thum-bx">
-                        <img src={productDtl.p_image} alt="sukhaa" />
+                        <img src={productDtl.p_image ? productDtl.p_image : config.defaultimage} alt="sukhaa" />
                       </div>
                     </div>
                   </div>

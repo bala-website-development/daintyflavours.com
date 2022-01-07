@@ -7,7 +7,7 @@ class Footer extends Component {
   render() {
     return (
       <>
-        <footer className="site-footer " style={{ backgroundImage: "url(" + bgfoter + ")", backgroundSize: "cover" }}>
+        <footer className="site-footer " style={{ backgroundImage: "url(" + config.footerimage + ")", backgroundSize: "cover" }}>
           <div className="footer-top bg-line-top">
             <div className="container">
               <div className="row">

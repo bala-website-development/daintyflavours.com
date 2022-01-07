@@ -51,7 +51,7 @@ const Featured_Product = (props) => {
               <div className="col-lg-3 col-md-6 col-sm-6 ">
                 <div className="port-box1 homeimagerecent text-white my-2">
                   <div className="dlab-media">
-                    <img className="homeimagerecent" src={product.p_image} alt="sukhaa" />
+                    <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} />
                   </div>
                   <div className="dlab-info">
                     <h4 className="title ">
