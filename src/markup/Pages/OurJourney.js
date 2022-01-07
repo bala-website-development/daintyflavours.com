@@ -73,9 +73,6 @@ class About extends Component {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="section-head text-center">
-                      <div className="my-4">
-                        <img src={config.logo} width="250px" className="rounded" alt="tsalastudio" />
-                      </div>
                       <h3>Our Journey</h3>
                     </div>
                   </div>
@@ -116,66 +113,8 @@ class About extends Component {
               </div>
             </div>
 
-            <div className="section-full content-inner bg-line-top bg-line-bottom d-none" style={{ backgroundImage: "url(" + img4 + " )" }}>
-              <div className="container">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="section-head text-center text-white">
-                      <h3 className="text-white">We Are Professional at Our Skills</h3>
-                      <p>More than 2000+ customers trusted us</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="row max-w900 m-auto">
-                  <div className="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
-                    <div className="counter-style-1 text-white text-center">
-                      <div className="counter-num">
-                        <span className="counter">
-                          <CountUp end={15} />
-                        </span>
-                        <small>+</small>
-                      </div>
-                      <span className="counter-text">Years of Experience</span>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
-                    <div className="counter-style-1 text-white text-center">
-                      <div className="counter-num">
-                        <span className="counter">
-                          <CountUp end={10} />
-                        </span>
-                      </div>
-                      <span className="counter-text">Awards Wins</span>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
-                    <div className="counter-style-1 text-white text-center">
-                      <div className="counter-num">
-                        <span className="counter">
-                          <CountUp end={30} />
-                        </span>
-                        <small>+</small>
-                      </div>
-                      <span className="counter-text">Happy Clients</span>
-                    </div>
-                  </div>
-                  <div className="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
-                    <div className="counter-style-1 text-white text-center">
-                      <div className="counter-num">
-                        <span className="counter">
-                          <CountUp end={99} />
-                        </span>
-                        <small>+</small>
-                      </div>
-                      <span className="counter-text">Perfect Products</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="section-full content-inner-1 bg-white">
-              <div className="container d-none">
+            <div className="section-full my-4 bg-white">
+              <div className="container ">
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="section-head text-center">

@@ -73,10 +73,7 @@ class About extends Component {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="section-head text-center">
-                      <div className="my-4">
-                        <img src={config.logo} width="250px" className="rounded" alt="tsalastudio" />
-                      </div>
-                      <h3>About Sukaa</h3>
+                      <h3>About Dainty Falvours</h3>
                     </div>
                   </div>
                 </div>
