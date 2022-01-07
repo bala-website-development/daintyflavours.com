@@ -117,12 +117,12 @@ const Shopchekout = () => {
       billingaddress: userAddress[0],
       shippingaddress: {
         address: data.address === "" ? userAddress[0].address : data.address,
-        name: userAddress[0].name,
-        email: userAddress[0].email,
+        name: data.name === "" ? userAddress[0].name : data.name,
+        email: data.email === "" ? userAddress[0].email : data.email,
         city: data.city === "" ? userAddress[0].city : data.city,
         state: data.state === "" ? userAddress[0].state : data.state,
         pincode: data.pincode === "" ? userAddress[0].pincode : data.pincode,
-        phonenumber: userAddress[0].phonenumber,
+        phonenumber: data.phonenumber === "" ? userAddress[0].phonenumber : data.phonenumber,
       },
     };
     console.log("input", data);
@@ -135,8 +135,12 @@ const Shopchekout = () => {
             handleVisible();
             setMessage(data.message);
             setCartDetails([]);
+            // call payemnt
+            history.push({
+              pathname: "/payment",
+              state: { amount: data.data.grosstotal, orderid: data.data.orderid, orderstatus: data.data.orderstatus, paymentstatus: data.data.paymentstatus, contactno: data.data.billingaddress.phonenumber, name: data.data.billingaddress.name, email: data.data.billingaddress.email },
+            });
             setStatus(true);
-            history.push("/success");
           } else if (data?.status === 499) {
             history.push("/shop-login");
           } else {
@@ -203,12 +207,12 @@ const Shopchekout = () => {
                   </div> */}
                   <div className="row">
                     <div className="form-group col-md-6">
-                      First Name
+                      Name
                       <input type="text" className="form-control" placeholder="First Name" defaultValue={userAddress[0]?.name} />
                     </div>
                     <div className="form-group col-md-6">
-                      Last Name
-                      <input type="text" className="form-control" placeholder="Last Name" defaultValue={userAddress[0]?.name} />
+                      Email
+                      <input type="text" className="form-control" placeholder="Email" defaultValue={userAddress[0]?.email} />
                     </div>
                   </div>
                   <div className="form-group">
@@ -410,8 +414,8 @@ const Shopchekout = () => {
                           </tr>
                         </tbody>
                       </table>
-                      <h4>Payment Method</h4>
-                      <h6>Please place the order and scan QR code to pay in the next screen.</h6>
+                      <h4>Payment Method - Online</h4>
+
                       <div className="d-none">
                         <div className="form-group">
                           <input type="text" className="form-control" placeholder="Name on Card" />
@@ -435,9 +439,18 @@ const Shopchekout = () => {
                       <div className="form-group">
                         {cartDetails.length > 0 && status === false && (
                           <button disabled={loading} className="btn button-lg btnhover btn-block" type="submit">
-                            Place Order Now{" "}
+                            Place Order Now - Pay Online{" "}
                           </button>
                         )}
+                        <div className="d-none">
+                          <h4>Payment Method - Offline</h4>
+                          <h6>Please place the order and scan QR code to pay in the next screen.</h6>
+                          {cartDetails.length > 0 && status === false && (
+                            <button disabled={loading} className="btn button-lg btnhover btn-block" type="submit">
+                              Place Order Now - Pay Offline{" "}
+                            </button>
+                          )}
+                        </div>
                       </div>
                       {/* </form> */}
                     </div>

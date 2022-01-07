@@ -42,7 +42,7 @@ const Success = () => {
                           <i className="fa fa-check text-primary"></i>
                         </strong>
                         <h5 className="sub-title">Order successfully placed.</h5>
-                        <div className="mb-2">
+                        <div className="mb-2 d-none">
                           <a href={config.razorpaylink} target="_blank" className="btn  btnhover">
                             Pay Here
                           </a>

@@ -93,7 +93,7 @@ const Orderhistory = (props) => {
                         </li>
                         <li>
                           <Link className="nav-link" id="pills-payment-tab" data-bs-toggle="pill" data-bs-target="#pills-payment">
-                            Payment
+                            QR / UPI Payment
                           </Link>
                         </li>
                       </ul>
