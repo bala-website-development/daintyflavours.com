@@ -1554,8 +1554,8 @@
 }
 .shop-item.style2 {
   background: #fff;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
   overflow: hidden;
 }
 .shop-item.style2 .item-info .btn {

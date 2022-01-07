@@ -91,14 +91,14 @@ class Footer extends Component {
                         <h5>Terms and Condition</h5>
                       </a>
                     </div>
-                    <ul className="work-hour-list d-none">
+                    <ul className="work-hour-list">
                       <li>
                         <span className="day">
-                          <span>Monday to Friday</span>
+                          <span>Monday to Saturday</span>
                         </span>
-                        <span className="timing">10AM - 6PM</span>
+                        <span className="timing">9.30am to 7.45pm</span>
                       </li>
-                      <li>
+                      <li className="d-none">
                         <span className="day">
                           <span>Saturday</span>
                         </span>
@@ -130,6 +130,7 @@ class Footer extends Component {
                     <div>Copyright © {new Date().getFullYear()} Unique Creations. All rights are reserved.</div>
                   </span>{" "}
                 </div>
+
                 <div className="col-lg-6 col-md-6 text-right">
                   <div className="widget-link">
                     <ul>

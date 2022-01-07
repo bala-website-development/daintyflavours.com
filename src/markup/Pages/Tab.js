@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
+import config from "../../config.json";
 const img = "https://firebasestorage.googleapis.com/v0/b/tucfbclouddb.appspot.com/o/tuc%20admin%20qa-e1eb083-cc55-b73c-6826-1fe64a6002bd%2Fproducts%2F7b25283-664-efa6-cc2e-7d1c8ade43bf?alt=media&token=2b33790b-6b6b-427a-b9f4-c38405670d70";
 const Popupss = (props) => {
   const [activeTab, setActiveTab] = useState("1");
@@ -113,33 +114,15 @@ const Popupss = (props) => {
                 <div className="dz-col col m-b30">
                   <div className="item-box shop-item style2">
                     <div className="">
-                      <img src={img} className="" alt="Dainty Flavours" />
+                      <img src={img} className="img-fluid" alt={config.websitetitle} />
                     </div>
                     <div className="item-info text-center">
-                      <h4 className="item-title">
-                        <Link to={"/shop-product-details"}>Summer Pizza</Link>
+                      <h4 className="item-title font-weight-normal">
+                        <Link to={"/shop?baking"}>Baking</Link>
                       </h4>
 
                       <div className="cart-btn">
-                        <Link to={"/shop-product-details"} className="btn btnhover radius-xl">
-                          View all <i className="ti-angle-double-right"></i>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="dz-col col m-b30">
-                  <div className="item-box shop-item style2">
-                    <div className="">
-                      <img src={img} className="" alt="Dainty Flavours" />
-                    </div>
-                    <div className="item-info text-center">
-                      <h4 className="item-title">
-                        <Link to={"/shop-product-details"}>Summer Pizza</Link>
-                      </h4>
-
-                      <div className="cart-btn">
-                        <Link to={"/shop-product-details"} className="btn btnhover radius-xl">
+                        <Link to={"/shop?baking"} className="btn btnhover radius-xl">
                           View all <i className="ti-angle-double-right"></i>
                         </Link>
                       </div>
@@ -149,15 +132,105 @@ const Popupss = (props) => {
                 <div className="dz-col col m-b30">
                   <div className="item-box shop-item style2">
                     <div className="">
-                      <img src={img} className="" alt="Dainty Flavours" />
+                      <img src={img} className="img-fluid" alt={config.websitetitle} />
                     </div>
                     <div className="item-info text-center">
-                      <h4 className="item-title">
-                        <Link to={"/shop-product-details"}>Summer Pizza</Link>
+                      <h4 className="item-title font-weight-normal">
+                        <Link to={"/shop?baking"}>Baking</Link>
                       </h4>
 
                       <div className="cart-btn">
-                        <Link to={"/shop-product-details"} className="btn btnhover radius-xl">
+                        <Link to={"/shop?baking"} className="btn btnhover radius-xl">
+                          View all <i className="ti-angle-double-right"></i>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>{" "}
+                <div className="dz-col col m-b30">
+                  <div className="item-box shop-item style2">
+                    <div className="">
+                      <img src={img} className="img-fluid" alt={config.websitetitle} />
+                    </div>
+                    <div className="item-info text-center">
+                      <h4 className="item-title font-weight-normal">
+                        <Link to={"/shop?baking"}>Baking</Link>
+                      </h4>
+
+                      <div className="cart-btn">
+                        <Link to={"/shop?baking"} className="btn btnhover radius-xl">
+                          View all <i className="ti-angle-double-right"></i>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>{" "}
+                <div className="dz-col col m-b30">
+                  <div className="item-box shop-item style2">
+                    <div className="">
+                      <img src={img} className="img-fluid" alt={config.websitetitle} />
+                    </div>
+                    <div className="item-info text-center">
+                      <h4 className="item-title font-weight-normal">
+                        <Link to={"/shop?baking"}>Baking</Link>
+                      </h4>
+
+                      <div className="cart-btn">
+                        <Link to={"/shop?baking"} className="btn btnhover radius-xl">
+                          View all <i className="ti-angle-double-right"></i>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>{" "}
+                <div className="dz-col col m-b30">
+                  <div className="item-box shop-item style2">
+                    <div className="">
+                      <img src={img} className="img-fluid" alt={config.websitetitle} />
+                    </div>
+                    <div className="item-info text-center">
+                      <h4 className="item-title font-weight-normal">
+                        <Link to={"/shop?baking"}>Baking</Link>
+                      </h4>
+
+                      <div className="cart-btn">
+                        <Link to={"/shop?baking"} className="btn btnhover radius-xl">
+                          View all <i className="ti-angle-double-right"></i>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>{" "}
+                <div className="dz-col col m-b30">
+                  <div className="item-box shop-item style2">
+                    <div className="">
+                      <img src={img} className="img-fluid" alt={config.websitetitle} />
+                    </div>
+                    <div className="item-info text-center">
+                      <h4 className="item-title font-weight-normal">
+                        <Link to={"/shop?baking"}>Baking</Link>
+                      </h4>
+
+                      <div className="cart-btn">
+                        <Link to={"/shop?baking"} className="btn btnhover radius-xl">
+                          View all <i className="ti-angle-double-right"></i>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>{" "}
+                <div className="dz-col col m-b30">
+                  <div className="item-box shop-item style2">
+                    <div className="">
+                      <img src={img} className="img-fluid " alt={config.websitetitle} />
+                    </div>
+                    <div className="item-info text-center">
+                      <h4 className="item-title font-weight-normal">
+                        <Link to={"/shop?baking"}>Baking</Link>
+                      </h4>
+
+                      <div className="cart-btn">
+                        <Link to={"/shop?baking"} className="btn btnhover radius-xl">
                           View all <i className="ti-angle-double-right"></i>
                         </Link>
                       </div>

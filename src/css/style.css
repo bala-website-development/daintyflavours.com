@@ -167,6 +167,9 @@ select.form-control:not([size]):not([multiple]) {
 .thumbnailimage {
   height: 250px;
 }
+.thumbnailimage_cat {
+  height: 250px;
+}
 .postthumbnailimage {
   max-height: 350px !important;
 }
