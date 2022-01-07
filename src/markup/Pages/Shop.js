@@ -69,7 +69,7 @@ const Shop = (props) => {
       .then((response) => response.json())
       .then((data) => {
         let active = data
-          .filter((filter) => filter.isactive === "1")
+          .filter((filter) => filter.isactive === 1)
           .map((data) => {
             return data;
           });
@@ -422,9 +422,15 @@ const Shop = (props) => {
                                 <Link to={{ pathname: `/shop-product-details/${product.p_id}` }} className="btn btnhover">
                                   Details
                                 </Link>{" "}
-                                <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btnhover">
-                                  <i className="ti-shopping-cart m-r5"></i> Add to cart
-                                </button>
+                                {product.p_quantity > 0 || product.p_quantity != 0 ? (
+                                  <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btnhover">
+                                    <i className="ti-shopping-cart m-r5"></i> Add to cart
+                                  </button>
+                                ) : (
+                                  <button disabled={true} className="btn btnhover">
+                                    Out of Stock
+                                  </button>
+                                )}
                               </div>
                             </div>
                           </div>

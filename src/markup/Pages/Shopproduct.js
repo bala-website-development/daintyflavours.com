@@ -258,10 +258,18 @@ const Shopproduct = (props) => {
                     <div className="dlab-divider bg-gray tb15">
                       <i className="icon-dot c-square"></i>
                     </div>
-
-                    <button disabled={loading} className="btn btnhover" type="submit">
-                      <i className="ti-shopping-cart"></i>Add To Cart
-                    </button>
+                    <div className="py-2">
+                      <div> Available Quantity - {productDtl.p_quantity}</div>
+                    </div>
+                    {productDtl.p_quantity > 0 ? (
+                      <button disabled={loading} className="btn btnhover" type="submit">
+                        <i className="ti-shopping-cart"></i>Add To Cart
+                      </button>
+                    ) : (
+                      <button disabled={true} className="btn btnhover">
+                        Out of Stock
+                      </button>
+                    )}
                   </Form>
                 </div>
               </div>
