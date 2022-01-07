@@ -48,7 +48,7 @@ class About extends Component {
         <Header active="about" />
 
         <div className="page-content bg-white">
-          <div className="dlab-bnr-inr overlay-black-middle" style={{ backgroundImage: "url(" + img1 + ")" }}>
+          <div className="dlab-bnr-inr " style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
             <div className="container">
               <div className="dlab-bnr-inr-entry">
                 <h1 className="text-white">Our Journey</h1>

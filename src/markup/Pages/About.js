@@ -5,7 +5,6 @@ import Footer from "./../Layout/Footer";
 import OurPartners from "./../Element/OurPartners";
 import CountUp from "react-countup";
 
-import img1 from "./../../images/banner/bnr1.jpg";
 import img2 from "./../../images/background/bg1.jpg";
 import img3 from "./../../images/background/bg5.jpg";
 import img4 from "./../../images/background/bg3.jpg";
@@ -40,7 +39,7 @@ const teamInfo = [
     post: "Master Chef",
   },
 ];
-
+const img1 = config.bannerimg1;
 class About extends Component {
   render() {
     return (
@@ -48,7 +47,7 @@ class About extends Component {
         <Header active="about" />
 
         <div className="page-content bg-white">
-          <div className="dlab-bnr-inr overlay-black-middle" style={{ backgroundImage: "url(" + img1 + ")" }}>
+          <div className="dlab-bnr-inr overlay-black-middle1" style={{ backgroundImage: "url(" + img1 + ")" }}>
             <div className="container">
               <div className="dlab-bnr-inr-entry">
                 <h1 className="text-white">About Us</h1>

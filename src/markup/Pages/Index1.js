@@ -25,6 +25,7 @@ import work_pic3 from "./../../images/our-work/pic3.jpg";
 import pic3 from "./../../images/about/pic3.jpg";
 import A_Newsletter from "./A_Newsletter";
 import Recent_Product from "./../Element/Recent_Products";
+import Testimonial from "./../Element/Testimonial";
 import Featured_Products from "./../Element/Featured_Products";
 import SideBar from "./../Element/SideBar";
 import Tab from "./../Pages/Tab";
@@ -179,7 +180,9 @@ const Index1 = () => {
               </div>
             </div>
           </div>
-
+          <div id="testimonial" className="container">
+            <Testimonial />
+          </div>
           <div className="section-full bg-white">
             <div className="container">
               <div className="row">

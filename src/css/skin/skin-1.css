@@ -16,7 +16,8 @@
   background-color: transparent;
 }
 .header-nav .nav > li > a {
-  color: #e3b32f;
+  color: #000000;
+  font-weight: normal;
 }
 .titlename {
   color: var(--color-primary) !important;
