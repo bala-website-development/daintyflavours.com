@@ -3994,7 +3994,7 @@ blockquote cite {
   .header-nav .nav > li > a:focus {
     background-color: transparent;
     text-decoration: none;
-    color: #000;
+    color: rgb(101, 104, 47);
   }
   .header-nav .nav > li .mega-menu > li:after {
     display: none;
@@ -4245,7 +4245,7 @@ blockquote cite {
 .header-transparent .header-nav .nav > li > a,
 .header-transparent .extra-nav .btn-link,
 .header-transparent .navbar-toggler {
-  color: #000;
+  color: rgb(255, 255, 255) !important;
 }
 .header-transparent .navbar-toggler span {
   background-color: #fff;

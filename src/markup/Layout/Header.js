@@ -48,7 +48,20 @@ const Header = (props) => {
                 Dainty Falvours
               </Link>
             </div>
-
+            <div className=" navbar-toggler collapsed px-3">
+              <ul className="nav navbar-nav nav1">
+                <li>
+                  {localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null && (
+                    <>
+                      <Link to={"/shop-cart"}>
+                        <i className="ti-shopping-cart cart font-weight-bold"></i>
+                        <span className="mb-1 position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger text-light">{cartDetails.length > 0 ? cartDetails.length : 0}</span>
+                      </Link>
+                    </>
+                  )}
+                </li>
+              </ul>
+            </div>
             <button className="navbar-toggler collapsed navicon justify-content-end" type="button" onClick={toggle} data-toggle="collapse" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               {toggleShow === true ? (
                 <>
@@ -73,7 +86,7 @@ const Header = (props) => {
                 </div>
               )}
               {toggleShow === true ? (
-                <ul className="nav navbar-nav nav1 bg-white h-100 pt-5">
+                <ul className="nav navbar-nav nav1 bg-primary  h-100 pt-5">
                   <li>
                     <div className="logo-header mostion  d-none">
                       <img src={config.logo} alt="dainty flavour" className="w-50" />
@@ -88,20 +101,6 @@ const Header = (props) => {
                       </>
                     )}
                   </li>
-                  <li>
-                    {localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null && (
-                      <Link to={"/shop-cart"}>
-                        <div className="btn">
-                          <div className="text-small">
-                            <span className="position-relative">
-                              <img height="10" src={cart} alt="" />
-                              <span className="position-absolute top-0  translate-middle badge rounded-pill bg-danger">{cartDetails.length > 0 ? cartDetails.length : 0}</span>
-                            </span>
-                          </div>
-                        </div>
-                      </Link>
-                    )}
-                  </li>
 
                   <li className={props?.active === "home" ? `active${toggleShow ? "open" : ""}` : ""}>
                     <Link to={"/"}>Home</Link>
@@ -114,32 +113,11 @@ const Header = (props) => {
                       Our Journey
                     </Link>
                   </li>
-                  {/* <li className={props?.active === "service" ? "active" : ""}>
-                    <Link to={"/our-services"}>Course</Link>
-                  </li> */}
-                  {/* <li className={props?.active === "menu" ? "active" : ""}>
-                    <Link to={"/our-menu-1"}>Menu</Link>
-                  </li> */}
-
-                  {/* <li className={props?.active === "shop" ? "active" : ""}>
-                    <Link to={"/blog-half-img-sidebar"}>Blog</Link>
-                  </li> */}
                   <li className={props?.active === "shop" ? "active" : ""}>
-                    <Link to={"/shop"}>Collections</Link>
-                    {/* <ul className="sub-menu">
-                      <li>
-                        <Link to={"/shop"}>Shop</Link>
-                      </li>
-
-                      <li>
-                        <Link to={"/shop-checkout"}>Checkout</Link>
-                      </li>
-
-                      <li>
-                        <Link to={"/shop-register"}>Register</Link>
-                      </li>
-                    </ul>
-                   */}
+                    <Link to={"/shop"}>Shop</Link>
+                  </li>
+                  <li className={props?.active === "shop" ? "active" : ""}>
+                    <Link to={"#"}> Categories</Link>
                   </li>
                   <li className={props?.active === "contact" ? "active" : ""}>
                     <Link to={"/contact"}>Contact Us</Link>
@@ -174,10 +152,6 @@ const Header = (props) => {
                   <ul className="nav navbar-nav nav1">
                     <li className={props?.active === "home" ? `active${toggleShow ? "open" : ""}` : ""}>
                       <Link to={"/"}>Home</Link>
-                      {/* <ul className="sub-menu">
-                    <li><Link to={'/'}>Home 01</Link></li>
-                    <li><Link to={'/index-2'}>Home 02</Link></li>
-                  </ul> */}
                     </li>
                     <li className={props?.active === "about" ? "active" : ""}>
                       <Link to={"#"}>
@@ -195,76 +169,42 @@ const Header = (props) => {
                           </Link>
                         </li>
                       </ul>
-                      {/* <ul className="sub-menu">
-                    <li>
-                      <Link to={"/about"}>About Us</Link>
                     </li>
 
-                    <li>
-                      <Link to={"./faq"}>FAQs</Link>
-                    </li>
-                   
-                    <li>
-                      <Link to={"./error-404"}>404 Error</Link>
-                    </li>
-                    <li>
-                      <Link to={"/calendar"}>Calendar</Link>
-                    </li>
-                    <li>
-                      <Link to={"/team"}>Team</Link>
-                    </li>
-                  </ul> */}
-                    </li>
-                    {/* <li className={props?.active === "service" ? "active" : ""}>
-                      <Link to={"/our-services"}>Course</Link>
-                    </li> */}
-                    {/* <li className={props?.active === "menu" ? "active" : ""}>
-                      <Link to={"/our-menu-1"}>Menu</Link>
-                    </li> */}
-
-                    {/* <li className={props?.active === "blog" ? "active" : ""}>
-                      <Link to={"/blog-half-img-sidebar"}>Blog</Link>
-                    </li> */}
                     <li className={props?.active === "shop" ? "active" : ""}>
-                      <Link to={"/shop"}>Collections</Link>
+                      <Link to={"/shop"}>Shop</Link>
                     </li>
-                    {/* <li className={props?.active === "shop" ? "active" : ""}>
-                      <Link to={""}>
-                        Shop <i className="fa fa-chevron-down"></i>
+                    <li className={props?.active === "shop" ? "active" : ""}>
+                      <Link to={"#"}>
+                        {" "}
+                        Categories <i className="fa fa-chevron-down"></i>
                       </Link>
                       <ul className="sub-menu">
                         <li>
-                          <Link to={"/shop"}>Shop</Link>
-                        </li>
-                        <li>
-                      <Link to={"/shop-sidebar"}>Shop Sidebar</Link>
-                    </li> */}
-                    {/* <li>
-                      <Link to={"/shop-product-details"}>Product Details</Link>
-                    </li> */}
-
-                    {/* <li>
-                      <Link to={"/shop-wishlist"}>Wishlist</Link>
-                    </li> 
-                        <li>
-                          <Link to={"/shop-checkout"}>Checkout</Link>
+                          <Link to={"/shop?cat1"}>cat1</Link>
                         </li>
 
                         <li>
-                          <Link to={"/shop-register"}>Register</Link>
+                          <Link to={"/shop"}>cat2</Link>
+                        </li>
+
+                        <li>
+                          <Link to={"/shop"}>cat2</Link>
+                        </li>
+                        <li>
+                          <Link to={"/shop"}>cat2</Link>
+                        </li>
+                        <li>
+                          <Link to={"/shop"}>cat2</Link>
+                        </li>
+                        <li>
+                          <Link to={"/shop"}>cat2</Link>
                         </li>
                       </ul>
-                    </li>*/}
+                    </li>
+
                     <li className={props?.active === "contact" ? "active" : ""}>
                       <Link to={"/contact"}>Contact Us</Link>
-                      {/* <ul className="sub-menu left">
-                    <li>
-                      <Link to={"/contact"}>Contact Us 1</Link>
-                    </li>
-                    <li>
-                      <Link to={"/contact-2"}>Contact Us 2</Link>
-                    </li>
-                  </ul> */}
                     </li>
                     <li>
                       {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? (

@@ -128,7 +128,7 @@ const Index1 = () => {
               </div>
             </div>
           </div>
-          <div className="section-full content-inner service-area2 bg-img-fix bg-line-top bg-line-bottom" style={{ backgroundImage: "url(" + img4 + ")", backgroundSize: "cover" }}>
+          <div className="section-full my-4 service-area2 bg-img-fix bg-line-top bg-line-bottom" style={{ backgroundImage: "url(" + img4 + ")", backgroundSize: "cover" }}>
             <div className="container ">
               <div className="row ">
                 <div className="col-lg-12">
@@ -170,10 +170,10 @@ const Index1 = () => {
             <div className="container">
               <div className="row faq-area1">
                 <div className="col-lg-12 m-b20">
-                  <Recent_Product></Recent_Product>
                   <Featured_Products></Featured_Products>
+                  <Recent_Product></Recent_Product>
                 </div>
-                <div className="col-lg-6 m-b30 d-none">
+                <div className="col-lg-12 m-b30">
                   <Accord />
                 </div>
               </div>

@@ -2091,7 +2091,7 @@ ol.comment-list li.comment .reply a {
   margin-right: 5px;
 }
 .pizza-header .main-bar {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
 }
 .adv-box {
   margin-bottom: 30px;
