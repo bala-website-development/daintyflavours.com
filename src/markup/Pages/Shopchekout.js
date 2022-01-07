@@ -208,11 +208,11 @@ const Shopchekout = () => {
                   <div className="row">
                     <div className="form-group col-md-6">
                       Name
-                      <input type="text" className="form-control" placeholder="First Name" defaultValue={userAddress[0]?.name} />
+                      <input type="text" name="name" className="form-control" placeholder="First Name" defaultValue={userAddress[0]?.name} {...register("name") />
                     </div>
                     <div className="form-group col-md-6">
                       Email
-                      <input type="text" className="form-control" placeholder="Email" defaultValue={userAddress[0]?.email} />
+                      <input type="text" name="email" className="form-control" placeholder="Email" defaultValue={userAddress[0]?.email} {...register("email") />
                     </div>
                   </div>
                   <div className="form-group">
