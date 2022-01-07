@@ -238,7 +238,7 @@ const Index1 = () => {
                 <div className="col-lg-6 p-lr0">
                   <img className="img-cover" src={config.aboutus_imageurl2} alt="" />
                 </div>
-                <div className="col-lg-6 p-lr0 d-flex about-bx align-items-center text-center text-dark">
+                <div className="col-lg-6 p-lr0  about-bx align-items-center text-center text-dark">
                   <div className="about-bx">
                     <div className="section-head text-center text-dark">
                       <h4 className="text-dark">For More Offer</h4>
