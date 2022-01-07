@@ -27,6 +27,7 @@
   position: relative;
   background-size: cover;
   background-color: #ffecef;
+  width: 100%;
   /* background-color: rgba(0, 0, 0, 0.5); Black background with opacity */
 }
 .main-slider .slide .content {
@@ -1558,16 +1559,15 @@
   overflow: hidden;
 }
 .shop-item.style2 .item-info .btn {
-  /*  left: 50%;
-    transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%); */
+  /* transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%); */
 }
 .shop-item.style2 .item-info {
   margin-bottom: 0;
-  padding: 0 20px 30px 20px;
+  padding: 10px;
   position: relative;
 
   background: #fff;

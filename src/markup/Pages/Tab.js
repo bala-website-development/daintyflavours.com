@@ -105,27 +105,24 @@ const Popupss = (props) => {
         </div>
       </div>
 
-      <div className="content-inner">
+      <div className="my-4">
         <div className="container-fluid">
           <TabContent activeTab={activeTab}>
             <TabPane tabId="1">
               <div className="row tab-pane fade show active">
                 <div className="dz-col col m-b30">
                   <div className="item-box shop-item style2">
-                    <div className="item-img">
-                      <img src={img} alt="" />
+                    <div className="">
+                      <img src={img} className="" alt="Dainty Flavours" />
                     </div>
                     <div className="item-info text-center">
                       <h4 className="item-title">
                         <Link to={"/shop-product-details"}>Summer Pizza</Link>
                       </h4>
-                      <h5 className="price text-primary">
-                        <del>45</del>
-                        <span>$40</span>
-                      </h5>
+
                       <div className="cart-btn">
                         <Link to={"/shop-product-details"} className="btn btnhover radius-xl">
-                          <i className="ti-shopping-cart"></i> View all
+                          View all <i className="ti-angle-double-right"></i>
                         </Link>
                       </div>
                     </div>
@@ -133,83 +130,35 @@ const Popupss = (props) => {
                 </div>
                 <div className="dz-col col m-b30">
                   <div className="item-box shop-item style2">
-                    <div className="item-img">
-                      <img src={img} alt="" />
+                    <div className="">
+                      <img src={img} className="" alt="Dainty Flavours" />
                     </div>
                     <div className="item-info text-center">
                       <h4 className="item-title">
-                        <Link to={"/shop-product-details"}>Pepperoni Pizza</Link>
+                        <Link to={"/shop-product-details"}>Summer Pizza</Link>
                       </h4>
-                      <h5 className="price text-primary">
-                        <del>45</del>
-                        <span>$40</span>
-                      </h5>
+
                       <div className="cart-btn">
                         <Link to={"/shop-product-details"} className="btn btnhover radius-xl">
-                          <i className="ti-shopping-cart"></i> Add To Cart
+                          View all <i className="ti-angle-double-right"></i>
                         </Link>
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>{" "}
                 <div className="dz-col col m-b30">
                   <div className="item-box shop-item style2">
-                    <div className="item-img">
-                      <img src={img} alt="" />
+                    <div className="">
+                      <img src={img} className="" alt="Dainty Flavours" />
                     </div>
                     <div className="item-info text-center">
                       <h4 className="item-title">
-                        <Link to={"/shop-product-details"}>Apricot Chicken</Link>
+                        <Link to={"/shop-product-details"}>Summer Pizza</Link>
                       </h4>
-                      <h5 className="price text-primary">
-                        <del>45</del>
-                        <span>$40</span>
-                      </h5>
+
                       <div className="cart-btn">
                         <Link to={"/shop-product-details"} className="btn btnhover radius-xl">
-                          <i className="ti-shopping-cart"></i> Add To Cart
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="dz-col col m-b30">
-                  <div className="item-box shop-item style2">
-                    <div className="item-img">
-                      <img src={require("./../../images/product/pizza/pic4.jpg")} alt="" />
-                    </div>
-                    <div className="item-info text-center">
-                      <h4 className="item-title">
-                        <Link to={"shop-product-details"}>Liguria Pizza</Link>
-                      </h4>
-                      <h5 className="price text-primary">
-                        <del>45</del>
-                        <span>$40</span>
-                      </h5>
-                      <div className="cart-btn">
-                        <Link to={"shop-product-details"} className="btn btnhover radius-xl">
-                          <i className="ti-shopping-cart"></i> Add To Cart
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="dz-col col m-b30">
-                  <div className="item-box shop-item style2">
-                    <div className="item-img">
-                      <img src={require("./../../images/product/pizza/pic5.jpg")} alt="" />
-                    </div>
-                    <div className="item-info text-center">
-                      <h4 className="item-title">
-                        <Link to={"/shop-product-details"}>Pizza Veronese</Link>
-                      </h4>
-                      <h5 className="price text-primary">
-                        <del>45</del>
-                        <span>$40</span>
-                      </h5>
-                      <div className="cart-btn">
-                        <Link to={"/shop-product-details"} className="btn btnhover radius-xl">
-                          <i className="ti-shopping-cart"></i> Add To Cart
+                          View all <i className="ti-angle-double-right"></i>
                         </Link>
                       </div>
                     </div>

@@ -127,6 +127,13 @@ select.form-control:not([size]):not([multiple]) {
   height: 100%;
   vertical-align: middle;
 }
+.carousel-control-next,
+.carousel-control-prev {
+  width: 5% !important;
+}
+.flipvertical {
+  transform: rotate(0deg);
+}
 .dangerous p {
   margin: 0 0 5px 0 !important;
 }

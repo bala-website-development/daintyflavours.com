@@ -33,7 +33,7 @@ const Shop = (props) => {
       .then((data) => {
         if (props.location.category) {
           let selective = data
-            .filter((filter) => filter.p_category === props.location.category && filter.isactive === "1")
+            .filter((filter) => filter.p_category === props.location.category && filter.isactive === 1)
             .map((data) => {
               return data;
             });
@@ -43,7 +43,7 @@ const Shop = (props) => {
           console.log(selective, "selective");
         } else {
           let active = data
-            .filter((filter) => filter.isactive === "1")
+            .filter((filter) => filter.isactive === 1)
             .map((data) => {
               return data;
             });

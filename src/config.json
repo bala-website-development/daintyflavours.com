@@ -1,7 +1,7 @@
 {
   "domain": "DAINTYFLAVOURS",
   "storage": "DAINTYFLAVOURS",
-  "service_url": "http://localhost:8000/api/",
+  "service_url": "https://asia-south1-tuc-shopping-dev.cloudfunctions.net/daintyflavours_api/api/",
   "admin_url": "https://www.theuniquecreations.com/login/",
   "email_service_url": "https://asia-south1-tucfbclouddb.cloudfunctions.net/daintyflavours_api/email/",
   "============================": "==========================",
@@ -14,14 +14,20 @@
     {
       "title": "Dainty Falvours",
       "prefix": "One Stop Shop for Baking",
-      "description": "Variety of Backing items in one place",
+      "description": "Variety of Baking items in one place",
       "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fslide1.jpg?alt=media&token=c13bdea2-953e-4be3-974c-f712fcfcda3e"
     },
     {
-      "title": "Dainty Falvours",
+      "title": "Birth Day Cakes",
       "prefix": "One Stop Shop for Baking",
-      "description": "Variety of Backing items in one place",
+      "description": "Variety of Baking items in one place",
       "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fslide2.jpg?alt=media&token=6e85caf3-66d2-4044-b5f7-5de9935ebd4d"
+    },
+    {
+      "title": "Fresh Cocoa Powder",
+      "prefix": "One Stop Shop for Baking",
+      "description": "Variety of Baking items in one place",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fslide3.jpg?alt=media&token=b0239035-a429-4931-8540-83d54711a990"
     }
   ],
   "aboutustitle": "About Dainty Falvours",
