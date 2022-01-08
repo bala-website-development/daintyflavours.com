@@ -1,7 +1,7 @@
 {
   "domain": "DAINTYFLAVOURS",
   "storage": "DAINTYFLAVOURS",
-  "service_url": "https://asia-south1-tuc-shopping-dev.cloudfunctions.net/daintyflavours_api/api/",
+  "service_url": "http://localhost:8000/api/",
   "admin_url": "https://www.theuniquecreations.com/login/",
   "email_service_url": "https://asia-south1-tucfbclouddb.cloudfunctions.net/tuc_shop_node_api/email/",
   "============================": "==========================",
@@ -40,6 +40,7 @@
   "aboutus_imageurl2": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Faboutpic.jpg?alt=media&token=902c1db9-ae2d-4280-8c61-aac3205a4ff8",
   "footerimage": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fbanner%2Ffooter.jpg?alt=media&token=f514a05d-78fc-4be2-a93e-1c66549f3325",
   "servicebgimage": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fbanner%2Fservice.jpg?alt=media&token=4f042c05-7aca-4b9b-90b1-8d651a8aab17",
+  "defaulticon": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fbanner%2Fdefault_cake.png?alt=media&token=aab424ce-8dc1-4be8-b7bc-91890219a554",
   "defaultimage": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Fdefaultimage.jpg?alt=media&token=8b0ac75f-98df-4841-a86b-02c9b71498f8",
   "about_service": "About Dainty or About owner. About Dainty or About owner, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "contact_phone1": "+91 93533 73641",
