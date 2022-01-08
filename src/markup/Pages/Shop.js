@@ -28,12 +28,14 @@ const Shop = (props) => {
   const getProductDetails = async () => {
     setLoading((loading) => !loading);
     console.log("cakecategory", props.location.category);
+    console.log("both", props.location.category, props.location.maincategory);
+    let _filterOption = (props.location?.category != "" && props.location?.category !== undefined ? props.location?.category : props.location?.maincategory)
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
         if (props.location.category) {
           let selective = data
-            .filter((filter) => filter.p_category === props.location.category && filter.isactive === 1)
+            .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
             .map((data) => {
               return data;
             });
@@ -41,7 +43,21 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
-        } else {
+        }
+        else if (props.location.maincategory) {
+          console.log("mainprod", data)
+          let selective = data
+            .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+            .map((data) => {
+              return data;
+            });
+          setProducts(selective);
+          setFilter(selective);
+
+          console.log(selective, "selective");
+        }
+
+        else {
           let active = data
             .filter((filter) => filter.isactive === 1)
             .map((data) => {
@@ -130,7 +146,7 @@ const Shop = (props) => {
     // loopWithSlice(0, postsPerPage);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.location?.category, props.location?.maincategory]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);
@@ -248,6 +264,8 @@ const Shop = (props) => {
     });
     setMasterCategory(clearedMCategory);
     setMcatFilterApp(false);
+    props.location.maincategory = undefined;
+    props.location.category = undefined;
     // loopWithSlice(0, next + postsPerPage, false);
     // setNext(postsPerPage);
     let sliced = filter.slice(0, postsPerPage);
@@ -331,7 +349,7 @@ const Shop = (props) => {
               <div className="row">
                 <div className="col-xl-3 col-lg-4 col-md-5 m-b30">
                   <aside className="side-bar shop-categories sticky-top">
-                    {props.location.category !== undefined ? (
+                    {props.location?.category !== undefined && props.location?.maincategory !== undefined ? (
                       <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
                         Shop All Products
                       </Link>
