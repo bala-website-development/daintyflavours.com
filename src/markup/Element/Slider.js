@@ -16,7 +16,7 @@ const Slider = () => {
               <div className="slide img-fluid" style={{ backgroundImage: "url(" + slider.image_url + ")" }}>
                 {/* <div className="slide" style={{ backgroundColor: "#FFECEF" }}> */}
                 <div className="slideroverlay">
-                  {/* <img className="w-50 float-right bottom-0" src={"https://firebasestorage.googleapis.com/v0/b/tuc-shopping-dev.appspot.com/o/daintyflavour%2Fpngegg.png?alt=media&token=392f4d59-f387-445b-aea0-fb297ba68023"} alt="Dainty Flavour" /> */}
+                  {/* <img className="w-50 float-right bottom-0" src={"https://firebasestorage.googleapis.com/v0/b/tuc-shopping-dev.appspot.com/o/daintyflavour%2Fpngegg.png?alt=media&token=392f4d59-f387-445b-aea0-fb297ba68023"} alt="Dainty Flavor" /> */}
                   <div className="content text-left px-5">
                     <div className="">
                       <span className="prefix">{slider.prefix}</span>

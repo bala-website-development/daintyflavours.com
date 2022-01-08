@@ -18,11 +18,10 @@ const Header = (props) => {
     history.push("/");
   };
   const getMainCategories = async () => {
-    console.log("entered")
+    console.log("entered");
     await fetch(config.service_url + "getmaincategoryforusers")
       .then((response) => response.json())
       .then((data) => {
-
         if (data.status === 200) {
           console.log("main master category", data);
           let _filter = data.data.filter((_d) => _d.type === "product");
@@ -48,7 +47,7 @@ const Header = (props) => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) { });
+        .catch(function (error) {});
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
@@ -67,7 +66,7 @@ const Header = (props) => {
             <div className="logo-header mostion">
               <Link to={"/"} className="dez-page titlename text-nowrap">
                 <img src={config.logo} className="logoimage pr-1 d-none" alt="sukhaa" />
-                Dainty Falvours
+                {config.websitetitle}
               </Link>
             </div>
             <div className=" navbar-toggler collapsed px-3">
@@ -111,7 +110,7 @@ const Header = (props) => {
                 <ul className="nav navbar-nav nav1 bg-primary  h-100 pt-5">
                   <li>
                     <div className="logo-header mostion  d-none">
-                      <img src={config.logo} alt="dainty flavour" className="w-50" />
+                      <img src={config.logo} alt={config.websitetitle} className="w-50" />
                     </div>
                   </li>
                   <li>
@@ -204,18 +203,15 @@ const Header = (props) => {
                     <li className={props?.active === "category" ? "active" : ""}>
                       <Link to={"#"}>
                         {" "}
-                        Categories <i className="fa fa-chevron-down"></i>
+                        Main Categories <i className="fa fa-chevron-down"></i>
                       </Link>
                       <ul className="sub-menu">
-                        {
-                          menuMainCategory && menuMainCategory.map((mmc) => (
+                        {menuMainCategory &&
+                          menuMainCategory.map((mmc) => (
                             <li>
                               <Link to={{ pathname: "/shop", maincategory: mmc.maincategory }}>{mmc.maincategory}</Link>
                             </li>
-                          ))
-                        }
-
-
+                          ))}
                       </ul>
                     </li>
 

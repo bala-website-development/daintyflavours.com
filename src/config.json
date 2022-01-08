@@ -1,6 +1,6 @@
 {
-  "domain": "DAINTYFLAVOURS",
-  "storage": "DAINTYFLAVOURS",
+  "domain": "DAINTYFLAVORS",
+  "storage": "DAINTYFLAVORS",
   "service_url": "https://asia-south1-tuc-shopping-dev.cloudfunctions.net/daintyflavours_api/api/",
   "admin_url": "https://www.theuniquecreations.com/login/",
   "email_service_url": "https://asia-south1-tucfbclouddb.cloudfunctions.net/tuc_shop_node_api/email/",
@@ -12,7 +12,7 @@
   "logo": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Flogo%2Flogo.jpg?alt=media&token=1157409c-f51a-4d69-8a89-1ea4cbbc1c3c",
   "slider": [
     {
-      "title": "Dainty Falvours",
+      "title": "Dainty Falvors",
       "prefix": "One Stop Shop for Baking",
       "description": "Variety of Baking items in one place",
       "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fslide1.jpg?alt=media&token=c13bdea2-953e-4be3-974c-f712fcfcda3e"
@@ -30,7 +30,7 @@
       "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fslide3.jpg?alt=media&token=b0239035-a429-4931-8540-83d54711a990"
     }
   ],
-  "aboutustitle": "About Dainty Falvours",
+  "aboutustitle": "About Dainty Falvors",
   "aboutus1": "Dainty Flavors is a one stop shop for all your baking needs!",
   "aboutus2": "Add the perfect finishing touch to your cake with our range of toppers for every occasion",
   "aboutus_aboutpage": "Add the perfect finishing touch to your cake with our range of toppers for every occasion",
@@ -57,7 +57,7 @@
   "twitter": "https://www.twiter.com/",
   "pins": "https://www.pinterest.com/",
   "qrurl": "#",
-  "website": "https://www.daintyflavours.com",
+  "website": "https://www.daintyflavors.com",
   "recentproduct": 8,
   "featuredproduct": 8,
   "freeshippingcost": 3000,
