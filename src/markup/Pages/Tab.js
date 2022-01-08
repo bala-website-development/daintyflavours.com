@@ -115,12 +115,13 @@ const Popupss = (props) => {
                               </div>
                               <div className="item-info text-center">
                                 <h4 className="item-title font-weight-normal">
-                                  <Link to={"/shop?baking"}>{mc.category}</Link>
+                                  <Link to={{ pathname: "/shop", category: mc.category }}>{mc.category}</Link>
                                 </h4>
 
                                 <div className="cart-btn">
-                                  <Link to={"/shop?baking"} className="btn btnhover radius-xl">
+                                  <Link to={{ pathname: "/shop", category: mc.category }} className="btn btnhover radius-xl">
                                     View all <i className="ti-angle-double-right"></i>
+
                                   </Link>
                                 </div>
                               </div>

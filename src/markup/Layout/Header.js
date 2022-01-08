@@ -210,7 +210,7 @@ const Header = (props) => {
                         {
                           menuMainCategory && menuMainCategory.map((mmc) => (
                             <li>
-                              <Link to={"/shop?" + mmc.maincategory?.toUpperCase()}>{mmc.maincategory}</Link>
+                              <Link to={{ pathname: "/shop", maincategory: mmc.maincategory }}>{mmc.maincategory}</Link>
                             </li>
                           ))
                         }
