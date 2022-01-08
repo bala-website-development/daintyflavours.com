@@ -154,6 +154,9 @@ select.form-control:not([size]):not([multiple]) {
   width: 70px;
   border-radius: 3px;
 }
+.iconimage {
+  height:25px;
+}
 .homeimagerecent {
   height: 250px !important;
   /* width: 300px !important; */

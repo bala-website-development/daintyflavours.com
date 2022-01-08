@@ -86,7 +86,7 @@ const Popupss = (props) => {
                       toggle(index);
                     }}
                   >
-                    <i className="flaticon-pizza-slice"></i>
+                    <img src={config.defaulticon} alt={config.defaulticon} className={"iconimage"} />
                     <span>{mmc.maincategory}</span>
                   </Link>
                 </li>
@@ -111,7 +111,7 @@ const Popupss = (props) => {
                           <div className="col-sm-2 m-b30">
                             <div className="item-box shop-item style2">
                               <div className="">
-                                <img src={img} className="img-fluid" alt={config.websitetitle} />
+                                <img src={config.defaultimage} className="img-fluid" alt={config.websitetitle} />
                               </div>
                               <div className="item-info text-center">
                                 <h4 className="item-title font-weight-normal">
