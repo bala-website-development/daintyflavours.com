@@ -12,7 +12,7 @@ const Popupss = (props) => {
   const [smShow, setSmShow] = useState(false);
   const [masterCategory, setMasterCategory] = useState([]);
   const toggle = (tab) => {
-    console.log("tab", tab)
+    console.log("tab", tab);
     if (activeTab !== tab) setActiveTab(tab);
   };
   const handleVisible = () => {
@@ -22,11 +22,10 @@ const Popupss = (props) => {
     }, 1000);
   };
   const getMainCategories = async () => {
-    console.log("entered")
+    console.log("entered");
     await fetch(config.service_url + "getmaincategoryforusers")
       .then((response) => response.json())
       .then((data) => {
-
         if (data.status === 200) {
           console.log("main master category", data);
           let _filter = data.data.filter((_d) => _d.type === "product");
@@ -76,22 +75,21 @@ const Popupss = (props) => {
         <div className="bg-primary pizza-items">
           <div className="container">
             <ul className="nav nav-tabs pizza-items filters">
-              {masterMainCategory && masterMainCategory?.map((mmc, index) =>
-              (
-                <li className="nav-item item">
-                  <input type="radio" />
-                  <Link
-                    className={classnames({ active: activeTab === index }, "item-icon-box nav-link")}
-                    onClick={() => {
-                      toggle(index);
-                    }}
-                  >
-                    <img src={config.defaulticon} alt={config.defaulticon} className={"iconimage"} />
-                    <span>{mmc.maincategory}</span>
-                  </Link>
-                </li>
-              ))}
-
+              {masterMainCategory &&
+                masterMainCategory?.map((mmc, index) => (
+                  <li className="nav-item item">
+                    <input type="radio" />
+                    <Link
+                      className={classnames({ active: activeTab === index }, "item-icon-box nav-link")}
+                      onClick={() => {
+                        toggle(index);
+                      }}
+                    >
+                      <img src={mmc.icon_image ? mmc.icon_image : config.defaulticon} alt={config.defaulticon} className={"iconimage"} />
+                      <span>{mmc.maincategory}</span>
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
@@ -100,14 +98,14 @@ const Popupss = (props) => {
       <div className="my-4">
         <div className="container-fluid">
           <TabContent activeTab={activeTab}>
-            {
-              masterMainCategory && masterMainCategory?.map((mmc, index) => (
+            {masterMainCategory &&
+              masterMainCategory?.map((mmc, index) => (
                 <TabPane tabId={index}>
                   <div className={activeTab === index ? "row tab-pane fade show active" : "row tab-pane fade"}>
-                    {
-                      masterCategory && masterCategory?.filter((filter) => filter.maincategory === mmc.maincategory
-                        && mmc.type === "product")?.map((mc) => (
-
+                    {masterCategory &&
+                      masterCategory
+                        ?.filter((filter) => filter.maincategory === mmc.maincategory && mmc.type === "product")
+                        ?.map((mc) => (
                           <div className="col-sm-2 m-b30">
                             <div className="item-box shop-item style2">
                               <div className="">
@@ -121,22 +119,19 @@ const Popupss = (props) => {
                                 <div className="cart-btn">
                                   <Link to={{ pathname: "/shop", category: mc.category }} className="btn btnhover radius-xl">
                                     View all <i className="ti-angle-double-right"></i>
-
                                   </Link>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        ))
-                    }
+                        ))}
                   </div>
                 </TabPane>
-              ))
-            }
+              ))}
           </TabContent>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
