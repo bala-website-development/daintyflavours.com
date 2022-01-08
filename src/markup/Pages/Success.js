@@ -13,7 +13,7 @@ const Success = () => {
         <Header />
 
         <div className="page-content bg-white">
-          <div className="dlab-bnr-inr overlay-black-middle" style={{ backgroundImage: "url(" + img1 + ")" }}>
+          <div className="dlab-bnr-inr  bg-pt" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
             <div className="container">
               <div className="dlab-bnr-inr-entry">
                 <h1 className="text-white">Success</h1>
@@ -42,7 +42,7 @@ const Success = () => {
                           <i className="fa fa-check text-primary"></i>
                         </strong>
                         <h5 className="sub-title">Order successfully placed.</h5>
-                        <div className="mb-2">
+                        <div className="mb-2 d-none">
                           <a href={config.razorpaylink} target="_blank" className="btn  btnhover">
                             Pay Here
                           </a>

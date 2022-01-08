@@ -115,11 +115,32 @@
 1. GENERAL
 
 ---------------------------------------------------------------*/
+@font-face {
+  font-family: daintytitle;
+  src: url("/src/css/fonts/Ageritta.ttf");
+}
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 5px) !important;
 }
+.main-slider .slideroverlay {
+  background: none;
+  height: 100%;
+  vertical-align: middle;
+}
+.carousel-control-next,
+.carousel-control-prev {
+  width: 5% !important;
+}
+.flipvertical {
+  transform: rotate(0deg);
+}
 .dangerous p {
   margin: 0 0 5px 0 !important;
+}
+.titlename {
+  font-size: 35px !important;
+  color: white !important;
+  font-family: daintytitle;
 }
 .aligntopsidebar {
   align-items: baseline !important;
@@ -133,9 +154,12 @@ select.form-control:not([size]):not([multiple]) {
   width: 70px;
   border-radius: 3px;
 }
+.iconimage {
+  height:25px;
+}
 .homeimagerecent {
   height: 250px !important;
-  /* width: 250px !important; */
+  /* width: 300px !important; */
 }
 .w-10 {
   width: 10%;
@@ -144,6 +168,9 @@ select.form-control:not([size]):not([multiple]) {
   width: 30%;
 }
 .thumbnailimage {
+  height: 250px;
+}
+.thumbnailimage_cat {
   height: 250px;
 }
 .postthumbnailimage {
@@ -310,7 +337,7 @@ html {
 body {
   background-color: #fff;
   /* font-family: "Poppins", sans-serif; */
-  font-family: "Saira", sans-serif;
+  font-family: "Abel", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #0a0a0a;
@@ -3005,8 +3032,9 @@ blockquote cite {
 ---------------------------------------------------------------*/
 
 .site-header {
-  position: relative;
+  position: absolute;
   z-index: 99999;
+  background-color: transparent;
 }
 
 .site-header {
@@ -3014,13 +3042,13 @@ blockquote cite {
   z-index: 99999;
   top: 0;
   left: 0;
-  background-color: #030e22 !important;
+  /* background-color: #030e22 !important; */
   width: 100%;
   /* height: 80px; */
   -webkit-animation: headerSlideDown 0.95s ease forwards;
   animation: headerSlideDown 0.95s ease forwards;
-  -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
+  /* -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1); */
+  /* box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1); */
 }
 
 .site-header ul,
@@ -3278,6 +3306,10 @@ blockquote cite {
 16. LOGO ( company identify  symbol )
 ---------------------------------------------------------------*/
 /*=== >logo for header ===*/
+.logoimage {
+  height: 70px !important;
+  width: auto !important;
+}
 .logo-header {
   /* display: table; */
   float: left;
@@ -3313,6 +3345,7 @@ blockquote cite {
 .logo-footer > a {
   display: table-cell;
   vertical-align: middle;
+  font-size: 20px;
 }
 .logo-header.center-block {
   margin-left: auto;
@@ -3347,8 +3380,8 @@ blockquote cite {
   .is-fixed.header-curve .logo-header,
   .is-fixed .logo-header,
   .is-fixed.header-curve .logo-header {
-    width: 120px;
-    max-width: 120px;
+    width: 220px;
+    max-width: 220px;
     height: 70px;
   }
   .is-fixed .logo-header a img,
@@ -3369,9 +3402,9 @@ blockquote cite {
 ---------------------------------------------------------------*/
 
 .main-bar {
-  background: #ffffff;
+  background-color: transparent;
   width: 100%;
-  position: relative;
+  position: absolute;
 }
 .header-curve .logo-header:before,
 .header-curve .logo-header:after {
@@ -3455,7 +3488,7 @@ blockquote cite {
 }
 .header-nav .nav > li > a {
   border-radius: 0px;
-  color: #2b2d2e;
+  color: #ffffff;
   font-size: 18px;
   padding: 42px 12px 38px 12px;
   cursor: pointer;
@@ -3967,7 +4000,7 @@ blockquote cite {
   .header-nav .nav > li > a:focus {
     background-color: transparent;
     text-decoration: none;
-    color: #000;
+    color: rgb(101, 104, 47);
   }
   .header-nav .nav > li .mega-menu > li:after {
     display: none;
@@ -4218,7 +4251,7 @@ blockquote cite {
 .header-transparent .header-nav .nav > li > a,
 .header-transparent .extra-nav .btn-link,
 .header-transparent .navbar-toggler {
-  color: #000;
+  color: rgb(255, 255, 255) !important;
 }
 .header-transparent .navbar-toggler span {
   background-color: #fff;
@@ -5283,7 +5316,7 @@ blockquote cite {
   font-size: 14px;
   font-weight: 400;
   background: #fff;
-  font-family: poppins;
+  font-family: Abel;
 }
 .dlab-post-tags .post-tags a:hover {
   text-decoration: underline;
@@ -13608,7 +13641,7 @@ ol.commentlist li .star-rating {
 ================================================ */
 /* Header Box */
 .logo-header {
-  width: 120px;
+  width: 220px;
 }
 .header-full .main-bar {
   padding: 30px 0;

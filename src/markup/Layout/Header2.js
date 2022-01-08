@@ -49,7 +49,7 @@ class Header2 extends Component {
 
   render() {
     return (
-      <header className="site-header mo-left header header-transparent pizza-header">
+      <header className="site-header  mo-left header header-transparent pizza-header">
         <div className="sticky-header main-bar-wraper navbar-expand-lg">
           <div className="main-bar clearfix ">
             <div className="container clearfix">
@@ -57,29 +57,32 @@ class Header2 extends Component {
                 <Link to="./">
                   <img src={require("./../../images/logo-2.png")} alt="" />
                 </Link>
+                <div>
+                  <h1 className="titlename font-weight-normal text-nowrap">Dainty Flavour</h1>
+                </div>
               </div>
 
               <button className="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span className="bg-primary"></span>
+                <span className="bg-primary"></span>
+                <span className="bg-primary"></span>
               </button>
 
-              <div className="extra-nav">
+              <div className="extra-nav d-flex justify-content-between">
                 <div className="extra-cell">
                   <ul className="extra-info">
                     <li>
-                      <div className="header-phone-no">
+                      <div className="header-phone-no text-primary">
                         <img src="images/icons/telephone.png" alt="" />
-                        <span>24/7 pizza delivery service</span>
-                        <h2>920 234 5768</h2>
+                        <span className="text-primary">24/7 Bakery service</span>
+                        <h3 className="text-primary">+91 72598 92390</h3>
                       </div>
                     </li>
                     <li>
                       <div className="menu-btn ">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <span className="bg-primary"></span>
+                        <span className="bg-primary"></span>
+                        <span className="bg-primary"></span>
                       </div>
                     </li>
                   </ul>
@@ -95,25 +98,12 @@ class Header2 extends Component {
                 </form>
               </div>
 
-              <div className="header-nav navbar-collapse  collapse navbar myNavbar justify-content-end" id="navbarNavDropdown">
-                <div className="logo-header">
-                  <Link to={"./"}>
-                    <img src={require("./../../images/logo-2.png")} alt="" />{" "}
-                  </Link>
-                </div>
+              <div className="header-nav  bg-primary navbar-collapse aligntopsidebar  collapse navbar myNavbar" id="navbarNavDropdown">
+                <div className=" py-4"></div>
+
                 <ul className="nav navbar-nav">
                   <li className="active">
-                    <Link to={""}>
-                      Home<i className="fa fa-chevron-down"></i>
-                    </Link>
-                    <ul className="sub-menu">
-                      <li>
-                        <Link to={"./"}>Home 01</Link>
-                      </li>
-                      <li>
-                        <Link to={"index-2"}>Home 02</Link>
-                      </li>
-                    </ul>
+                    <Link to={""}>Home</Link>
                   </li>
                   <li>
                     <Link to={""}>
@@ -126,26 +116,15 @@ class Header2 extends Component {
                       <li>
                         <Link to={"/our-services"}>Our Services</Link>
                       </li>
+
                       <li>
-                        <Link to={"/faq"}>FAQs</Link>
-                      </li>
-                      <li>
-                        <Link to={"/booking"}>Booking</Link>
-                      </li>
-                      <li>
-                        <Link to={"/error-404"}>404 Error</Link>
-                      </li>
-                      <li>
-                        <Link to={"/calendar"}>Calendar</Link>
-                      </li>
-                      <li>
-                        <Link to={"/team"}>Team</Link>
+                        <Link to={"/team"}>Clients</Link>
                       </li>
                     </ul>
                   </li>
                   <li>
                     <Link to={""}>
-                      Our Menu<i className="fa fa-chevron-down"></i>
+                      Categories<i className="fa fa-chevron-down"></i>
                     </Link>
                     <ul className="sub-menu">
                       <li>
@@ -164,7 +143,7 @@ class Header2 extends Component {
                   </li>
                   <li className="has-mega-menu">
                     <Link to={""}>
-                      Blog<i className="fa fa-chevron-down"></i>
+                      Categories<i className="fa fa-chevron-down"></i>
                     </Link>
                     <ul className="mega-menu">
                       <li>
@@ -236,45 +215,13 @@ class Header2 extends Component {
                     <Link to={""}>
                       Shop <i className="fa fa-chevron-down"></i>
                     </Link>
-                    <ul className="sub-menu">
-                      <li>
-                        <Link to={"/shop"}>Shop</Link>
-                      </li>
-                      <li>
-                        <Link to={"/shop-sidebar"}>Shop Sidebar</Link>
-                      </li>
-                      <li>
-                        <Link to={"/shop-product-details"}>Product Details</Link>
-                      </li>
-                      <li>
-                        <Link to={"/shop-cart"}>Cart</Link>
-                      </li>
-                      <li>
-                        <Link to={"/shop-wishlist"}>Wishlist</Link>
-                      </li>
-                      <li>
-                        <Link to={"/shop-checkout"}>Checkout</Link>
-                      </li>
-                      <li>
-                        <Link to={"/shop-login"}>Login</Link>
-                      </li>
-                      <li>
-                        <Link to={"/shop-register"}>Register</Link>
-                      </li>
-                    </ul>
+                  </li>
+
+                  <li>
+                    <Link to={"/contact"}>Contact Us</Link>
                   </li>
                   <li>
-                    <Link to={""}>
-                      Contact Us <i className="fa fa-chevron-down"></i>
-                    </Link>
-                    <ul className="sub-menu left">
-                      <li>
-                        <Link to={"/contact"}>Contact Us 1</Link>
-                      </li>
-                      <li>
-                        <Link to={"/contact-2"}>Contact Us 2</Link>
-                      </li>
-                    </ul>
+                    <Link to={"/shop-login"}>Login</Link>
                   </li>
                 </ul>
                 <div className="dlab-social-icon">

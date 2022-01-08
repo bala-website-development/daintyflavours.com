@@ -173,7 +173,7 @@ const Shopproduct = (props) => {
       </Modal>
       <Header />
       <div className="page-content bg-white">
-        <div className="dlab-bnr-inr overlay-black-middle" style={{ backgroundImage: "url(" + img1 + ")" }}>
+        <div className="dlab-bnr-inr  bg-pt" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">Product Details</h1>
@@ -200,7 +200,7 @@ const Shopproduct = (props) => {
                   <div className="product-gallery on-show-slider lightgallery" id="lightgallery">
                     <div className="dlab-box">
                       <div className="dlab-thum-bx">
-                        <img src={productDtl.p_image} alt="sukhaa" />
+                        <img src={productDtl.p_image ? productDtl.p_image : config.defaultimage} alt="sukhaa" />
                       </div>
                     </div>
                   </div>
@@ -258,10 +258,18 @@ const Shopproduct = (props) => {
                     <div className="dlab-divider bg-gray tb15">
                       <i className="icon-dot c-square"></i>
                     </div>
-
-                    <button disabled={loading} className="btn btnhover" type="submit">
-                      <i className="ti-shopping-cart"></i>Add To Cart
-                    </button>
+                    <div className="py-2">
+                      <div> Available Quantity - {productDtl.p_quantity}</div>
+                    </div>
+                    {productDtl.p_quantity > 0 ? (
+                      <button disabled={loading} className="btn btnhover" type="submit">
+                        <i className="ti-shopping-cart"></i>Add To Cart
+                      </button>
+                    ) : (
+                      <button disabled={true} className="btn btnhover">
+                        Out of Stock
+                      </button>
+                    )}
                   </Form>
                 </div>
               </div>

@@ -18,7 +18,7 @@ const Shoplogin = ({ history }) => {
   const onSubmit = (data, e) => {
     e.preventDefault();
     console.log("login user", data);
-    fetch(config.service_url + "login", { method: "POST", headers: { "Content-Type": "application/json", 'authorization': localStorage.getItem("accessToken") }, body: JSON.stringify({ phonenumber: data.phonenumber, password: data.password }) })
+    fetch(config.service_url + "login", { method: "POST", headers: { "Content-Type": "application/json", authorization: localStorage.getItem("accessToken") }, body: JSON.stringify({ phonenumber: data.phonenumber, password: data.password }) })
       .then((response) => response.json())
       .then((data) => {
         if (data.status === 200) {
@@ -28,11 +28,9 @@ const Shoplogin = ({ history }) => {
           localStorage.setItem("accessToken", data.data.token);
           setMessage("");
           history.push("/shop");
-        }
-        else if (data?.status === 499) {
+        } else if (data?.status === 499) {
           history.push("/shop-login");
-        }
-        else {
+        } else {
           //alert(data.message);
           setMessage(data.message);
         }
@@ -50,7 +48,7 @@ const Shoplogin = ({ history }) => {
     <div>
       <Header />
       <div className="page-content bg-white">
-        <div className="dlab-bnr-inr overlay-black-middle bg-pt" style={{ backgroundImage: "url(" + bnr + ")" }}>
+        <div className="dlab-bnr-inr  bg-pt" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">Login</h1>

@@ -1,21 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Header from "../Layout/Header";
-import Footer from "../Layout/Footer";
+import React, { Component, useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import Header from "./../Layout/Header";
+import Payment from "./../Element/Payment";
+import Footer from "./../Layout/Footer";
 import img1 from "./../../images/banner/bnr1.jpg";
 import img2 from "./../../images/background/bg5.jpg";
+import { useLocation } from "react-router-dom";
 import config from "../../config.json";
-const PasswordChanged = () => {
+
+const PaymentPage = (props) => {
+  const location = useLocation();
+  const history = useHistory();
+  useEffect(() => {
+    if (location.state === undefined) {
+      history.push("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div>
       <div>
         <Header />
 
         <div className="page-content bg-white">
-          <div className="dlab-bnr-inr  bg-pt" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+          <div className="dlab-bnr-inr overlay-black-middle" style={{ backgroundImage: "url(" + img1 + ")" }}>
             <div className="container">
               <div className="dlab-bnr-inr-entry">
-                <h1 className="text-white">Success</h1>
+                <h1 className="text-white">Payment</h1>
                 <div className="breadcrumb-row">
                   <ul className="list-inline">
                     <li>
@@ -23,7 +34,7 @@ const PasswordChanged = () => {
                         <i className="fa fa-home"></i>
                       </Link>
                     </li>
-                    <li>Success</li>
+                    <li>Payment</li>
                   </ul>
                 </div>
               </div>
@@ -36,15 +47,7 @@ const PasswordChanged = () => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="page-notfound text-center">
-                      <form method="post">
-                        <strong>
-                          <i className="fa fa-check text-primary"></i>
-                        </strong>
-                        <h5 className="sub-title">Password changed succesfully.</h5>
-                        <Link to={"./shop-login"} className="btn btnhover">
-                          Go To Login Page
-                        </Link>
-                      </form>
+                      <Payment amount={location.state?.amount} name={location.state?.name} orderid={location.state?.orderid} email={location.state?.email} contactno={location.state?.contactno} orderstatus={location.state?.orderstatus} paymentstatus={location.state?.paymentstatus} />
                     </div>
                   </div>
                 </div>
@@ -59,4 +62,4 @@ const PasswordChanged = () => {
   );
 };
 
-export default PasswordChanged;
+export default PaymentPage;

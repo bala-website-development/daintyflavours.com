@@ -28,12 +28,14 @@ const Shop = (props) => {
   const getProductDetails = async () => {
     setLoading((loading) => !loading);
     console.log("cakecategory", props.location.category);
+    console.log("both", props.location.category, props.location.maincategory);
+    let _filterOption = (props.location?.category != "" && props.location?.category !== undefined ? props.location?.category : props.location?.maincategory)
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
         if (props.location.category) {
           let selective = data
-            .filter((filter) => filter.p_category === props.location.category && filter.isactive === "1")
+            .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
             .map((data) => {
               return data;
             });
@@ -41,9 +43,23 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
-        } else {
+        }
+        else if (props.location.maincategory) {
+          console.log("mainprod", data)
+          let selective = data
+            .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+            .map((data) => {
+              return data;
+            });
+          setProducts(selective);
+          setFilter(selective);
+
+          console.log(selective, "selective");
+        }
+
+        else {
           let active = data
-            .filter((filter) => filter.isactive === "1")
+            .filter((filter) => filter.isactive === 1)
             .map((data) => {
               return data;
             });
@@ -69,7 +85,7 @@ const Shop = (props) => {
       .then((response) => response.json())
       .then((data) => {
         let active = data
-          .filter((filter) => filter.isactive === "1")
+          .filter((filter) => filter.isactive === 1)
           .map((data) => {
             return data;
           });
@@ -130,7 +146,7 @@ const Shop = (props) => {
     // loopWithSlice(0, postsPerPage);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.location?.category, props.location?.maincategory]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);
@@ -248,6 +264,8 @@ const Shop = (props) => {
     });
     setMasterCategory(clearedMCategory);
     setMcatFilterApp(false);
+    props.location.maincategory = undefined;
+    props.location.category = undefined;
     // loopWithSlice(0, next + postsPerPage, false);
     // setNext(postsPerPage);
     let sliced = filter.slice(0, postsPerPage);
@@ -306,7 +324,7 @@ const Shop = (props) => {
       <Header active={"shop"} />
 
       <div className="page-content bg-white">
-        <div className="dlab-bnr-inr overlay-black-middle" style={{ backgroundImage: "url(" + bnr + ")" }}>
+        <div className="dlab-bnr-inr " style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">Shop</h1>
@@ -331,7 +349,7 @@ const Shop = (props) => {
               <div className="row">
                 <div className="col-xl-3 col-lg-4 col-md-5 m-b30">
                   <aside className="side-bar shop-categories sticky-top">
-                    {props.location.category !== undefined ? (
+                    {props.location?.category !== undefined && props.location?.maincategory !== undefined ? (
                       <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
                         Shop All Products
                       </Link>
@@ -393,7 +411,7 @@ const Shop = (props) => {
                           <div className="col-xl-4 col-lg-6 col-md-12 col-sm-6 m-b30">
                             <div className="item-box shop-item">
                               <div className="item-img">
-                                <img className="thumbnailimage" src={product.p_image} alt="" />
+                                <img className="thumbnailimage" src={product.p_image ? product.p_image : config.defaultimage} alt="" />
                                 {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
                                   <>
                                     <div className="price bg-white">
@@ -422,9 +440,15 @@ const Shop = (props) => {
                                 <Link to={{ pathname: `/shop-product-details/${product.p_id}` }} className="btn btnhover">
                                   Details
                                 </Link>{" "}
-                                <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btnhover">
-                                  <i className="ti-shopping-cart m-r5"></i> Add to cart
-                                </button>
+                                {product.p_quantity > 0 || product.p_quantity != 0 ? (
+                                  <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btnhover">
+                                    <i className="ti-shopping-cart m-r5"></i> Add to cart
+                                  </button>
+                                ) : (
+                                  <button disabled={true} className="btn btnhover">
+                                    Out of Stock
+                                  </button>
+                                )}
                               </div>
                             </div>
                           </div>

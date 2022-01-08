@@ -14,6 +14,7 @@ import Error from "./Pages/Error";
 import Success from "./Pages/Success";
 import Calendar from "./Pages/Calendar";
 import Team from "./Pages/Team";
+import Payment from "./Pages/Payment";
 import PasswordChanged from "./Pages/PasswordChanged";
 
 import Ourmenustyle1 from "./Pages/Ourmenustyle1";
@@ -67,6 +68,7 @@ class Markup extends Component {
           <Route path="/termsandcondition" exact component={TermsandCondition} />
           <Route path="/our-journey" exact component={OurJourney} />
           <Route path="/our-services" exact component={Ourservices} />
+          <Route path="/payment" exact component={Payment} />
           <Route path="/faq" exact component={Faq} />
           <Route path="/booking" exact component={Booking} />
           <Route path="/error-404" exact component={Error} />
@@ -108,6 +110,7 @@ class Markup extends Component {
 
           <Route path="/contact" exact component={Contact} />
           <Route path="/contact-2" exact component={Contact2} />
+          <Route path="*" component={Error} />
         </Switch>
       </BrowserRouter>
     );
