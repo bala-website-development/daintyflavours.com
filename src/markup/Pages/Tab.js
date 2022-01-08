@@ -85,7 +85,7 @@ const Popupss = (props) => {
                         toggle(index);
                       }}
                     >
-                      <img src={mmc.icon_image ? mmc.icon_image : config.defaulticon} alt={config.defaulticon} className={"iconimage"} />
+                      <img src={mmc.icon_image ? mmc.icon_image : config.defaulticon} alt={config.websitetitle} className={"iconimage"} />
                       <span>{mmc.maincategory}</span>
                     </Link>
                   </li>
