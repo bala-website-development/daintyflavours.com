@@ -8,6 +8,7 @@ const Header = (props) => {
   const [toggleShow, setToggleShow] = useState(false);
   const [cartDetails, setCartDetails] = useState(false);
   const [cartUpdated, setCartUpdated] = useState(localStorage.getItem("cartUpdated"));
+  const [menuMainCategory, setMenuMainCategory] = useState([]);
   const toggle = () => {
     setToggleShow((toggleShow) => !toggleShow);
   };
@@ -15,6 +16,26 @@ const Header = (props) => {
   const logout = () => {
     localStorage.clear();
     history.push("/");
+  };
+  const getMainCategories = async () => {
+    console.log("entered")
+    await fetch(config.service_url + "getmaincategoryforusers")
+      .then((response) => response.json())
+      .then((data) => {
+
+        if (data.status === 200) {
+          console.log("main master category", data);
+          let _filter = data.data.filter((_d) => _d.type === "product");
+          setMenuMainCategory(_filter);
+          localStorage.setItem("cartUpdated", true);
+        } else if (data.status === 400) {
+          setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
   };
 
   useEffect(() => {
@@ -27,11 +48,12 @@ const Header = (props) => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) {});
+        .catch(function (error) { });
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
     }
+    getMainCategories();
     // else {
     //   history.push("/");
     // }
@@ -185,35 +207,15 @@ const Header = (props) => {
                         Categories <i className="fa fa-chevron-down"></i>
                       </Link>
                       <ul className="sub-menu">
-                        <li>
-                          <Link to={"/shop?INGREDIENTS"}>INGREDIENTS</Link>
-                        </li>
+                        {
+                          menuMainCategory && menuMainCategory.map((mmc) => (
+                            <li>
+                              <Link to={"/shop?" + mmc.maincategory?.toUpperCase()}>{mmc.maincategory}</Link>
+                            </li>
+                          ))
+                        }
 
-                        <li>
-                          <Link to={"/shop?BAKEWARE"}>BAKEWARE</Link>
-                        </li>
 
-                        <li>
-                          <Link to={"/shop?CHOCOLATE"}>CHOCOLATE</Link>
-                        </li>
-                        <li>
-                          <Link to={"/shop?ACCESSORIES"}>ACCESSORIES</Link>
-                        </li>
-                        <li>
-                          <Link to={"/shop?CAKECRAFT"}>CAKECRAFT</Link>
-                        </li>
-                        <li>
-                          <Link to={"/shop?PACKAGING"}>PACKAGING</Link>
-                        </li>
-                        <li>
-                          <Link to={"/shop?DECORATION"}>DECORATION</Link>
-                        </li>
-                        <li>
-                          <Link to={"/shop?EQUIPMENTS"}>EQUIPMENTS</Link>
-                        </li>
-                        <li>
-                          <Link to={"/shop?BRANDS"}>BRANDS</Link>
-                        </li>
                       </ul>
                     </li>
 
