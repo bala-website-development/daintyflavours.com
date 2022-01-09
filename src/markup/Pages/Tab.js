@@ -70,7 +70,7 @@ const Popupss = (props) => {
   }, []);
 
   return (
-    <div class="section-full bg-white pizza-full-menu">
+    <div class="section-full bg-white pizza-full-menu" style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
       <div tabs>
         <div className="bg-primary pizza-items">
           <div className="container">

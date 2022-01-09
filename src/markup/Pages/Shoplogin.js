@@ -9,6 +9,7 @@ import config from "../../config.json";
 import bnr from "./../../images/banner/bnr3.jpg";
 
 const Shoplogin = ({ history }) => {
+  const [fphonenumber, setFphonenumber] = useState("");
   const [message, setMessage] = useState("");
   const {
     register,
@@ -43,7 +44,36 @@ const Shoplogin = ({ history }) => {
   const toggle = (tab) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
+  const forgetPwd = () => {
+    if (fphonenumber === "") {
+      setMessage("Please enter registerd phone number");
+      return;
+    }
 
+    let data = {
+      phonenumber: fphonenumber,
+      adminLabel: config.title,
+      adminEmail: config.fromemail,
+    };
+
+    fetch(config.service_url + "userforgetpassword", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data }) })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          localStorage.clear();
+          setFphonenumber("");
+          setMessage("Please check your registerd email.");
+        } else if (data.status === 499) {
+          history.push("/shop-login");
+        } else {
+          setMessage(data.message);
+          console.log("error", data.message);
+        }
+      })
+      .catch((err) => {
+        setMessage("Something went wrong, Please try again later!!");
+      });
+  };
   return (
     <div>
       <Header />
@@ -121,11 +151,13 @@ const Shoplogin = ({ history }) => {
                       <TabPane tabId="2">
                         <form id="forgot-password" className={activeTab === "2" ? "tab-pane fade col-12 p-a0  show" : " tab-pane fade col-12 p-a0 "}>
                           <h4>Forget Password ?</h4>
-                          <p>We will send you an email to reset your password. </p>
+                          <p>We will send you an email with your password details. </p>
                           <div className="form-group">
-                            <label>E-Mail *</label>
-                            <input type="email" className="form-control" defaultValue="hello@example.com" />
+                            <label className="">Phone Number *</label>
+
+                            <input name="forgetphonenumber" value={fphonenumber} type="number" className=" border form-control w-100" onChange={(e) => setFphonenumber(e.target.value)} />
                           </div>
+                          <div>{message}</div>
                           <div className="text-left gray-btn">
                             <Link
                               className={classnames({ active: activeTab === "2" }) + " btn  gray"}
@@ -137,8 +169,8 @@ const Shoplogin = ({ history }) => {
                             >
                               Back
                             </Link>
-                            <button type="submit" className="btn btnhover pull-right">
-                              Submit
+                            <button type="button" className="btn btnhover pull-right" onClick={(e) => forgetPwd()}>
+                              Reset your Password
                             </button>
                           </div>
                         </form>
