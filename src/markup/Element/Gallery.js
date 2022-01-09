@@ -22,16 +22,26 @@ const GalleryView = (props) => {
     setViewerIsOpen(false);
   };
   const getGalleryDetails = async () => {
+    let _newJson = [];
+
     await fetch(config.service_url + "getgallery")
       .then((response) => response.json())
       .then((data1) => {
+        let length = data1.length;
         let active1 = data1
           .filter((filter1) => filter1.viewingallery === 1)
-          .map((data1) => {
-            return data1;
+          .map((data1, index) => {
+            if (index <= props?.count || length) {
+              let _newObj = {};
+              _newObj.src = data1.imageurl;
+              _newObj.width = 1;
+              _newObj.height = 1;
+              _newJson.push(_newObj);
+            }
+            return _newJson;
           });
-        setGalleryImage(active1);
-        console.log("galleryimages", galleryimage);
+        setGalleryImage(_newJson);
+        console.log("galleryimages", _newJson);
       })
       .catch((err) => {
         setNetworkError("Something went wrong, Please try again later!!");
@@ -42,56 +52,6 @@ const GalleryView = (props) => {
     getGalleryDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const photos = [
-    {
-      src: galleryimage.imageurl,
-      width: 1,
-      height: 1,
-    },
-
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fbanner%2Fbanner1.jpg?alt=media&token=5d911c9a-ede0-43cb-a1a3-f7360c81abfb",
-      width: 1,
-      height: 1,
-    },
-
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fbanner%2Fbanner1.jpg?alt=media&token=5d911c9a-ede0-43cb-a1a3-f7360c81abfb",
-      width: 1,
-      height: 1,
-    },
-
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Faboutpic.jpg?alt=media&token=902c1db9-ae2d-4280-8c61-aac3205a4ff8",
-      width: 1,
-      height: 1,
-    },
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Faboutpic.jpg?alt=media&token=902c1db9-ae2d-4280-8c61-aac3205a4ff8",
-      width: 1,
-      height: 1,
-    },
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Faboutpic.jpg?alt=media&token=902c1db9-ae2d-4280-8c61-aac3205a4ff8",
-      width: 1,
-      height: 1,
-    },
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Faboutpic.jpg?alt=media&token=902c1db9-ae2d-4280-8c61-aac3205a4ff8",
-      width: 1,
-      height: 1,
-    },
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fbanner%2Fbanner1.jpg?alt=media&token=5d911c9a-ede0-43cb-a1a3-f7360c81abfb",
-      width: 4,
-      height: 3,
-    },
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Faboutpic.jpg?alt=media&token=902c1db9-ae2d-4280-8c61-aac3205a4ff8",
-      width: 1,
-      height: 1,
-    },
-  ];
 
   return (
     <div className="col-lg-12 sticky-top">
@@ -115,13 +75,13 @@ const GalleryView = (props) => {
               </SRLWrapper>
             </SimpleReactLightbox>
           </div>
-          <Gallery photos={photos} onClick={openLightbox} />;
+          <Gallery photos={galleryimage} onClick={openLightbox} />;
           <ModalGateway>
             {viewerIsOpen ? (
               <Modal onClose={closeLightbox}>
                 <Carousel
                   currentIndex={currentImage}
-                  views={photos.map((x) => ({
+                  views={galleryimage.map((x) => ({
                     ...x,
                     srcset: x.srcSet,
                     caption: x.title,
