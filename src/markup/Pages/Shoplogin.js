@@ -52,7 +52,7 @@ const Shoplogin = ({ history }) => {
 
     let data = {
       phonenumber: fphonenumber,
-      adminLabel: config.title,
+      adminLabel: config.websitetitle,
       adminEmail: config.fromemail,
     };
 
