@@ -78,7 +78,7 @@ const Index1 = () => {
             </svg>
           </div>
 
-          <div className="row">
+          <div className="row" style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
             <div className="col-lg-12">
               <div className="section-head mb-0 text-center">
                 <div className="my-4">
@@ -130,8 +130,8 @@ const Index1 = () => {
               </div>
             </div>
           </div>
-          <div className="section-full my-5 ">
-            <div className="container">
+          <div className="section-full my-5  " style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
+            <div className="container ">
               <div className="row faq-area1">
                 <div className="recentproduct px-3">
                   <Featured_Products></Featured_Products>

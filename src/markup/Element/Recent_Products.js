@@ -44,7 +44,7 @@ const Recent_Products = () => {
       <div className="m-r20">
         <div className="section-head text-left">
           <h2>Our Latest Prodcuts</h2>
-          <p className="text-bold">Dont miss our new arrivals</p>
+
           <div className="dlab-separator style1 bg-primary"></div>
         </div>
 
