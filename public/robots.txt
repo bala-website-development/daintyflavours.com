@@ -4,4 +4,4 @@ Allow: /about
 Allow: /contact
 Allow: /shop
 Allow: /gallery
-Sitemap: https://www.daintyflavours.com/sitemap.txt
+Sitemap: https://www.daintyflavors.com/sitemap.txt

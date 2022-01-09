@@ -103,56 +103,27 @@ const Index1 = () => {
           <div>
             <div className="section-head mb-0 text-center">
               <div className="my-4">
-                <h3 className="text-primary">Product Categories</h3>
+                <h3 className="text-primary">View our Gallery</h3>
               </div>
             </div>
-            <p className="main-text"> </p>
-            <div className="section-full mb-5">
-              <div className="container">
-                <div className="row service-area1">
-                  {latestCat &&
-                    latestCat.map((cat) => (
-                      <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                        <div className="icon-bx-wraper text-center service-box1" style={{ backgroundImage: "url(" + cat.imageurl + ")" }}>
-                          <div className="icon-content">
-                            <h2 className="dlab-tilte text-white">{cat.title}</h2>
-                            <p>{cat.subtitle}</p>
-                            <div className="dlab-separator style1 bg-primary"></div>
-                            <Link to={{ pathname: "/shop", category: cat.category }} className="btn btnhover">
-                              More details <i className="fa fa-angle-double-right m-l5"></i>
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              </div>
+            <div className="text-center mt-2">
+              <Link to={"/Gallery"} className="btn btn-md btnhover shadow m-t30">
+                <i className="fa fa-angle-right m-r10"></i>Gallery
+              </Link>
             </div>
           </div>
           <div className="section-full my-4 service-area2 bg-img-fix bg-line-top bg-line-bottom" style={{ backgroundImage: "url(" + config.servicebgimage + ")", backgroundSize: "cover" }}>
             <div className="container ">
-              <div className="row ">
-                <div className="col-lg-12">
+              <div className="row">
+                <div className="col-lg-12 col-sm-12 m-b30">
                   <div className="text-center">
                     <h2 className="text-white mt-4">Our Journey</h2>
-                    <div className="dlab-separator style1 bg-primary"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="row">
-                    <div className="col-lg-12 col-sm-12 m-b30">
-                      <div className="icon-bx-wraper text-white service-box2">
-                        <div className="">
-                          <p>{config.about_service}</p>
-                          <div className="text-center mt-2">
-                            <Link to={"/our-journey"} className="btn btn-md btnhover shadow m-t30">
-                              <i className="fa fa-angle-right m-r10"></i>More..
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
+
+                    <span className="text-white">{config.about_service}</span>
+                    <div className="text-center mt-2">
+                      <Link to={"/our-journey"} className="btn btn-md btnhover shadow m-t30">
+                        <i className="fa fa-angle-right m-r10"></i>More..
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -162,7 +133,7 @@ const Index1 = () => {
           <div className="section-full my-5 ">
             <div className="container">
               <div className="row faq-area1">
-                <div className="col-lg-12 m-b20">
+                <div className="recentproduct px-3">
                   <Featured_Products></Featured_Products>
                   <Recent_Product></Recent_Product>
                 </div>

@@ -131,6 +131,9 @@ select.form-control:not([size]):not([multiple]) {
 .carousel-control-prev {
   width: 5% !important;
 }
+.SRLOpened {
+  z-index: 99999 !important;
+}
 .flipvertical {
   transform: rotate(0deg);
 }
@@ -155,7 +158,7 @@ select.form-control:not([size]):not([multiple]) {
   border-radius: 3px;
 }
 .iconimage {
-  height:25px;
+  height: 25px;
 }
 .homeimagerecent {
   height: 250px !important;
@@ -169,6 +172,12 @@ select.form-control:not([size]):not([multiple]) {
 }
 .thumbnailimage {
   height: 250px;
+}
+.testimonialimage {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border: 1px solid var(--color-primary);
 }
 .thumbnailimage_cat {
   height: 250px;
@@ -240,6 +249,16 @@ select.form-control:not([size]):not([multiple]) {
   -o-transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   overflow: hidden;
+}
+@media only screen and (max-width: 479px) {
+  .tab-content .col-sm-2 {
+    width: 50%;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .recentproduct .col-lg-3 {
+    width: 50%;
+  }
 }
 @media only screen and (max-width: 479px) {
   .scroll-top {
@@ -346,6 +365,9 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   /* font-smoothing: antialiased; */
+}
+.z-indexmore {
+  z-index: 99999 !important;
 }
 a {
   color: #6f6f6f;
