@@ -44,7 +44,7 @@ const GalleryView = (props) => {
   }, []);
   const photos = [
     {
-      src: "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fbanner%2Fbanner1.jpg?alt=media&token=5d911c9a-ede0-43cb-a1a3-f7360c81abfb",
+      src: galleryimage.imageurl,
       width: 1,
       height: 1,
     },
