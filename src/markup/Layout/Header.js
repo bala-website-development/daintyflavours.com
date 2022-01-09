@@ -141,7 +141,7 @@ const Header = (props) => {
                     <Link to={"/gallery"}> Gallery</Link>
                   </li>
                   <li className={props?.active === "category" ? "active" : ""}>
-                    <Link to={"#"}> Categories</Link>
+                    <Link to={"/maincategories"}> Main Categories</Link>
                   </li>
                   <li className={props?.active === "contact" ? "active" : ""}>
                     <Link to={"/contact"}>Contact Us</Link>
