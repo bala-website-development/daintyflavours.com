@@ -34,7 +34,7 @@ const Success = () => {
 
           <div className="content-block">
             <div className="section-fullcontact-form bg-white">
-              <div className="row py-3">
+              <div className="row p-3">
                 <Tab />
               </div>
             </div>
