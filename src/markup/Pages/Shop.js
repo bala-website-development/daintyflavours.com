@@ -29,7 +29,7 @@ const Shop = (props) => {
     setLoading((loading) => !loading);
     console.log("cakecategory", props.location.category);
     console.log("both", props.location.category, props.location.maincategory);
-    let _filterOption = (props.location?.category != "" && props.location?.category !== undefined ? props.location?.category : props.location?.maincategory)
+    let _filterOption = props.location?.category != "" && props.location?.category !== undefined ? props.location?.category : props.location?.maincategory;
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
@@ -43,9 +43,8 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
-        }
-        else if (props.location.maincategory) {
-          console.log("mainprod", data)
+        } else if (props.location.maincategory) {
+          console.log("mainprod", data);
           let selective = data
             .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
             .map((data) => {
@@ -55,9 +54,7 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
-        }
-
-        else {
+        } else {
           let active = data
             .filter((filter) => filter.isactive === 1)
             .map((data) => {
@@ -454,7 +451,16 @@ const Shop = (props) => {
                           </div>
                         ))
                       ) : (
-                        "No Records to display"
+                        <div className="p-2">
+                          {" "}
+                          No Records to display{" "}
+                          <div>
+                            {" "}
+                            <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
+                              View All
+                            </Link>
+                          </div>
+                        </div>
                       )
                     ) : (
                       <div class="position-relative">

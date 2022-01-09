@@ -107,7 +107,7 @@ const Header = (props) => {
                 </div>
               )}
               {toggleShow === true ? (
-                <ul className="nav navbar-nav nav1 bg-primary  h-100 pt-5">
+                <ul className="nav navbar-nav nav1 bg-primary   h-100 pt-5">
                   <li>
                     <div className="logo-header mostion  d-none">
                       <img src={config.logo} alt={config.websitetitle} className="w-50" />
