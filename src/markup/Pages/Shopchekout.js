@@ -252,13 +252,13 @@ const Shopchekout = () => {
                       <div>Name : {userAddress[0]?.name}</div>
                       <div>Eamil : {userAddress[0]?.email}</div>
                       <div>
-                        Address : {userAddress[0]?.address}, {userAddress[0]?.city} , {userAddress[0]?.state} , {userAddress[0]?.pincode}{" "}
+                        Address : {userAddress[0]?.address}, {userAddress[0]?.city}, {userAddress[0]?.state}, {userAddress[0]?.pincode}{" "}
                       </div>
                       <div>Phone : {userAddress[0]?.phonenumber}</div>
                     </div>
                   </div>
                   <div className="form-group">
-                    <textarea type="textarea" rows="3" className="form-control" placeholder="Notes about your order, e.g. special notes for delivery" onChange={(e) => setNotes(e.target.value)}></textarea>
+                    <textarea type="textarea" rows="3" className="form-control" placeholder="Notes about your order, e.g. special notes for delivery, contact phone number" onChange={(e) => setNotes(e.target.value)}></textarea>
                   </div>
                 </div>
               </div>
