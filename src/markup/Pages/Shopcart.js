@@ -71,12 +71,12 @@ const Shopcart = () => {
             // return;
           }
           setCartDetails(data);
-
+          console.log("netdata", data)
           // console.log("query_cartDetails", data1);
           setSubTotal(
             data
               .map((total) => {
-                return total.p_price * total.p_quantity || 0;
+                return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
               })
               .reduce((a, b) => a + b, 0)
           );
@@ -146,6 +146,12 @@ const Shopcart = () => {
                         <div className="w-25">
                           <b>Total</b>
                         </div>
+                        <div className="w-25">
+                          <b>Tax</b>
+                        </div>
+                        <div className="w-25">
+                          <b>Net Amount <i>*inclusive of tax</i></b>
+                        </div>
                         <div className="w-10"></div>
                       </div>
                     </thead>
@@ -176,6 +182,14 @@ const Shopcart = () => {
                               <div className="w-25 text-nowrap">
                                 {" "}
                                 <i class="fa fa-inr"></i> {cart.p_price * cart.p_quantity}
+                              </div>
+                              <div className="w-25 text-nowrap">
+                                {" "}
+                                {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
+                              </div>
+                              <div className="w-25 text-nowrap">
+                                {" "}
+                                <i class="fa fa-inr"></i> {(parseInt(cart.p_price * cart.p_quantity) + ((cart.p_price * cart.p_quantity) * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)))}
                               </div>
                               <div className="w-10">
                                 <Link
