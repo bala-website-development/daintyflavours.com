@@ -41,10 +41,17 @@ const Shopchekout = () => {
         setCartDetails(data);
 
         // console.log("query_cartDetails", data1);
+        // setSubTotal(
+        //   data
+        //     .map((total) => {
+        //       return total.p_price * total.p_quantity || 0;
+        //     })
+        //     .reduce((a, b) => a + b, 0)
+        // );
         setSubTotal(
           data
             .map((total) => {
-              return total.p_price * total.p_quantity || 0;
+              return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
             })
             .reduce((a, b) => a + b, 0)
         );
@@ -109,9 +116,8 @@ const Shopchekout = () => {
       deliverystatus: "InProgress",
       deliverydate: "",
       orderdate: new Date(),
-      tax: (subTotal * config.taxpercentage) / 100,
       shipping: subTotal < config.freeshippingcost ? config.shippingcost : 0,
-      grosstotal: subTotal + (subTotal * config.taxpercentage) / 100 + (subTotal < config.freeshippingcost ? config.shippingcost : 0),
+      grosstotal: subTotal + (subTotal < config.freeshippingcost ? config.shippingcost : 0),
       userid: localStorage.getItem("uuid"),
       usernotes: notes,
       billingaddress: userAddress[0],
@@ -277,6 +283,7 @@ const Shopchekout = () => {
                         <th>Unit Price</th>
                         <th>Quantity</th>
                         <th>Total</th>
+                        <th>Net Amount</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -292,6 +299,9 @@ const Shopchekout = () => {
                               <td className="product-item-quantity">{cart.p_quantity}</td>
                               <td className="product-item-totle">
                                 <i class="fa fa-inr"></i> {cart.p_price * cart.p_quantity}
+                              </td>
+                              <td className="product-item-totle">
+                                <i class="fa fa-inr"></i> {(cart.p_net_product_price === undefined ? cart.p_price : cart.p_net_product_price) * cart.p_quantity}
                               </td>
                             </tr>
                           ))
@@ -330,12 +340,12 @@ const Shopchekout = () => {
                               </div>
                             </td>
                           </tr>
-                          <tr>
+                          {/* <tr>
                             <td>Tax({config.taxpercentage}%)</td>
                             <td>
                               <i class="fa fa-inr"></i> {(subTotal * (config.taxpercentage / 100)).toFixed(2)}
                             </td>
-                          </tr>
+                          </tr> */}
                           <tr className="bg-primary text-light">
                             <td>Total</td>
                             <td>
