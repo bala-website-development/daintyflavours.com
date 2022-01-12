@@ -250,11 +250,48 @@ select.form-control:not([size]):not([multiple]) {
   transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   overflow: hidden;
 }
+.shopproducts .btn {
+  padding: 10px;
+  margin-top: 2px;
+}
 @media only screen and (max-width: 479px) {
   .tab-content .col-sm-2 {
     width: 50%;
   }
+  .shopproducts .col-lg-3 {
+    width: 50% !important;
+  }
+  .shopproducts .col-lg-9 {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+  }
+  .shopproducts .item-title {
+    font-weight: normal;
+    font-size: medium;
+  }
+  .shopproducts .btn {
+    padding: 5px;
+    margin-top: 2px;
+  }
+
+  .shopproducts .thumbnailimage {
+    height: 200px;
+  }
 }
+@media only screen and (max-width: 1020px) and (min-width: 520px) {
+  .shopproducts .col-lg-3 {
+    width: 33.33333% !important;
+  }
+  .shopproducts .btn {
+    padding: 5px;
+    margin-top: 2px;
+  }
+
+  .shopproducts .thumbnailimage {
+    height: 200px;
+  }
+}
+
 @media only screen and (max-width: 479px) {
   .recentproduct .col-lg-3 {
     width: 50%;
