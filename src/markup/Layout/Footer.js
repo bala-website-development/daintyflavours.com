@@ -81,21 +81,7 @@ class Footer extends Component {
                   <div className="widget border-0">
                     <h4 className="footer-title">Order Online</h4>
                     <p className="m-b20">Our support available to help you.</p>
-                    <div className="d-none">
-                      <a href={config.qrurl} target="_blank">
-                        <h5>QR Payment</h5>
-                      </a>
-                    </div>
-                    <div>
-                      <a href={"/termsandcondition"}>
-                        <h5>Terms and Condition</h5>
-                      </a>
-                    </div>
-                    <div>
-                      <a href={"/privacypolicy"}>
-                        <h5>Privacy Policy</h5>
-                      </a>
-                    </div>
+
                     <ul className="work-hour-list">
                       <li>
                         <span className="day">
@@ -116,6 +102,21 @@ class Footer extends Component {
                         <span className="timing">Closed</span>
                       </li>
                     </ul>
+                    <div className="mt-2">
+                      <a href={"/termsandcondition"}>
+                        <h5>Terms and Condition</h5>
+                      </a>
+                    </div>
+                    <div>
+                      <a href={"/privacypolicy"}>
+                        <h5>Privacy Policy</h5>
+                      </a>
+                    </div>
+                    <div className="">
+                      <a href={config.qrurl} target="_blank">
+                        <h5>QR Payment</h5>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
