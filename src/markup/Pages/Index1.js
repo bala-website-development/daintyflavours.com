@@ -26,6 +26,8 @@ import pic3 from "./../../images/about/pic3.jpg";
 import A_Newsletter from "./A_Newsletter";
 import Recent_Product from "./../Element/Recent_Products";
 import Testimonial from "./../Element/Testimonial";
+import Instagram from "./../Element/InstagramFeed";
+
 import Featured_Products from "./../Element/Featured_Products";
 import SideBar from "./../Element/SideBar";
 import Tab from "./../Pages/Tab";
@@ -227,6 +229,10 @@ const Index1 = () => {
             </div>
             <div className="container my-4">
               {/* <OurPartners /> */}
+              <div className="section-head text-center">
+                <h3>Latest Instagram post</h3>
+              </div>
+              <Instagram />
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-head text-center">

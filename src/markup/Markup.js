@@ -6,6 +6,7 @@ import Index1 from "./Pages/Index1";
 
 import About from "./Pages/About";
 import TermsandCondition from "./Pages/TermsandCondition";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import OurJourney from "./Pages/OurJourney";
 import Ourservices from "./Pages/Ourservices";
 import Faq from "./Pages/Faq";
@@ -68,6 +69,8 @@ class Markup extends Component {
           <Route path="/orderhistory" exact component={Orderhistory} />
           <Route path="/about" exact component={About} />
           <Route path="/termsandcondition" exact component={TermsandCondition} />
+          <Route path="/privacypolicy" exact component={PrivacyPolicy} />
+
           <Route path="/our-journey" exact component={OurJourney} />
           <Route path="/our-services" exact component={Ourservices} />
           <Route path="/payment" exact component={Payment} />
@@ -87,7 +90,6 @@ class Markup extends Component {
           <Route path="/contact" exact component={Contact} />
           <Route path="/maincategories" exact component={MainCategory} />
           <Route path="/gallery" exact component={Gallery} />
-
           <Route path="/our-menu-1" exact component={Ourmenustyle1} />
           <Route path="/our-menu-2" exact component={Ourmenustyle2} />
           <Route path="/our-menu-3" exact component={Ourmenustyle3} />
