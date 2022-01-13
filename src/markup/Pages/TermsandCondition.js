@@ -48,7 +48,7 @@ class About extends Component {
         <Header active="about" />
 
         <div className="page-content bg-white">
-          <div className="dlab-bnr-inr overlay-black-middle" style={{ backgroundImage: "url(" + img1 + ")" }}>
+          <div className="dlab-bnr-inr" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
             <div className="container">
               <div className="dlab-bnr-inr-entry">
                 <h1 className="text-white">Terms and Condition</h1>
@@ -73,9 +73,6 @@ class About extends Component {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="section-head text-center">
-                      <div className="my-4">
-                        <img src={config.logo} width="250px" className="rounded" alt="tsalastudio" />
-                      </div>
                       <h3>Terms and Condition</h3>
                     </div>
                   </div>
@@ -87,6 +84,9 @@ class About extends Component {
                       <p>{config.tc2}</p>
                       <p>{config.tc3}</p>
                       <p>{config.tc4}</p>
+                      <p>{config.tc5}</p>
+                      <p>{config.tc6}</p>
+                      <p>{config.tc7}</p>
                     </div>
                   </div>
                 </div>
