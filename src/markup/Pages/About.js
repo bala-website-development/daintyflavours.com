@@ -72,7 +72,7 @@ class About extends Component {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="section-head text-center">
-                      <h3>About Dainty Falvours</h3>
+                      <h3>About Dainty Flavors</h3>
                     </div>
                   </div>
                 </div>
