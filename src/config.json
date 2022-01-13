@@ -67,6 +67,8 @@
   "taxpercentage": 0,
   "shippingcost": 150,
   "return_cancel_days": 3,
+  "instagram_feedcount": "12",
+  "instagram_access_token": "IGQVJYMXNxblVySjJqWWMxV2FUb01JU2N6Y0VZAdE9HSUtWUEVPd3V6eWJHUm9uVGZAzNFB3Qy1iNm9KMEZA1d000RzZACME5CN2w4R3VwYjhOMHFaU3RHNExKRy16bDQ4RGdXV0d0c3ByNFpIU2lOMC1faAZDZD",
   "razorpaylink": "https://pages.razorpay.com/daintyfalvours",
   "tc1": "",
   "tc2": "",
