@@ -107,7 +107,7 @@ class About extends Component {
                         </li>
                         <li>
                           <p>
-                            <strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Dainty Falvors, No 118, 1, 80 Feet Rd, Hal, HAL 2nd Stage, Indiranagar, Bengaluru, Karnataka 560038.
+                            <strong>Company</strong> (referred to as either &quot;the Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Dainty Flavors, No 118, 1, 80 Feet Rd, Hal, HAL 2nd Stage, Indiranagar, Bengaluru, Karnataka 560038.
                           </p>
                         </li>
                         <li>
@@ -147,7 +147,7 @@ class About extends Component {
                         </li>
                         <li>
                           <p>
-                            <strong>Website</strong> refers to Dainty Falvors, accessible from{" "}
+                            <strong>Website</strong> refers to Dainty Flavors, accessible from{" "}
                             <a href="https://www.daintyflavors.com" rel="external nofollow noopener" target="_blank">
                               https://www.daintyflavors.com
                             </a>

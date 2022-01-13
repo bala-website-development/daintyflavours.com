@@ -12,7 +12,7 @@
   "logo": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Flogo%2Flogo.jpg?alt=media&token=1157409c-f51a-4d69-8a89-1ea4cbbc1c3c",
   "slider": [
     {
-      "title": "Dainty Falvors",
+      "title": "Dainty Flavors",
       "prefix": "One Stop Shop for Baking",
       "description": "Variety of Baking items in one place",
       "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fslide1.jpg?alt=media&token=c13bdea2-953e-4be3-974c-f712fcfcda3e"
@@ -30,12 +30,12 @@
       "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fslide3.jpg?alt=media&token=b0239035-a429-4931-8540-83d54711a990"
     }
   ],
-  "aboutustitle": "About Dainty Falvors",
+  "aboutustitle": "About Dainty Flavors",
   "aboutus1": "Dainty Flavors is a one stop shop for all your baking needs!",
   "aboutus2": "Add the perfect finishing touch to your cake with our range of toppers for every occasion",
   "aboutus_aboutpage": "Add the perfect finishing touch to your cake with our range of toppers for every occasion",
   "aboutus_aboutpage2": "Add the perfect finishing touch to your cake with our range of toppers for every occasion",
-  "bannerimg1": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fbanner%2Fbanner1.jpg?alt=media&token=5d911c9a-ede0-43cb-a1a3-f7360c81abfb",
+  "bannerimg1": "",
   "aboutus_imageurl1": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Faboutpic.jpg?alt=media&token=902c1db9-ae2d-4280-8c61-aac3205a4ff8",
   "aboutus_imageurl2": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Faboutpic.jpg?alt=media&token=902c1db9-ae2d-4280-8c61-aac3205a4ff8",
   "footerimage": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fbanner%2Ffooter.jpg?alt=media&token=f514a05d-78fc-4be2-a93e-1c66549f3325",
@@ -70,10 +70,10 @@
   "instagram_feedcount": "12",
   "instagram_access_token": "IGQVJXV0pyMUZA1ZAm44VXFHU0k0bXJsSnZAaeGtfSExudEVuTnJId1ZAYeTFKaVhLV2hDTWlqTnlIU3pxaTR4bXFmcHl4RDRSNFZABR3R2S2RtSmtLMkI1N0hPUVVFQnVyQ1NuU0NYNnRrbkJ6RUU4REFScQZDZD",
   "instagram_access_token_tuc": "IGQVJYMXNxblVySjJqWWMxV2FUb01JU2N6Y0VZAdE9HSUtWUEVPd3V6eWJHUm9uVGZAzNFB3Qy1iNm9KMEZA1d000RzZACME5CN2w4R3VwYjhOMHFaU3RHNExKRy16bDQ4RGdXV0d0c3ByNFpIU2lOMC1faAZDZD",
-  "razorpaylink": "https://pages.razorpay.com/daintyfalvours",
+  "razorpaylink": "https://pages.razorpay.com/daintyflavors",
   "tc1": "Cancellation/Return policy: Cancel or Return is not accepted for edible items. Once the product is shipped there won't be any cancellation or return.",
   "tc2": "Cancellation/Return policy: Certain product can only be canceled / returned on or before 48 hours of order date. ",
-  "tc3": "Product quality : Out of the Dainty Falvors Bakery will provide a professionally prepared foos items in a timely manner as specified in the invoice or contract.  We appreciate your business and we are honored that you have chosen us for your special celebration. We guarantee that the flavors, size, and general design elements will be met as outlined. If you are not satisfied with our product(s) please let us know at the time you receive your order. Once your order is accepted, refunds will not be considered.",
+  "tc3": "Product quality : Out of the Dainty Flavors Bakery will provide a professionally prepared foos items in a timely manner as specified in the invoice or contract.  We appreciate your business and we are honored that you have chosen us for your special celebration. We guarantee that the flavors, size, and general design elements will be met as outlined. If you are not satisfied with our product(s) please let us know at the time you receive your order. Once your order is accepted, refunds will not be considered.",
   "tc4": "Photographs and Marketing: We respect the privacy of all our clients. We will not disclose the identity of clients (photographs of people, last names, event details, contract details) without permission. We do however, reserve the right to photograph baked goods and use those photos on our website, social media, or marketing materials. We also reserve the right to use any photographs for display or promotion without compensation to you.",
   "tc5": "",
   "tc6": "",
