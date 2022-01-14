@@ -22,11 +22,12 @@ const Shop = (props) => {
   const [next, setNext] = useState(postsPerPage);
   const [end, setEnd] = useState(0);
   const history = useHistory();
-
+  let bannerimageurl = props.location.bannerimage;
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
     setLoading((loading) => !loading);
+    console.log("banner image", props.location.bannerimage);
     console.log("cakecategory", props.location.category);
     console.log("both", props.location.category, props.location.maincategory);
     let _filterOption = props.location?.category != "" && props.location?.category !== undefined ? props.location?.category : props.location?.maincategory;
@@ -321,7 +322,7 @@ const Shop = (props) => {
       <Header active={"shop"} />
 
       <div className="page-content bg-white">
-        <div className="dlab-bnr-inr " style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+        <div className="dlab-bnr-inr " style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">Shop</h1>

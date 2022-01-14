@@ -69,7 +69,7 @@ const Index1 = () => {
   }, []);
   return (
     <div>
-      <Header active={"home"} />
+      <Header active={"home"} home={true} />
 
       <div className="page-content bg-white">
         <div className="content-block">

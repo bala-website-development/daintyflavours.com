@@ -157,6 +157,12 @@ select.form-control:not([size]):not([multiple]) {
   width: 70px;
   border-radius: 3px;
 }
+.navbarbg {
+  background-color: #f8f9fa92;
+  border-radius: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 .iconimage {
   height: 25px;
 }
