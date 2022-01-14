@@ -161,7 +161,8 @@ select.form-control:not([size]):not([multiple]) {
   height: 25px;
 }
 .homeimagerecent {
-  height: 250px !important;
+  height: 200px !important;
+  width: 100% !important;
   /* width: 300px !important; */
 }
 .w-10 {
@@ -258,7 +259,7 @@ select.form-control:not([size]):not([multiple]) {
   .tab-content .col-sm-2 {
     width: 50%;
   }
-  .shopproducts .col-lg-3 {
+  .shopproducts .col-lg-3 .col-lg-2 {
     width: 50% !important;
   }
   .shopproducts .col-lg-9 {
@@ -293,8 +294,8 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 @media only screen and (max-width: 479px) {
-  .recentproduct .col-lg-3 {
-    width: 50%;
+  .recentproduct .col-lg-2 {
+    width: 50% !important;
   }
 }
 @media only screen and (max-width: 479px) {

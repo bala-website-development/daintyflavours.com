@@ -109,15 +109,15 @@ const Popupss = (props) => {
                           <div className="col-sm-2 m-b30">
                             <div className="item-box shop-item style2">
                               <div className="">
-                                <img src={mc.thumbnail_image ? mc.thumbnail_image : config.defaultimage} className="img-fluid" alt={config.websitetitle} />
+                                <img src={mc.thumbnail_image ? mc.thumbnail_image : config.defaultimage} className="img-fluid " alt={config.websitetitle} />
                               </div>
                               <div className="item-info text-center">
-                                <h4 className="item-title font-weight-normal">
+                                <span className="item-title font-weight-normal">
                                   <Link to={{ pathname: "/shop", category: mc.category }}>{mc.category}</Link>
-                                </h4>
+                                </span>
 
                                 <div className="cart-btn">
-                                  <Link to={{ pathname: "/shop", category: mc.category }} className="btn btnhover radius-xl">
+                                  <Link to={{ pathname: "/shop", category: mc.category }} className="btn btnhover p-1 px-2">
                                     View all <i className="ti-angle-double-right"></i>
                                   </Link>
                                 </div>

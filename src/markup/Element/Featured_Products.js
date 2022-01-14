@@ -39,21 +39,21 @@ const Featured_Product = (props) => {
   }, []);
 
   return (
-    <div className="m-r20 mt-5">
-      <div className="section-head text-left">
-        <h2>Our Featured Prodcuts</h2>
+    <div className="px-1 mt-1">
+      <div className="text-left">
+        <h3>Our Featured Prodcuts</h3>
         <div className="dlab-separator style1 bg-primary"></div>
       </div>
 
       <div className="row">
         {products.length > 0 &&
           products.map((product) => (
-            <div className="col-lg-3">
-              <div className="port-box1 homeimagerecent text-white my-2">
-                <div className="dlab-media">
-                  <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} />
+            <div className="col-lg-2">
+              <div className="item-box shop-item style2  text-white my-2">
+                <div className="">
+                  <img className="img-fluid homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} />
                 </div>
-                <div className="dlab-info">
+                <div className="dlab-info d-none">
                   <h4 className="title ">
                     <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                       <div>
@@ -86,6 +86,46 @@ const Featured_Product = (props) => {
                       <div>{product.p_name}</div>
                     </Link>
                   </h4>
+                </div>
+                <div className="item-info text-center">
+                  <span className="">
+                    {" "}
+                    <div>
+                      {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
+                        <>
+                          <div className=" text-dark">
+                            <span style={{ "text-decoration": "line-through" }}>
+                              {" "}
+                              <span className="text-dark">
+                                <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                              </span>
+                            </span>
+                            {"   |  "}
+                            <span className="text-dark">
+                              {"   "} <i class="fa fa-inr "></i> {product.p_price}
+                            </span>{" "}
+                            <span className="px-1 sale bg-primary text-light">Sale</span>
+                          </div>
+                        </>
+                      ) : (
+                        <div className=" text-dark ">
+                          <span className="text-dark ">
+                            <i class="fa fa-inr"> {"   "} </i>
+                            {"   "}
+                            {product.p_price}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </span>
+
+                  <div className="cart-btn">
+                    {" "}
+                    <Link className="text-dark" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
+                      {" "}
+                      <div>{product.p_name}</div>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

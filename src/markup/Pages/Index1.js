@@ -84,15 +84,19 @@ const Index1 = () => {
             <div className="col-lg-12">
               <div className="section-head mb-0 text-center">
                 <div className="my-4">
-                  <img className="rounded d-none" width="200px" src={config.logo} alt="" />
-                </div>
-                <h3 className="text-primary">{config.aboutustitle}</h3>
-                <p className="main-text">{config.aboutus1} </p>
-                <p>{config.aboutus2}</p>
-                <div className="text-center mb-3">
-                  <Link to={"/about"} className="btn btn-md btnhover shadow m-t30">
+                  <h4 className="text-primary">{config.aboutustitle} </h4>
+                  <a href={"/about"} className="">
                     <i className="fa fa-angle-right m-r10"></i>More..
-                  </Link>
+                  </a>{" "}
+                </div>
+                <div className="d-none">
+                  <p className="main-text">{config.aboutus1} </p>
+                  <p>{config.aboutus2}</p>
+                  <div className="text-center mb-3 ">
+                    <a href={"/about"} className=" m-t30">
+                      <i className="fa fa-angle-right m-r10"></i>More..
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -101,7 +105,19 @@ const Index1 = () => {
           <div>
             <Tab />
           </div>
-
+          <div className="section-full my-1  " style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
+            <div className="container ">
+              <div className="row faq-area1">
+                <div className="recentproduct px-1">
+                  <Featured_Products></Featured_Products>
+                  <Recent_Product></Recent_Product>
+                </div>
+                <div className="col-lg-12 m-b30 d-none">
+                  <Accord />
+                </div>
+              </div>
+            </div>
+          </div>
           <div>
             <div className="section-head mb-0 text-center">
               <div className="my-4">
@@ -132,19 +148,7 @@ const Index1 = () => {
               </div>
             </div>
           </div>
-          <div className="section-full my-5  " style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
-            <div className="container ">
-              <div className="row faq-area1">
-                <div className="recentproduct px-3">
-                  <Featured_Products></Featured_Products>
-                  <Recent_Product></Recent_Product>
-                </div>
-                <div className="col-lg-12 m-b30 d-none">
-                  <Accord />
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div id="testimonial" className="container">
             <Testimonial />
           </div>
