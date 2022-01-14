@@ -90,7 +90,7 @@ const Featured_Product = (props) => {
                 <div className="item-info text-center">
                   <span className="">
                     {" "}
-                    <div>
+                    <div className="cart-btn">
                       {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
                         <>
                           <div className=" text-dark">
@@ -119,11 +119,13 @@ const Featured_Product = (props) => {
                     </div>
                   </span>
 
-                  <div className="cart-btn">
+                  <div>
                     {" "}
                     <Link className="text-dark" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                       {" "}
-                      <div>{product.p_name}</div>
+                      <div>
+                        <b>{product.p_name}</b>
+                      </div>
                     </Link>
                   </div>
                 </div>
@@ -133,7 +135,7 @@ const Featured_Product = (props) => {
       </div>
 
       <div className="text-center mt-2">
-        <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
+        <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
           <i className="fa fa-angle-right m-r10"></i>Shop all
         </Link>
       </div>

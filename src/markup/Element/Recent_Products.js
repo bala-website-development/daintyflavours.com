@@ -91,9 +91,18 @@ const Recent_Products = () => {
                     </h4>
                   </div>
                   <div className="item-info text-center">
+                    <div>
+                      {" "}
+                      <Link className="text-dark" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
+                        {" "}
+                        <div>
+                          <b>{product.p_name}</b>
+                        </div>
+                      </Link>
+                    </div>
                     <span className="">
                       {" "}
-                      <div>
+                      <div className="cart-btn">
                         {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
                           <>
                             <div className=" text-dark">
@@ -121,17 +130,6 @@ const Recent_Products = () => {
                         )}
                       </div>
                     </span>
-
-                    <div className="cart-btn">
-                      {" "}
-                      <Link className="text-dark" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                        {" "}
-                        <div>
-                          <b>{product.p_name}</b>
-                          <i className="fa fa-angle-right m-l10"></i>
-                        </div>
-                      </Link>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -139,7 +137,7 @@ const Recent_Products = () => {
         </div>
       </div>
       <div className="text-center mt-2">
-        <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
+        <Link to={"/shop"} className="p-2 px-3  btn btn-md btnhover shadow m-t30">
           <i className="fa fa-angle-right m-r10"></i>Shop all
         </Link>
       </div>
