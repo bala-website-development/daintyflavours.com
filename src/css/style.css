@@ -6933,7 +6933,7 @@ button:focus {
   border-style: solid;
   border-color: transparent;
   line-height: 1.42857;
-  border-radius: 6px;
+  border-radius: 30px;
   font-weight: 400;
   text-align: center;
   white-space: nowrap;

@@ -441,11 +441,11 @@ const Shop = (props) => {
                                   <h4 className="item-title">
                                     <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
                                   </h4>
-                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }} className="btn btnhover">
+                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }} className="btn btn-sm btnhover">
                                     Details
                                   </Link>{" "}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btnhover">
+                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-sm btnhover">
                                       <i className="ti-shopping-cart m-r5"></i> Add to cart
                                     </button>
                                   ) : (

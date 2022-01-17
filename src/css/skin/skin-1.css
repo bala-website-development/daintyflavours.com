@@ -107,8 +107,8 @@
 .fc-button.fc-state-active,
 .fc-button.fc-state-default {
   background-color: var(--color-button);
-  border-radius: 1px !important;
-  color: #000000;
+
+  color: white;
 }
 
 /*Hex color :hover */
