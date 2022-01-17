@@ -141,9 +141,18 @@ select.form-control:not([size]):not([multiple]) {
   margin: 0 0 5px 0 !important;
 }
 .titlename {
-  font-size: 35px !important;
+  font-size: 25px !important;
   color: white !important;
   font-family: daintytitle;
+}
+.titlename1 {
+  font-size: 25px !important;
+  color: white !important;
+  font-family: daintytitle;
+}
+.searchbar {
+  border-radius: 30px;
+  border: 1px solid rgb(55, 54, 54);
 }
 .aligntopsidebar {
   align-items: baseline !important;
@@ -3389,7 +3398,7 @@ blockquote cite {
   width: 140px;
   height: 85px;
   position: relative;
-  z-index: 9;
+  z-index: 9999999;
   transition: all 0.5s;
   -moz-transition: all 0.5s;
   -webkit-transition: all 0.5s;

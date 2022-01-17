@@ -7,13 +7,13 @@ class Footer extends Component {
   render() {
     return (
       <>
-        <footer className="site-footer " style={{ backgroundImage: "url(" + config.footerimage + ")", backgroundSize: "cover" }}>
+        <footer className="" style={{ backgroundImage: "url(" + config.footerimage + ")", backgroundSize: "cover" }}>
           <div className="footer-top bg-line-top">
             <div className="container">
               <div className="row">
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="widget widget_getintuch">
-                    <h5 className="footer-title text-white">Contact Us</h5>
+                    <h5 className="footer-title">Contact Us</h5>
                     <ul>
                       <li>
                         <i className="fa fa-map-marker"></i>
@@ -58,6 +58,12 @@ class Footer extends Component {
                       <li>
                         <Link to={"/contact"}>Contact</Link>
                       </li>
+                      <li>
+                        <Link to={"/termsandcondition"}>Terms and Condition</Link>
+                      </li>
+                      <li>
+                        <Link to={"/privacypolicy"}>Privacy Policy</Link>
+                      </li>
                     </ul>
                   </div>
                   <div className="m-t20">
@@ -78,45 +84,29 @@ class Footer extends Component {
                   </div>
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                  <div className="widget border-0">
-                    <h4 className="footer-title">Order Online</h4>
-                    <p className="m-b20">Our support available to help you.</p>
+                  <div className="widget border-0 ">
+                    <h4 className="footer-title">Order Online/ Store Timings</h4>
 
                     <ul className="work-hour-list">
                       <li>
-                        <span className="day">
-                          <span>Monday to Saturday</span>
+                        <span className="day" className="text-dark">
+                          <span className="text-dark">Monday to Saturday</span>
                         </span>
-                        <span className="timing">9.30am to 7.45pm</span>
+                        <span className="timing text-dark">9.30am to 7.45pm</span>
                       </li>
                       <li className="d-none">
-                        <span className="day">
+                        <span className="day ">
                           <span>Saturday</span>
                         </span>
                         <span className="timing">By Appointment</span>
                       </li>
-                      <li>
+                      <li className="text-dark">
                         <span className="day">
                           <span>Sunday</span>
                         </span>
                         <span className="timing">Closed</span>
                       </li>
                     </ul>
-                    <div className="mt-2">
-                      <a href={"/termsandcondition"}>
-                        <h5>Terms and Condition</h5>
-                      </a>
-                    </div>
-                    <div>
-                      <a href={"/privacypolicy"}>
-                        <h5>Privacy Policy</h5>
-                      </a>
-                    </div>
-                    <div className="">
-                      <a href={config.qrurl} target="_blank">
-                        <h5>QR Payment</h5>
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>
