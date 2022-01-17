@@ -1,210 +1,244 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
+import { Link, useHistory } from "react-router-dom";
 
 import config from "../../config.json";
-class Header2 extends Component {
-  componentDidMount() {
-    // sidebar open/close
 
-    var btn = document.querySelector(".navicon");
-    var aaa = document.querySelector(".myNavbar ");
 
-    function toggleFunc() {
-      return aaa.classList.toggle("show");
-    }
+const Header2 = () => {
+  var btn = document.querySelector(".navicon");
+  var aaa = document.querySelector(".myNavbar ");
 
-    btn.addEventListener("click", toggleFunc);
-
-    /* Menu onpen/close */
-    var menuBtn = document.querySelector(".menu-btn");
-    var pizzaHeaderNav = document.querySelector(".pizza-header .header-nav");
-
-    function menuBtnAddActive() {
-      return pizzaHeaderNav.classList.add("active");
-    }
-
-    menuBtn.addEventListener("mouseenter", menuBtnAddActive);
-
-    function menuBtnRemoveActive() {
-      return pizzaHeaderNav.classList.remove("active");
-    }
-
-    //pizzaHeaderNav.addEventListener("mouseleave", menuBtnRemoveActive);
-
-    /* Test */
-
-    // Sidenav li open close
-
-    var navUl = [].slice.call(document.querySelectorAll(".navbar-nav > li"));
-    for (var y = 0; y < navUl.length; y++) {
-      navUl[y].addEventListener("click", function () {
-        checkLi(this);
-      });
-    }
-
-    function checkLi(current) {
-      navUl.forEach((el) => el.classList.remove("open"));
-      current.classList.add("open");
-    }
+  function toggleFunc() {
+    return aaa.classList.toggle("show");
   }
 
-  render() {
-    return (
-      <>
-        <header className="site-header position-relative  mo-left header header-transparent pizza-header w-100">
-          <div className="p-2 px-4 searchbarbg">
-            <div className=" d-flex align-items-center justify-content-end">
-              <div className="flex-grow-1 px-3">
-                <form action="#">
-                  <input name="search" value="" type="text" className="searchbar px-3" placeholder="Search all our products" />
-                </form>
-              </div>
+  btn?.addEventListener("click", toggleFunc);
 
-              <div className="text-nowrap">Log in</div>
-              <div className="px-3">Account</div>
+  /* Menu onpen/close */
+  var menuBtn = document.querySelector(".menu-btn");
+  var pizzaHeaderNav = document.querySelector(".pizza-header .header-nav");
 
-              <div className="">
-                <i className="ti-shopping-cart cart"></i>
-              </div>
+  function menuBtnAddActive() {
+    return pizzaHeaderNav.classList.add("active");
+  }
+
+  menuBtn?.addEventListener("mouseenter", menuBtnAddActive);
+
+  function menuBtnRemoveActive() {
+    return pizzaHeaderNav.classList.remove("active");
+  }
+
+  //pizzaHeaderNav.addEventListener("mouseleave", menuBtnRemoveActive);
+
+  /* Test */
+
+  // Sidenav li open close
+
+  var navUl = [].slice.call(document.querySelectorAll(".navbar-nav > li"));
+  for (var y = 0; y < navUl.length; y++) {
+    navUl[y].addEventListener("click", function () {
+      checkLi(this);
+    });
+  }
+
+  function checkLi(current) {
+    navUl.forEach((el) => el.classList.remove("open"));
+    current.classList.add("open");
+  }
+
+  const [toggleShow, setToggleShow] = useState(false);
+  const [cartDetails, setCartDetails] = useState(false);
+  const [cartUpdated, setCartUpdated] = useState(localStorage.getItem("cartUpdated"));
+  const [menuMainCategory, setMenuMainCategory] = useState([]);
+  const [menuCategory, setMenuCategory] = useState([]);
+  const toggle = () => {
+    setToggleShow((toggleShow) => !toggleShow);
+  };
+  const history = useHistory();
+  const logout = () => {
+    localStorage.clear();
+    history.push("/");
+  };
+  const getMainCategories = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getmaincategoryforusers")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("main master category", data);
+          let _filter = data.data.filter((_d) => _d.type === "product");
+          localStorage.setItem("maincategories", JSON.stringify(_filter));
+          setMenuMainCategory(_filter);
+          localStorage.setItem("cartUpdated", true);
+        } else if (data.status === 400) {
+          setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
+
+  const getCategories = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getuserscategory")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("main master category", data);
+          let _filter = data.data.filter((_d) => _d.type === "product");
+          localStorage.setItem("categories", JSON.stringify(_filter));
+          setMenuCategory(_filter);
+          localStorage.setItem("cartUpdated", true);
+        } else if (data.status === 400) {
+          setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
+
+  useEffect(() => {
+    const fetchCartDetails = () => {
+      fetch(config.service_url + "getCartProducts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userid: localStorage.getItem("uuid") }) })
+        .then((response) => response.json())
+        .then((data) => {
+          setCartDetails(data);
+
+          console.log("cart details", data);
+          setCartUpdated(false);
+        })
+        .catch(function (error) { });
+    };
+    if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
+      fetchCartDetails();
+    }
+    if (localStorage.getItem("maincategories") === undefined || localStorage.getItem("maincategories") === null) {
+      getMainCategories();
+      console.log("fromservice")
+    }
+    else {
+
+      if (menuMainCategory === undefined || menuMainCategory === null || menuMainCategory?.length === 0) {
+        setMenuMainCategory(JSON.parse(localStorage.getItem("maincategories")));
+        console.log(menuMainCategory, "ls")
+      }
+
+    }
+
+    if (localStorage.getItem("categories") === undefined || localStorage.getItem("categories") === null) {
+      getCategories();
+      console.log("fromservice")
+    }
+    else {
+      if (menuCategory === undefined || menuCategory === null || menuCategory?.length === 0) {
+        setMenuCategory(JSON.parse(localStorage.getItem("categories")));
+        console.log(menuCategory, "ls")
+      }
+    }
+
+
+    // else {
+    //   history.push("/");
+    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartUpdated]);
+
+
+  return (
+    <>
+      <header className="site-header position-relative  mo-left header header-transparent pizza-header w-100">
+        <div className="p-2 px-4 searchbarbg">
+          <div className=" d-flex align-items-center justify-content-end">
+            <div className="flex-grow-1 px-3">
+              <form action="#">
+                <input name="search" value="" type="text" className="searchbar px-3" placeholder="Search all our products" />
+              </form>
+            </div>
+
+            <div className="text-nowrap">Log in</div>
+            <div className="px-3">Account</div>
+
+            <div className="">
+              <i className="ti-shopping-cart cart"></i>
             </div>
           </div>
-          <div className="sticky-header main-bar-wraper navbar-expand-lg">
-            <div className="main-bar position-relative   ">
-              <div className="container ">
-                <div className="logo-header d-flex align-items-center">
-                  <div>
-                    <div className="titlename1 font-weight-normal text-nowrap">Dainty Flavour</div>
-                  </div>
+        </div>
+        <div className="sticky-header main-bar-wraper navbar-expand-lg">
+          <div className="main-bar position-relative   ">
+            <div className="container ">
+              <div className="logo-header d-flex align-items-center">
+                <div>
+                  <div className="titlename1 font-weight-normal text-nowrap">Dainty Flavour</div>
                 </div>
+              </div>
 
-                <button className="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                  <span className="bg-primary"></span>
-                  <span className="bg-primary"></span>
-                  <span className="bg-primary"></span>
-                </button>
+              <button className="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="bg-primary"></span>
+                <span className="bg-primary"></span>
+                <span className="bg-primary"></span>
+              </button>
 
-                <div className="extra-nav d-flex justify-content-between">
-                  <div className="extra-cell">
-                    <ul className="extra-info">
-                      <li>
-                        <div className="menu-btn ">
-                          <span className="bg-primary"></span>
-                          <span className="bg-primary"></span>
-                          <span className="bg-primary"></span>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="header-nav  bg-primary navbar-collapse aligntopsidebar  collapse navbar myNavbar active" id="navbarNavDropdown">
-                  <ul className="nav navbar-nav">
-                    <li className="active">
-                      <Link to={""}>Home</Link>
-                    </li>
+              <div className="extra-nav d-flex justify-content-between">
+                <div className="extra-cell">
+                  <ul className="extra-info">
                     <li>
-                      <Link to={""}>
-                        Pages<i className="fa fa-chevron-down"></i>
-                      </Link>
-                      <ul className="sub-menu">
-                        <li>
-                          <Link to={"/about"}>
-                            <span className="text-nowrap">About Us</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to={"/about"}>
-                            <span className="text-nowrap">About Us</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to={"/about"}>
-                            <span className="text-nowrap">About Us</span>
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <Link to={""}>
-                        Pages<i className="fa fa-chevron-down"></i>
-                      </Link>
-                      <ul className="sub-menu">
-                        <li>
-                          <Link to={"/about"}>
-                            <span className="text-nowrap">About Us</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to={"/about"}>
-                            <span className="text-nowrap">About Us</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to={"/about"}>
-                            <span className="text-nowrap">About Us</span>
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>{" "}
-                    <li>
-                      <Link to={""}>
-                        Pages<i className="fa fa-chevron-down"></i>
-                      </Link>
-                      <ul className="sub-menu">
-                        <li>
-                          <Link to={"/about"}>
-                            <span className="text-nowrap">About Us</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to={"/about"}>
-                            <span className="text-nowrap">About Us</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to={"/about"}>
-                            <span className="text-nowrap">About Us</span>
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>{" "}
-                    <li>
-                      <Link to={""}>
-                        Pages<i className="fa fa-chevron-down"></i>
-                      </Link>
-                      <ul className="sub-menu">
-                        <li>
-                          <Link to={"/about"}>
-                            <span className="text-nowrap">About Us</span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to={"/contact"}>
-                            <span className="text-nowrap">Contact Us</span>
-                          </Link>
-                        </li>
-                      </ul>
+                      <div className="menu-btn ">
+                        <span className="bg-primary"></span>
+                        <span className="bg-primary"></span>
+                        <span className="bg-primary"></span>
+                      </div>
                     </li>
                   </ul>
-                  <div className="dlab-social-icon">
-                    <ul>
-                      <li>
-                        <Link className="site-button sharp-sm fa fa-facebook" to={""}></Link>
-                      </li>
+                </div>
+              </div>
 
+              <div className="header-nav  bg-primary navbar-collapse aligntopsidebar  collapse navbar myNavbar active" id="navbarNavDropdown">
+                <ul className="nav navbar-nav">
+
+                  {menuMainCategory &&
+                    menuMainCategory.map((mmc) => (
                       <li>
-                        <Link className="site-button sharp-sm fa fa-instagram" to={""}></Link>
+                        <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mmc.banner_image }}>{mmc.maincategory}
+                          <i className="fa fa-chevron-down"></i>
+                        </Link>
+                        <ul className="sub-menu">
+                          {
+                            menuCategory && menuCategory.filter((fil) => fil.maincategory === mmc.maincategory)?.map((mc) => (
+
+                              <li>
+                                <Link to={"/shop"}>
+                                  <span className="text-nowrap">{mc.category}</span>
+                                </Link>
+                              </li>
+                            ))
+                          }
+                        </ul>
                       </li>
-                    </ul>
-                  </div>
+                    ))}
+                </ul>
+                <div className="dlab-social-icon">
+                  <ul>
+                    <li>
+                      <Link className="site-button sharp-sm fa fa-facebook" to={""}></Link>
+                    </li>
+
+                    <li>
+                      <Link className="site-button sharp-sm fa fa-instagram" to={""}></Link>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
-        </header>
-      </>
-    );
-  }
+        </div>
+      </header>
+    </>
+  );
 }
 
 export default Header2;
