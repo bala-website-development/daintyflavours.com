@@ -6917,7 +6917,7 @@ button:focus {
 .btn-group-sm > .btn,
 .btn-sm {
   border-radius: 3px;
-  font-size: 12px;
+  font-size: 14px;
   padding: 4px 8px;
 }
 .btn,
@@ -6964,7 +6964,7 @@ button:focus {
 /* button size */
 .btn-sm {
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .btn-md {
   padding: 16px 42px;

@@ -463,7 +463,7 @@ const Shop = (props) => {
                             No Records to display{" "}
                             <div>
                               {" "}
-                              <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
+                              <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
                                 View All
                               </Link>
                             </div>
@@ -480,7 +480,7 @@ const Shop = (props) => {
                     </div>
                     <div className="aligncenter">
                       {end <= filter.length + postsPerPage && (
-                        <button className="btn btnhover" onClick={handleShowMorePosts}>
+                        <button className="btn btn-sm btnhover" onClick={handleShowMorePosts}>
                           Load more
                         </button>
                       )}
