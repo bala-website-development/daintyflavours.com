@@ -199,27 +199,35 @@ const Header2 = () => {
 
               <div className="header-nav  bg-primary navbar-collapse aligntopsidebar  collapse navbar myNavbar active" id="navbarNavDropdown">
                 <ul className="nav navbar-nav">
-
-                  {menuMainCategory &&
-                    menuMainCategory.map((mmc) => (
-                      <li>
-                        <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mmc.banner_image }}>{mmc.maincategory}
-                          <i className="fa fa-chevron-down"></i>
+                  {
+                    (menuMainCategory === null || menuMainCategory === undefined || menuMainCategory.length == 0) ?
+                      (<li>
+                        <Link>
+                          Loading...
                         </Link>
-                        <ul className="sub-menu">
-                          {
-                            menuCategory && menuCategory.filter((fil) => fil.maincategory === mmc.maincategory)?.map((mc) => (
+                      </li>) : (
 
-                              <li>
-                                <Link to={"/shop"}>
-                                  <span className="text-nowrap">{mc.category}</span>
-                                </Link>
-                              </li>
-                            ))
-                          }
-                        </ul>
-                      </li>
-                    ))}
+                        menuMainCategory?.map((mmc) => (
+                          <li>
+                            <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mmc.banner_image }}>{mmc.maincategory}
+                              <i className="fa fa-chevron-down"></i>
+                            </Link>
+                            <ul className="sub-menu">
+                              {
+                                menuCategory && menuCategory.filter((fil) => fil.maincategory === mmc.maincategory)?.map((mc) => (
+
+                                  <li>
+                                    <Link to={"/shop"}>
+                                      <span className="text-nowrap">{mc.category}</span>
+                                    </Link>
+                                  </li>
+                                ))
+                              }
+                            </ul>
+                          </li>
+                        ))
+                      )
+                  }
                 </ul>
                 <div className="dlab-social-icon">
                   <ul>
