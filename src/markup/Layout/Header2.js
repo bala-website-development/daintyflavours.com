@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 
 import config from "../../config.json";
 
-
 const Header2 = () => {
   var btn = document.querySelector(".navicon");
   var aaa = document.querySelector(".myNavbar ");
@@ -113,35 +112,30 @@ const Header2 = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) { });
+        .catch(function (error) {});
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
     }
     if (localStorage.getItem("maincategories") === undefined || localStorage.getItem("maincategories") === null) {
       getMainCategories();
-      console.log("fromservice")
-    }
-    else {
-
+      console.log("fromservice");
+    } else {
       if (menuMainCategory === undefined || menuMainCategory === null || menuMainCategory?.length === 0) {
         setMenuMainCategory(JSON.parse(localStorage.getItem("maincategories")));
-        console.log(menuMainCategory, "ls")
+        console.log(menuMainCategory, "ls");
       }
-
     }
 
     if (localStorage.getItem("categories") === undefined || localStorage.getItem("categories") === null) {
       getCategories();
-      console.log("fromservice")
-    }
-    else {
+      console.log("fromservice");
+    } else {
       if (menuCategory === undefined || menuCategory === null || menuCategory?.length === 0) {
         setMenuCategory(JSON.parse(localStorage.getItem("categories")));
-        console.log(menuCategory, "ls")
+        console.log(menuCategory, "ls");
       }
     }
-
 
     // else {
     //   history.push("/");
@@ -149,35 +143,45 @@ const Header2 = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartUpdated]);
 
-
   return (
     <>
       <header className="site-header position-relative  mo-left header header-transparent pizza-header w-100">
         <div className="p-2 px-4 searchbarbg">
           <div className=" d-flex align-items-center justify-content-end">
-            <div className="flex-grow-1 px-3">
+            <div className="flex-grow-1 px-3  d-flex align-items-center">
               {/* <form action="#"> */}
-              <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar px-3" placeholder="Search all our products" />
-              <Link to={{ pathname: "/shop", searchFilter: searchFilter }} className="px-2">
-                <i className="ti-search"></i>
-              </Link>
+
+              <div>
+                <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar px-3" placeholder="Search all our products" />
+              </div>
+              <div className="align-items-center">
+                <Link to={{ pathname: "/shop", searchFilter: searchFilter }} className="mx-1 px-2 btn btn-sm btnhover">
+                  {/* <i className="ti-search"></i> */}
+                  Search
+                </Link>
+              </div>
+
               {/* </form> */}
             </div>
 
-            <div className="text-nowrap">Log in</div>
-            <div className="px-3">Account</div>
+            <div className="text-nowrap px-3">Log in</div>
 
             <div className="">
               <i className="ti-shopping-cart cart"></i>
             </div>
           </div>
         </div>
-        <div className="sticky-header main-bar-wraper navbar-expand-lg">
+        <div className="sticky-header bg-white main-bar-wraper navbar-expand-lg">
           <div className="main-bar position-relative   ">
-            <div className="container ">
-              <div className="logo-header d-flex align-items-center">
+            <div className="px-2">
+              <div className="logo-header d-flex align-items-center ">
                 <div>
-                  <div className="titlename1 font-weight-normal text-nowrap">Dainty Flavour</div>
+                  <div className="titlename1 font-weight-normal text-nowrap">
+                    <Link to="/" className="text-primary">
+                      {" "}
+                      {config.websitetitle}
+                    </Link>
+                  </div>
                 </div>
               </div>
 
@@ -187,60 +191,45 @@ const Header2 = () => {
                 <span className="bg-primary"></span>
               </button>
 
-              <div className="extra-nav d-flex justify-content-between">
-                <div className="extra-cell">
-                  <ul className="extra-info">
-                    <li>
-                      <div className="menu-btn ">
-                        <span className="bg-primary"></span>
-                        <span className="bg-primary"></span>
-                        <span className="bg-primary"></span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="header-nav  bg-primary navbar-collapse aligntopsidebar  collapse navbar myNavbar active" id="navbarNavDropdown">
-                <ul className="nav navbar-nav">
-                  {
-                    (menuMainCategory === null || menuMainCategory === undefined || menuMainCategory.length == 0) ?
-                      (<li>
-                        <Link>
-                          Loading...
-                        </Link>
-                      </li>) : (
-
-                        menuMainCategory?.map((mmc) => (
-                          <li>
-                            <Link >{mmc.maincategory}
-                              <i className="fa fa-chevron-down"></i>
-                            </Link>
-                            <ul className="sub-menu">
-                              {
-                                menuCategory && menuCategory.filter((fil) => fil.maincategory === mmc.maincategory)?.map((mc) => (
-
+              <div className="header-nav d-flex justify-content-end align-items-center bg-white navbar-collapse   collapse navbar myNavbar active" id="navbarNavDropdown">
+                <div>
+                  <ul className="nav navbar-nav">
+                    {menuMainCategory === null || menuMainCategory === undefined || menuMainCategory.length == 0 ? (
+                      <li>
+                        <Link>Loading...</Link>
+                      </li>
+                    ) : (
+                      menuMainCategory?.map((mmc) => (
+                        <li>
+                          <Link>
+                            {mmc.maincategory.toUpperCase()}
+                            <i className="fa fa-chevron-down"></i>
+                          </Link>
+                          <ul className="sub-menu">
+                            {menuCategory &&
+                              menuCategory
+                                .filter((fil) => fil.maincategory === mmc.maincategory)
+                                ?.map((mc) => (
                                   <li>
                                     <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mmc.banner_image, category: mc.category }}>
                                       <span className="text-nowrap">{mc.category}</span>
                                     </Link>
                                   </li>
-                                ))
-                              }
-                            </ul>
-                          </li>
-                        ))
-                      )
-                  }
-                </ul>
-                <div className="dlab-social-icon">
+                                ))}
+                          </ul>
+                        </li>
+                      ))
+                    )}
+                  </ul>
+                </div>
+                <div className="dlab-social-icon widget d-none">
                   <ul>
                     <li>
-                      <Link className="site-button sharp-sm fa fa-facebook" to={""}></Link>
+                      <Link className="bg-primary site-button sharp-sm fa fa-facebook" to={""}></Link>
                     </li>
 
                     <li>
-                      <Link className="site-button sharp-sm fa fa-instagram" to={""}></Link>
+                      <Link className="bg-primary site-button sharp-sm fa fa-instagram" to={""}></Link>
                     </li>
                   </ul>
                 </div>
@@ -251,6 +240,6 @@ const Header2 = () => {
       </header>
     </>
   );
-}
+};
 
 export default Header2;

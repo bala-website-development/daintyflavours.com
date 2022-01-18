@@ -119,6 +119,10 @@
   font-family: daintytitle;
   src: url("/src/css/fonts/Ageritta.ttf");
 }
+@font-face {
+  font-family: daintybody;
+  src: url("/src/css/fonts/NeutraText-Book.otf");
+}
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 5px) !important;
 }
@@ -143,16 +147,22 @@ select.form-control:not([size]):not([multiple]) {
 .titlename {
   font-size: 25px !important;
   color: white !important;
-  font-family: daintytitle;
+  font-family: daintybody;
 }
 .titlename1 {
   font-size: 25px !important;
   color: white !important;
-  font-family: daintytitle;
+  font-family: daintybody;
 }
 .searchbar {
   border-radius: 30px;
-  border: 1px solid rgb(55, 54, 54);
+  border: 1px solid rgb(255, 255, 255);
+}
+.searchbar:active,
+.searchbar:focus,
+.searchbar:hover {
+  border-radius: 30px;
+  border: 1px solid rgb(255, 255, 255) !important;
 }
 .aligntopsidebar {
   align-items: baseline !important;
@@ -409,7 +419,7 @@ html {
 body {
   background-color: #fff;
   /* font-family: "Poppins", sans-serif; */
-  font-family: "Abel", sans-serif;
+  font-family: daintybody;
   font-size: 16px;
   font-weight: 400;
   color: #0a0a0a;
@@ -2649,7 +2659,7 @@ dl dd {
 ---------------------------------------------------------------*/
 
 label {
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 10px;
 }
 .panel-default,
@@ -3386,6 +3396,7 @@ blockquote cite {
   width: auto !important;
 }
 .logo-header {
+  display: none;
   /* display: table; */
   float: left;
   vertical-align: middle;
@@ -4321,12 +4332,12 @@ blockquote cite {
   background-color: rgba(0, 0, 0, 0);
 }
 .header-transparent .header-nav .nav > li > a {
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 .header-transparent .header-nav .nav > li > a,
 .header-transparent .extra-nav .btn-link,
 .header-transparent .navbar-toggler {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0) !important;
 }
 .header-transparent .navbar-toggler span {
   background-color: #fff;
