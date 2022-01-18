@@ -209,7 +209,7 @@ const Header2 = () => {
 
                         menuMainCategory?.map((mmc) => (
                           <li>
-                            <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mmc.banner_image }}>{mmc.maincategory}
+                            <Link >{mmc.maincategory}
                               <i className="fa fa-chevron-down"></i>
                             </Link>
                             <ul className="sub-menu">
@@ -217,7 +217,7 @@ const Header2 = () => {
                                 menuCategory && menuCategory.filter((fil) => fil.maincategory === mmc.maincategory)?.map((mc) => (
 
                                   <li>
-                                    <Link to={"/shop"}>
+                                    <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mmc.banner_image, category: mc.category }}>
                                       <span className="text-nowrap">{mc.category}</span>
                                     </Link>
                                   </li>

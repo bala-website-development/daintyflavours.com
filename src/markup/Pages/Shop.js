@@ -7,6 +7,7 @@ import bnr from "./../../images/banner/bnr1.jpg";
 import uuid from "react-uuid";
 import { Modal } from "react-bootstrap";
 import loadingimg from "./../../images/load.gif";
+import Header2 from "../Layout/Header2";
 const Shop = (props) => {
   const [products, setProducts] = useState([]);
   const [networkError, setNetworkError] = useState("");
@@ -44,7 +45,8 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
-        } else if (props.location.maincategory) {
+        }
+        else if (props.location.maincategory) {
           console.log("mainprod", data);
           let selective = data
             .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
@@ -319,7 +321,7 @@ const Shop = (props) => {
       <Modal size="sm" show={smShow} onHide={() => setSmShow(false)}>
         <Modal.Header closeButton>{message}</Modal.Header>
       </Modal>
-      <Header active={"shop"} />
+      <Header2 active={"shop"} />
 
       <div className="page-content bg-white">
         <div className="dlab-bnr-inr " style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
