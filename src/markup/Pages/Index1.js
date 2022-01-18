@@ -100,7 +100,7 @@ const Index1 = () => {
             </div>
           </div>
 
-          <div className="position-relative">
+          <div className="position-relative d-none">
             <Tab />
           </div>
           <div className="section-full my-1  " style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
