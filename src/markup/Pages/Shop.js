@@ -57,7 +57,16 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
-        } else {
+        }
+        else if (props.location.searchFilter) {
+          let selective = data.filter((fil) => {
+            console.log("searchdata", fil);
+            return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
+          });
+          setProducts(selective);
+          setFilter(selective);
+        }
+        else {
           let active = data
             .filter((filter) => filter.isactive === 1)
             .map((data) => {
@@ -146,7 +155,7 @@ const Shop = (props) => {
     // loopWithSlice(0, postsPerPage);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.category, props.location?.maincategory]);
+  }, [props.location?.category, props.location?.maincategory, props.location?.searchFilter]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);

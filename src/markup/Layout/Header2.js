@@ -52,6 +52,7 @@ const Header2 = () => {
   const [cartUpdated, setCartUpdated] = useState(localStorage.getItem("cartUpdated"));
   const [menuMainCategory, setMenuMainCategory] = useState([]);
   const [menuCategory, setMenuCategory] = useState([]);
+  const [searchFilter, setSearchFilter] = useState("");
   const toggle = () => {
     setToggleShow((toggleShow) => !toggleShow);
   };
@@ -155,9 +156,12 @@ const Header2 = () => {
         <div className="p-2 px-4 searchbarbg">
           <div className=" d-flex align-items-center justify-content-end">
             <div className="flex-grow-1 px-3">
-              <form action="#">
-                <input name="search" value="" type="text" className="searchbar px-3" placeholder="Search all our products" />
-              </form>
+              {/* <form action="#"> */}
+              <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar px-3" placeholder="Search all our products" />
+              <Link to={{ pathname: "/shop", searchFilter: searchFilter }} className="px-2">
+                <i className="ti-search"></i>
+              </Link>
+              {/* </form> */}
             </div>
 
             <div className="text-nowrap">Log in</div>
