@@ -117,11 +117,11 @@
 ---------------------------------------------------------------*/
 @font-face {
   font-family: daintytitle;
-  src: url("/src/css/fonts/Ageritta.ttf");
+  src: url("../css/fonts/Ageritta.ttf");
 }
 @font-face {
   font-family: daintybody;
-  src: url("/src/css/fonts/NeutraText-Book.otf");
+  src: url("../css/fonts/NeutraTextTF-Book.ttf");
 }
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 5px) !important;
