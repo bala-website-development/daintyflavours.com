@@ -32,6 +32,10 @@ const Myprofile = (props) => {
     }, 1000);
   };
 
+  const logout = () => {
+    localStorage.clear();
+    history.push("/");
+  };
   const changePassword = async (e) => {
     e.preventDefault();
     let _data = {};
@@ -147,7 +151,7 @@ const Myprofile = (props) => {
           </div>
         </div>
         <div className="content-block">
-          <div className="section-full content-inner-1 bg-gray-light">
+          <div className="section-full py-2 bg-gray-light">
             <div className="container woo-entry">
               <div className="row">
                 <div className="col-lg-12">
@@ -172,6 +176,11 @@ const Myprofile = (props) => {
                         <li>
                           <Link className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-changepwd">
                             Change Password
+                          </Link>
+                        </li>
+                        <li>
+                          <Link className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-logout">
+                            Log out
                           </Link>
                         </li>
                       </ul>
@@ -290,6 +299,13 @@ const Myprofile = (props) => {
                                 </div>
                               </div>
                             </div>
+                          </div>
+
+                          <div className="tab-pane " id="pills-logout">
+                            <Link onClick={logout} className="btn btn-sm btnhover">
+                              {" "}
+                              Log Out
+                            </Link>
                           </div>
                         </div>
                       ))}
