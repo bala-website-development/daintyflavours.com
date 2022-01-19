@@ -20,6 +20,7 @@ const Slider = () => {
                       <Link to={"/shop"} className="btn btnhover border z-index">
                         Shop now
                       </Link>
+                      <p className="font-weight-normal text-light">{slider.prefix}</p>
                     </div>
                   </div>
                   <div className="d-flex justify-content-center align-items-end h-100 w-100 p-4">

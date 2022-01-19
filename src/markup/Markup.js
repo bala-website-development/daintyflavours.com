@@ -9,6 +9,7 @@ import TermsandCondition from "./Pages/TermsandCondition";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import OurJourney from "./Pages/OurJourney";
 import Ourservices from "./Pages/Ourservices";
+import Construction from "./Pages/Construction";
 import Faq from "./Pages/Faq";
 import Booking from "./Pages/Booking";
 import Error from "./Pages/Error";
@@ -40,9 +41,9 @@ class Markup extends Component {
     return (
       <BrowserRouter basename="/">
         <Switch>
-          <Route path="/" exact component={Index1} />
-          {/* <Route path="/index-2" exact component={Index2} /> */}
-          {/* <Route path="/admin" exact component={Admin} /> */}
+          {/* <Route path="/" exact component={Index1} /> */}
+          <Route path="/" exact component={Construction} />
+          <Route path="/home" exact component={Index1} />
           <Route path="/myprofile" exact component={Myprofile} />
           <Route path="/orderhistory" exact component={Orderhistory} />
           <Route path="/about" exact component={About} />
@@ -70,6 +71,7 @@ class Markup extends Component {
           <Route path="/gallery" exact component={Gallery} />
 
           <Route path="/shop-wishlist" exact component={Shopwishlist} />
+          <Route path="/construction" exact component={Construction} />
 
           <Route path="*" component={Error} />
         </Switch>
