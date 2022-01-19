@@ -34,7 +34,7 @@ import Myprofile from "./Pages/Myprofile";
 import Orderhistory from "./Pages/Orderhistory";
 
 import Contact from "./Pages/Contact";
-import Contact2 from "./Pages/Contact2";
+import config from "../../src/config.json";
 
 class Markup extends Component {
   render() {
@@ -42,7 +42,7 @@ class Markup extends Component {
       <BrowserRouter basename="/">
         <Switch>
           {/* <Route path="/" exact component={Index1} /> */}
-          <Route path="/" exact component={Construction} />
+          {config.siteconstruction ? <Route path="/" exact component={Construction} /> : <Route path="/" exact component={Index1} />}
           <Route path="/home" exact component={Index1} />
           <Route path="/myprofile" exact component={Myprofile} />
           <Route path="/orderhistory" exact component={Orderhistory} />
