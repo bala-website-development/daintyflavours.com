@@ -45,8 +45,7 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
-        }
-        else if (props.location.maincategory) {
+        } else if (props.location.maincategory) {
           console.log("mainprod", data);
           let selective = data
             .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
@@ -57,16 +56,14 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
-        }
-        else if (props.location.searchFilter) {
+        } else if (props.location.searchFilter) {
           let selective = data.filter((fil) => {
             console.log("searchdata", fil);
             return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
           });
           setProducts(selective);
           setFilter(selective);
-        }
-        else {
+        } else {
           let active = data
             .filter((filter) => filter.isactive === 1)
             .map((data) => {
@@ -336,7 +333,7 @@ const Shop = (props) => {
         <div className="dlab-bnr-inr " style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">Shop</h1>
+              <h1 className="text-white">{props.location.category != undefined ? props.location.category : "Shop"}</h1>
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">

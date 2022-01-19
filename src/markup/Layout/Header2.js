@@ -174,7 +174,7 @@ const Header2 = () => {
         <div className="sticky-header bg-white main-bar-wraper navbar-expand-lg">
           <div className="main-bar position-relative   ">
             <div className="px-2">
-              <div className="logo-header d-flex align-items-center ">
+              <div className="logo-header d-flex justify-content-end align-items-center">
                 <div>
                   <div className="titlename1 font-weight-normal text-nowrap">
                     <Link to="/" className="text-primary">
@@ -194,6 +194,11 @@ const Header2 = () => {
               <div className="header-nav  align-items-center bg-white navbar-collapse   collapse navbar myNavbar active" id="navbarNavDropdown">
                 <div>
                   <ul className="nav navbar-nav">
+                    <li>
+                      <Link to={"/"}>
+                        <i className="text-primary fst-normal fa fa-home fa-3x"></i>
+                      </Link>
+                    </li>
                     {menuMainCategory === null || menuMainCategory === undefined || menuMainCategory.length == 0 ? (
                       <li>
                         <Link>Loading...</Link>
@@ -211,7 +216,7 @@ const Header2 = () => {
                                 .filter((fil) => fil.maincategory === mmc.maincategory)
                                 ?.map((mc) => (
                                   <li>
-                                    <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mmc.banner_image, category: mc.category }}>
+                                    <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mc.banner_image, category: mc.category }}>
                                       <span className="text-nowrap">{mc.category}</span>
                                     </Link>
                                   </li>
