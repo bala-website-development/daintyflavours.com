@@ -18,7 +18,7 @@ const Featured_Product = (props) => {
       .then((data1) => {
         if (data1.status === 200) {
           let active1 = data1.data
-            .filter((filter1, index) => filter1.isactive === "1" && filter1.isfeatured === 1 && index < config.featuredproduct)
+            .filter((filter1, index) => filter1.isactive === 1 && filter1.isfeatured === 1 && index < config.featuredproduct)
             .map((data) => {
               return data;
             });
@@ -39,61 +39,103 @@ const Featured_Product = (props) => {
   }, []);
 
   return (
-    <div className="m-r20 mt-5">
-      <div className="section-head text-left">
-        <h2>Our Featured Prodcuts</h2>
+    <div className="px-1 mt-1">
+      <div className="text-left">
+        <h3>Our Featured Prodcuts</h3>
         <div className="dlab-separator style1 bg-primary"></div>
       </div>
-      <div className="">
-        <div className="row ">
-          {products.length > 0 &&
-            products.map((product) => (
-              <div className="col-lg-3 col-md-6 col-sm-6 ">
-                <div className="port-box1 homeimagerecent text-white my-2">
-                  <div className="dlab-media">
-                    <img className="homeimagerecent" src={product.p_image} alt="sukhaa" />
-                  </div>
-                  <div className="dlab-info">
-                    <h4 className="title ">
-                      <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                        <div>
-                          {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
-                            <>
-                              <div className="price text-light">
-                                <span style={{ "text-decoration": "line-through" }}>
-                                  {" "}
-                                  <span className="text-light">
-                                    <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
-                                  </span>
-                                </span>
-                                {"   |  "}
+
+      <div className="row">
+        {products.length > 0 &&
+          products.map((product) => (
+            <div className="col-lg-3">
+              <div className="item-box shop-item style text-white my-2">
+                <div className="">
+                  <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} />
+                </div>
+                <div className="dlab-info d-none">
+                  <h4 className="title ">
+                    <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
+                      <div>
+                        {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
+                          <>
+                            <div className="price text-light">
+                              <span style={{ "text-decoration": "line-through" }}>
+                                {" "}
                                 <span className="text-light">
-                                  {"   "} <i class="fa fa-inr"></i> {product.p_price}
-                                </span>{" "}
-                                <span className="px-1 sale bg-primary text-light">Sale</span>
-                              </div>
-                            </>
-                          ) : (
-                            <div className="price text-light ">
-                              <span className="text-light ">
-                                <i class="fa fa-inr"> {"   "} </i>
-                                {"   "}
-                                {product.p_price}
+                                  <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                                </span>
                               </span>
+                              {"   |  "}
+                              <span className="text-light">
+                                {"   "} <i class="fa fa-inr"></i> {product.p_price}
+                              </span>{" "}
+                              <span className="px-1 sale bg-primary text-light">Sale</span>
                             </div>
-                          )}
+                          </>
+                        ) : (
+                          <div className="price text-light ">
+                            <span className="text-light ">
+                              <i class="fa fa-inr"> {"   "} </i>
+                              {"   "}
+                              {product.p_price}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div>{product.p_name}</div>
+                    </Link>
+                  </h4>
+                </div>
+                <div className="item-info text-center">
+                  <span className="">
+                    {" "}
+                    <div className="cart-btn">
+                      {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
+                        <>
+                          <div className="text-dark">
+                            <span style={{ "text-decoration": "line-through" }}>
+                              {" "}
+                              <span className="text-dark">
+                                <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                              </span>
+                            </span>
+                            {"   |  "}
+                            <span className="text-dark">
+                              {"   "} <i class="fa fa-inr "></i> {product.p_price}
+                            </span>{" "}
+                            <span className="px-1 sale bg-primary text-light d-none">Sale</span>
+                          </div>
+                        </>
+                      ) : (
+                        <div className=" text-dark ">
+                          <span className="text-dark ">
+                            <i class="fa fa-inr"> {"   "} </i>
+                            {"   "}
+                            {product.p_price}
+                          </span>
                         </div>
-                        <div>{product.p_name}</div>
-                      </Link>
-                    </h4>
+                      )}
+                    </div>
+                  </span>
+
+                  <div>
+                    {" "}
+                    <Link className="text-dark" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
+                      {" "}
+                      <div>
+                        <b className="text-primary">{product.p_name}</b>
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </div>
-            ))}
-        </div>
+            </div>
+          ))}
       </div>
+
       <div className="text-center mt-2">
-        <Link to={"/shop"} className="btn btn-md btnhover shadow m-t30">
+        <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
           <i className="fa fa-angle-right m-r10"></i>Shop all
         </Link>
       </div>

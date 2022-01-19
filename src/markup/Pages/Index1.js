@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "./../Layout/Header";
+import Header from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import { Link } from "react-router-dom";
 import CountUp from "react-countup";
@@ -25,8 +25,12 @@ import work_pic3 from "./../../images/our-work/pic3.jpg";
 import pic3 from "./../../images/about/pic3.jpg";
 import A_Newsletter from "./A_Newsletter";
 import Recent_Product from "./../Element/Recent_Products";
+import Testimonial from "./../Element/Testimonial";
+import Instagram from "./../Element/InstagramFeed";
+
 import Featured_Products from "./../Element/Featured_Products";
 import SideBar from "./../Element/SideBar";
+import Tab from "./../Pages/Tab";
 //Images
 // var img1 = require("./../../images/background/bg5.jpg");
 // var serblog1 = require("./../../images/our-services/pic1.jpg");
@@ -37,142 +41,104 @@ import SideBar from "./../Element/SideBar";
 // var img3 = require("./../../images/background/bg5.jpg");
 // var img4 = require("./../../images/background/bg4.jpg");
 
-const blogNews = [
-  {
-    image: require("./../../images/blog/grid/pic1.jpg"),
-    title: "Understand The Background Of Bakery Now.",
-  },
-  {
-    image: require("./../../images/blog/grid/pic2.jpg"),
-    title: "Seven Reliable Sources To Learn About Bakery.",
-  },
-  {
-    image: require("./../../images/blog/grid/pic3.jpg"),
-    title: "Ten Places That You Can Find Bakery.",
-  },
-];
-
 const Index1 = () => {
   const [latestCat, setLatestCat] = useState([]);
   useEffect(() => {
     const fetchCategories = async () => {
       await fetch(config.service_url + "getHomePageCategory")
         .then((response) => response.json())
-        .then((data) => setLatestCat(data));
+        .then((data) => {
+          if (data.length > 0) {
+            let active = data
+              .filter((filter, index) => filter.isactive === 1 && filter.type === "home")
+              .map((data) => {
+                return data;
+              });
+
+            setLatestCat(active);
+          }
+        })
+        .catch((err) => {
+          setLatestCat([]);
+        });
+
+      //add filer type=home
       console.log("latestCat", latestCat);
     };
     fetchCategories();
   }, []);
   return (
     <div>
-      <Header active={"home"} />
+      <Header active={"home"} home={true} />
+
+      <Slider />
+      <br />
 
       <div className="page-content bg-white">
         <div className="content-block">
-          <Slider />
-          <div>
-            <div className="section-head mb-0 text-center">
-              <div className="my-4">
-                <h3 className="text-primary">Product Categories</h3>
-              </div>
-            </div>
-            <p className="main-text"> </p>
-            <div className="section-full mb-5">
-              <div className="container">
-                <div className="row service-area1">
-                  {latestCat &&
-                    latestCat.map((cat) => (
-                      <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6">
-                        <div className="icon-bx-wraper text-center service-box1" style={{ backgroundImage: "url(" + cat.imageurl + ")" }}>
-                          <div className="icon-content">
-                            <h2 className="dlab-tilte text-white">{cat.title}</h2>
-                            <p>{cat.subtitle}</p>
-                            <div className="dlab-separator style1 bg-primary"></div>
-                            <Link to={{ pathname: "/shop", category: cat.category }} className="btn btnhover">
-                              More details <i className="fa fa-angle-double-right m-l5"></i>
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+          <div className="row d-none" style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
+            <div className="col-lg-12">
+              <div className="section-head mb-0 text-center">
+                <div className="my-4">
+                  <h4 className="text-primary">{config.aboutustitle} </h4>
+                  <a href={"/about"} className="btn btn-sm p-1 btnhover">
+                    <i className="fa fa-angle-right m-r10"></i>More..
+                  </a>{" "}
                 </div>
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="section-head mb-0 text-center">
-                      <div className="my-4">
-                        <img className="rounded" width="200px" src={config.logo} alt="" />
-                      </div>
-                      <h3 className="text-primary">{config.aboutustitle}</h3>
-                      <p className="main-text">{config.aboutus1} </p>
-                      <p>{config.aboutus2}</p>
-                      <div className="text-center mt-2">
-                        <Link to={"/about"} className="btn btn-md btnhover shadow m-t30">
-                          <i className="fa fa-angle-right m-r10"></i>More..
-                        </Link>
-                      </div>
-                      <div className="d-none">
-                        <A_Newsletter />
-                      </div>
-                    </div>
+                <div className="d-none">
+                  <p className="main-text">{config.aboutus1} </p>
+                  <p>{config.aboutus2}</p>
+                  <div className="text-center mb-3 ">
+                    <a href={"/about"} className=" m-t30">
+                      <i className="fa fa-angle-right m-r10"></i>More..
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="section-full content-inner service-area2 bg-img-fix bg-line-top bg-line-bottom" style={{ backgroundImage: "url(" + img4 + ")", backgroundSize: "cover" }}>
+
+          <div className="position-relative d-none">
+            <Tab />
+          </div>
+          <div className="section-full my-1  " style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
             <div className="container ">
-              <div className="row ">
-                <div className="col-lg-12">
-                  <div className="section-head text-center">
-                    <h2 className="text-white">Our Journey</h2>
-                    <div className="dlab-separator style1 bg-primary"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-lg-4 m-b30 d-none">
-                  <img src={pic1} className="img-cover1 radius-sm" alt="tsalastudio" />
-                </div>
-                <div className="col-lg-12">
-                  <div className="row p-l30">
-                    <div className="col-lg-12 col-sm-12 m-b30">
-                      <div className="icon-bx-wraper text-white service-box2">
-                        <div className="icon-bx icon-bx-lg">
-                          <Link to={""} className="icon-cell d-none">
-                            <img src={icon2} alt="" />
-                          </Link>
-                        </div>
-                        <div className="">
-                          <p>{config.about_service}</p>
-                          <div className="text-center mt-2">
-                            <Link to={"/our-journey"} className="btn btn-md btnhover shadow m-t30">
-                              <i className="fa fa-angle-right m-r10"></i>More..
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="section-full my-5 ">
-            <div className="container">
               <div className="row faq-area1">
-                <div className="col-lg-12 m-b20">
-                  <Recent_Product></Recent_Product>
+                <div className="recentproduct px-1">
                   <Featured_Products></Featured_Products>
+                  <Recent_Product></Recent_Product>
                 </div>
-                <div className="col-lg-6 m-b30 d-none">
+                <div className="col-lg-12 m-b30 d-none">
                   <Accord />
                 </div>
               </div>
             </div>
           </div>
 
+          <div className="section-full my-4 service-area2 bg-img-fix bg-line-top bg-line-bottom" style={{ backgroundImage: "url(" + config.servicebgimage + ")", backgroundSize: "cover" }}>
+            <div className="container ">
+              <div className="row">
+                <div className="col-lg-12 col-sm-12 m-b30">
+                  <div className="text-center">
+                    <h2 className="text-white mt-4">Our Journey</h2>
+
+                    <span className="text-white">{config.about_service}</span>
+                    <div className="text-center mt-2">
+                      <Link to={"/our-journey"} className="btn btn-sm btnhover shadow m-t30">
+                        <i className="fa fa-angle-right m-r10"></i>More..
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="testimonial" className="container">
+            <Testimonial />
+          </div>
           <div className="section-full bg-white">
-            <div className="container d-none">
+            <div className="container">
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
@@ -184,7 +150,7 @@ const Index1 = () => {
                   </div>
                 </div>
               </div>
-              <div className="row">
+              <div className="row d-none">
                 <div className="col-lg-3 col-md-6 col-sm-6 col-6 m-b30">
                   <div className="counter-style-1 text-center">
                     <div className="counter-num text-primary">
@@ -232,14 +198,14 @@ const Index1 = () => {
             <div className="container ">
               <div className="row m-lr0 about-area1">
                 <div className="col-lg-6 p-lr0">
-                  <img className="img-cover" src={pic3} alt="" />
+                  <img className="img-cover" src={config.aboutus_imageurl2} alt="" />
                 </div>
-                <div className="col-lg-6 p-lr0 d-flex about-bx align-items-center text-center text-dark">
+                <div className="col-lg-6 p-lr0  about-bx align-items-center text-center text-dark">
                   <div className="about-bx">
                     <div className="section-head text-center text-dark">
                       <h4 className="text-dark">For More Offer</h4>
                       Contact us
-                      <h1> SUKHAA </h1>
+                      <h1 className="titlename font-weight-normal title"> {config.websitetitle} </h1>
                     </div>
                     <p className="text-dark">{config.contact_email}</p>
                     <p className="text-dark">{config.contact_phone1}</p>
@@ -252,12 +218,13 @@ const Index1 = () => {
             </div>
             <div className="container my-4">
               {/* <OurPartners /> */}
+              <div className="section-head text-center">
+                <h3>Latest Instagram post</h3>
+              </div>
+              <Instagram />
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
-                    <div className="icon-bx icon-bx-lg">
-                      <img src={config.logo} alt="" />
-                    </div>
                     <h3>Thanks for reaching us.</h3>
                   </div>
                 </div>
@@ -266,7 +233,12 @@ const Index1 = () => {
           </div>
         </div>
       </div>
+      <div className="text-center ">
+        <h3 className=" font-weight-light">Join the BakeryBits club for offers, new products, recepies, tips and much more!</h3>
+      </div>
+      <A_Newsletter />
       <ScrollToTop />
+
       <Footer />
     </div>
   );

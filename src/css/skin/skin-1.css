@@ -3,20 +3,44 @@
 =====================*/
 
 :root {
-  --color-primary: #f61645;
-  --color-secondry: #f2e3f8;
-  --color-button: #f2e3f8;
-  --color-hover: #f61645;
+  --color-primary: #b43b8d;
+  --color-secondry: #ecb7d4;
+  --color-button: #b43b8d;
+  --color-hover: #b43b8d;
   --color-primary-opacity: rgba(242, 227, 248, 0.455);
 }
 .main-bar,
 .mo-left .header-nav.show {
   /* background-color: #f4bb41 !important; */
-  background-color: #f2e3f8 !important;
+  /* background-color: #f2e3f8 !important; */
+  background-color: transparent;
+}
+.header-nav .nav > li > a {
+  color: #000000;
+  font-weight: normal;
+}
+.titlename {
+  color: var(--color-primary) !important;
+}
+.searchbarbg,
+.about-bx {
+  background-color: var(--color-secondry) !important;
+}
+.footer-top {
+  background-color: #fae3ee;
+}
+.title,
+.sub-title {
+  color: var(--color-primary) !important;
+}
+.prefix {
+  color: #e3b32f;
+}
+.bg-primarytab {
+  background-color: var(--color-button);
 }
 /* Hex */
 .bg-primary,
-.about-bx,
 .theme-bg,
 .meet-ask-row:after,
 .dlab-separator.style-skew[class*="style-"]:after,
@@ -83,8 +107,8 @@
 .fc-button.fc-state-active,
 .fc-button.fc-state-default {
   background-color: var(--color-button);
-  border-radius: 1px !important;
-  color: #000000;
+
+  color: white;
 }
 
 /*Hex color :hover */
@@ -197,6 +221,7 @@ h6 a:hover,
 	Premery border color 
 =====================*/
 .navbar-toggle,
+.border-primary,
 .sub-menu,
 .tab-content,
 .testimonial-4 .testimonial-pic,

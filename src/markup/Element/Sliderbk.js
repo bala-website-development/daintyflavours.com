@@ -9,28 +9,30 @@ const Slider = () => {
   const slider_content = config.slider;
   return (
     <div className="main-slider">
-      <>
+      <Carousel indicators={false}>
         {slider_content &&
           slider_content.map((slider) => (
-            <>
-              <div className="slideroverlay ">
-                <div className="slide img-fluid" style={{ backgroundImage: "url(" + slider.image_url + ")" }}>
+            <Carousel.Item>
+              <div className="slide img-fluid" style={{ backgroundImage: "url(" + slider.image_url + ")" }}>
+                {/* <div className="slide" style={{ backgroundColor: "#FFECEF" }}> */}
+                <div className="slideroverlay">
+                  {/* <img className="w-50 float-right bottom-0" src={"https://firebasestorage.googleapis.com/v0/b/tuc-shopping-dev.appspot.com/o/daintyflavour%2Fpngegg.png?alt=media&token=392f4d59-f387-445b-aea0-fb297ba68023"} alt="Dainty Flavor" /> */}
                   <div className="content text-left px-5">
                     <div className="">
+                      <span className="prefix">{slider.prefix}</span>
+                      <h3 className="title">{slider.title}</h3>
+                      <h4 className="sub-title">{slider.description}</h4>
+
                       <Link to={"/shop"} className="btn btnhover border z-index">
                         Shop now
                       </Link>
-                      <p className="font-weight-normal text-light">{slider.prefix}</p>
                     </div>
-                  </div>
-                  <div className="d-flex justify-content-center align-items-end h-100 w-100 p-4">
-                    <img src={config.logo} className="logoimage" height="50" />
                   </div>
                 </div>
               </div>
-            </>
+            </Carousel.Item>
           ))}
-      </>
+      </Carousel>
     </div>
   );
 };

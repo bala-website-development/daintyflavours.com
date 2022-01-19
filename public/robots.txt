@@ -3,4 +3,5 @@ Allow: /
 Allow: /about
 Allow: /contact
 Allow: /shop
-Sitemap: https://www.sukhaa.in/sitemap.txt
+Allow: /gallery
+Sitemap: https://www.daintyflavors.com/sitemap.txt

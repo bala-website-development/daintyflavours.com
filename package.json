@@ -1,5 +1,5 @@
 {
-  "name": "sukhaa-gui",
+  "name": "daintyflavors-gui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,10 +19,13 @@
     "react-dom": "^16.14.0",
     "react-hook-form": "^7.14.0",
     "react-html5-camera-photo": "^1.5.5",
+    "react-ig-feed": "^1.0.4",
     "react-image-lightbox": "^5.1.1",
+    "react-images": "^1.2.0-beta.7",
     "react-masonry-component": "^6.2.1",
     "react-masonry-css": "^1.0.14",
     "react-multi-carousel": "^2.6.1",
+    "react-photo-gallery": "^8.0.0",
     "react-rev-slider": "^1.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
@@ -34,7 +37,7 @@
     "simple-react-lightbox": "^3.5.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

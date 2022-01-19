@@ -10,13 +10,13 @@ const Success = () => {
   return (
     <div>
       <div>
-        <Header />
+        {/* <Header /> */}
 
         <div className="page-content bg-white">
-          <div className="dlab-bnr-inr  bg-pt" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+          <div className="dlab-bnr-inr  bg-pt" style={{ backgroundImage: "url(" + config.homebannerimg + ")" }}>
             <div className="container">
               <div className="dlab-bnr-inr-entry">
-                <h1 className="text-white">Success</h1>
+                <h1 className="text-white">Site Construction in Progress</h1>
                 <div className="breadcrumb-row">
                   <ul className="list-inline">
                     <li>
@@ -24,7 +24,7 @@ const Success = () => {
                         <i className="fa fa-home"></i>
                       </Link>
                     </li>
-                    <li>Success</li>
+                    <li>Site Construction in Progress</li>
                   </ul>
                 </div>
               </div>
@@ -39,18 +39,12 @@ const Success = () => {
                     <div className="page-notfound text-center">
                       <form method="post">
                         <strong>
-                          <i className="fa fa-check text-primary"></i>
+                          <i className="fa fa-cog fa-spin fa-fw text-primary"></i>
                         </strong>
-                        <h5 className="sub-title">Order successfully placed.</h5>
-                        <div className="mb-2 d-none">
-                          <a href={config.razorpaylink} target="_blank" className="btn  btnhover">
-                            Pay Here
-                          </a>
-                          <div className="p-3">Or Scan the QR</div>
-                          <img src={config.qrurl} className="border rounded w-50" />
-                        </div>
-                        <Link to={"./orderhistory"} className="btn btnhover">
-                          Go To Order History
+                        <h5 className="sub-title">Site Construction in Progress. Please wait..... </h5>
+                        <h5 className="sub-title">We will be Live Soon.</h5>
+                        <Link to={"./home"} className="btn btnhover">
+                          Home
                         </Link>
                       </form>
                     </div>
