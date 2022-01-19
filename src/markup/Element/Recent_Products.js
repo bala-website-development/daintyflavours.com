@@ -43,7 +43,7 @@ const Recent_Products = () => {
     <div>
       <div className="px-1">
         <div className=" text-left">
-          <h3>Our New Arrivals</h3>
+          <h4>Our New Arrivals</h4>
 
           <div className="dlab-separator style1 bg-primary"></div>
         </div>

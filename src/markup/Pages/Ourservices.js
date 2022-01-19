@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import OurPartners from "./../Element/OurPartners";
 import PriceTable from "./../Element/PriceTable";
 
-import Header from "./../Layout/Header";
+import Header from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 
 import img1 from "./../../images/banner/bnr4.jpg";

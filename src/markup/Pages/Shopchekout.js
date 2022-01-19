@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header";
+import Header from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import loadingimg from "./../../images/load.gif";
 import { Form } from "react-bootstrap";

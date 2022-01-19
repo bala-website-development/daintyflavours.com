@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header";
+import Header from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
 //import ReactStars from "react-stars";
@@ -160,6 +160,11 @@ const Myprofile = (props) => {
                           </Link>
                         </li>
                         <li>
+                          <Link className="nav-link " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-orderhistory">
+                            Order History
+                          </Link>
+                        </li>
+                        <li>
                           <Link className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-address">
                             Manage Address
                           </Link>
@@ -172,6 +177,13 @@ const Myprofile = (props) => {
                       </ul>
                       {profile?.map((profile) => (
                         <div className="tab-content">
+                          <div className="tab-pane " id="pills-orderhistory">
+                            <p>Track your order status here</p>
+                            <Link to="/orderhistory" className="btn btn-sm btnhover">
+                              Go to Order History
+                            </Link>
+                          </div>
+
                           <div className="tab-pane " id="pills-address">
                             <div id="review_form_wrapper">
                               <form className="comment-form" onSubmit={handleSubmit(onSubmit)}>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "./../Layout/Header";
+import Header from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import { TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
@@ -94,7 +94,7 @@ const Shoplogin = ({ history }) => {
             </div>
           </div>
         </div>
-        <div className="section-full content-inner shop-account">
+        <div className="section-full  py-3 shop-account">
           <div className="container">
             <div className="row">
               <div className="col-lg-12 text-center">
@@ -106,7 +106,7 @@ const Shoplogin = ({ history }) => {
                 <div className="p-a30 border-1 h100">
                   <div className="tab-content">
                     <h3 className="m-b10">New Customer</h3>
-                    <p className="m-b15">By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+                    <p className="m-b15">By creating an account with our store, you will be able to move through the checkout process faster, view and track your orders in your account and more.</p>
                     <Link to={"/shop-register"} className="btn btnhover">
                       Create An Account
                     </Link>
