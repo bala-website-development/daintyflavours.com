@@ -73,9 +73,7 @@ const Index1 = () => {
 
       <Slider />
       <br />
-      <br />
-      <br />
-      <br />
+
       <div className="page-content bg-white">
         <div className="content-block">
           <div className="row d-none" style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
@@ -83,7 +81,7 @@ const Index1 = () => {
               <div className="section-head mb-0 text-center">
                 <div className="my-4">
                   <h4 className="text-primary">{config.aboutustitle} </h4>
-                  <a href={"/about"} className="">
+                  <a href={"/about"} className="btn btn-sm p-1 btnhover">
                     <i className="fa fa-angle-right m-r10"></i>More..
                   </a>{" "}
                 </div>
@@ -126,7 +124,7 @@ const Index1 = () => {
 
                     <span className="text-white">{config.about_service}</span>
                     <div className="text-center mt-2">
-                      <Link to={"/our-journey"} className="btn btn-md btnhover shadow m-t30">
+                      <Link to={"/our-journey"} className="btn btn-sm btnhover shadow m-t30">
                         <i className="fa fa-angle-right m-r10"></i>More..
                       </Link>
                     </div>

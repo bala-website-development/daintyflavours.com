@@ -185,13 +185,13 @@ const Header2 = () => {
                 </div>
               </div>
 
-              <button className="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <button className="navbar-toggler collapsed navicon " type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="bg-primary"></span>
                 <span className="bg-primary"></span>
                 <span className="bg-primary"></span>
               </button>
 
-              <div className="header-nav d-flex justify-content-end align-items-center bg-white navbar-collapse   collapse navbar myNavbar active" id="navbarNavDropdown">
+              <div className="header-nav  align-items-center bg-white navbar-collapse   collapse navbar myNavbar active" id="navbarNavDropdown">
                 <div>
                   <ul className="nav navbar-nav">
                     {menuMainCategory === null || menuMainCategory === undefined || menuMainCategory.length == 0 ? (

@@ -17,7 +17,7 @@ class Footer extends Component {
                     <ul>
                       <li>
                         <i className="fa fa-map-marker"></i>
-                        <p>{config.contact_address}</p>
+                        <span>{config.contact_address}</span>
                       </li>
                       <li>
                         <i className="fa fa-phone"></i>

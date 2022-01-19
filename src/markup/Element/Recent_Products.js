@@ -43,7 +43,7 @@ const Recent_Products = () => {
     <div>
       <div className="px-1">
         <div className=" text-left">
-          <h3>Our Latest Prodcuts</h3>
+          <h3>Our New Arrivals</h3>
 
           <div className="dlab-separator style1 bg-primary"></div>
         </div>
@@ -51,8 +51,8 @@ const Recent_Products = () => {
         <div className="row ">
           {products.length > 0 &&
             products.map((product) => (
-              <div className="col-lg-2 col-md-6 col-sm-6 ">
-                <div className="item-box shop-item style2 text-white my-2">
+              <div className="col-lg-3 col-md-6 col-sm-6 ">
+                <div className="item-box shop-item  text-white my-2">
                   <div className="dlab-media">
                     <img className="img-fluid homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} />
                   </div>

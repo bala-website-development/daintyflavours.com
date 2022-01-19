@@ -9,7 +9,7 @@
   "service_url_prod": "https://asia-south1-tucfbclouddb.cloudfunctions.net/daintyflavours_api/api/",
   "admin_url_local": "http://localhost:3001/login/",
   "service_url_local": "http://localhost:8000/api/",
-  "logo": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Flogo%2Flogo.jpg?alt=media&token=1157409c-f51a-4d69-8a89-1ea4cbbc1c3c",
+  "logo": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Flogo%2Flogo.png?alt=media&token=d3e12a4b-916e-417c-aaf4-c8790314cc85",
   "slider": [
     {
       "title": "",

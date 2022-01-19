@@ -186,8 +186,9 @@ select.form-control:not([size]):not([multiple]) {
   height: 25px;
 }
 .homeimagerecent {
-  height: 200px !important;
-  width: 100% !important;
+  height: 300px !important;
+  width: 300px !important;
+  /* width: 100% !important; */
   /* width: 300px !important; */
 }
 .w-10 {
@@ -303,6 +304,9 @@ select.form-control:not([size]):not([multiple]) {
   .shopproducts .thumbnailimage {
     height: 200px;
   }
+  .logoimage {
+    margin-left: 10rem !important;
+  }
 }
 @media only screen and (max-width: 1020px) and (min-width: 520px) {
   .shopproducts .col-lg-3 {
@@ -319,8 +323,16 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 @media only screen and (max-width: 479px) {
-  .recentproduct .col-lg-2 {
+  .recentproduct .col-lg-2,
+  .col-lg-3,
+  .col {
     width: 50% !important;
+    padding: 0px !important;
+  }
+
+  .homeimagerecent {
+    width: 200px !important;
+    height: 200px !important;
   }
 }
 @media only screen and (max-width: 479px) {
@@ -3392,8 +3404,9 @@ blockquote cite {
 ---------------------------------------------------------------*/
 /*=== >logo for header ===*/
 .logoimage {
-  height: 70px !important;
+  height: 150px !important;
   width: auto !important;
+  margin-left: 30rem;
 }
 .logo-header {
   display: none;

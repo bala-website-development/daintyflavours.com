@@ -48,10 +48,10 @@ const Featured_Product = (props) => {
       <div className="row">
         {products.length > 0 &&
           products.map((product) => (
-            <div className="col-lg-2">
-              <div className="item-box shop-item style2  text-white my-2">
+            <div className="col-lg-3">
+              <div className="item-box shop-item style text-white my-2">
                 <div className="">
-                  <img className="img-fluid homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} />
+                  <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} />
                 </div>
                 <div className="dlab-info d-none">
                   <h4 className="title ">
@@ -93,7 +93,7 @@ const Featured_Product = (props) => {
                     <div className="cart-btn">
                       {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
                         <>
-                          <div className=" text-dark">
+                          <div className="text-dark">
                             <span style={{ "text-decoration": "line-through" }}>
                               {" "}
                               <span className="text-dark">
@@ -104,7 +104,7 @@ const Featured_Product = (props) => {
                             <span className="text-dark">
                               {"   "} <i class="fa fa-inr "></i> {product.p_price}
                             </span>{" "}
-                            <span className="px-1 sale bg-primary text-light">Sale</span>
+                            <span className="px-1 sale bg-primary text-light d-none">Sale</span>
                           </div>
                         </>
                       ) : (
@@ -124,7 +124,7 @@ const Featured_Product = (props) => {
                     <Link className="text-dark" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                       {" "}
                       <div>
-                        <b>{product.p_name}</b>
+                        <b className="text-primary">{product.p_name}</b>
                       </div>
                     </Link>
                   </div>
