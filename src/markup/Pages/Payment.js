@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header";
+import Header from "./../Layout/Header2";
 import Payment from "./../Element/Payment";
 import Footer from "./../Layout/Footer";
 import img1 from "./../../images/banner/bnr1.jpg";

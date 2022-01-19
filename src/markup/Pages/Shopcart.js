@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header";
+import Header from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
 import img from "./../../images/banner/bnr3.jpg";
@@ -71,7 +71,7 @@ const Shopcart = () => {
             // return;
           }
           setCartDetails(data);
-          console.log("netdata", data)
+          console.log("netdata", data);
           // console.log("query_cartDetails", data1);
           setSubTotal(
             data
@@ -150,7 +150,9 @@ const Shopcart = () => {
                           <b>Tax</b>
                         </div>
                         <div className="w-25">
-                          <b>Net Amount <i>*inclusive of tax</i></b>
+                          <b>
+                            Net Amount <i>*inclusive of tax</i>
+                          </b>
                         </div>
                         <div className="w-10"></div>
                       </div>
@@ -189,7 +191,7 @@ const Shopcart = () => {
                               </div>
                               <div className="w-25 text-nowrap">
                                 {" "}
-                                <i class="fa fa-inr"></i> {(parseInt(cart.p_price * cart.p_quantity) + ((cart.p_price * cart.p_quantity) * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)))}
+                                <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)}
                               </div>
                               <div className="w-10">
                                 <Link

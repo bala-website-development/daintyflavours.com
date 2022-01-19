@@ -164,10 +164,26 @@ const Header2 = () => {
               {/* </form> */}
             </div>
 
-            <div className="text-nowrap px-3">Log in</div>
-
-            <div className="">
-              <i className="ti-shopping-cart cart"></i>
+            <div className="px-3">
+              {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? (
+                <Link to={"/shop-login"}>
+                  <i className="ti-user "></i>
+                </Link>
+              ) : (
+                <>
+                  <Link to={"/myprofile"}>Account</Link>
+                </>
+              )}
+            </div>
+            <div>
+              {localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null && (
+                <>
+                  <Link to={"/shop-cart"}>
+                    <i className="ti-shopping-cart cart font-weight-bold"></i>
+                    <span className="mb-1 position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger text-light">{cartDetails.length > 0 ? cartDetails.length : 0}</span>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -185,10 +201,18 @@ const Header2 = () => {
                 </div>
               </div>
 
-              <button className="navbar-toggler collapsed navicon " type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="bg-primary"></span>
-                <span className="bg-primary"></span>
-                <span className="bg-primary"></span>
+              <button className="navbar-toggler collapsed navicon " type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" onClick={toggle}>
+                {toggleShow === true ? (
+                  <>
+                    <i class="fa fa-times"></i>
+                  </>
+                ) : (
+                  <>
+                    <span className="bg-primary"></span>
+                    <span className="bg-primary"></span>
+                    <span className="bg-primary"></span>
+                  </>
+                )}
               </button>
 
               <div className="header-nav  align-items-center bg-white navbar-collapse   collapse navbar myNavbar active" id="navbarNavDropdown">

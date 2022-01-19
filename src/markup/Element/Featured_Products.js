@@ -41,7 +41,7 @@ const Featured_Product = (props) => {
   return (
     <div className="px-1 mt-1">
       <div className="text-left">
-        <h3>Our Featured Prodcuts</h3>
+        <h4>Our Featured Prodcuts</h4>
         <div className="dlab-separator style1 bg-primary"></div>
       </div>
 
