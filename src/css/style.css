@@ -119,6 +119,10 @@
   font-family: daintytitle;
   src: url("/src/css/fonts/Ageritta.ttf");
 }
+@font-face {
+  font-family: daintybody;
+  src: url("/src/css/fonts/NeutraText-Book.otf");
+}
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 5px) !important;
 }
@@ -141,9 +145,24 @@ select.form-control:not([size]):not([multiple]) {
   margin: 0 0 5px 0 !important;
 }
 .titlename {
-  font-size: 35px !important;
+  font-size: 25px !important;
   color: white !important;
-  font-family: daintytitle;
+  font-family: daintybody;
+}
+.titlename1 {
+  font-size: 25px !important;
+  color: white !important;
+  font-family: daintybody;
+}
+.searchbar {
+  border-radius: 30px;
+  border: 1px solid rgb(255, 255, 255);
+}
+.searchbar:active,
+.searchbar:focus,
+.searchbar:hover {
+  border-radius: 30px;
+  border: 1px solid rgb(255, 255, 255) !important;
 }
 .aligntopsidebar {
   align-items: baseline !important;
@@ -157,11 +176,19 @@ select.form-control:not([size]):not([multiple]) {
   width: 70px;
   border-radius: 3px;
 }
+.navbarbg {
+  background-color: #f8f9fa92;
+  border-radius: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 .iconimage {
   height: 25px;
 }
 .homeimagerecent {
-  height: 250px !important;
+  height: 300px !important;
+  width: 300px !important;
+  /* width: 100% !important; */
   /* width: 300px !important; */
 }
 .w-10 {
@@ -258,7 +285,7 @@ select.form-control:not([size]):not([multiple]) {
   .tab-content .col-sm-2 {
     width: 50%;
   }
-  .shopproducts .col-lg-3 {
+  .shopproducts .col-lg-3 .col-lg-2 {
     width: 50% !important;
   }
   .shopproducts .col-lg-9 {
@@ -277,6 +304,9 @@ select.form-control:not([size]):not([multiple]) {
   .shopproducts .thumbnailimage {
     height: 200px;
   }
+  .logoimage {
+    margin-left: 10rem !important;
+  }
 }
 @media only screen and (max-width: 1020px) and (min-width: 520px) {
   .shopproducts .col-lg-3 {
@@ -293,8 +323,16 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 @media only screen and (max-width: 479px) {
-  .recentproduct .col-lg-3 {
-    width: 50%;
+  .recentproduct .col-lg-2,
+  .col-lg-3,
+  .col {
+    width: 50% !important;
+    padding: 0px !important;
+  }
+
+  .homeimagerecent {
+    width: 200px !important;
+    height: 200px !important;
   }
 }
 @media only screen and (max-width: 479px) {
@@ -393,7 +431,7 @@ html {
 body {
   background-color: #fff;
   /* font-family: "Poppins", sans-serif; */
-  font-family: "Abel", sans-serif;
+  font-family: daintybody;
   font-size: 16px;
   font-weight: 400;
   color: #0a0a0a;
@@ -2633,7 +2671,7 @@ dl dd {
 ---------------------------------------------------------------*/
 
 label {
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 10px;
 }
 .panel-default,
@@ -3366,10 +3404,12 @@ blockquote cite {
 ---------------------------------------------------------------*/
 /*=== >logo for header ===*/
 .logoimage {
-  height: 70px !important;
+  height: 150px !important;
   width: auto !important;
+  margin-left: 30rem;
 }
 .logo-header {
+  display: none;
   /* display: table; */
   float: left;
   vertical-align: middle;
@@ -3382,7 +3422,7 @@ blockquote cite {
   width: 140px;
   height: 85px;
   position: relative;
-  z-index: 9;
+  z-index: 9999999;
   transition: all 0.5s;
   -moz-transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -4305,12 +4345,12 @@ blockquote cite {
   background-color: rgba(0, 0, 0, 0);
 }
 .header-transparent .header-nav .nav > li > a {
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 .header-transparent .header-nav .nav > li > a,
 .header-transparent .extra-nav .btn-link,
 .header-transparent .navbar-toggler {
-  color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0) !important;
 }
 .header-transparent .navbar-toggler span {
   background-color: #fff;
@@ -6901,7 +6941,7 @@ button:focus {
 .btn-group-sm > .btn,
 .btn-sm {
   border-radius: 3px;
-  font-size: 12px;
+  font-size: 14px;
   padding: 4px 8px;
 }
 .btn,
@@ -6917,7 +6957,7 @@ button:focus {
   border-style: solid;
   border-color: transparent;
   line-height: 1.42857;
-  border-radius: 6px;
+  border-radius: 30px;
   font-weight: 400;
   text-align: center;
   white-space: nowrap;
@@ -6948,7 +6988,7 @@ button:focus {
 /* button size */
 .btn-sm {
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .btn-md {
   padding: 16px 42px;

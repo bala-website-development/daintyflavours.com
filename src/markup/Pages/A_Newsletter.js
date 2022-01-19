@@ -76,10 +76,10 @@ const A_Newsletter = (props) => {
         <form id="newslettersubscription" onSubmit={handleSubmit(onSubmit)}>
           <div className=" d-flex ">
             <div class="input-group mb-3 justify-content-center w-100">
-              <input type="email" className="px-3 border-primary rounded" placeholder="Enter your email" required name="subscribe_email" {...register("subscribe_email")} />
+              <input type="email" className="searchbar px-3 border-primary rounded" placeholder="Enter your email" required name="subscribe_email" {...register("subscribe_email")} />
               <div class="input-group-append">
                 <button class="btn btnhover" type="submit">
-                  Join us
+                  Subscribe
                 </button>
               </div>
             </div>

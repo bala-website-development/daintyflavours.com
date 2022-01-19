@@ -1,242 +1,240 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-class Header2 extends Component {
-  componentDidMount() {
-    // sidebar open/close
+import { Link, useHistory } from "react-router-dom";
 
-    var btn = document.querySelector(".navicon");
-    var aaa = document.querySelector(".myNavbar ");
+import config from "../../config.json";
 
-    function toggleFunc() {
-      return aaa.classList.toggle("show");
-    }
+const Header2 = () => {
+  var btn = document.querySelector(".navicon");
+  var aaa = document.querySelector(".myNavbar ");
 
-    btn.addEventListener("click", toggleFunc);
-
-    /* Menu onpen/close */
-    var menuBtn = document.querySelector(".menu-btn");
-    var pizzaHeaderNav = document.querySelector(".pizza-header .header-nav");
-
-    function menuBtnAddActive() {
-      return pizzaHeaderNav.classList.add("active");
-    }
-
-    menuBtn.addEventListener("mouseenter", menuBtnAddActive);
-
-    function menuBtnRemoveActive() {
-      return pizzaHeaderNav.classList.remove("active");
-    }
-
-    pizzaHeaderNav.addEventListener("mouseleave", menuBtnRemoveActive);
-
-    /* Test */
-
-    // Sidenav li open close
-
-    var navUl = [].slice.call(document.querySelectorAll(".navbar-nav > li"));
-    for (var y = 0; y < navUl.length; y++) {
-      navUl[y].addEventListener("click", function () {
-        checkLi(this);
-      });
-    }
-
-    function checkLi(current) {
-      navUl.forEach((el) => el.classList.remove("open"));
-      current.classList.add("open");
-    }
+  function toggleFunc() {
+    return aaa.classList.toggle("show");
   }
 
-  render() {
-    return (
-      <header className="site-header  mo-left header header-transparent pizza-header">
-        <div className="sticky-header main-bar-wraper navbar-expand-lg">
-          <div className="main-bar clearfix ">
-            <div className="container clearfix">
-              <div className="logo-header mostion">
-                <Link to="./">
-                  <img src={require("./../../images/logo-2.png")} alt="" />
+  btn?.addEventListener("click", toggleFunc);
+
+  /* Menu onpen/close */
+  var menuBtn = document.querySelector(".menu-btn");
+  var pizzaHeaderNav = document.querySelector(".pizza-header .header-nav");
+
+  function menuBtnAddActive() {
+    return pizzaHeaderNav.classList.add("active");
+  }
+
+  menuBtn?.addEventListener("mouseenter", menuBtnAddActive);
+
+  function menuBtnRemoveActive() {
+    return pizzaHeaderNav.classList.remove("active");
+  }
+
+  //pizzaHeaderNav.addEventListener("mouseleave", menuBtnRemoveActive);
+
+  /* Test */
+
+  // Sidenav li open close
+
+  var navUl = [].slice.call(document.querySelectorAll(".navbar-nav > li"));
+  for (var y = 0; y < navUl.length; y++) {
+    navUl[y].addEventListener("click", function () {
+      checkLi(this);
+    });
+  }
+
+  function checkLi(current) {
+    navUl.forEach((el) => el.classList.remove("open"));
+    current.classList.add("open");
+  }
+
+  const [toggleShow, setToggleShow] = useState(false);
+  const [cartDetails, setCartDetails] = useState(false);
+  const [cartUpdated, setCartUpdated] = useState(localStorage.getItem("cartUpdated"));
+  const [menuMainCategory, setMenuMainCategory] = useState([]);
+  const [menuCategory, setMenuCategory] = useState([]);
+  const [searchFilter, setSearchFilter] = useState("");
+  const toggle = () => {
+    setToggleShow((toggleShow) => !toggleShow);
+  };
+  const history = useHistory();
+  const logout = () => {
+    localStorage.clear();
+    history.push("/");
+  };
+  const getMainCategories = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getmaincategoryforusers")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("main master category", data);
+          let _filter = data.data.filter((_d) => _d.type === "product");
+          localStorage.setItem("maincategories", JSON.stringify(_filter));
+          setMenuMainCategory(_filter);
+          localStorage.setItem("cartUpdated", true);
+        } else if (data.status === 400) {
+          setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
+
+  const getCategories = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getuserscategory")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("main master category", data);
+          let _filter = data.data.filter((_d) => _d.type === "product");
+          localStorage.setItem("categories", JSON.stringify(_filter));
+          setMenuCategory(_filter);
+          localStorage.setItem("cartUpdated", true);
+        } else if (data.status === 400) {
+          setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
+
+  useEffect(() => {
+    const fetchCartDetails = () => {
+      fetch(config.service_url + "getCartProducts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userid: localStorage.getItem("uuid") }) })
+        .then((response) => response.json())
+        .then((data) => {
+          setCartDetails(data);
+
+          console.log("cart details", data);
+          setCartUpdated(false);
+        })
+        .catch(function (error) {});
+    };
+    if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
+      fetchCartDetails();
+    }
+    if (localStorage.getItem("maincategories") === undefined || localStorage.getItem("maincategories") === null) {
+      getMainCategories();
+      console.log("fromservice");
+    } else {
+      if (menuMainCategory === undefined || menuMainCategory === null || menuMainCategory?.length === 0) {
+        setMenuMainCategory(JSON.parse(localStorage.getItem("maincategories")));
+        console.log(menuMainCategory, "ls");
+      }
+    }
+
+    if (localStorage.getItem("categories") === undefined || localStorage.getItem("categories") === null) {
+      getCategories();
+      console.log("fromservice");
+    } else {
+      if (menuCategory === undefined || menuCategory === null || menuCategory?.length === 0) {
+        setMenuCategory(JSON.parse(localStorage.getItem("categories")));
+        console.log(menuCategory, "ls");
+      }
+    }
+
+    // else {
+    //   history.push("/");
+    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartUpdated]);
+
+  return (
+    <>
+      <header className="site-header position-relative  mo-left header header-transparent pizza-header w-100">
+        <div className="p-2 px-4 searchbarbg">
+          <div className=" d-flex align-items-center justify-content-end">
+            <div className="flex-grow-1 px-3  d-flex align-items-center">
+              {/* <form action="#"> */}
+
+              <div>
+                <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar px-3" placeholder="Search all our products" />
+              </div>
+              <div className="align-items-center">
+                <Link to={{ pathname: "/shop", searchFilter: searchFilter }} className="mx-1 px-2 btn btn-sm btnhover">
+                  {/* <i className="ti-search"></i> */}
+                  Search
                 </Link>
+              </div>
+
+              {/* </form> */}
+            </div>
+
+            <div className="text-nowrap px-3">Log in</div>
+
+            <div className="">
+              <i className="ti-shopping-cart cart"></i>
+            </div>
+          </div>
+        </div>
+        <div className="sticky-header bg-white main-bar-wraper navbar-expand-lg">
+          <div className="main-bar position-relative   ">
+            <div className="px-2">
+              <div className="logo-header d-flex justify-content-end align-items-center">
                 <div>
-                  <h1 className="titlename font-weight-normal text-nowrap">Dainty Flavour</h1>
+                  <div className="titlename1 font-weight-normal text-nowrap">
+                    <Link to="/" className="text-primary">
+                      {" "}
+                      {config.websitetitle}
+                    </Link>
+                  </div>
                 </div>
               </div>
 
-              <button className="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <button className="navbar-toggler collapsed navicon " type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="bg-primary"></span>
                 <span className="bg-primary"></span>
                 <span className="bg-primary"></span>
               </button>
 
-              <div className="extra-nav d-flex justify-content-between">
-                <div className="extra-cell">
-                  <ul className="extra-info">
+              <div className="header-nav  align-items-center bg-white navbar-collapse   collapse navbar myNavbar active" id="navbarNavDropdown">
+                <div>
+                  <ul className="nav navbar-nav">
                     <li>
-                      <div className="header-phone-no text-primary">
-                        <img src="images/icons/telephone.png" alt="" />
-                        <span className="text-primary">24/7 Bakery service</span>
-                        <h3 className="text-primary">+91 72598 92390</h3>
-                      </div>
+                      <Link to={"/"}>
+                        <i className="text-primary fst-normal fa fa-home fa-3x"></i>
+                      </Link>
                     </li>
-                    <li>
-                      <div className="menu-btn ">
-                        <span className="bg-primary"></span>
-                        <span className="bg-primary"></span>
-                        <span className="bg-primary"></span>
-                      </div>
-                    </li>
+                    {menuMainCategory === null || menuMainCategory === undefined || menuMainCategory.length == 0 ? (
+                      <li>
+                        <Link>Loading...</Link>
+                      </li>
+                    ) : (
+                      menuMainCategory?.map((mmc) => (
+                        <li>
+                          <Link>
+                            {mmc.maincategory.toUpperCase()}
+                            <i className="fa fa-chevron-down"></i>
+                          </Link>
+                          <ul className="sub-menu">
+                            {menuCategory &&
+                              menuCategory
+                                .filter((fil) => fil.maincategory === mmc.maincategory)
+                                ?.map((mc) => (
+                                  <li>
+                                    <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mc.banner_image, category: mc.category }}>
+                                      <span className="text-nowrap">{mc.category}</span>
+                                    </Link>
+                                  </li>
+                                ))}
+                          </ul>
+                        </li>
+                      ))
+                    )}
                   </ul>
                 </div>
-              </div>
-
-              <div className="dlab-quik-search ">
-                <form action="#">
-                  <input name="search" value="" type="text" className="form-control" placeholder="Type to search" />
-                  <span id="quik-search-remove">
-                    <i className="ti-close"></i>
-                  </span>
-                </form>
-              </div>
-
-              <div className="header-nav  bg-primary navbar-collapse aligntopsidebar  collapse navbar myNavbar" id="navbarNavDropdown">
-                <div className=" py-4"></div>
-
-                <ul className="nav navbar-nav">
-                  <li className="active">
-                    <Link to={""}>Home</Link>
-                  </li>
-                  <li>
-                    <Link to={""}>
-                      Pages<i className="fa fa-chevron-down"></i>
-                    </Link>
-                    <ul className="sub-menu">
-                      <li>
-                        <Link to={"/about"}>About Us</Link>
-                      </li>
-                      <li>
-                        <Link to={"/our-services"}>Our Services</Link>
-                      </li>
-
-                      <li>
-                        <Link to={"/team"}>Clients</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link to={""}>
-                      Categories<i className="fa fa-chevron-down"></i>
-                    </Link>
-                    <ul className="sub-menu">
-                      <li>
-                        <Link to={"/our-menu"}>Menu Style 1</Link>
-                      </li>
-                      <li>
-                        <Link to={"/our-menu-2"}>Menu Style 2</Link>
-                      </li>
-                      <li>
-                        <Link to={"/our-menu-3"}>Menu Style 3</Link>
-                      </li>
-                      <li>
-                        <Link to={"/our-menu-4"}>Menu Style 4</Link>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="has-mega-menu">
-                    <Link to={""}>
-                      Categories<i className="fa fa-chevron-down"></i>
-                    </Link>
-                    <ul className="mega-menu">
-                      <li>
-                        {" "}
-                        <Link to={""}>Blog Grid</Link>
-                        <ul>
-                          <li>
-                            <Link to={"/blog-grid-2"}>Grid 2</Link>
-                          </li>
-                          <li>
-                            <Link to={"/blog-grid-2-sidebar"}>Grid 2 sidebar</Link>
-                          </li>
-                          <li>
-                            <Link to={"/blog-grid-2-sidebar-left"}>Grid 2 sidebar left</Link>
-                          </li>
-                          <li>
-                            <Link to={"/blog-grid-3"}>Grid 3</Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        {" "}
-                        <Link to={""}>Blog Half Image</Link>
-                        <ul>
-                          <li>
-                            <Link to={"/blog-half-img"}>Half image</Link>
-                          </li>
-                          <li>
-                            <Link to={"/blog-half-img-sidebar"}>Half image sidebar</Link>
-                          </li>
-                          <li>
-                            <Link to={"/blog-half-img-left-sidebar"}>Half image sidebar left</Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        {" "}
-                        <Link to={""}>Blog Large Image</Link>
-                        <ul>
-                          <li>
-                            <Link to={"/blog-large-img"}>Large image</Link>
-                          </li>
-                          <li>
-                            <Link to={"/blog-large-img-sidebar"}>Large image sidebar</Link>
-                          </li>
-                          <li>
-                            <Link to={"/blog-large-img-left-sidebar"}>Large image sidebar left</Link>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        {" "}
-                        <Link to={""}>Blog Details</Link>
-                        <ul>
-                          <li>
-                            <Link to={"/blog-single"}>Single</Link>
-                          </li>
-                          <li>
-                            <Link to={"/blog-single-sidebar"}>Single sidebar</Link>
-                          </li>
-                          <li>
-                            <Link to={"/blog-single-left-sidebar"}>Single sidebar right</Link>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <Link to={""}>
-                      Shop <i className="fa fa-chevron-down"></i>
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link to={"/contact"}>Contact Us</Link>
-                  </li>
-                  <li>
-                    <Link to={"/shop-login"}>Login</Link>
-                  </li>
-                </ul>
-                <div className="dlab-social-icon">
+                <div className="dlab-social-icon widget d-none">
                   <ul>
                     <li>
-                      <Link className="site-button sharp-sm fa fa-facebook" to={""}></Link>
+                      <Link className="bg-primary site-button sharp-sm fa fa-facebook" to={""}></Link>
                     </li>
+
                     <li>
-                      <Link className="site-button sharp-sm fa fa-twitter" to={""}></Link>
-                    </li>
-                    <li>
-                      <Link className="site-button sharp-sm fa fa-linkedin" to={""}></Link>
-                    </li>
-                    <li>
-                      <Link className="site-button sharp-sm fa fa-instagram" to={""}></Link>
+                      <Link className="bg-primary site-button sharp-sm fa fa-instagram" to={""}></Link>
                     </li>
                   </ul>
                 </div>
@@ -245,8 +243,8 @@ class Header2 extends Component {
           </div>
         </div>
       </header>
-    );
-  }
-}
+    </>
+  );
+};
 
 export default Header2;

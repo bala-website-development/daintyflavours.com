@@ -3,10 +3,10 @@
 =====================*/
 
 :root {
-  --color-primary: #9b0641;
-  --color-secondry: #9b0641;
-  --color-button: #e3b32f;
-  --color-hover: #9b0641;
+  --color-primary: #b43b8d;
+  --color-secondry: #ecb7d4;
+  --color-button: #b43b8d;
+  --color-hover: #b43b8d;
   --color-primary-opacity: rgba(242, 227, 248, 0.455);
 }
 .main-bar,
@@ -22,6 +22,13 @@
 .titlename {
   color: var(--color-primary) !important;
 }
+.searchbarbg,
+.about-bx {
+  background-color: var(--color-secondry) !important;
+}
+.footer-top {
+  background-color: #fae3ee;
+}
 .title,
 .sub-title {
   color: var(--color-primary) !important;
@@ -34,7 +41,6 @@
 }
 /* Hex */
 .bg-primary,
-.about-bx,
 .theme-bg,
 .meet-ask-row:after,
 .dlab-separator.style-skew[class*="style-"]:after,
@@ -101,8 +107,8 @@
 .fc-button.fc-state-active,
 .fc-button.fc-state-default {
   background-color: var(--color-button);
-  border-radius: 1px !important;
-  color: #000000;
+
+  color: white;
 }
 
 /*Hex color :hover */

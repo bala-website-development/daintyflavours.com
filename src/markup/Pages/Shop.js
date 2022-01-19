@@ -7,6 +7,7 @@ import bnr from "./../../images/banner/bnr1.jpg";
 import uuid from "react-uuid";
 import { Modal } from "react-bootstrap";
 import loadingimg from "./../../images/load.gif";
+import Header2 from "../Layout/Header2";
 const Shop = (props) => {
   const [products, setProducts] = useState([]);
   const [networkError, setNetworkError] = useState("");
@@ -22,11 +23,12 @@ const Shop = (props) => {
   const [next, setNext] = useState(postsPerPage);
   const [end, setEnd] = useState(0);
   const history = useHistory();
-
+  let bannerimageurl = props.location.bannerimage;
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
     setLoading((loading) => !loading);
+    console.log("banner image", props.location.bannerimage);
     console.log("cakecategory", props.location.category);
     console.log("both", props.location.category, props.location.maincategory);
     let _filterOption = props.location?.category != "" && props.location?.category !== undefined ? props.location?.category : props.location?.maincategory;
@@ -54,6 +56,13 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
+        } else if (props.location.searchFilter) {
+          let selective = data.filter((fil) => {
+            console.log("searchdata", fil);
+            return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
+          });
+          setProducts(selective);
+          setFilter(selective);
         } else {
           let active = data
             .filter((filter) => filter.isactive === 1)
@@ -143,7 +152,7 @@ const Shop = (props) => {
     // loopWithSlice(0, postsPerPage);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.category, props.location?.maincategory]);
+  }, [props.location?.category, props.location?.maincategory, props.location?.searchFilter]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);
@@ -318,13 +327,13 @@ const Shop = (props) => {
       <Modal size="sm" show={smShow} onHide={() => setSmShow(false)}>
         <Modal.Header closeButton>{message}</Modal.Header>
       </Modal>
-      <Header active={"shop"} />
+      <Header2 active={"shop"} />
 
       <div className="page-content bg-white">
-        <div className="dlab-bnr-inr " style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+        <div className="dlab-bnr-inr " style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">Shop</h1>
+              <h1 className="text-white">{props.location.category != undefined ? props.location.category : "Shop"}</h1>
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">
@@ -440,11 +449,11 @@ const Shop = (props) => {
                                   <h4 className="item-title">
                                     <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
                                   </h4>
-                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }} className="btn btnhover">
+                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }} className="btn btn-sm btnhover">
                                     Details
                                   </Link>{" "}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btnhover">
+                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-sm btnhover">
                                       <i className="ti-shopping-cart m-r5"></i> Add to cart
                                     </button>
                                   ) : (
@@ -462,7 +471,7 @@ const Shop = (props) => {
                             No Records to display{" "}
                             <div>
                               {" "}
-                              <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
+                              <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
                                 View All
                               </Link>
                             </div>
@@ -479,7 +488,7 @@ const Shop = (props) => {
                     </div>
                     <div className="aligncenter">
                       {end <= filter.length + postsPerPage && (
-                        <button className="btn btnhover" onClick={handleShowMorePosts}>
+                        <button className="btn btn-sm btnhover" onClick={handleShowMorePosts}>
                           Load more
                         </button>
                       )}

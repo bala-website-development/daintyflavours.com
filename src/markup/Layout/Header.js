@@ -96,12 +96,12 @@ const Header = (props) => {
                 </>
               )}
             </button>
-            <div className={`header-nav navbar-collapse aligntopsidebar navbar myNavbar collapse ${toggleShow ? "show" : "hide"}`} id="navbarNavDropdown">
+            <div className={`header-nav navbar-collapse flex-grow-0 aligntopsidebar navbar myNavbar collapse  ${toggleShow ? "show" : "hide"}`} id="navbarNavDropdown">
               {toggleShow === true && (
                 <div className="logo-header mostion d-none">
                   <Link to={"/"} className="dez-page">
                     <li>
-                      <img src={config.logo} alt="sukhaa" />
+                      <img src={config.logo} alt={config.websitetitle} />
                     </li>
                   </Link>
                 </div>
@@ -173,7 +173,7 @@ const Header = (props) => {
                 </ul>
               ) : (
                 <>
-                  <ul className="nav navbar-nav nav1">
+                  <ul className={props.home ? "nav navbar-nav nav1" : "navbarbg nav navbar-nav nav1"}>
                     <li className={props?.active === "home" ? `active${toggleShow ? "open" : ""}` : ""}>
                       <Link to={"/"}>Home</Link>
                     </li>
@@ -209,7 +209,7 @@ const Header = (props) => {
                         {menuMainCategory &&
                           menuMainCategory.map((mmc) => (
                             <li>
-                              <Link to={{ pathname: "/shop", maincategory: mmc.maincategory }}>{mmc.maincategory}</Link>
+                              <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mmc.banner_image }}>{mmc.maincategory}</Link>
                             </li>
                           ))}
                       </ul>
