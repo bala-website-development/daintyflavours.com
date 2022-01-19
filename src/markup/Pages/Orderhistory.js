@@ -74,7 +74,7 @@ const Orderhistory = (props) => {
         </div>
 
         <div className="content-block">
-          <div className="section-full content-inner-1 bg-gray-light">
+          <div className="section-full py-2 bg-gray-light">
             <div className="container woo-entry">
               <div className="row">
                 <div className="col-lg-12">
