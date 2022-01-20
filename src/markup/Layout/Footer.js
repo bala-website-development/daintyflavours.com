@@ -132,7 +132,9 @@ class Footer extends Component {
                     <a href="https://www.theuniquecreations.com" className="font-weight-bold" target="blank">
                       theuniquecreations
                     </a>{" "}
-                    <div>Copyright © {new Date().getFullYear()} Unique Creations. All rights are reserved.</div>
+                    <div>
+                      Copyright © {new Date().getFullYear()} Unique Creations & {config.websitetitle}. All rights are reserved.
+                    </div>
                   </span>{" "}
                 </div>
 
@@ -142,6 +144,11 @@ class Footer extends Component {
                       <li>
                         <a href="https://www.theuniquecreations.com/contact" className="font-weight-light" target="blank">
                           Contact developer
+                        </a>{" "}
+                      </li>
+                      <li>
+                        <a href="https://www.instagram.com/theuniquecreations.it" className="font-weight-light" target="blank">
+                          <i className="fa fa-instagram" />
                         </a>{" "}
                       </li>
                     </ul>
