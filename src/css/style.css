@@ -2692,7 +2692,7 @@ label {
   font-size: 15px;
   line-height: 20px;
   padding: 10px 20px;
-  border-radius: 5px !important;
+  border-radius: 30px !important;
 }
 .form-control:focus {
   border-color: var(--color-primary);
