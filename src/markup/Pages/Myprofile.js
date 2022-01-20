@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header";
+import Header from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
 //import ReactStars from "react-stars";
@@ -32,6 +32,10 @@ const Myprofile = (props) => {
     }, 1000);
   };
 
+  const logout = () => {
+    localStorage.clear();
+    history.push("/");
+  };
   const changePassword = async (e) => {
     e.preventDefault();
     let _data = {};
@@ -147,7 +151,7 @@ const Myprofile = (props) => {
           </div>
         </div>
         <div className="content-block">
-          <div className="section-full content-inner-1 bg-gray-light">
+          <div className="section-full py-2 bg-gray-light">
             <div className="container woo-entry">
               <div className="row">
                 <div className="col-lg-12">
@@ -160,6 +164,11 @@ const Myprofile = (props) => {
                           </Link>
                         </li>
                         <li>
+                          <Link className="nav-link " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-orderhistory">
+                            Order History
+                          </Link>
+                        </li>
+                        <li>
                           <Link className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-address">
                             Manage Address
                           </Link>
@@ -169,9 +178,21 @@ const Myprofile = (props) => {
                             Change Password
                           </Link>
                         </li>
+                        <li>
+                          <Link className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-logout">
+                            Log out
+                          </Link>
+                        </li>
                       </ul>
                       {profile?.map((profile) => (
                         <div className="tab-content">
+                          <div className="tab-pane " id="pills-orderhistory">
+                            <p>Track your order status here</p>
+                            <Link to="/orderhistory" className="btn btn-sm btnhover">
+                              Go to Order History
+                            </Link>
+                          </div>
+
                           <div className="tab-pane " id="pills-address">
                             <div id="review_form_wrapper">
                               <form className="comment-form" onSubmit={handleSubmit(onSubmit)}>
@@ -278,6 +299,13 @@ const Myprofile = (props) => {
                                 </div>
                               </div>
                             </div>
+                          </div>
+
+                          <div className="tab-pane " id="pills-logout">
+                            <Link onClick={logout} className="btn btn-sm btnhover">
+                              {" "}
+                              Log Out
+                            </Link>
                           </div>
                         </div>
                       ))}

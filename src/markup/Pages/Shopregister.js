@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "./../Layout/Header";
+import Header from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import { useForm } from "react-hook-form";
 import uuid from "react-uuid";
@@ -70,7 +70,7 @@ const Shopregister = ({ history }) => {
             </div>
           </div>
         </div>
-        <div className="section-full content-inner-2 shop-account">
+        <div className="section-full py-3 shop-account">
           <div className="container">
             <div className="row">
               <div className="col-lg-12 text-center">

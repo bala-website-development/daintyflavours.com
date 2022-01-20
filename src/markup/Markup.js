@@ -8,7 +8,6 @@ import About from "./Pages/About";
 import TermsandCondition from "./Pages/TermsandCondition";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import OurJourney from "./Pages/OurJourney";
-import Ourservices from "./Pages/Ourservices";
 import Construction from "./Pages/Construction";
 import Faq from "./Pages/Faq";
 import Booking from "./Pages/Booking";
@@ -20,11 +19,9 @@ import Payment from "./Pages/Payment";
 import PasswordChanged from "./Pages/PasswordChanged";
 import MainCategory from "./Pages/MainCategory";
 import Gallery from "./Pages/Gallery";
-
 import Shop from "./Pages/Shop";
 import Shopsidebar from "./Pages/Shopsidebar";
 import Shopproduct from "./Pages/Shopproduct";
-//import Admin from "./Pages/Admin";
 import Shopcart from "./Pages/Shopcart";
 import Shopwishlist from "./Pages/Shopwishlist";
 import Shopchekout from "./Pages/Shopchekout";
@@ -32,7 +29,6 @@ import Shoplogin from "./Pages/Shoplogin";
 import Shopregister from "./Pages/Shopregister";
 import Myprofile from "./Pages/Myprofile";
 import Orderhistory from "./Pages/Orderhistory";
-
 import Contact from "./Pages/Contact";
 import config from "../../src/config.json";
 
@@ -49,9 +45,7 @@ class Markup extends Component {
           <Route path="/about" exact component={About} />
           <Route path="/termsandcondition" exact component={TermsandCondition} />
           <Route path="/privacypolicy" exact component={PrivacyPolicy} />
-
           <Route path="/our-journey" exact component={OurJourney} />
-          <Route path="/our-services" exact component={Ourservices} />
           <Route path="/payment" exact component={Payment} />
           <Route path="/faq" exact component={Faq} />
           <Route path="/booking" exact component={Booking} />
@@ -69,10 +63,8 @@ class Markup extends Component {
           <Route path="/contact" exact component={Contact} />
           <Route path="/maincategories" exact component={MainCategory} />
           <Route path="/gallery" exact component={Gallery} />
-
           <Route path="/shop-wishlist" exact component={Shopwishlist} />
           <Route path="/construction" exact component={Construction} />
-
           <Route path="*" component={Error} />
         </Switch>
       </BrowserRouter>

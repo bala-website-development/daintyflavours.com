@@ -117,11 +117,11 @@
 ---------------------------------------------------------------*/
 @font-face {
   font-family: daintytitle;
-  src: url("/src/css/fonts/Ageritta.ttf");
+  src: url("../css/fonts/Ageritta.ttf");
 }
 @font-face {
   font-family: daintybody;
-  src: url("/src/css/fonts/NeutraText-Book.otf");
+  src: url("../css/fonts/NeutraTextTF-Book.ttf");
 }
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 5px) !important;
@@ -2692,7 +2692,7 @@ label {
   font-size: 15px;
   line-height: 20px;
   padding: 10px 20px;
-  border-radius: 5px !important;
+  border-radius: 30px !important;
 }
 .form-control:focus {
   border-color: var(--color-primary);
@@ -11381,7 +11381,7 @@ footer .widget_services ul li {
   background: #fff;
   background-size: cover;
   background-position: center;
-  padding: 80px 0 40px;
+  padding: 20px 0 20px;
   position: relative;
 }
 .footer-bottom {
