@@ -354,7 +354,7 @@ const Shop = (props) => {
             <div className="container">
               <div className="row mt-3">
                 <div className="col-lg-3">
-                  <div className="bg-white mb-3">
+                  <div className="bg-white px-3 mb-3">
                     <aside className="side-bar shop-categories sticky-top">
                       {props.location?.category !== undefined && props.location?.maincategory !== undefined ? (
                         <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
