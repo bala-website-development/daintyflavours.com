@@ -292,7 +292,7 @@ const Shopchekout = () => {
                           cartDetails.map((cart, key) => (
                             <tr className="alert">
                               <td className="product-item-img">
-                                <img src={cart.p_image} alt="" />
+                                <img src={cart.p_image ? cart.p_image : config.defaultimage} alt={cart.p_name} />
                               </td>
                               <td className="product-item-name">{cart.p_name}</td>
                               <td className="product-item-price">{cart.p_price}</td>
