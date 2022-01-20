@@ -45,40 +45,33 @@ class Footer extends Component {
                       <li>
                         <Link to={"/about"}>About</Link>
                       </li>
-                      {/* <li>
-                      <Link to={"/our-services"}>Our Courses</Link>
-                    </li> */}
+                      <li>
+                        <Link to={"/our-journey"}>Our Journey</Link>
+                      </li>
 
                       {/* <li>
                       <Link to={"/blog-half-img-sidebar"}>Blog</Link>
                     </li> */}
                       <li>
-                        <Link to={"/shop"}>Collections</Link>
+                        <Link to={"/gallery"}>Gallery</Link>
+                      </li>
+                      <li>
+                        <Link to={"/maincategories"}>Category</Link>
+                      </li>
+                      <li>
+                        <Link to={"/shop"}>Shop All</Link>
                       </li>
                       <li>
                         <Link to={"/contact"}>Contact</Link>
+                      </li>
+                      <li>
+                        <Link to={"/shop-register"}>Register</Link>
                       </li>
                       <li>
                         <Link to={"/termsandcondition"}>Terms and Condition</Link>
                       </li>
                       <li>
                         <Link to={"/privacypolicy"}>Privacy Policy</Link>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="m-t20">
-                    <ul className="dlab-social-icon dlab-social-icon-lg">
-                      <li>
-                        <a href={config.fb} target="_blank" className="fa fa-facebook bg-primary mr-1"></a>
-                      </li>
-                      <li>
-                        <a href={config.insta} target="_blank" className="fa fa-instagram bg-primary mr-1"></a>
-                      </li>
-                      <li className="d-none">
-                        <a href={config.pins} target="_blank" className="fa fa-pinterest-p bg-primary mr-1"></a>
-                      </li>
-                      <li>
-                        <a href={config.whatsappurl} target="_blank" className="fa fa-whatsapp bg-success mr-1"></a>
                       </li>
                     </ul>
                   </div>
@@ -105,6 +98,22 @@ class Footer extends Component {
                           <span>Sunday</span>
                         </span>
                         <span className="timing">Closed</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="m-t20">
+                    <ul className="dlab-social-icon dlab-social-icon-lg">
+                      <li>
+                        <a href={config.fb} target="_blank" className="fa fa-facebook bg-primary mr-1"></a>
+                      </li>
+                      <li>
+                        <a href={config.insta} target="_blank" className="fa fa-instagram bg-primary mr-1"></a>
+                      </li>
+                      <li className="d-none">
+                        <a href={config.pins} target="_blank" className="fa fa-pinterest-p bg-primary mr-1"></a>
+                      </li>
+                      <li>
+                        <a href={config.whatsappurl} target="_blank" className="fa fa-whatsapp bg-success mr-1"></a>
                       </li>
                     </ul>
                   </div>
