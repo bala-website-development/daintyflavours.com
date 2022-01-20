@@ -163,7 +163,7 @@ const Shopcart = () => {
                           cartDetails.map((cart, key) => (
                             <div className="d-flex justify-content-between align-items-center p-1 my-1 border-bottom">
                               <div className="w-25">
-                                <img src={cart.p_image} className="rounded" alt="" />
+                                <img className="smallimage" src={cart.p_image ? cart.p_image : config.defaultimage} alt="" />
                               </div>
                               <div className="w-30">{cart.p_name}</div>
                               <div className="w-25">{cart.p_price}</div>
