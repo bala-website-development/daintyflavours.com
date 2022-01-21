@@ -204,7 +204,7 @@ const Header2 = () => {
               <button className="navbar-toggler collapsed navicon " type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" onClick={toggle}>
                 {toggleShow === true ? (
                   <>
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-times text-primary"></i>
                   </>
                 ) : (
                   <>
