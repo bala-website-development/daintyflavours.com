@@ -146,9 +146,7 @@ const Shopcart = () => {
                         <div className="w-25">
                           <b>Total</b>
                         </div>
-                        <div className="w-25">
-                          <b>Tax</b>
-                        </div>
+
                         <div className="w-25">
                           <b>
                             Net Amount <i>*inclusive of tax</i>
@@ -184,11 +182,12 @@ const Shopcart = () => {
                               <div className="w-25 text-nowrap">
                                 {" "}
                                 <i class="fa fa-inr"></i> {cart.p_price * cart.p_quantity}
+                                <div>
+                                  + Tax:
+                                  {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
+                                </div>
                               </div>
-                              <div className="w-25 text-nowrap">
-                                {" "}
-                                {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
-                              </div>
+
                               <div className="w-25 text-nowrap">
                                 {" "}
                                 <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)}
@@ -257,7 +256,7 @@ const Shopcart = () => {
                   <table className="table-bordered check-tbl">
                     <tbody>
                       <tr>
-                        <td>Order Subtotal</td>
+                        <td>Order Subtotal(with Tax)</td>
                         <td>
                           <i class="fa fa-inr"></i> {subTotal}
                         </td>
@@ -272,7 +271,7 @@ const Shopcart = () => {
                           </span>
                         </td>
                       </tr>
-                      <tr>
+                      <tr className="d-none">
                         <td>Tax({config.taxpercentage}%)</td>
                         <td>
                           <i class="fa fa-inr"></i> {(subTotal * config.taxpercentage) / 100}

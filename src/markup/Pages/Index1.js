@@ -72,7 +72,6 @@ const Index1 = () => {
       <Header active={"home"} home={true} />
 
       <Slider />
-      <br />
 
       <div className="page-content bg-white">
         <div className="content-block">
