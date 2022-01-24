@@ -305,7 +305,9 @@ select.form-control:not([size]):not([multiple]) {
     height: 200px;
   }
   .logoimage {
+    height: 120px !important;
     margin-left: 10rem !important;
+    margin-bottom: 15px !important;
   }
 }
 @media only screen and (max-width: 1020px) and (min-width: 520px) {
@@ -3404,9 +3406,10 @@ blockquote cite {
 ---------------------------------------------------------------*/
 /*=== >logo for header ===*/
 .logoimage {
-  height: 150px !important;
+  height: 150px;
   width: auto !important;
-  margin-left: 30rem;
+  margin-left: 34rem;
+  margin-bottom: -28px;
 }
 .logo-header {
   display: none;
@@ -3673,8 +3676,8 @@ blockquote cite {
 .header-nav .nav > li .sub-menu li a {
   color: #000;
   display: block;
-  font-size: 15px;
-  padding: 10px 20px;
+  font-size: 12px;
+  padding: 5px 20px;
   text-transform: uppercase;
   transition: all 0.15s linear;
   -webkit-transition: all 0.15s linear;

@@ -219,7 +219,7 @@ const Index1 = () => {
             <div className="container my-4">
               {/* <OurPartners /> */}
               <div className="section-head text-center">
-                <h3>Latest Instagram post</h3>
+                <h3>Find Us on Instagram</h3>
               </div>
               <Instagram />
               <div className="row">
