@@ -13,19 +13,13 @@ const Slider = () => {
         {slider_content &&
           slider_content.map((slider) => (
             <>
-              <div className="slideroverlay ">
-                <div className="slide img-fluid" style={{ backgroundImage: "url(" + slider.image_url + ")" }}>
-                  <div className="content text-left px-5">
-                    <div className="">
-                      <Link to={"/shop"} className="btn btnhover border z-index">
-                        Shop now
-                      </Link>
-                      <p className="font-weight-normal text-light">{slider.prefix}</p>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-center align-items-end h-75 w-100 p-1">
-                    <img src={config.logo} className="logoimage" height="50" />
-                  </div>
+              <div className="slideroverlay">
+                <img src={slider.image_url} className="img-fluid" />
+                <div className="text-center">
+                  <Link to={"/shop"} className="btn btnhover border z-index">
+                    Shop now
+                  </Link>
+                  <p className="font-weight-normal text-primary">{slider.prefix}</p>
                 </div>
               </div>
             </>

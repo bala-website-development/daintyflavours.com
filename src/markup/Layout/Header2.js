@@ -176,14 +176,14 @@ const Header2 = () => {
               )}
             </div>
             <div>
-              {localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null && (
+              {
                 <>
                   <Link to={"/shop-cart"}>
                     <i className="ti-shopping-cart cart font-weight-bold"></i>
                     <span className="mb-1 position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger text-light">{cartDetails.length > 0 ? cartDetails.length : 0}</span>
                   </Link>
                 </>
-              )}
+              }
             </div>
           </div>
         </div>
@@ -218,7 +218,7 @@ const Header2 = () => {
               <div className="header-nav  align-items-center bg-white navbar-collapse   collapse navbar myNavbar active" id="navbarNavDropdown">
                 <div>
                   <ul className="nav navbar-nav">
-                    <li>
+                    <li className="d-none">
                       <Link to={"/"}>
                         <i className="text-primary fst-normal fa fa-home fa-3x"></i>
                       </Link>

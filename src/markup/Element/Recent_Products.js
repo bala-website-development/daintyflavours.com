@@ -41,9 +41,9 @@ const Recent_Products = () => {
 
   return (
     <div>
-      <div className="px-1">
-        <div className=" text-left">
-          <h4>Our New Arrivals</h4>
+      <div className="px-1 mt-2">
+        <div className=" text-center">
+          <h3>Our New Arrivals</h3>
 
           <div className="dlab-separator style1 bg-primary"></div>
         </div>
