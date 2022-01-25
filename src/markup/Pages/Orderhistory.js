@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Header from "./../Layout/Header2";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
@@ -17,7 +17,7 @@ const Orderhistory = (props) => {
 
   const [orderHistory, setOrderHistory] = useState([]);
   const [orderDetails, setOrderDetails] = useState([]);
-
+  const history = useHistory();
   const getOrderHistory = async () => {
     await fetch(config.service_url + `getOrderHistory`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userid: localStorage.getItem("uuid") }) })
       .then((response) => response.json())
@@ -47,6 +47,42 @@ const Orderhistory = (props) => {
         } else {
           setSuccessMsg(data.message);
         }
+      });
+  };
+
+  const CancelWholeOrder = async (orderid, value) => {
+    const specificOrder = orderHistory?.filter((a) => a.orderid == orderid);
+    console.log("specificorder", specificOrder);
+    console.log(value);
+    delete specificOrder[0].orderdate;
+    specificOrder[0].updateddate = new Date();
+    //orderstatus
+    if (value === "w_return") specificOrder[0].orderstatus = "Returned";
+    else if (value === "w_cancel") specificOrder[0].orderstatus = "Cancelled";
+
+    //owener notes
+    // else if (value === "ownernotes") specificOrder[0].ownernotes = ownerNotes;
+    console.log("cancel whole order", specificOrder[0]);
+    delete specificOrder[0].grosstotal;
+    //delete specificOrder[0].products; // check and addd this code
+    await fetch(config.service_url + "updateorderbyuser", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", authorization: localStorage.getItem("accessToken") },
+      body: JSON.stringify({ id: orderid, data: specificOrder[0] }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          setSuccessMsg(data.message);
+          getOrderHistory();
+        } else if (data?.status === 499) {
+          history.push("/shop-login");
+        } else {
+          setSuccessMsg(data.message);
+        }
+      })
+      .catch((err) => {
+
       });
   };
 
@@ -211,6 +247,7 @@ const Orderhistory = (props) => {
                                           <th className="d-none">Delivery Date</th>
                                           <th>Payment Status</th>
                                           <th>Total</th>
+                                          <th></th>
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -226,6 +263,29 @@ const Orderhistory = (props) => {
                                               <span className="float-left">
                                                 <i class="fa fa-inr"></i> {orderhistory.grosstotal}
                                               </span>
+                                            </td>
+                                            <td>
+                                              {
+                                                orderhistory.products?.filter((f) => f.p_returnaccepted === false || f.p_returnaccepted === "false"
+                                                  || f.p_returnaccepted === undefined || f.p_returnaccepted === "").length > 0 ?
+                                                  (orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" ?
+                                                    <></> :
+                                                    <button className="p-1 m-1 btnadmin bg-secondary dropdown-item" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
+                                                      Cancel
+                                                    </button>
+                                                  )
+                                                  :
+                                                  (orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" ? <></> :
+                                                    <>
+                                                      <button className="p-1 m-1 btnadmin bg-secondary dropdown-item" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_return")}>
+                                                        Return
+                                                      </button>
+                                                      <button className="p-1 m-1 btnadmin bg-secondary dropdown-item" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
+                                                        Cancel
+                                                      </button>
+                                                    </>
+                                                  )
+                                              }
                                             </td>
                                           </tr>
                                         ))}
