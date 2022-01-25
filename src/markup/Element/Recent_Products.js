@@ -92,12 +92,12 @@ const Recent_Products = () => {
                   </Link>
                 )
               )}
-            <div to={"/shop"} data-role="tile" data-size="medium" className="w-100">
+            <Link to={"/shop"} data-role="tile" data-size="medium" className="w-100">
               <div className="p-1">
                 <span>Shop All</span>
                 <div></div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
         <div className="row w-100">
