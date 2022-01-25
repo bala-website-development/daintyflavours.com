@@ -102,11 +102,12 @@ const Index1 = () => {
           </div>
           <div className="section-full my-1  " style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
             <div className="container ">
-              <div className="row faq-area1">
+              <div className="faq-area1">
                 <div className="recentproduct">
                   <Featured_Products></Featured_Products>
                   <Recent_Product></Recent_Product>
                 </div>
+
                 <div className="col-lg-12 m-b30 d-none">
                   <Accord />
                 </div>

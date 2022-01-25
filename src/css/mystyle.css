@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, 70px);
   grid-template-rows: repeat(auto-fit, 70px);
-  grid-gap: 10px;
+  grid-gap: 5px;
 }
 .tiles-grid .tile-small {
   grid-column: span 1;
@@ -19,7 +19,7 @@
 .tile-large,
 .tile-app {
   display: block;
-  background-color: #1ba1e2;
+  background-color: #b43b8d;
   color: #ffffff;
   width: 150px;
   height: 150px;
@@ -208,7 +208,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, 70px);
   grid-template-rows: repeat(auto-fit, 70px);
-  grid-gap: 10px;
+  grid-gap: 5px;
 }
 .tiles-grid .tile-small {
   grid-column: span 1;
