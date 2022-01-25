@@ -39,12 +39,35 @@ const Featured_Product = (props) => {
   }, []);
 
   return (
-    <div className="px-1 mt-1">
+    <div className="mt-1">
       <div className="text-center">
         <h3>Our Featured Prodcuts</h3>
         <div className="dlab-separator style1 bg-primary"></div>
       </div>
-
+      <div id="tileview text-center">
+        <div class="tiles-grid d-flex-row justify-content-between w-100">
+          <div data-role="tile" data-size="large" className="w-100">
+            <div className="p-1">
+              <span>Title 1</span>
+              <div>₹ 30</div>
+            </div>
+          </div>
+          <div data-role="tile" data-size="medium" className="w-100">
+            <div className="p-1">
+              <span>Title 1</span>
+              <div>₹ 30</div>
+            </div>
+          </div>
+          <div data-role="tile" data-size="medium" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="medium" className="w-100"></div>
+          <div data-role="tile" data-size="medium" className="w-100"></div>
+          <div data-role="tile" data-size="medium" className="w-100"></div>
+          <div data-role="tile" data-size="medium" className="w-100"></div>
+          <div data-role="tile" data-size="medium" className="w-100"></div>
+          <Link to={"/shop"} data-role="tile" data-size="medium" className="w-100"></Link>
+        </div>
+      </div>
       <div className="row">
         {products.length > 0 &&
           products.map((product) => (
