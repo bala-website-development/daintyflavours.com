@@ -46,29 +46,34 @@ const Featured_Product = (props) => {
       </div>
       <div id="tileview text-center">
         <div class="tiles-grid d-flex-row justify-content-between w-100">
-          <div data-role="tile" data-size="large" className="w-100">
-            <div className="p-1">
-              <span>Title 1</span>
-              <div>₹ 30</div>
-            </div>
-          </div>
-          <div data-role="tile" data-size="medium" className="w-100">
-            <div className="p-1">
-              <span>Title 1</span>
-              <div>₹ 30</div>
-            </div>
-          </div>
-          <div data-role="tile" data-size="medium" className="w-100"></div>
-          <div data-role="tile" data-size="large" className="w-100"></div>
-          <div data-role="tile" data-size="medium" className="w-100"></div>
-          <div data-role="tile" data-size="medium" className="w-100"></div>
-          <div data-role="tile" data-size="medium" className="w-100"></div>
-          <div data-role="tile" data-size="medium" className="w-100"></div>
-          <div data-role="tile" data-size="medium" className="w-100"></div>
-          <Link to={"/shop"} data-role="tile" data-size="medium" className="w-100"></Link>
+
+          {products && products.length > 0 && products.map((fProduct, index) => (
+            index === 0 || index === 3 ?
+              <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }} data-role="tile" data-size="large" className="w-100"
+                style={{
+                  backgroundImage: "url(" + fProduct.p_image + ")", backgroundSize: "100%", backgroundSize: 'cover',
+                  overflow: 'hidden'
+                }}>
+
+                <div className="p-1"> <span>{fProduct.p_name}</span>
+                  <div>₹ {fProduct.p_price}</div>
+                  <div></div>
+                </div>
+              </Link> :
+              <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }} data-role="tile" data-size="medium" className="w-100"
+                style={{
+                  backgroundImage: "url(" + fProduct.p_image + ")", backgroundSize: "100%"
+                  , backgroundSize: 'cover',
+                  overflow: 'hidden'
+                }}>
+                <div className="p-1"> <span>{fProduct.p_name}</span>
+                  <div>₹ {fProduct.p_price}</div>
+                </div>
+              </Link>)
+          )}
         </div>
       </div>
-      <div className="row">
+      <div className="row d-none">
         {products.length > 0 &&
           products.map((product) => (
             <div className="col-lg-3">
