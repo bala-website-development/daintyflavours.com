@@ -44,13 +44,52 @@ const Featured_Product = (props) => {
         <h3>Our Featured Prodcuts</h3>
         <div className="dlab-separator style1 bg-primary"></div>
       </div>
+      <div id="tileview text-center d-none">
+        <div class="tiles-grid d-flex-row justify-content-between w-100 d-none">
+          <div data-role="tile" data-size="xlarge" className="w-100 bg-dark">
+            a
+          </div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="xlarge" className="w-100 bg-dark">
+            a
+          </div>{" "}
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+        </div>
+      </div>
+
       <div id="tileview text-center">
         <div class="tiles-grid d-flex-row justify-content-between w-100">
           {products &&
             products.length > 0 &&
             products.map((fProduct, index) =>
-              index === 0 || index === 3 ? (
-                <Link
+              index === 0 || index === 7 ? (
+                <div
+                  to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}
+                  data-role="tile"
+                  data-size="xlarge"
+                  className="w-100"
+                  style={{
+                    backgroundImage: "url(" + fProduct.p_image + ")",
+                    backgroundSize: "100%",
+                    backgroundSize: "cover",
+                    overflow: "hidden",
+                  }}
+                >
+                  <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }} className="p-1">
+                    <div className="p-1">
+                      <span>{fProduct.p_name}</span>
+                      <div>₹ {fProduct.p_price}</div>
+                    </div>
+                  </Link>
+                </div>
+              ) : (
+                <div
                   to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}
                   data-role="tile"
                   data-size="large"
@@ -62,40 +101,15 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <div className="p-1">
-                    {" "}
-                    <span>{fProduct.p_name}</span>
-                    <div>₹ {fProduct.p_price}</div>
-                    <div></div>
-                  </div>
-                </Link>
-              ) : (
-                <Link
-                  to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}
-                  data-role="tile"
-                  data-size="medium"
-                  className="w-100"
-                  style={{
-                    backgroundImage: "url(" + fProduct.p_image + ")",
-                    backgroundSize: "100%",
-                    backgroundSize: "cover",
-                    overflow: "hidden",
-                  }}
-                >
-                  <div className="p-1">
-                    {" "}
-                    <span>{fProduct.p_name}</span>
-                    <div>₹ {fProduct.p_price}</div>
-                  </div>
-                </Link>
+                  <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }} className="p-1">
+                    <div className="p-1">
+                      <span>{fProduct.p_name}</span>
+                      <div>₹ {fProduct.p_price}</div>
+                    </div>
+                  </Link>
+                </div>
               )
             )}
-          <Link to={"/shop"} data-role="tile" data-size="medium" className="w-100">
-            <div className="p-1">
-              <span>Shop All</span>
-              <div></div>
-            </div>
-          </Link>
         </div>
       </div>
       <div className="row d-none">
@@ -187,7 +201,7 @@ const Featured_Product = (props) => {
           ))}
       </div>
 
-      <div className="text-center mt-2 d-none">
+      <div className="text-center mt-2">
         <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
           <i className="fa fa-angle-right m-r10"></i>Shop all
         </Link>
