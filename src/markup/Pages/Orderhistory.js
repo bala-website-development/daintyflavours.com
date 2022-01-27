@@ -8,6 +8,7 @@ import "react-multi-carousel/lib/styles.css";
 //import { Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import img1 from "./../../images/banner/bnr1.jpg";
+import moment from "moment";
 
 const Orderhistory = (props) => {
   //const [productDtl, setProductDtl] = useState({});
@@ -266,25 +267,28 @@ const Orderhistory = (props) => {
                                             </td>
                                             <td>
                                               {
-                                                orderhistory.products?.filter((f) => f.p_returnaccepted === false || f.p_returnaccepted === "false"
-                                                  || f.p_returnaccepted === undefined || f.p_returnaccepted === "").length > 0 ?
-                                                  (orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" ?
-                                                    <></> :
-                                                    <button className="p-1 m-1 btnadmin bg-secondary dropdown-item" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
-                                                      Cancel
-                                                    </button>
-                                                  )
-                                                  :
-                                                  (orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" ? <></> :
-                                                    <>
-                                                      <button className="p-1 m-1 btnadmin bg-secondary dropdown-item" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_return")}>
-                                                        Return
-                                                      </button>
-                                                      <button className="p-1 m-1 btnadmin bg-secondary dropdown-item" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
-                                                        Cancel
-                                                      </button>
-                                                    </>
-                                                  )
+                                                moment(orderhistory.orderdate).add(config.return_cancel_days, 'd') >= moment() ?
+                                                  (
+                                                    orderhistory.products?.filter((f) => f.p_returnaccepted === false || f.p_returnaccepted === "false"
+                                                      || f.p_returnaccepted === undefined || f.p_returnaccepted === "").length > 0 ?
+                                                      (orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" || orderhistory.deliverystatus === "Shipped" ?
+                                                        <></> :
+                                                        <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
+                                                          Cancel
+                                                        </button>
+                                                      )
+                                                      :
+                                                      (orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" || orderhistory.deliverystatus === "Shipped" ? <></> :
+                                                        <>
+                                                          <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_return")}>
+                                                            Return
+                                                          </button>
+                                                          <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
+                                                            Cancel
+                                                          </button>
+                                                        </>
+                                                      )
+                                                  ) : <></>
                                               }
                                             </td>
                                           </tr>

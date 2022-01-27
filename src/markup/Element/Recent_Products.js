@@ -52,7 +52,7 @@ const Recent_Products = () => {
               products.length > 0 &&
               products.map((fProduct, index) =>
                 index === 0 || index === 3 ? (
-                  <Link
+                  <div
                     to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}
                     data-role="tile"
                     data-size="large"
@@ -64,16 +64,16 @@ const Recent_Products = () => {
                       overflow: "hidden",
                     }}
                   >
-                    <div className="p-1">
-                      {" "}
-                      <span>{fProduct.p_name}</span>
-                      <div>₹ {fProduct.p_price}</div>
-                      <div></div>
-                    </div>
-                  </Link>
+                    <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}>
+                      <div className="p-1">
+                        <span>{fProduct.p_name}</span>
+                        <div>₹ {fProduct.p_price}</div>
+                        <div></div>
+                      </div>
+                    </Link>
+                  </div>
                 ) : (
-                  <Link
-                    to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}
+                  <div
                     data-role="tile"
                     data-size="medium"
                     className="w-100"
@@ -84,12 +84,13 @@ const Recent_Products = () => {
                       overflow: "hidden",
                     }}
                   >
-                    <div className="p-1">
-                      {" "}
-                      <span>{fProduct.p_name}</span>
-                      <div>₹ {fProduct.p_price}</div>
-                    </div>
-                  </Link>
+                    <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}>
+                      <div className="p-1">
+                        <span>{fProduct.p_name}</span>
+                        <div>₹ {fProduct.p_price}</div>
+                      </div>
+                    </Link>
+                  </div>
                 )
               )}
             <Link to={"/shop"} data-role="tile" data-size="medium" className="w-100">
