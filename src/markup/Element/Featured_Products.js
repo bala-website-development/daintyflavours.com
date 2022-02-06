@@ -93,7 +93,7 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: "/shop", category: fProduct.category }} className="p-1">
+                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="p-1">
                     <div className="p-1">
                       <span>{fProduct.category}</span>
                     </div>
@@ -111,7 +111,7 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: "/shop", category: fProduct.category }} className="p-1">
+                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="p-1">
                     <div className="p-1">
                       <span>{fProduct.category}</span>
                     </div>
