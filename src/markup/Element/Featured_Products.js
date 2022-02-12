@@ -13,7 +13,7 @@ const Featured_Product = (props) => {
   const [networkError, setNetworkError] = useState("");
   const getFeaturedProducts = async () => {
     console.log("recentpost", products);
-    await fetch(config.service_url + "getFeaturedProducts")
+    await fetch(config.service_url + "getHomePageCategory")
       .then((response) => response.json())
       .then((data1) => {
         if (data1.status === 200) {
@@ -31,9 +31,22 @@ const Featured_Product = (props) => {
         // console.log(networkError);
       });
   };
+  const getHomePageCategory = async () => {
+    console.log("recentpost", products);
+
+    let active1 = JSON.parse(localStorage.getItem("categories"))
+      .filter((filter1, index) => filter1.isactive === 1 && filter1.featured === true && index < config.featuredproduct)
+      .map((data) => {
+        return data;
+      });
+    setProducts(active1);
+
+    console.log("getHomePageCategory", active1);
+  };
 
   useEffect(() => {
-    getFeaturedProducts();
+    //getFeaturedProducts();
+    getHomePageCategory();
     // getGalleryDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -70,41 +83,37 @@ const Featured_Product = (props) => {
             products.map((fProduct, index) =>
               index === 0 || index === 7 ? (
                 <div
-                  to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}
                   data-role="tile"
                   data-size="xlarge"
                   className="w-100"
                   style={{
-                    backgroundImage: "url(" + fProduct.p_image + ")",
+                    backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                     backgroundSize: "100%",
                     backgroundSize: "cover",
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }} className="p-1">
+                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="p-1">
                     <div className="p-1">
-                      <span>{fProduct.p_name}</span>
-                      <div>₹ {fProduct.p_price}</div>
+                      <span>{fProduct.category}</span>
                     </div>
                   </Link>
                 </div>
               ) : (
                 <div
-                  to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}
                   data-role="tile"
                   data-size="large"
                   className="w-100"
                   style={{
-                    backgroundImage: "url(" + fProduct.p_image + ")",
+                    backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                     backgroundSize: "100%",
                     backgroundSize: "cover",
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }} className="p-1">
+                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="p-1">
                     <div className="p-1">
-                      <span>{fProduct.p_name}</span>
-                      <div>₹ {fProduct.p_price}</div>
+                      <span>{fProduct.category}</span>
                     </div>
                   </Link>
                 </div>

@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 const Shopchekout = () => {
   const [cartDetails, setCartDetails] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
-
+  const [productWeight, setProductWeight] = useState(0);
   const [networkError, setNetworkError] = useState("");
   const [loading, setLoading] = useState(false);
   const [smShow, setSmShow] = useState(false);
@@ -55,7 +55,13 @@ const Shopchekout = () => {
             })
             .reduce((a, b) => a + b, 0)
         );
-
+        setProductWeight(
+          data
+            .map((wt) => {
+              return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
+            })
+            .reduce((a, b) => a + b, 0)
+        );
         setLoading((loading) => !loading);
         console.log("cart details", data);
       })
@@ -116,8 +122,10 @@ const Shopchekout = () => {
       deliverystatus: "InProgress",
       deliverydate: "",
       orderdate: new Date(),
-      shipping: subTotal < config.freeshippingcost ? config.shippingcost : 0,
-      grosstotal: subTotal + (subTotal < config.freeshippingcost ? config.shippingcost : 0),
+      //shipping: subTotal < config.freeshippingcost ? config.shippingcost : 0,
+      //grosstotal: subTotal + (subTotal < config.freeshippingcost ? config.shippingcost : 0),
+      shipping: productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost),
+      grosstotal: subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)),
       userid: localStorage.getItem("uuid"),
       usernotes: notes,
       billingaddress: userAddress[0],
@@ -290,11 +298,16 @@ const Shopchekout = () => {
                       {!loading ? (
                         cartDetails.length > 0 && status === false ? (
                           cartDetails.map((cart, key) => (
-                            <tr className="alert">
+                            <tr className="font-weight-normal">
                               <td className="product-item-img">
                                 <img src={cart.p_image ? cart.p_image : config.defaultimage} alt={cart.p_name} />
                               </td>
-                              <td className="product-item-name">{cart.p_name}</td>
+                              <td>
+                                {cart.p_name}{" "}
+                                <div>
+                                  <i>{cart.p_productweight && " Wt.: " + cart.p_productweight + "gms"}</i>
+                                </div>
+                              </td>
                               <td className="product-item-price">{cart.p_price}</td>
                               <td className="product-item-quantity">{cart.p_quantity}</td>
                               <td className="product-item-totle">
@@ -333,10 +346,12 @@ const Shopchekout = () => {
                           </tr>
                           <tr>
                             <td>Shipping</td>
-                            <td>
-                              <i class="fa fa-inr"></i> {subTotal < config.freeshippingcost ? config.shippingcost : 0}
-                              <div className={subTotal < config.freeshippingcost ? "small" : "d-none"}>
-                                {config.freeshippingmessage} <i class="fa fa-inr"></i> {config.freeshippingcost}
+                            <td class="align-right">
+                              <i class="fa fa-inr"></i> {productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)}
+                              <div className={"small"}>
+                                Total Product Weight: {productWeight / 1000.0} Kgs. ; Weight/Kg: {config.shippingcost}
+                                <br />
+                                {config.internationalshippingmessage}
                               </div>
                             </td>
                           </tr>
@@ -349,7 +364,7 @@ const Shopchekout = () => {
                           <tr className="bg-primary text-light">
                             <td>Total</td>
                             <td>
-                              <i class="fa fa-inr"></i> {subTotal + (subTotal * config.taxpercentage) / 100 + (subTotal < config.freeshippingcost ? config.shippingcost : 0)}
+                              <i class="fa fa-inr"></i> {subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))}
                             </td>
                           </tr>
                         </tbody>

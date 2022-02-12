@@ -11,13 +11,13 @@ const Recent_Products = () => {
   const [products, setProducts] = useState([]);
   const [galleryimage, setGalleryImage] = useState([]);
   const [networkError, setNetworkError] = useState("");
-  const getLatestProducts = async () => {
-    await fetch(config.service_url + "getLatestProducts")
+  const getNewarrivalsProducts = async () => {
+    await fetch(config.service_url + "getFeaturedProducts")
       .then((response) => response.json())
       .then((data) => {
         if (data.status === 200) {
           let active = data.data
-            .filter((filter, index) => filter.isactive === 1 && index < config.recentproduct)
+            .filter((filter, index) => filter.isactive === 1 && index < config.newarrivalsproduct)
             .map((data) => {
               return data;
             });
@@ -34,8 +34,8 @@ const Recent_Products = () => {
   };
 
   useEffect(() => {
-    getLatestProducts();
-
+    getNewarrivalsProducts();
+    //coverting Latest product to Featured product. it is newest arrival as per this client.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
