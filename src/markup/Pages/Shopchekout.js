@@ -199,7 +199,7 @@ const Shopchekout = () => {
             <form className="shop-form" onSubmit={handleSubmit(onSubmit)}>
               <div className="row">
                 <div className="col-lg-6 col-md-12 m-b30">
-                  <h3>Shipping Address</h3>
+                  <h3>Full Shipping Address</h3>
                   {/* <div className="form-group">
                     <Form.Group controlId="exampleForm.ControlSelect1">
                       <Form.Control as="select">
@@ -234,7 +234,7 @@ const Shopchekout = () => {
                     <input type="text" name="phonenumber" placeholder="Phonenumber" defaultValue={userAddress[0]?.phonenumber} className="form-control" {...register("phonenumber")} required />
                   </div>
                   <div className="form-group">
-                    Shipping Address
+                    Full Shipping Address
                     <input type="text" name="address" placeholder="Full Address" defaultValue={userAddress[0]?.address} className="form-control" {...register("address")} required />
                   </div>
                   <div className="form-group">
@@ -287,7 +287,7 @@ const Shopchekout = () => {
                     <thead>
                       <tr>
                         <th>Product</th>
-                        <th>Product name</th>
+                        <th class="d-none">Product name</th>
                         <th>Unit Price</th>
                         <th>Quantity</th>
                         <th>Total</th>
@@ -301,16 +301,16 @@ const Shopchekout = () => {
                             <tr className="font-weight-normal">
                               <td className="product-item-img">
                                 <img src={cart.p_image ? cart.p_image : config.defaultimage} alt={cart.p_name} />
-                              </td>
-                              <td>
-                                {cart.p_name}{" "}
                                 <div>
-                                  <i>{cart.p_productweight && " Wt.: " + cart.p_productweight + "gms"}</i>
-                                </div>
+                                  {cart.p_name}{" "}
+                                  <div>
+                                    <i>{cart.p_productweight && " Wt.: " + cart.p_productweight + "gms"}</i>
+                                  </div>
+                                </div>{" "}
                               </td>
                               <td className="product-item-price">{cart.p_price}</td>
                               <td className="product-item-quantity">{cart.p_quantity}</td>
-                              <td className="product-item-totle">
+                              <td className="product-item-totle text-nowrap">
                                 <i class="fa fa-inr"></i> {cart.p_price * cart.p_quantity}
                               </td>
                               <td className="product-item-totle">
@@ -348,10 +348,18 @@ const Shopchekout = () => {
                             <td>Shipping</td>
                             <td class="align-right">
                               <i class="fa fa-inr"></i> {productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td></td>
+                            <td>
                               <div className={"small"}>
                                 Total Product Weight: {productWeight / 1000.0} Kgs. ; Weight/Kg: {config.shippingcost}
                                 <br />
+                                {config.shippingmessage}
+                                <br />
                                 {config.internationalshippingmessage}
+                                <br />
                               </div>
                             </td>
                           </tr>
