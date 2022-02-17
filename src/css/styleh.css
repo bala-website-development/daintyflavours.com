@@ -3220,7 +3220,7 @@ blockquote cite {
 .header-nav .nav > li .sub-menu li a {
   color: #000;
   display: block;
-  font-size: 15px;
+  font-size: 13px;
   padding: 10px 20px;
   text-transform: uppercase;
   transition: all 0.15s linear;

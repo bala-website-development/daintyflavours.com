@@ -42,7 +42,7 @@ const PaymentPage = (props) => {
           </div>
 
           <div className="content-block">
-            <div className="section-full content-inner-2 contact-form bg-white" style={{ backgroundImage: "url(" + img2 + ")", backgroundSize: "100%" }}>
+            <div className="section-full content-inner-2 contact-form bg-white">
               <div className="container">
                 <div className="row">
                   <div className="col-lg-12">

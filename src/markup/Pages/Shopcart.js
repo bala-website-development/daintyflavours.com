@@ -11,6 +11,7 @@ const Shopcart = () => {
   const history = useHistory();
   const [cartUpdated, setCartUpdated] = useState(false);
   const [subTotal, setSubTotal] = useState(0);
+  const [productWeight, setProductWeight] = useState(0);
   const [networkError, setNetworkError] = useState("");
   const [message, setMessage] = useState("");
   const [smShow, setSmShow] = useState(false);
@@ -80,6 +81,13 @@ const Shopcart = () => {
               })
               .reduce((a, b) => a + b, 0)
           );
+          setProductWeight(
+            data
+              .map((wt) => {
+                return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
+              })
+              .reduce((a, b) => a + b, 0)
+          );
           setLoading((loading) => !loading);
           console.log("cart details", data);
           setCartUpdated(false);
@@ -123,11 +131,16 @@ const Shopcart = () => {
           </div>
         </div>
 
-        <div className="section-full content-inner">
+        <div className="section-full">
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
-                <div className="table-responsive m-b50">
+                <div className="table-responsive m-b20">
+                  <div className="text-center">
+                    <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
+                      <i className="fa fa-angle-right m-r10"></i>Shop all
+                    </Link>
+                  </div>
                   <table className="table check-tbl">
                     <thead>
                       <div className="d-flex justify-content-between font-weigth-bold my-1 p-2 border-bottom">
@@ -146,13 +159,9 @@ const Shopcart = () => {
                         <div className="w-25">
                           <b>Total</b>
                         </div>
+
                         <div className="w-25">
-                          <b>Tax</b>
-                        </div>
-                        <div className="w-25">
-                          <b>
-                            Net Amount <i>*inclusive of tax</i>
-                          </b>
+                          <b>Net Amount</b>
                         </div>
                         <div className="w-10"></div>
                       </div>
@@ -163,9 +172,14 @@ const Shopcart = () => {
                           cartDetails.map((cart, key) => (
                             <div className="d-flex justify-content-between align-items-center p-1 my-1 border-bottom">
                               <div className="w-25">
-                                <img className="smallimage" src={cart.p_image ? cart.p_image : config.defaultimage} alt="" />
+                                <img className="smallimage" src={cart.p_image ? cart.p_image : config.defaultimage} alt={cart.p_name} />
                               </div>
-                              <div className="w-30">{cart.p_name}</div>
+                              <div className="w-30">
+                                {cart.p_name}
+                                <div>
+                                  <i>{cart.p_productweight && " Wt.: " + cart.p_productweight + "gms"}</i>
+                                </div>
+                              </div>
                               <div className="w-25">{cart.p_price}</div>
                               <div className="w-25">
                                 <select id={key} className="drpquantity" onChange={(e) => updateCartQuantity(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
@@ -184,11 +198,12 @@ const Shopcart = () => {
                               <div className="w-25 text-nowrap">
                                 {" "}
                                 <i class="fa fa-inr"></i> {cart.p_price * cart.p_quantity}
+                                <div>
+                                  + Tax:
+                                  {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
+                                </div>
                               </div>
-                              <div className="w-25 text-nowrap">
-                                {" "}
-                                {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
-                              </div>
+
                               <div className="w-25 text-nowrap">
                                 {" "}
                                 <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)}
@@ -219,60 +234,38 @@ const Shopcart = () => {
                 </div>
               </div>
             </div>
+
             <div className="row">
-              <div className="col-lg-6 col-md-6 m-b30">
-                {/* <form className="shop-form">
-                  <h3>Calculate Shipping</h3>
-                  <div className="form-group">
-                    <Form.Group controlId="exampleForm.ControlSelect1">
-                      <Form.Control as="select">
-                        <option value="">Credit Card Type</option>
-                        <option value="">Another option</option>
-                        <option value="">A option</option>
-                        <option value="">Potato</option>
-                      </Form.Control>
-                    </Form.Group>
-                  </div>
-                  <div className="row">
-                    <div className="form-group col-lg-6">
-                      <input type="text" className="form-control" placeholder="Credit Card Number" />
-                    </div>
-                    <div className="form-group col-lg-6">
-                      <input type="text" className="form-control" placeholder="Card Verification Number" />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <input type="text" className="form-control" placeholder="Coupon Code" />
-                  </div>
-                  <div className="form-group">
-                    <button className="btn btnhover" type="button">
-                      Apply Coupon
-                    </button>
-                  </div>
-                </form> */}
-              </div>
+              <div className="col-lg-6 col-md-6 m-b30"></div>
               {cartDetails.length > 0 && (
                 <div className="col-lg-6 col-md-6">
                   <h3>Cart Subtotal</h3>
                   <table className="table-bordered check-tbl">
                     <tbody>
                       <tr>
-                        <td>Order Subtotal</td>
+                        <td>Order Subtotal(with Tax)</td>
                         <td>
                           <i class="fa fa-inr"></i> {subTotal}
                         </td>
                       </tr>
                       <tr>
                         <td>Shipping</td>
-                        <td>
+                        <td class="d-none">
                           <i class="fa fa-inr"></i> {subTotal < config.freeshippingcost ? config.shippingcost : 0}
                           <br />
                           <span className={subTotal < config.freeshippingcost ? "small" : "d-none"}>
                             {config.freeshippingmessage} <i class="fa fa-inr"></i> {config.freeshippingcost}
                           </span>
                         </td>
+                        <td>
+                          <i class="fa fa-inr"></i> {productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)}
+                          <br />
+                          <span className={"small"}>
+                            Total Product Weight: {productWeight / 1000.0} Kgs. ; Weight/Kg: {config.shippingcost}
+                          </span>
+                        </td>
                       </tr>
-                      <tr>
+                      <tr className="d-none">
                         <td>Tax({config.taxpercentage}%)</td>
                         <td>
                           <i class="fa fa-inr"></i> {(subTotal * config.taxpercentage) / 100}
@@ -281,11 +274,12 @@ const Shopcart = () => {
                       <tr className="bg-primary text-light">
                         <td>Total</td>
                         <td>
-                          <i class="fa fa-inr"></i> {subTotal + (subTotal * config.taxpercentage) / 100 + (subTotal < config.freeshippingcost ? config.shippingcost : 0)}
+                          <i class="fa fa-inr"></i> {subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))}
                         </td>
                       </tr>
                     </tbody>
                   </table>
+
                   <div className="form-group">
                     {/* <button className="btn btnhover" type="button">
                     Proceed to Checkout 

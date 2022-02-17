@@ -1,0 +1,229 @@
+.tiles-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 70px);
+  grid-template-rows: repeat(auto-fit, 70px);
+  grid-gap: 5px;
+}
+.tiles-grid .tile-small {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+.tile-small {
+  width: 70px;
+  height: 70px;
+}
+
+.tile-small,
+.tile-medium,
+.tile-wide,
+.tile-large,
+.tile-xlarge,
+.tile-app {
+  display: block;
+  background-color: #ecb7d4;
+  color: #ffffff;
+  width: 150px;
+
+  -webkit-box-shadow: inset 0 0 1px #ffffcc;
+  box-shadow: inset 0 0 1px #ffffcc;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  max-width: none !important;
+}
+.tiles-grid .tile-small.row-2 {
+  grid-row: 2 / span 1;
+}
+.tiles-grid .tile-small.col-1 {
+  grid-column: 1 / span 1;
+}
+.tiles-grid .tile-medium {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.tile-medium {
+  width: 150px;
+  height: 150px;
+}
+
+.tiles-grid .tile-large {
+  grid-column: span 4;
+  grid-row: span 4;
+}
+.tiles-grid .tile-xlarge {
+  grid-column: span 8;
+  grid-row: span 8;
+}
+.tile-xlarge {
+  width: 610px;
+  height: 624px;
+}
+
+@media only screen and (max-width: 479px) {
+  .tiles-grid .tile-xlarge {
+    grid-column: span 4;
+    grid-row: span 4;
+  }
+  .tile-xlarge {
+    width: 310px;
+    height: 310px;
+  }
+}
+
+.tile-large {
+  width: 310px;
+  height: 310px;
+}
+
+.tiles-grid .tile-wide {
+  grid-column: span 4;
+  grid-row: span 2;
+}
+
+.tile-wide {
+  width: 310px;
+  height: 150px;
+}
+
+.transform-right,
+.tile-medium.transform-right,
+.tile-small.transform-right,
+.tile-wide.transform-right {
+  -webkit-transform-origin: left 50%;
+  transform-origin: left 50%;
+  -webkit-transform: perspective(500px) rotateY(0.138372rad) !important;
+  transform: perspective(500px) rotateY(0.138372rad) !important;
+}
+.tile-app.transform-right.tile-small,
+.tile-large.transform-right.tile-small,
+.tile-medium.transform-right.tile-small,
+.tile-small.transform-right.tile-small,
+.tile-wide.transform-right.tile-small {
+  -webkit-transform: perspective(500px) rotateY(0.276744rad) !important;
+  transform: perspective(500px) rotateY(0.276744rad) !important;
+}
+.tile-app.transform-right.tile-wide,
+.tile-large.transform-right.tile-wide,
+.tile-medium.transform-right.tile-wide,
+.tile-small.transform-right.tile-wide,
+.tile-wide.transform-right.tile-wide {
+  -webkit-transform: perspective(500px) rotateY(0.069186rad) !important;
+  transform: perspective(500px) rotateY(0.069186rad) !important;
+}
+.tile-app.transform-right.tile-large,
+.tile-large.transform-right.tile-large,
+.tile-medium.transform-right.tile-large,
+.tile-small.transform-right.tile-large,
+.tile-wide.transform-right.tile-large {
+  -webkit-transform: perspective(500px) rotateY(0.046124rad) !important;
+  transform: perspective(500px) rotateY(0.046124rad) !important;
+}
+.tile-app.transform-left,
+.tile-large.transform-left,
+.tile-medium.transform-left,
+.tile-small.transform-left,
+.tile-wide.transform-left {
+  -webkit-transform-origin: right 50%;
+  transform-origin: right 50%;
+  -webkit-transform: perspective(500px) rotateY(-0.138372rad) !important;
+  transform: perspective(500px) rotateY(-0.138372rad) !important;
+}
+.tile-app.transform-left.tile-small,
+.tile-large.transform-left.tile-small,
+.tile-medium.transform-left.tile-small,
+.tile-small.transform-left.tile-small,
+.tile-wide.transform-left.tile-small {
+  -webkit-transform: perspective(500px) rotateY(-0.276744rad) !important;
+  transform: perspective(500px) rotateY(-0.276744rad) !important;
+}
+.tile-app.transform-left.tile-wide,
+.tile-large.transform-left.tile-wide,
+.tile-medium.transform-left.tile-wide,
+.tile-small.transform-left.tile-wide,
+.tile-wide.transform-left.tile-wide {
+  -webkit-transform: perspective(500px) rotateY(-0.069186rad) !important;
+  transform: perspective(500px) rotateY(-0.069186rad) !important;
+}
+.tile-app.transform-left.tile-large,
+.tile-large.transform-left.tile-large,
+.tile-medium.transform-left.tile-large,
+.tile-small.transform-left.tile-large,
+.tile-wide.transform-left.tile-large {
+  -webkit-transform: perspective(500px) rotateY(-0.046124rad) !important;
+  transform: perspective(500px) rotateY(-0.046124rad) !important;
+}
+.tile-app.transform-top,
+.tile-large.transform-top,
+.tile-medium.transform-top,
+.tile-small.transform-top,
+.tile-wide.transform-top {
+  -webkit-transform-origin: 50% bottom;
+  transform-origin: 50% bottom;
+  -webkit-transform: perspective(500px) rotateX(0.138372rad) !important;
+  transform: perspective(500px) rotateX(0.138372rad) !important;
+}
+.tile-app.transform-top.tile-small,
+.tile-large.transform-top.tile-small,
+.tile-medium.transform-top.tile-small,
+.tile-small.transform-top.tile-small,
+.tile-wide.transform-top.tile-small {
+  -webkit-transform: perspective(500px) rotateX(0.276744rad) !important;
+  transform: perspective(500px) rotateX(0.276744rad) !important;
+}
+.tile-app.transform-top.tile-wide,
+.tile-large.transform-top.tile-wide,
+.tile-medium.transform-top.tile-wide,
+.tile-small.transform-top.tile-wide,
+.tile-wide.transform-top.tile-wide {
+  -webkit-transform: perspective(500px) rotateX(0.069186rad) !important;
+  transform: perspective(500px) rotateX(0.069186rad) !important;
+}
+.tile-app.transform-top.tile-large,
+.tile-large.transform-top.tile-large,
+.tile-medium.transform-top.tile-large,
+.tile-small.transform-top.tile-large,
+.tile-wide.transform-top.tile-large {
+  -webkit-transform: perspective(500px) rotateX(0.046124rad) !important;
+  transform: perspective(500px) rotateX(0.046124rad) !important;
+}
+.tile-app.transform-bottom,
+.tile-xlarge.transform-bottom,
+.tile-large.transform-bottom,
+.tile-medium.transform-bottom,
+.tile-small.transform-bottom,
+.tile-wide.transform-bottom {
+  -webkit-transform-origin: 50% top;
+  transform-origin: 50% top;
+  -webkit-transform: perspective(500px) rotateX(-0.138372rad) !important;
+  transform: perspective(500px) rotateX(-0.138372rad) !important;
+}
+.tile-app.transform-bottom.tile-small,
+.tile-large.transform-bottom.tile-small,
+.tile-medium.transform-bottom.tile-small,
+.tile-small.transform-bottom.tile-small,
+.tile-wide.transform-bottom.tile-small {
+  -webkit-transform: perspective(500px) rotateX(-0.276744rad) !important;
+  transform: perspective(500px) rotateX(-0.276744rad) !important;
+}
+.tile-app.transform-bottom.tile-wide,
+.tile-large.transform-bottom.tile-wide,
+.tile-medium.transform-bottom.tile-wide,
+.tile-small.transform-bottom.tile-wide,
+.tile-wide.transform-bottom.tile-wide {
+  -webkit-transform: perspective(500px) rotateX(-0.069186rad) !important;
+  transform: perspective(500px) rotateX(-0.069186rad) !important;
+}
+.tile-app.transform-bottom.tile-large,
+.tile-large.transform-bottom.tile-large,
+.tile-medium.transform-bottom.tile-large,
+.tile-small.transform-bottom.tile-large,
+.tile-wide.transform-bottom.tile-large {
+  -webkit-transform: perspective(500px) rotateX(-0.046124rad) !important;
+  transform: perspective(500px) rotateX(-0.046124rad) !important;
+}

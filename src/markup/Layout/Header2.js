@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 
 import { Link, useHistory } from "react-router-dom";
@@ -68,6 +69,7 @@ const Header2 = () => {
         if (data.status === 200) {
           console.log("main master category", data);
           let _filter = data.data.filter((_d) => _d.type === "product");
+          _filter.push({ "Expiration": moment().add(1, 'd') });
           localStorage.setItem("maincategories", JSON.stringify(_filter));
           setMenuMainCategory(_filter);
           localStorage.setItem("cartUpdated", true);
@@ -89,6 +91,7 @@ const Header2 = () => {
         if (data.status === 200) {
           console.log("main master category", data);
           let _filter = data.data.filter((_d) => _d.type === "product");
+          _filter.push({ "Expiration": moment().add(1, 'd') });
           localStorage.setItem("categories", JSON.stringify(_filter));
           setMenuCategory(_filter);
           localStorage.setItem("cartUpdated", true);
@@ -102,6 +105,35 @@ const Header2 = () => {
       });
   };
 
+  const checkExpirationForMainCategories = () => {
+    let _expDate = "";
+    // moment(orderhistory.orderdate).add(config.return_cancel_days, 'd') >= moment()
+    let _localstorageData = JSON.parse(localStorage.getItem("maincategories"));
+    let _getdate = _localstorageData.filter(f => f?.Expiration);
+    if (_getdate.length > 0) {
+      _expDate = moment(_getdate[0]["Expiration"])
+    }
+    if (_expDate <= moment()) {
+      console.log("goinside")
+      getMainCategories();
+    }
+  }
+
+  const checkExpirationForCategories = () => {
+    // moment(orderhistory.orderdate).add(config.return_cancel_days, 'd') >= moment()
+    let _expDate = "";
+    let _localstorageData = JSON.parse(localStorage.getItem("categories"));
+    let _getdate = _localstorageData.filter(f => f?.Expiration);
+    if (_getdate.length > 0) {
+      _expDate = moment(_getdate[0]["Expiration"])
+    }
+    // var _expDate = moment(_localstorageData.filter(f => f?.Expiration)[0]["Expiration"])
+    if (_expDate <= moment()) {
+      console.log("goinside")
+      getCategories();
+    }
+  }
+
   useEffect(() => {
     const fetchCartDetails = () => {
       fetch(config.service_url + "getCartProducts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userid: localStorage.getItem("uuid") }) })
@@ -112,7 +144,7 @@ const Header2 = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) {});
+        .catch(function (error) { });
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
@@ -122,6 +154,7 @@ const Header2 = () => {
       console.log("fromservice");
     } else {
       if (menuMainCategory === undefined || menuMainCategory === null || menuMainCategory?.length === 0) {
+        checkExpirationForMainCategories();
         setMenuMainCategory(JSON.parse(localStorage.getItem("maincategories")));
         console.log(menuMainCategory, "ls");
       }
@@ -132,6 +165,7 @@ const Header2 = () => {
       console.log("fromservice");
     } else {
       if (menuCategory === undefined || menuCategory === null || menuCategory?.length === 0) {
+        checkExpirationForCategories();
         setMenuCategory(JSON.parse(localStorage.getItem("categories")));
         console.log(menuCategory, "ls");
       }
@@ -176,14 +210,14 @@ const Header2 = () => {
               )}
             </div>
             <div>
-              {localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null && (
+              {
                 <>
                   <Link to={"/shop-cart"}>
                     <i className="ti-shopping-cart cart font-weight-bold"></i>
                     <span className="mb-1 position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger text-light">{cartDetails.length > 0 ? cartDetails.length : 0}</span>
                   </Link>
                 </>
-              )}
+              }
             </div>
           </div>
         </div>
@@ -218,7 +252,7 @@ const Header2 = () => {
               <div className="header-nav  align-items-center bg-white navbar-collapse   collapse navbar myNavbar active" id="navbarNavDropdown">
                 <div>
                   <ul className="nav navbar-nav">
-                    <li>
+                    <li className="d-none">
                       <Link to={"/"}>
                         <i className="text-primary fst-normal fa fa-home fa-3x"></i>
                       </Link>
@@ -231,7 +265,7 @@ const Header2 = () => {
                       menuMainCategory?.map((mmc) => (
                         <li>
                           <Link>
-                            {mmc.maincategory.toUpperCase()}
+                            {mmc.maincategory?.toUpperCase()}
                             <i className="fa fa-chevron-down"></i>
                           </Link>
                           <ul className="sub-menu">
@@ -240,8 +274,8 @@ const Header2 = () => {
                                 .filter((fil) => fil.maincategory === mmc.maincategory)
                                 ?.map((mc) => (
                                   <li>
-                                    <Link to={{ pathname: "/shop", maincategory: mmc.maincategory, bannerimage: mc.banner_image, category: mc.category }}>
-                                      <span className="text-nowrap">{mc.category}</span>
+                                    <Link to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}>
+                                      <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
                                   </li>
                                 ))}

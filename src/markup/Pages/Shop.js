@@ -446,18 +446,18 @@ const Shop = (props) => {
                                   )}
                                 </div>
                                 <div className="item-info text-center">
-                                  <h4 className="item-title">
+                                  <h5 className="">
                                     <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                  </h4>
-                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }} className="btn btn-sm btnhover">
+                                  </h5>
+                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }} className="btn btn-secondary btn-sm btnhover">
                                     Details
                                   </Link>{" "}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-sm btnhover">
+                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-secondary btn-sm btnhover">
                                       <i className="ti-shopping-cart m-r5"></i> Add to cart
                                     </button>
                                   ) : (
-                                    <button disabled={true} className="btn btnhover">
+                                    <button disabled={true} className="btn btn-secondary btn-sm btnhover">
                                       Out of Stock
                                     </button>
                                   )}

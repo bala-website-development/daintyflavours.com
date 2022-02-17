@@ -110,7 +110,9 @@
 
   color: white;
 }
-
+.btn-secondary {
+  background-color: var(--color-secondry) !important;
+}
 /*Hex color :hover */
 .btn:active,
 .nav-tabs li a.active,

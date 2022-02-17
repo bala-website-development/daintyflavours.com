@@ -72,7 +72,6 @@ const Index1 = () => {
       <Header active={"home"} home={true} />
 
       <Slider />
-      <br />
 
       <div className="page-content bg-white">
         <div className="content-block">
@@ -103,11 +102,12 @@ const Index1 = () => {
           </div>
           <div className="section-full my-1  " style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
             <div className="container ">
-              <div className="row faq-area1">
-                <div className="recentproduct px-1">
+              <div className="faq-area1">
+                <div className="recentproduct">
                   <Featured_Products></Featured_Products>
                   <Recent_Product></Recent_Product>
                 </div>
+
                 <div className="col-lg-12 m-b30 d-none">
                   <Accord />
                 </div>
@@ -219,7 +219,7 @@ const Index1 = () => {
             <div className="container my-4">
               {/* <OurPartners /> */}
               <div className="section-head text-center">
-                <h3>Latest Instagram post</h3>
+                <h3>Find Us on Instagram</h3>
               </div>
               <Instagram />
               <div className="row">

@@ -13,7 +13,7 @@ const Featured_Product = (props) => {
   const [networkError, setNetworkError] = useState("");
   const getFeaturedProducts = async () => {
     console.log("recentpost", products);
-    await fetch(config.service_url + "getFeaturedProducts")
+    await fetch(config.service_url + "getHomePageCategory")
       .then((response) => response.json())
       .then((data1) => {
         if (data1.status === 200) {
@@ -31,21 +31,97 @@ const Featured_Product = (props) => {
         // console.log(networkError);
       });
   };
+  const getHomePageCategory = async () => {
+    console.log("recentpost", products);
+
+    let active1 = JSON.parse(localStorage.getItem("categories"))
+      .filter((filter1, index) => filter1.isactive === 1 && filter1.featured === true && index < config.featuredproduct)
+      .map((data) => {
+        return data;
+      });
+    setProducts(active1);
+
+    console.log("getHomePageCategory", active1);
+  };
 
   useEffect(() => {
-    getFeaturedProducts();
+    //getFeaturedProducts();
+    getHomePageCategory();
     // getGalleryDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="px-1 mt-1">
-      <div className="text-left">
-        <h4>Our Featured Prodcuts</h4>
+    <div className="mt-1">
+      <div className="text-center">
+        <h3>Our Featured Prodcuts</h3>
         <div className="dlab-separator style1 bg-primary"></div>
       </div>
+      <div id="tileview text-center d-none">
+        <div class="tiles-grid d-flex-row justify-content-between w-100 d-none">
+          <div data-role="tile" data-size="xlarge" className="w-100 bg-dark">
+            a
+          </div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="xlarge" className="w-100 bg-dark">
+            a
+          </div>{" "}
+          <div data-role="tile" data-size="large" className="w-100"></div>
+          <div data-role="tile" data-size="large" className="w-100"></div>
+        </div>
+      </div>
 
-      <div className="row">
+      <div id="tileview text-center">
+        <div class="tiles-grid d-flex-row justify-content-between w-100">
+          {products &&
+            products.length > 0 &&
+            products.map((fProduct, index) =>
+              index === 0 || index === 7 ? (
+                <div
+                  data-role="tile"
+                  data-size="xlarge"
+                  className="w-100"
+                  style={{
+                    backgroundImage: "url(" + fProduct.thumbnail_image + ")",
+                    backgroundSize: "100%",
+                    backgroundSize: "cover",
+                    overflow: "hidden",
+                  }}
+                >
+                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="p-1">
+                    <div className="p-1">
+                      <span>{fProduct.category}</span>
+                    </div>
+                  </Link>
+                </div>
+              ) : (
+                <div
+                  data-role="tile"
+                  data-size="large"
+                  className="w-100"
+                  style={{
+                    backgroundImage: "url(" + fProduct.thumbnail_image + ")",
+                    backgroundSize: "100%",
+                    backgroundSize: "cover",
+                    overflow: "hidden",
+                  }}
+                >
+                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="p-1">
+                    <div className="p-1">
+                      <span>{fProduct.category}</span>
+                    </div>
+                  </Link>
+                </div>
+              )
+            )}
+        </div>
+      </div>
+      <div className="row d-none">
         {products.length > 0 &&
           products.map((product) => (
             <div className="col-lg-3">
