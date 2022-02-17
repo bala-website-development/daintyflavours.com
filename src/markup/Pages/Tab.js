@@ -32,8 +32,6 @@ const Popupss = (props) => {
           setMasterMainCategory(_filter);
           localStorage.setItem("cartUpdated", true);
         } else if (data.status === 400) {
-          setMessage("No Data");
-          handleVisible();
         }
       })
       .catch((err) => {
@@ -51,8 +49,6 @@ const Popupss = (props) => {
           setMasterCategory(_filter);
           localStorage.setItem("cartUpdated", true);
         } else if (data.status === 400) {
-          setMessage("No Data");
-          handleVisible();
         }
       })
       .catch((err) => {
