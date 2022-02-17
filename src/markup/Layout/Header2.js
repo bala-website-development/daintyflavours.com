@@ -69,7 +69,7 @@ const Header2 = () => {
         if (data.status === 200) {
           console.log("main master category", data);
           let _filter = data.data.filter((_d) => _d.type === "product");
-          _filter.push({ "Expiration": moment().add(1, 'd') });
+          _filter.push({ Expiration: moment().add(1, "d") });
           localStorage.setItem("maincategories", JSON.stringify(_filter));
           setMenuMainCategory(_filter);
           localStorage.setItem("cartUpdated", true);
@@ -91,7 +91,7 @@ const Header2 = () => {
         if (data.status === 200) {
           console.log("main master category", data);
           let _filter = data.data.filter((_d) => _d.type === "product");
-          _filter.push({ "Expiration": moment().add(1, 'd') });
+          _filter.push({ Expiration: moment().add(1, "d") });
           localStorage.setItem("categories", JSON.stringify(_filter));
           setMenuCategory(_filter);
           localStorage.setItem("cartUpdated", true);
@@ -109,30 +109,30 @@ const Header2 = () => {
     let _expDate = "";
     // moment(orderhistory.orderdate).add(config.return_cancel_days, 'd') >= moment()
     let _localstorageData = JSON.parse(localStorage.getItem("maincategories"));
-    let _getdate = _localstorageData.filter(f => f?.Expiration);
+    let _getdate = _localstorageData.filter((f) => f?.Expiration);
     if (_getdate.length > 0) {
-      _expDate = moment(_getdate[0]["Expiration"])
+      _expDate = moment(_getdate[0]["Expiration"]);
     }
     if (_expDate <= moment()) {
-      console.log("goinside")
+      console.log("goinside");
       getMainCategories();
     }
-  }
+  };
 
   const checkExpirationForCategories = () => {
     // moment(orderhistory.orderdate).add(config.return_cancel_days, 'd') >= moment()
     let _expDate = "";
     let _localstorageData = JSON.parse(localStorage.getItem("categories"));
-    let _getdate = _localstorageData.filter(f => f?.Expiration);
+    let _getdate = _localstorageData.filter((f) => f?.Expiration);
     if (_getdate.length > 0) {
-      _expDate = moment(_getdate[0]["Expiration"])
+      _expDate = moment(_getdate[0]["Expiration"]);
     }
     // var _expDate = moment(_localstorageData.filter(f => f?.Expiration)[0]["Expiration"])
     if (_expDate <= moment()) {
-      console.log("goinside")
+      console.log("goinside");
       getCategories();
     }
-  }
+  };
 
   useEffect(() => {
     const fetchCartDetails = () => {
@@ -144,7 +144,7 @@ const Header2 = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) { });
+        .catch(function (error) {});
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
@@ -262,26 +262,29 @@ const Header2 = () => {
                         <Link>Loading...</Link>
                       </li>
                     ) : (
-                      menuMainCategory?.map((mmc) => (
-                        <li>
-                          <Link>
-                            {mmc.maincategory?.toUpperCase()}
-                            <i className="fa fa-chevron-down"></i>
-                          </Link>
-                          <ul className="sub-menu">
-                            {menuCategory &&
-                              menuCategory
-                                .filter((fil) => fil.maincategory === mmc.maincategory)
-                                ?.map((mc) => (
-                                  <li>
-                                    <Link to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}>
-                                      <span className="text-nowrap">{mc?.category}</span>
-                                    </Link>
-                                  </li>
-                                ))}
-                          </ul>
-                        </li>
-                      ))
+                      menuMainCategory?.map(
+                        (mmc) =>
+                          mmc.id != null && (
+                            <li>
+                              <Link>
+                                {mmc.maincategory?.toUpperCase()}
+                                <i className="fa fa-chevron-down"></i>
+                              </Link>
+                              <ul className="sub-menu">
+                                {menuCategory &&
+                                  menuCategory
+                                    .filter((fil) => fil.maincategory === mmc.maincategory)
+                                    ?.map((mc) => (
+                                      <li>
+                                        <Link to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}>
+                                          <span className="text-nowrap">{mc?.category}</span>
+                                        </Link>
+                                      </li>
+                                    ))}
+                              </ul>
+                            </li>
+                          )
+                      )
                     )}
                   </ul>
                 </div>
