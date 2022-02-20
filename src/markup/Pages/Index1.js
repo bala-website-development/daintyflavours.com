@@ -65,7 +65,7 @@ const Index1 = () => {
       //add filer type=home
       console.log("latestCat", latestCat);
     };
-    fetchCategories();
+    //fetchCategories();
   }, []);
   return (
     <div>

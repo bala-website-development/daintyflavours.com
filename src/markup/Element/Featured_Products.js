@@ -35,10 +35,11 @@ const Featured_Product = (props) => {
     console.log("recentpost", products);
     if (JSON.parse(localStorage.getItem("categories")) !== null) {
       let active1 = JSON.parse(localStorage.getItem("categories"))
-        .filter((filter1, index) => filter1.isactive === 1 && filter1.featured === true && index < config.featuredproduct)
+        .filter((filter1, index) => filter1.isactive === 1 && filter1.featured === true)
         .map((data) => {
           return data;
         });
+      //order by forder ascending
       setProducts(active1);
       console.log("getHomePageCategory", active1);
     }

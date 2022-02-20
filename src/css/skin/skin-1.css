@@ -23,7 +23,8 @@
   color: var(--color-primary) !important;
 }
 .searchbarbg,
-.about-bx {
+.about-bx,
+.divbg {
   background-color: var(--color-secondry) !important;
 }
 .footer-top {
