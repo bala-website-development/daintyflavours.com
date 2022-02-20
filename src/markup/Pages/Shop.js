@@ -326,9 +326,9 @@ const Shop = (props) => {
         <Modal.Header closeButton>{message}</Modal.Header>
       </Modal>
       <Header2 active={"shop"} />
-
+      ssd
       <div className="page-content bg-white">
-        <div className="dlab-bnr-inr " style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+        <div className="dlab-bnr-inr divbg" style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">{props.location.category != undefined ? props.location.category : "Shop"}</h1>
@@ -498,7 +498,6 @@ const Shop = (props) => {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );
