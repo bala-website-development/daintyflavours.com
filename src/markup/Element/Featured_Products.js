@@ -39,6 +39,10 @@ const Featured_Product = (props) => {
         .map((data) => {
           return data;
         });
+
+      active1.sort(function (a, b) {
+        return a.forder - b.forder;
+      });
       //order by forder ascending
       setProducts(active1);
       console.log("getHomePageCategory", active1);
