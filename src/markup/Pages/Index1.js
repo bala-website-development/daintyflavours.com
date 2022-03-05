@@ -219,7 +219,11 @@ const Index1 = () => {
             <div className="container my-4">
               {/* <OurPartners /> */}
               <div className="section-head text-center">
-                <h3>Find Us on Instagram</h3>
+                <h3>
+                  <a href={config.insta} target="_blank">
+                    Find Us on Instagram
+                  </a>
+                </h3>
               </div>
               <Instagram />
               <div className="row">
