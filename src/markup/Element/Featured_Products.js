@@ -11,27 +11,27 @@ const Featured_Product = (props) => {
   const [products, setProducts] = useState([]);
   const [galleryimage, setGalleryImage] = useState([]);
   const [networkError, setNetworkError] = useState("");
-  const getFeaturedProducts = async () => {
-    console.log("recentpost", products);
-    await fetch(config.service_url + "getHomePageCategory")
+
+  const getHomePageCategoryfromService = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getuserscategory")
       .then((response) => response.json())
-      .then((data1) => {
-        if (data1.status === 200) {
-          let active1 = data1.data
-            .filter((filter1, index) => filter1.isactive === 1 && filter1.isfeatured === 1 && index < config.featuredproduct)
-            .map((data) => {
-              return data;
-            });
+      .then((data) => {
+        if (data.status === 200) {
+          let active1 = data.data.filter((_d) => _d.type === "product" && _d.isactive === 1 && _d.featured === true);
+          active1.sort(function (a, b) {
+            return a.forder - b.forder;
+          });
+          //order by forder ascending
           setProducts(active1);
-          console.log("featuredproduct", active1);
         }
       })
       .catch((err) => {
-        setNetworkError("Something went wrong, Please try again later!!");
+        // setNetworkError("Something went wrong, Please try again later!!");
         // console.log(networkError);
       });
   };
-  const getHomePageCategory = async () => {
+  const getHomePageCategoryfromLocalstorage = async () => {
     console.log("recentpost", products);
     if (JSON.parse(localStorage.getItem("categories")) !== null) {
       let active1 = JSON.parse(localStorage.getItem("categories"))
@@ -50,9 +50,8 @@ const Featured_Product = (props) => {
   };
 
   useEffect(() => {
-    //getFeaturedProducts();
-    getHomePageCategory();
-    // getGalleryDetails();
+    getHomePageCategoryfromService();
+    // getHomePageCategoryfromLocalstorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
