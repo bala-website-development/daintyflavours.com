@@ -326,7 +326,7 @@ const Shop = (props) => {
         <Modal.Header closeButton>{message}</Modal.Header>
       </Modal>
       <Header2 active={"shop"} />
-      ssd
+
       <div className="page-content bg-white">
         <div className="dlab-bnr-inr divbg" style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
