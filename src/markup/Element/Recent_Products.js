@@ -7,7 +7,7 @@ import work_pic1 from "./../../images/our-work/pic1.jpg";
 import work_pic2 from "./../../images/our-work/pic1.jpg";
 import work_pic3 from "./../../images/our-work/pic1.jpg";
 import config from "../../config.json";
-const Recent_Products = () => {
+const New_Products = () => {
   const [products, setProducts] = useState([]);
   const [galleryimage, setGalleryImage] = useState([]);
   const [networkError, setNetworkError] = useState("");
@@ -25,7 +25,7 @@ const Recent_Products = () => {
           setProducts(active);
         }
 
-        console.log("recentpost2", data);
+        console.log("new arriavals", data);
       })
       .catch((err) => {
         setNetworkError("Something went wrong, Please try again later!!");
@@ -62,6 +62,7 @@ const Recent_Products = () => {
                       backgroundSize: "100%",
                       backgroundSize: "cover",
                       overflow: "hidden",
+                      border: "1px solid rgb(180 59 141 / 40%)",
                     }}
                   >
                     <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}>
@@ -82,6 +83,7 @@ const Recent_Products = () => {
                       backgroundSize: "100%",
                       backgroundSize: "cover",
                       overflow: "hidden",
+                      border: "1px solid rgb(180 59 141 / 40%)",
                     }}
                   >
                     <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}>
@@ -121,4 +123,4 @@ const Recent_Products = () => {
   );
 };
 
-export default Recent_Products;
+export default New_Products;
