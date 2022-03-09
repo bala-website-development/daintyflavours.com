@@ -427,7 +427,7 @@ const Shop = (props) => {
                                       <div className="price bg-white">
                                         <span style={{ "text-decoration": "line-through" }}>
                                           {" "}
-                                          <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                                          <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
                                         </span>
                                         {"   |  "}
                                         <span>
