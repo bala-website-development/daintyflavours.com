@@ -242,7 +242,8 @@ input[type="checkbox"] + label:hover:before,
 input[type="radio"] + label:hover:before,
 .owl-theme.dots-style-3 .owl-dots .owl-dot.active,
 .owl-theme.dots-style-3 .owl-dots .owl-dot:hover,
-.side-bar .widget_tag_cloud a:hover {
+.side-bar .widget_tag_cloud a:hover,
+.product-gallery {
   border-color: var(--color-primary) !important;
 }
 .owl-item.active.center .testimonial-8 .testimonial-text:after {
