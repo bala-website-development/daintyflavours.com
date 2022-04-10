@@ -328,7 +328,7 @@ const Shop = (props) => {
       <Header2 active={"shop"} />
 
       <div className="page-content bg-white">
-        <div className="dlab-bnr-inr divbg" style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+        <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">{props.location.category != undefined ? props.location.category : "Shop"}</h1>
@@ -421,7 +421,9 @@ const Shop = (props) => {
                             <div className="col-lg-3 col-md-4 col-xl-3 col-sm-3 p-1">
                               <div className="item-box shop-item">
                                 <div className="item-img">
-                                  <img className="thumbnailimage" src={product.p_image ? product.p_image : config.defaultimage} alt="" />
+                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
+                                    <img className="thumbnailimage" src={product.p_image ? product.p_image : config.defaultimage} alt="" />
+                                  </Link>
                                   {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
                                     <>
                                       <div className="price bg-white">
