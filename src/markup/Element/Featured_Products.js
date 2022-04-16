@@ -58,7 +58,7 @@ const Featured_Product = (props) => {
   return (
     <div className="mt-1">
       <div className="text-center">
-        <h3>Our Featured Prodcuts</h3>
+        <h3>Our Featured Products</h3>
         <div className="dlab-separator style1 bg-primary"></div>
       </div>
       <div id="tileview text-center d-none">
