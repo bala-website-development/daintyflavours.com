@@ -352,7 +352,7 @@ const Shop = (props) => {
             <div className="container">
               <div className="row mt-3">
                 <div className="col-lg-3">
-                  <div className="bg-white px-3 mb-3">
+                  <div className="bg-white px-3 mb-3 d-none">
                     <aside className="side-bar shop-categories sticky-top">
                       {props.location?.category !== undefined && props.location?.maincategory !== undefined ? (
                         <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
@@ -410,9 +410,12 @@ const Shop = (props) => {
                   </div>
                 </div>
 
-                <div className="col-lg-9 shopproducts">
+                <div className="col-lg-12 shopproducts">
                   <div>
-                    <input type="text" className="form-control" placeholder="Search Products" name="searchbox" id="searchbox" onChange={(e) => applyFilter(e.target.value)}></input>
+                    <div>
+                      {" "}
+                      <input type="text" className="form-control" placeholder="Search Products" name="searchbox" id="searchbox" onChange={(e) => applyFilter(e.target.value)}></input>
+                    </div>
 
                     <div className="row m-1">
                       {!loading ? (
@@ -426,7 +429,7 @@ const Shop = (props) => {
                                   </Link>
                                   {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
                                     <>
-                                      <div className="price bg-white">
+                                      <div className="price bg-white d-none">
                                         <span style={{ "text-decoration": "line-through" }}>
                                           {" "}
                                           <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
@@ -446,11 +449,20 @@ const Shop = (props) => {
                                   )}
                                 </div>
                                 <div className="item-info text-center">
-                                  <h5 className="">
+                                  <h6 className="">
                                     <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                  </h5>
-                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }} className="btn btn-secondary btn-sm btnhover">
-                                    Details
+                                  </h6>
+                                  <Link className="">
+                                    <div className="">
+                                      <span style={{ "text-decoration": "line-through" }}>
+                                        {" "}
+                                        <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
+                                      </span>
+                                      {"   |  "}
+                                      <span>
+                                        {"   "} <i class="fa fa-inr"></i> {product.p_price}
+                                      </span>
+                                    </div>
                                   </Link>{" "}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
                                     <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-secondary btn-sm btnhover">
@@ -491,7 +503,10 @@ const Shop = (props) => {
                         <button className="btn btn-sm btnhover" onClick={handleShowMorePosts}>
                           Load more
                         </button>
-                      )}
+                      )}{" "}
+                      <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
+                        View all Products
+                      </Link>
                     </div>
                   </div>
                 </div>

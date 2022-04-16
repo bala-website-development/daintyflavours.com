@@ -79,7 +79,7 @@ const Featured_Product = (props) => {
           <div data-role="tile" data-size="large" className="w-100"></div>
         </div>
       </div>
-
+      {/* in use */}
       <div id="tileview text-center">
         <div class="tiles-grid d-flex-row justify-content-between w-100">
           {products && products.length > 0 ? (
@@ -97,7 +97,7 @@ const Featured_Product = (props) => {
                   }}
                 >
                   <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="">
-                    <div className="p-1 bg-primary ">
+                    <div className="p-1 bg-primary-opacity text-white text-center">
                       <span>{fProduct.category}</span>
                     </div>
                   </Link>
@@ -115,7 +115,7 @@ const Featured_Product = (props) => {
                   }}
                 >
                   <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="">
-                    <div className="p-1 bg-primary">
+                    <div className="p-1 bg-primary-opacity text-white text-center">
                       <span>{fProduct.category}</span>
                     </div>
                   </Link>

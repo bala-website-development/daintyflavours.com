@@ -138,6 +138,7 @@ select.form-control:not([size]):not([multiple]) {
 .SRLOpened {
   z-index: 99999 !important;
 }
+
 .flipvertical {
   transform: rotate(0deg);
 }
