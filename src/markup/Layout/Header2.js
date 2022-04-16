@@ -68,10 +68,10 @@ const Header2 = () => {
       .then((data) => {
         if (data.status === 200) {
           console.log("main master category", data);
-          let _filter = data.data.filter((_d) => _d.type === "product");
+          let _filter = data.data.filter((_d) => _d.type === "product" && _d.isactive === 1);
           _filter.push({ Expiration: moment().add(1, "d") });
           localStorage.setItem("maincategories", JSON.stringify(_filter));
-          setMenuMainCategory(_filter);
+          setMenuMainCategory(_filter.filter((a) => a.isactive === 1));
           localStorage.setItem("cartUpdated", true);
         } else if (data.status === 400) {
           setMenuMainCategory([]);

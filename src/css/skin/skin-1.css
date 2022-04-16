@@ -7,7 +7,7 @@
   --color-secondry: #ecb7d4;
   --color-button: #b43b8d;
   --color-hover: #b43b8d;
-  --color-primary-opacity: rgba(242, 227, 248, 0.455);
+  --color-primary-opacity: rgba(180, 59, 142, 0.509);
 }
 .main-bar,
 .mo-left .header-nav.show {
@@ -39,6 +39,9 @@
 }
 .bg-primarytab {
   background-color: var(--color-button);
+}
+.bg-primary-opacity {
+  background-color: var(--color-primary-opacity);
 }
 /* Hex */
 .bg-primary,
