@@ -212,7 +212,7 @@ const Shopproduct = (props) => {
                               <>
                                 <li>
                                   <div className="dlab-post-thum dlab-img-effect">
-                                    <img src={url} className="galarythumbnailimage" alt="sukhaa" />
+                                    <img src={url} className="galarythumbnailimage" alt={config.websitetitle}} />
                                   </div>
                                 </li>
                               </>
