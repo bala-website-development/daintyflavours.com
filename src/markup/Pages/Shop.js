@@ -449,9 +449,9 @@ const Shop = (props) => {
                                   )}
                                 </div>
                                 <div className="item-info text-center">
-                                  <p className="small">
+                                  <h1 className="small">
                                     <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                  </p>
+                                  </h1>
                                   <Link className="">
                                     <div className="">
                                       <span style={{ "text-decoration": "line-through" }}>
