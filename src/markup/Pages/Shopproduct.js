@@ -101,6 +101,7 @@ const Shopproduct = (props) => {
   };
   useEffect(() => {
     const getRelatedProducts = async (category) => {
+      console.log("dailtycategory", category);
       await fetch(config.service_url + `getRelatedProducts/${category}`)
         .then((response) => response.json())
         .then((data) => {
@@ -212,7 +213,7 @@ const Shopproduct = (props) => {
                               <>
                                 <li>
                                   <div className="dlab-post-thum dlab-img-effect">
-                                    <img src={url} className="galarythumbnailimage" alt={config.websitetitle}} />
+                                    <img src={url} className="galarythumbnailimage" alt={config.websitetitle} />
                                   </div>
                                 </li>
                               </>
@@ -397,17 +398,19 @@ const Shopproduct = (props) => {
                     relatedProd.map((rel) => (
                       <div className="p-a15">
                         <div class="item-box shop-item">
-                          <div class="item-img">
-                            <img src={rel.p_image} alt="" />
-                            <div class="price bg-white">
+                          <div class="item-img1">
+                            <Link to={{ pathname: `/shop-product-details/${rel.p_id}` }}>
+                              <div className="homeimagerecentdivimg" style={rel.p_image ? { backgroundImage: "url(" + rel.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
+                            </Link>
+                            <div class="sale bg-white text-primary d-none">
                               <i class="fa fa-inr"></i> {rel.p_price}
                             </div>
                           </div>
                           <div class="item-info text-center">
-                            <h4 class="item-title">
+                            <p class="item-title small">
                               <Link to={`/shop-product-details/${rel.p_id}`}>{rel.p_name}</Link>
-                            </h4>
-                            <Link to={`/shop-product-details/${rel.p_id}`} class="btn btnhover">
+                            </p>
+                            <Link to={`/shop-product-details/${rel.p_id}`} class="btn btn-sm  btnhover">
                               View
                             </Link>
                           </div>
