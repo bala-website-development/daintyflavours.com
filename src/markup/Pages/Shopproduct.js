@@ -198,10 +198,8 @@ const Shopproduct = (props) => {
               <div className="row">
                 <div className="col-lg-6 m-b30">
                   <div className="product-gallery on-show-slider lightgallery" id="lightgallery">
-                    <div className="dlab-box">
-                      <div className="dlab-thum-bx">
-                        <img src={productDtl.p_image ? productDtl.p_image : config.defaultimage} alt="sukhaa" />
-                      </div>
+                    <div className="dlab-box prodcutdetailimage" style={productDtl.p_image ? { backgroundImage: "url(" + productDtl.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}>
+                      <div className="dlab-thum-bx">{/* <img src={productDtl.p_image ? productDtl.p_image : config.defaultimage} alt="sukhaa" /> */}</div>
                     </div>
                   </div>
                   <div className={"widget widget_gallery gallery-grid-4"}>
@@ -227,7 +225,7 @@ const Shopproduct = (props) => {
                 <div className="col-lg-6 m-b30">
                   <Form className="cart sticky-top" onSubmit={addItemsToCart}>
                     <div className="dlab-post-title">
-                      <h4 className="post-title">{productDtl.p_name}</h4>
+                      <h4 className="post-title medium">{productDtl.p_name}</h4>
                       <p className="m-b10 d-none">{productDtl.p_description}</p>
                       <div className="dlab-divider bg-gray tb15">
                         <i className="icon-dot c-square"></i>

@@ -125,7 +125,10 @@ const New_Products = () => {
                 <div className="item-box shop-item style text-white my-2 shadow rounded">
                   <div className="">
                     <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                      <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} />
+                      {/* <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} /> */}
+
+ <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
+
                     </Link>
                   </div>
                   <div className="dlab-info d-none">
