@@ -123,6 +123,7 @@
   font-family: daintybody;
   src: url("../css/fonts/NeutraTextTF-Book.ttf");
 }
+
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 5px) !important;
 }
@@ -137,6 +138,21 @@ select.form-control:not([size]):not([multiple]) {
 }
 .SRLOpened {
   z-index: 99999 !important;
+}
+.prodcutdetailimage
+{
+  background-size: auto 100%;
+  min-height: 600px; 
+    background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media only screen and (max-width: 479px) {
+  .prodcutdetailimage {
+    min-height: 350px;
+      background-repeat: no-repeat;
+  background-position: center;
+  }
 }
 
 .flipvertical {
@@ -187,10 +203,26 @@ select.form-control:not([size]):not([multiple]) {
   height: 25px;
 }
 .homeimagerecent {
-  height: 300px !important;
+  /* height: 300px !important; */
   width: 300px !important;
   /* width: 100% !important; */
   /* width: 300px !important; */
+}
+
+.homeimagerecentdivimg
+{
+  background-size: auto 100%;
+  min-height: 250px; 
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media only screen and (max-width: 500px) {
+  .homeimagerecentdivimg {
+    min-height: 150px;
+      background-repeat: no-repeat;
+  background-position: center;
+  }
 }
 .w-10 {
   width: 10%;
@@ -335,7 +367,7 @@ select.form-control:not([size]):not([multiple]) {
 
   .homeimagerecent {
     width: 200px !important;
-    height: 200px !important;
+    /* height: 200px !important; */
   }
 }
 @media only screen and (max-width: 479px) {
@@ -12943,6 +12975,7 @@ ol.commentlist li .star-rating {
   right: -5px;
   top: 10px;
   z-index: 2;
+  border-radius: 0px 10px 0px 10px !important;
 }
 .product-item .overlay-icon {
   bottom: 0px;

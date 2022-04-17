@@ -425,7 +425,7 @@ const Shop = (props) => {
                               <div className="item-box shop-item style text-white shadow rounded">
                                 <div className="item-img1">
                                   <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                                    <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt="" />
+                                    <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
                                   </Link>
                                   {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
                                     <>
@@ -449,9 +449,9 @@ const Shop = (props) => {
                                   )}
                                 </div>
                                 <div className="item-info text-center">
-                                  <h1 className="small">
+                                  <p className="small mb-0"><b>
                                     <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                  </h1>
+                                 </b> </p>
                                   <Link className="">
                                     <div className="">
                                       <span style={{ "text-decoration": "line-through" }}>
