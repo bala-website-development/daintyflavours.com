@@ -421,11 +421,11 @@ const Shop = (props) => {
                       {!loading ? (
                         products && products.length > 0 ? (
                           products.map((product) => (
-                            <div className="col-lg-3 col-md-4 col-xl-3 col-sm-3 p-1">
-                              <div className="item-box shop-item">
-                                <div className="item-img">
+                            <div className="col-lg-3">
+                              <div className="item-box shop-item style text-white shadow rounded">
+                                <div className="item-img1">
                                   <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                                    <img className="thumbnailimage" src={product.p_image ? product.p_image : config.defaultimage} alt="" />
+                                    <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt="" />
                                   </Link>
                                   {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
                                     <>
@@ -449,9 +449,9 @@ const Shop = (props) => {
                                   )}
                                 </div>
                                 <div className="item-info text-center">
-                                  <h6 className="">
+                                  <p className="small">
                                     <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                  </h6>
+                                  </p>
                                   <Link className="">
                                     <div className="">
                                       <span style={{ "text-decoration": "line-through" }}>
@@ -465,11 +465,11 @@ const Shop = (props) => {
                                     </div>
                                   </Link>{" "}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-secondary btn-sm btnhover">
+                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-secondary btn-sm btnhover mb-3">
                                       <i className="ti-shopping-cart m-r5"></i> Add to cart
                                     </button>
                                   ) : (
-                                    <button disabled={true} className="btn btn-secondary btn-sm btnhover">
+                                    <button disabled={true} className="btn btn-secondary btn-sm btnhover mb-3">
                                       Out of Stock
                                     </button>
                                   )}
