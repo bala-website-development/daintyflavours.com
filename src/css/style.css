@@ -146,6 +146,15 @@ select.form-control:not([size]):not([multiple]) {
     background-repeat: no-repeat;
   background-position: center;
 }
+.watermark {
+  background-image: url("https: //firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Flogo%2Ffavicon.png?alt=media&token=53a3fa87-35fb-408c-8d5a-5b75a2ce1c8a");
+  position: relative;
+  background-position: center;
+  left: 30px;
+  top: 30px;
+  opacity: 0.6; 
+  
+}
 
 @media only screen and (max-width: 479px) {
   .prodcutdetailimage {
