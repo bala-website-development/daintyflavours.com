@@ -22,6 +22,11 @@
 .titlename {
   color: var(--color-primary) !important;
 }
+.dropdown-item:hover {
+  background-color:  var(--color-primary) !important;
+  color: white !important;
+  border-radius: 1px !important;
+}
 .searchbarbg,
 .about-bx,
 .divbg {

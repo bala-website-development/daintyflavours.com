@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import img1 from "./../../images/banner/bnr1.jpg";
 import img2 from "./../../images/background/bg5.jpg";

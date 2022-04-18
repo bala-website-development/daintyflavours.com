@@ -127,6 +127,11 @@
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 5px) !important;
 }
+
+.dropdown-item {
+ 
+  border-radius: none !important;
+}
 .main-slider .slideroverlay {
   background: none;
   height: 100%;
@@ -180,9 +185,17 @@ select.form-control:not([size]):not([multiple]) {
   color: white !important;
   font-family: daintybody;
 }
+
+.titlename2 {
+  font-size: 30px !important;
+  color: white !important;
+  font-family: daintybody;
+}
+
 .searchbar {
   border-radius: 30px;
   border: 1px solid rgb(255, 255, 255);
+  width: 100%;
 }
 .searchbar:active,
 .searchbar:focus,

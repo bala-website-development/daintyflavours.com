@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
 import ReactStars from "react-stars";

@@ -7,7 +7,7 @@ import bnr from "./../../images/banner/bnr1.jpg";
 import uuid from "react-uuid";
 import { Modal } from "react-bootstrap";
 import loadingimg from "./../../images/load.gif";
-import Header2 from "../Layout/Header2";
+import Header2 from "./../Layout/NavBarMenu";
 const Shop = (props) => {
   const [products, setProducts] = useState([]);
   const [networkError, setNetworkError] = useState("");
@@ -442,16 +442,18 @@ const Shop = (props) => {
                                       <div className="sale bg-primary text-light">Sale</div>
                                     </>
                                   ) : (
-                                    <div className="price bg-white">
+                                    <div className="sale bg-primary text-light">
                                       <i class="fa fa-inr"> {"   "} </i>
                                       {"   "} {product.p_price}
                                     </div>
                                   )}
                                 </div>
                                 <div className="item-info text-center">
-                                  <p className="small mb-0"><b>
-                                    <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                 </b> </p>
+                                  <p className="small mb-0">
+                                    <b>
+                                      <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
+                                    </b>{" "}
+                                  </p>
                                   <Link className="">
                                     <div className="">
                                       <span style={{ "text-decoration": "line-through" }}>
@@ -493,7 +495,7 @@ const Shop = (props) => {
                         <div class="position-relative">
                           <div className="p-2 start-50">
                             <div className="p-2">Fetching products Deails, please wait.....</div>
-                            <img className="p-2 w-25" src={loadingimg} height="20"></img>
+                            <img className="p-2 w-10" src={loadingimg} height="20px"></img>
                           </div>
                         </div>
                       )}
