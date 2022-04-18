@@ -198,7 +198,9 @@ select.form-control:not([size]):not([multiple]) {
   color: white !important;
   font-family: daintybody;
 }
-
+.newsletter {
+  border-radius: 30px;
+}
 .searchbar {
   border-radius: 30px;
   border: 1px solid rgb(255, 255, 255);
