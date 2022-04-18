@@ -182,7 +182,7 @@ const Shopproduct = (props) => {
               <div className="breadcrumb-row">
                 <ul className="list-inline">
                   <li>
-                    <Link to={"./"}>
+                    <Link to={"/"}>
                       <i className="fa fa-home"></i>
                     </Link>
                   </li>
@@ -238,7 +238,25 @@ const Shopproduct = (props) => {
                     </div>
                     <div className="relative">
                       <h3 className="m-tb10">
-                        <i class="fa fa-inr"></i> {productDtl.p_price}
+                        {productDtl.p_price < productDtl.p_actual_price && productDtl.p_price !== 0 && productDtl.p_price !== "" ? (
+                          <>
+                            <div className="text-primary">
+                              <span style={{ "text-decoration": "line-through" }}>
+                                {" "}
+                                <i class="fa fa-inr"></i> {productDtl.p_actual_price || 0}{" "}
+                              </span>
+                              {"   |  "}
+                              <span>
+                                {"   "} <i class="fa fa-inr"></i> {productDtl.p_price}
+                              </span>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="text-primary">
+                            <i class="fa fa-inr"> {"   "} </i>
+                            {"   "} {productDtl.p_price}
+                          </div>
+                        )}
                       </h3>
                       <div className="shop-item-rating">
                         <span className="rating-bx">
@@ -260,6 +278,12 @@ const Shopproduct = (props) => {
                     </div>
                     <div className="dlab-divider bg-gray tb15">
                       <i className="icon-dot c-square"></i>
+                    </div>
+                    <div className="py-2">
+                      <div> Expiry Date - {productDtl.p_expirydate === "" || productDtl.p_expirydate === undefined || productDtl.p_expirydate === "0001-01-01" ? "N/A" : productDtl.p_expirydate}</div>
+                    </div>
+                    <div className="py-2">
+                      <div> Net Weight - {productDtl.p_productweight === "" || productDtl.p_productweight === undefined ? "N/A" : productDtl.p_productweight + " gms"}</div>
                     </div>
                     <div className="py-2">
                       <div> Available Quantity - {productDtl.p_quantity}</div>
