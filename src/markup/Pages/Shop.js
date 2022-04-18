@@ -7,7 +7,7 @@ import bnr from "./../../images/banner/bnr1.jpg";
 import uuid from "react-uuid";
 import { Modal } from "react-bootstrap";
 import loadingimg from "./../../images/load.gif";
-import Header2 from "../Layout/Header2";
+import Header2 from "./../Layout/NavBarMenu";
 const Shop = (props) => {
   const [products, setProducts] = useState([]);
   const [networkError, setNetworkError] = useState("");
@@ -427,32 +427,21 @@ const Shop = (props) => {
                                   <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                                     <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
                                   </Link>
-                                  {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
+                                  {product.p_price < product.p_actual_price && product.p_price !== 0 && product.p_price !== "" ? (
                                     <>
-                                      <div className="price bg-white d-none">
-                                        <span style={{ "text-decoration": "line-through" }}>
-                                          {" "}
-                                          <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
-                                        </span>
-                                        {"   |  "}
-                                        <span>
-                                          {"   "} <i class="fa fa-inr"></i> {product.p_price}
-                                        </span>
-                                      </div>
                                       <div className="sale bg-primary text-light">Sale</div>
                                     </>
                                   ) : (
-                                    <div className="price bg-white">
-                                      <i class="fa fa-inr"> {"   "} </i>
-                                      {"   "} {product.p_price}
-                                    </div>
+                                    <></>
                                   )}
                                 </div>
                                 <div className="item-info text-center">
-                                  <p className="small mb-0"><b>
-                                    <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                 </b> </p>
-                                  <Link className="">
+                                  <p className="small mb-0">
+                                    <b>
+                                      <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
+                                    </b>{" "}
+                                  </p>
+                                  {/* <Link className="">
                                     <div className="">
                                       <span style={{ "text-decoration": "line-through" }}>
                                         {" "}
@@ -463,7 +452,26 @@ const Shop = (props) => {
                                         {"   "} <i class="fa fa-inr"></i> {product.p_price}
                                       </span>
                                     </div>
-                                  </Link>{" "}
+                                  </Link>{" "} */}
+                                  {product.p_price < product.p_actual_price && product.p_price !== 0 && product.p_price !== "" ? (
+                                    <>
+                                      <div className="text-primary">
+                                        <span style={{ "text-decoration": "line-through" }}>
+                                          {" "}
+                                          <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                                        </span>
+                                        {"   |  "}
+                                        <span>
+                                          {"   "} <i class="fa fa-inr"></i> {product.p_price}
+                                        </span>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <div className="text-primary">
+                                      <i class="fa fa-inr"> {"   "} </i>
+                                      {"   "} {product.p_price}
+                                    </div>
+                                  )}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
                                     <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-secondary btn-sm btnhover mb-3">
                                       <i className="ti-shopping-cart m-r5"></i> Add to cart
@@ -493,7 +501,7 @@ const Shop = (props) => {
                         <div class="position-relative">
                           <div className="p-2 start-50">
                             <div className="p-2">Fetching products Deails, please wait.....</div>
-                            <img className="p-2 w-25" src={loadingimg} height="20"></img>
+                            <img className="p-2 w-10" src={loadingimg} height="20px"></img>
                           </div>
                         </div>
                       )}

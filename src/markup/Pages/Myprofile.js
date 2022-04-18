@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
 //import ReactStars from "react-stars";
@@ -163,77 +163,9 @@ const Myprofile = (props) => {
                             Personal Info
                           </Link>
                         </li>
-                        <li>
-                          <Link className="nav-link " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-orderhistory">
-                            Order History
-                          </Link>
-                        </li>
-                        <li>
-                          <Link className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-address">
-                            Manage Address
-                          </Link>
-                        </li>
-                        <li>
-                          <Link className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-changepwd">
-                            Change Password
-                          </Link>
-                        </li>
-                        <li>
-                          <Link className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-logout">
-                            Log out
-                          </Link>
-                        </li>
                       </ul>
                       {profile?.map((profile) => (
                         <div className="tab-content">
-                          <div className="tab-pane " id="pills-orderhistory">
-                            <p>Track your order status here</p>
-                            <Link to="/orderhistory" className="btn btn-sm btnhover">
-                              Go to Order History
-                            </Link>
-                          </div>
-
-                          <div className="tab-pane " id="pills-address">
-                            <div id="review_form_wrapper">
-                              <form className="comment-form" onSubmit={handleSubmit(onSubmit)}>
-                                <div id="review_form">
-                                  <div id="respond" className="comment-respond">
-                                    <div className="comment-form-author">
-                                      <label>
-                                        Full Address <span className="required">*</span>
-                                      </label>
-                                      <input type="text" aria-required="true" defaultValue={profile.address} required size="30" name="address" {...register("address")} id="author" />
-                                    </div>
-                                    <div className="comment-form-author">
-                                      <label>
-                                        City <span className="required">*</span>
-                                      </label>
-                                      <input type="text" aria-required="true" defaultValue={profile.city} required size="30" name="city" {...register("city")} id="author" />
-                                    </div>
-                                    <div className="comment-form-author">
-                                      <label>
-                                        State<span className="required">*</span>
-                                      </label>
-                                      <input type="text" aria-required="true" defaultValue={profile.state} required size="30" name="state" {...register("state")} id="author" />
-                                    </div>
-                                    <div className="comment-form-author">
-                                      <label>
-                                        Pincode<span className="required">*</span>
-                                      </label>
-                                      <input type="text" aria-required="true" defaultValue={profile.pincode} required size="30" name="pincode" {...register("pincode")} id="author" />
-                                    </div>
-
-                                    <div className="form-submit">
-                                      <button type="submit" className="btn btnhover">
-                                        Submit
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-
                           <div className="tab-pane active" id="pills-review">
                             <div id="review_form_wrapper1">
                               <form className="comment-form" onSubmit={handleSubmit(onSubmit)}>
@@ -260,15 +192,46 @@ const Myprofile = (props) => {
 
                                     <div className="form-submit">
                                       <button type="submit" className="btn btnhover">
-                                        Submit
+                                        Update
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  <div id="respond" className="comment-respond">
+                                    <div className="comment-form-author">
+                                      <label>
+                                        Billing/Shipping Address <span className="required">*</span>
+                                      </label>
+                                      <input type="text" aria-required="true" defaultValue={profile.address} required size="30" name="address" {...register("address")} id="author" />
+                                    </div>
+                                    <div className="comment-form-author">
+                                      <label>
+                                        City <span className="required">*</span>
+                                      </label>
+                                      <input type="text" aria-required="true" defaultValue={profile.city} required size="30" name="city" {...register("city")} id="author" />
+                                    </div>
+                                    <div className="comment-form-author">
+                                      <label>
+                                        State<span className="required">*</span>
+                                      </label>
+                                      <input type="text" aria-required="true" defaultValue={profile.state} required size="30" name="state" {...register("state")} id="author" />
+                                    </div>
+                                    <div className="comment-form-author">
+                                      <label>
+                                        Pincode<span className="required">*</span>
+                                      </label>
+                                      <input type="text" aria-required="true" defaultValue={profile.pincode} required size="30" name="pincode" {...register("pincode")} id="author" />
+                                    </div>
+
+                                    <div className="form-submit">
+                                      <button type="submit" className="btn btnhover">
+                                        Update
                                       </button>
                                     </div>
                                   </div>
                                 </div>
                               </form>
                             </div>
-                          </div>
-                          <div className="tab-pane " id="pills-changepwd">
                             <div id="review_form_wrapper2">
                               <div id="review_form2" className="comment-form">
                                 <div id="respond" className="comment-respond">
@@ -300,13 +263,6 @@ const Myprofile = (props) => {
                               </div>
                             </div>
                           </div>
-
-                          <div className="tab-pane " id="pills-logout">
-                            <Link onClick={logout} className="btn btn-sm btnhover">
-                              {" "}
-                              Log Out
-                            </Link>
-                          </div>
                         </div>
                       ))}
                     </div>
@@ -315,15 +271,7 @@ const Myprofile = (props) => {
               </div>
             </div>
           </div>
-
-          {/* <Owl category={productDtl.p_category} /> */}
-          <div class="section-full related-products content-inner bg-gray-light">
-            <div class="container">
-              <div class="products-carousel"></div>
-            </div>
-          </div>
         </div>
-        ;
       </div>
 
       <Footer />

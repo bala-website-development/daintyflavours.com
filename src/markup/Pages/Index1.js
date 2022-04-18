@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
+import NavBarMenu from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import { Link } from "react-router-dom";
 import CountUp from "react-countup";
@@ -69,7 +70,8 @@ const Index1 = () => {
   }, []);
   return (
     <div>
-      <Header active={"home"} home={true} />
+      {/* <Header active={"home"} home={true} /> */}
+      <NavBarMenu active={"home"} home={true} />
 
       <Slider />
 

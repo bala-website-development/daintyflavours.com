@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 //import GoogleMaps from "simple-react-google-maps";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import bgimg1 from "./../../images/banner/bnr3.jpg";
 import bgimg2 from "./../../images/background/bg5.jpg";

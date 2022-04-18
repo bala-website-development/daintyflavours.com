@@ -127,8 +127,7 @@ const New_Products = () => {
                     <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                       {/* <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} /> */}
 
- <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
-
+                      <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
                     </Link>
                   </div>
                   <div className="dlab-info d-none">
@@ -169,7 +168,7 @@ const New_Products = () => {
                     <span className="">
                       {" "}
                       <div className="cart-btn">
-                        {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
+                        {product.p_price < product.p_actual_price && product.p_price !== 0 && product.p_price !== "" ? (
                           <>
                             <div className="text-dark">
                               <span style={{ "text-decoration": "line-through" }}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
 //import ReactStars from "react-stars";
@@ -82,9 +82,7 @@ const Orderhistory = (props) => {
           setSuccessMsg(data.message);
         }
       })
-      .catch((err) => {
-
-      });
+      .catch((err) => {});
   };
 
   return (
@@ -266,30 +264,30 @@ const Orderhistory = (props) => {
                                               </span>
                                             </td>
                                             <td>
-                                              {
-                                                moment(orderhistory.orderdate).add(config.return_cancel_days, 'd') >= moment() ?
-                                                  (
-                                                    orderhistory.products?.filter((f) => f.p_returnaccepted === false || f.p_returnaccepted === "false"
-                                                      || f.p_returnaccepted === undefined || f.p_returnaccepted === "").length > 0 ?
-                                                      (orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" || orderhistory.deliverystatus === "Shipped" ?
-                                                        <></> :
-                                                        <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
-                                                          Cancel
-                                                        </button>
-                                                      )
-                                                      :
-                                                      (orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" || orderhistory.deliverystatus === "Shipped" ? <></> :
-                                                        <>
-                                                          <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_return")}>
-                                                            Return
-                                                          </button>
-                                                          <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
-                                                            Cancel
-                                                          </button>
-                                                        </>
-                                                      )
-                                                  ) : <></>
-                                              }
+                                              {moment(orderhistory.orderdate).add(config.return_cancel_days, "d") >= moment() ? (
+                                                orderhistory.products?.filter((f) => f.p_returnaccepted === false || f.p_returnaccepted === "false" || f.p_returnaccepted === undefined || f.p_returnaccepted === "").length > 0 ? (
+                                                  orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" || orderhistory.deliverystatus === "Shipped" ? (
+                                                    <></>
+                                                  ) : (
+                                                    <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
+                                                      Cancel
+                                                    </button>
+                                                  )
+                                                ) : orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" || orderhistory.deliverystatus === "Shipped" ? (
+                                                  <></>
+                                                ) : (
+                                                  <>
+                                                    <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_return")}>
+                                                      Return
+                                                    </button>
+                                                    <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
+                                                      Cancel
+                                                    </button>
+                                                  </>
+                                                )
+                                              ) : (
+                                                <></>
+                                              )}
                                             </td>
                                           </tr>
                                         ))}

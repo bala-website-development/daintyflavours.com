@@ -10,6 +10,7 @@
   "admin_url_local": "http://localhost:3001/login/",
   "service_url_local": "http://localhost:8000/api/",
   "logo": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Flogo%2Flogo.png?alt=media&token=d3e12a4b-916e-417c-aaf4-c8790314cc85",
+  "watermark": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Flogo%2Fwatermark.png?alt=media&token=ca413773-be38-4667-b39a-d4d648a1ec43",
   "slider": [
     {
       "title": "",

@@ -9,6 +9,7 @@
     "bootstrap": "^4.5.3",
     "firebase": "^8.10.0",
     "jodit-react": "^1.1.1",
+    "mdb-ui-kit": "^3.11.0",
     "metro4": "^4.5.0",
     "moment": "^2.29.1",
     "react": "^16.14.0",

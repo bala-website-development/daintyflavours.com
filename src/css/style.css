@@ -127,6 +127,11 @@
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 5px) !important;
 }
+
+.dropdown-item {
+ 
+  border-radius: none !important;
+}
 .main-slider .slideroverlay {
   background: none;
   height: 100%;
@@ -146,12 +151,28 @@ select.form-control:not([size]):not([multiple]) {
     background-repeat: no-repeat;
   background-position: center;
 }
-
+.watermark {
+  background-image: url("https: //firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Flogo%2Ffavicon.png?alt=media&token=53a3fa87-35fb-408c-8d5a-5b75a2ce1c8a");
+  position: relative;
+  background-position: center;
+  left: 40%;
+  top: 50%;
+  opacity: 0.6; 
+  
+}
+.watermarkdiv
+{
+  min-height: 600px;
+  width: 100%;
+}
 @media only screen and (max-width: 479px) {
   .prodcutdetailimage {
     min-height: 350px;
       background-repeat: no-repeat;
   background-position: center;
+  }
+  .watermarkdiv {
+    min-height: 350px;
   }
 }
 
@@ -171,9 +192,17 @@ select.form-control:not([size]):not([multiple]) {
   color: white !important;
   font-family: daintybody;
 }
+
+.titlename2 {
+  font-size: 30px !important;
+  color: white !important;
+  font-family: daintybody;
+}
+
 .searchbar {
   border-radius: 30px;
   border: 1px solid rgb(255, 255, 255);
+  width: 100%;
 }
 .searchbar:active,
 .searchbar:focus,

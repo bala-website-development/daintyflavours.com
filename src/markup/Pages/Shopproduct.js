@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
 import ReactStars from "react-stars";
@@ -101,6 +101,7 @@ const Shopproduct = (props) => {
   };
   useEffect(() => {
     const getRelatedProducts = async (category) => {
+      console.log("dailtycategory", category);
       await fetch(config.service_url + `getRelatedProducts/${category}`)
         .then((response) => response.json())
         .then((data) => {
@@ -181,7 +182,7 @@ const Shopproduct = (props) => {
               <div className="breadcrumb-row">
                 <ul className="list-inline">
                   <li>
-                    <Link to={"./"}>
+                    <Link to={"/"}>
                       <i className="fa fa-home"></i>
                     </Link>
                   </li>
@@ -199,7 +200,11 @@ const Shopproduct = (props) => {
                 <div className="col-lg-6 m-b30">
                   <div className="product-gallery on-show-slider lightgallery" id="lightgallery">
                     <div className="dlab-box prodcutdetailimage" style={productDtl.p_image ? { backgroundImage: "url(" + productDtl.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}>
-                      <div className="dlab-thum-bx">{/* <img src={productDtl.p_image ? productDtl.p_image : config.defaultimage} alt="sukhaa" /> */}</div>
+                      <div className="d-flex watermarkdiv justify-content-center w-100">
+                        <div className="align-items-center">
+                          <img className="watermark" src={config.watermark} alt={config.websitetitle} />
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className={"widget widget_gallery gallery-grid-4"}>
@@ -212,7 +217,7 @@ const Shopproduct = (props) => {
                               <>
                                 <li>
                                   <div className="dlab-post-thum dlab-img-effect">
-                                    <img src={url} className="galarythumbnailimage" alt="sukhaa" />
+                                    <img src={url} className="galarythumbnailimage" alt={config.websitetitle} />
                                   </div>
                                 </li>
                               </>
@@ -233,7 +238,25 @@ const Shopproduct = (props) => {
                     </div>
                     <div className="relative">
                       <h3 className="m-tb10">
-                        <i class="fa fa-inr"></i> {productDtl.p_price}
+                        {productDtl.p_price < productDtl.p_actual_price && productDtl.p_price !== 0 && productDtl.p_price !== "" ? (
+                          <>
+                            <div className="text-primary">
+                              <span style={{ "text-decoration": "line-through" }}>
+                                {" "}
+                                <i class="fa fa-inr"></i> {productDtl.p_actual_price || 0}{" "}
+                              </span>
+                              {"   |  "}
+                              <span>
+                                {"   "} <i class="fa fa-inr"></i> {productDtl.p_price}
+                              </span>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="text-primary">
+                            <i class="fa fa-inr"> {"   "} </i>
+                            {"   "} {productDtl.p_price}
+                          </div>
+                        )}
                       </h3>
                       <div className="shop-item-rating">
                         <span className="rating-bx">
@@ -255,6 +278,12 @@ const Shopproduct = (props) => {
                     </div>
                     <div className="dlab-divider bg-gray tb15">
                       <i className="icon-dot c-square"></i>
+                    </div>
+                    <div className="py-2">
+                      <div> Expiry Date - {productDtl.p_expirydate === "" || productDtl.p_expirydate === undefined || productDtl.p_expirydate === "0001-01-01" ? "N/A" : productDtl.p_expirydate}</div>
+                    </div>
+                    <div className="py-2">
+                      <div> Net Weight - {productDtl.p_productweight === "" || productDtl.p_productweight === undefined ? "N/A" : productDtl.p_productweight + " gms"}</div>
                     </div>
                     <div className="py-2">
                       <div> Available Quantity - {productDtl.p_quantity}</div>
@@ -397,17 +426,19 @@ const Shopproduct = (props) => {
                     relatedProd.map((rel) => (
                       <div className="p-a15">
                         <div class="item-box shop-item">
-                          <div class="item-img">
-                            <img src={rel.p_image} alt="" />
-                            <div class="price bg-white">
+                          <div class="item-img1">
+                            <Link to={{ pathname: `/shop-product-details/${rel.p_id}` }}>
+                              <div className="homeimagerecentdivimg" style={rel.p_image ? { backgroundImage: "url(" + rel.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
+                            </Link>
+                            <div class="sale bg-white text-primary d-none">
                               <i class="fa fa-inr"></i> {rel.p_price}
                             </div>
                           </div>
                           <div class="item-info text-center">
-                            <h4 class="item-title">
+                            <p class="item-title small">
                               <Link to={`/shop-product-details/${rel.p_id}`}>{rel.p_name}</Link>
-                            </h4>
-                            <Link to={`/shop-product-details/${rel.p_id}`} class="btn btnhover">
+                            </p>
+                            <Link to={`/shop-product-details/${rel.p_id}`} class="btn btn-sm  btnhover">
                               View
                             </Link>
                           </div>
