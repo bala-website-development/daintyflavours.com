@@ -200,8 +200,10 @@ const Shopproduct = (props) => {
                 <div className="col-lg-6 m-b30">
                   <div className="product-gallery on-show-slider lightgallery" id="lightgallery">
                     <div className="dlab-box prodcutdetailimage" style={productDtl.p_image ? { backgroundImage: "url(" + productDtl.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}>
-                      <div>
-                        <img class="watermark" src={config.watermark} alt={config.websitetitle} />
+                      <div className="d-flex watermarkdiv justify-content-center w-100">
+                        <div className="align-items-center">
+                          <img className="watermark" src={config.watermark} alt={config.websitetitle} />
+                        </div>
                       </div>
                     </div>
                   </div>
