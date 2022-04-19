@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import config from "../../config.json";
 
 const NavBarMenu = () => {
+  const slider_content = config.slider;
   var btn = document.querySelector(".navicon");
   var aaa = document.querySelector(".myNavbar ");
 
@@ -180,170 +181,191 @@ const NavBarMenu = () => {
   return (
     <>
       {/* top nav bar */}
-      <nav class="navbar navbar-expand-lg navbar-light searchbarbg bg-light w-100 py-1 bg-white">
-        <div class="container-fluid">
-          <div className="d-flex align-items-center justify-content-end">
-            <div className="align-items-center">
-              <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar border px-3" placeholder="Search all our products" />
-            </div>
-            <div className="px-1"> </div>
-            <div className="align-items-center">
-              <Link to={{ pathname: "/shop", searchFilter: searchFilter }} className="">
-                <Link to={{ pathname: "/shop", searchFilter: searchFilter }} className="btn btn-sm btnhover">
-                  <i class="fas fa-search mt-1"> </i>
+      <div className="sticky-top top-0">
+        <nav class="navbar navbar-expand-lg navbar-light searchbarbg bg-light w-100 py-1 bg-white">
+          <div class="container-fluid">
+            <div className="d-flex align-items-center justify-content-end">
+              <div className="align-items-center">
+                <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar border px-3" placeholder="Search all our products" />
+              </div>
+              <div className="px-1"> </div>
+              <div className="align-items-center">
+                <Link to={{ pathname: "/shop", searchFilter: searchFilter }} className="">
+                  <Link to={{ pathname: "/shop", searchFilter: searchFilter }} className="btn btn-sm btnhover">
+                    <i class="fas fa-search mt-1"> </i>
+                  </Link>
                 </Link>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center">
+              <Link class="text-reset me-3 text-primary" to={"/shop-cart"}>
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge rounded-pill badge-notification mx-1">
+                  <span class="badge rounded-pill badge-notification bg-danger">{cartDetails.length > 0 ? cartDetails.length : 0}</span>
+                </span>
               </Link>
+
+              <div class="dropdown d-none">
+                <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-bell"></i>
+                  <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      Some news
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      Another news
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="dropdown">
+                {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? (
+                  <>
+                    <a>
+                      <Link to={"/shop-login"}>
+                        <i className="ti-user"></i>
+                        <span class="badge rounded-pill badge-notification">
+                          <i class="fa-solid fa-circle-xmark text-danger"></i>
+                        </span>
+                      </Link>
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                      <Link to={"/shop-login"}>
+                        <i className="ti-user"></i>
+                        <span class="badge rounded-pill badge-notification">
+                          <i class="fa-solid fa-circle-check text-success"></i>
+                        </span>
+                      </Link>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                      <li>
+                        <a class="dropdown-item" href="/myprofile">
+                          My profile
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="/orderhistory">
+                          Order History
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="/myprofile">
+                          Change Password
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#" onClick={logout}>
+                          Logout
+                        </a>
+                      </li>
+                    </ul>
+                  </>
+                )}
+              </div>
             </div>
           </div>
+        </nav>
 
-          <div class="d-flex align-items-center">
-            <Link class="text-reset me-3 text-primary" to={"/shop-cart"}>
-              <i class="fas fa-shopping-cart"></i>
-              <span class="badge rounded-pill badge-notification mx-1">
-                <span class="badge rounded-pill badge-notification bg-danger">{cartDetails.length > 0 ? cartDetails.length : 0}</span>
-              </span>
-            </Link>
+        <nav class=" d-flex navbar navbar-expand-lg navbar-light bg-light py-1 bg-white w-100 position-relative z-index999">
+          <div class="container-fluid">
+            <button class="navbar-toggler text-primary" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onClick={toggle}>
+              {/* <i class="fas fa-bars"></i> */}
 
-            <div class="dropdown d-none">
-              <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-bell"></i>
-                <span class="badge rounded-pill badge-notification bg-danger">1</span>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Some news
+              {toggleShow === true ? (
+                <>
+                  <i class="fa fa-times text-primary"></i>
+                </>
+              ) : (
+                <>
+                  <i class="fas fa-bars"></i>
+                </>
+              )}
+            </button>
+            <a class="navbar-brand mt-2 mt-lg-0" href="#">
+              <Link to="/" className="text-primary">
+                <p className="titlename2 text-primary mb-0 font-weight-normal"> {config.websitetitle}</p>
+              </Link>
+            </a>
+            <div class="collapse navbar-collapse overflow-auto" id="navbarSupportedContent">
+              {/* ---------- */}
+
+              <ul className="navbar-nav">
+                <li class="nav-item">
+                  <a class="dropdown-toggle align-items-center hidden-arrow  nav-link text-primary" href="/">
+                    <i class="fa fa-home" aria-hidden="true"></i>
                   </a>
                 </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Another news
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
+
+                {menuMainCategory === null || menuMainCategory === undefined || menuMainCategory.length == 0 ? (
+                  <li>
+                    <Link>Loading...</Link>
+                  </li>
+                ) : (
+                  menuMainCategory?.map(
+                    (mmc) =>
+                      mmc.id != null && (
+                        <li class="nav-item dropdown">
+                          <a class="dropdown-toggle align-items-center hidden-arrow nav-link text-dark" href="#" id={"navbarDropdownMenuAvatar" + mmc.maincategory} role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            <span className="small">
+                              {mmc.maincategory?.toUpperCase()} <i className="fa fa-angle-down"></i>
+                            </span>
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby={"navbarDropdownMenuAvatar" + mmc.maincategory}>
+                            {menuCategory &&
+                              menuCategory
+                                .filter((fil) => fil.maincategory === mmc.maincategory)
+                                ?.map((mc) => (
+                                  <li className="small">
+                                    <Link className="dropdown-item" to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}>
+                                      <span className="text-nowrap">{mc?.category}</span>
+                                    </Link>
+                                  </li>
+                                ))}
+                          </ul>
+                        </li>
+                      )
+                  )
+                )}
               </ul>
             </div>
-
-            <div class="dropdown">
-              {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? (
-                <>
-                  <a>
-                    <Link to={"/shop-login"}>
-                      <i className="ti-user"></i>
-                      <span class="badge rounded-pill badge-notification">
-                        <i class="fa-solid fa-circle-xmark text-danger"></i>
-                      </span>
-                    </Link>
-                  </a>
-                </>
-              ) : (
-                <>
-                  <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                    <Link to={"/shop-login"}>
-                      <i className="ti-user"></i>
-                      <span class="badge rounded-pill badge-notification">
-                        <i class="fa-solid fa-circle-check text-success"></i>
-                      </span>
-                    </Link>
-                  </a>
-
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                    <li>
-                      <a class="dropdown-item" href="/myprofile">
-                        My profile
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/orderhistory">
-                        Order History
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="/myprofile">
-                        Change Password
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#" onClick={logout}>
-                        Logout
-                      </a>
-                    </li>
-                  </ul>
-                </>
-              )}
-            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light py-1 bg-white w-100 position-absolute z-index999">
-        <div class="container-fluid">
-          <button class="navbar-toggler text-primary" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onClick={toggle}>
-            {/* <i class="fas fa-bars"></i> */}
-
-            {toggleShow === true ? (
+      <div className="main-slider d-none ">
+        <>
+          {slider_content &&
+            slider_content.map((slider) => (
               <>
-                <i class="fa fa-times text-primary"></i>
+                <div className="slideroverlay">
+                  <img src={slider.image_url} className="img-fluid" />
+                  <div className="text-center">
+                    <Link to={"/shop"} className="btn btnhover border z-index">
+                      Shop now
+                    </Link>
+                    <p className="font-weight-normal text-primary">{slider.prefix}</p>
+                  </div>
+                </div>
               </>
-            ) : (
-              <>
-                <i class="fas fa-bars"></i>
-              </>
-            )}
-          </button>
-          <a class="navbar-brand mt-2 mt-lg-0" href="#">
-            <Link to="/" className="text-primary">
-              <p className="titlename2 text-primary mb-0 font-weight-normal"> {config.websitetitle}</p>
-            </Link>
-          </a>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {/* ---------- */}
-
-            <ul className="navbar-nav">
-              <li class="nav-item">
-                <a class="dropdown-toggle align-items-center hidden-arrow  nav-link text-primary" href="/">
-                  <i class="fa fa-home" aria-hidden="true"></i>
-                </a>
-              </li>
-
-              {menuMainCategory === null || menuMainCategory === undefined || menuMainCategory.length == 0 ? (
-                <li>
-                  <Link>Loading...</Link>
-                </li>
-              ) : (
-                menuMainCategory?.map(
-                  (mmc) =>
-                    mmc.id != null && (
-                      <li class="nav-item dropdown">
-                        <a class="dropdown-toggle align-items-center hidden-arrow nav-link text-dark" href="#" id={"navbarDropdownMenuAvatar" + mmc.maincategory} role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                          <span className="small">
-                            {mmc.maincategory?.toUpperCase()} <i className="fa fa-angle-down"></i>
-                          </span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby={"navbarDropdownMenuAvatar" + mmc.maincategory}>
-                          {menuCategory &&
-                            menuCategory
-                              .filter((fil) => fil.maincategory === mmc.maincategory)
-                              ?.map((mc) => (
-                                <li>
-                                  <Link className="dropdown-item" to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}>
-                                    <span className="text-nowrap">{mc?.category}</span>
-                                  </Link>
-                                </li>
-                              ))}
-                        </ul>
-                      </li>
-                    )
-                )
-              )}
-            </ul>
-          </div>
-        </div>
-      </nav>
+            ))}
+        </>
+      </div>
     </>
   );
 };

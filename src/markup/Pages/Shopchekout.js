@@ -354,7 +354,8 @@ const Shopchekout = () => {
                             <td></td>
                             <td>
                               <div className={"small"}>
-                                Total Product Weight: {productWeight / 1000.0} Kgs. ; Weight/Kg: {config.shippingcost}
+                                Total Product Weight: {productWeight / 1000.0} Kgs. ; Cost/Kg: <i class="fa fa-inr"></i>
+                                {config.shippingcost}
                                 <br />
                                 {config.shippingmessage}
                                 <br />

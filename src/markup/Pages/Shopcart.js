@@ -261,7 +261,7 @@ const Shopcart = () => {
                           <i class="fa fa-inr"></i> {productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)}
                           <br />
                           <span className={"small"}>
-                            Total Product Weight: {productWeight / 1000.0} Kgs. ; Weight/Kg: {config.shippingcost}
+                            Total Product Weight: {productWeight / 1000.0} Kgs. ; Cost/Kg: <i class="fa fa-inr"></i> {config.shippingcost}
                           </span>
                         </td>
                       </tr>
