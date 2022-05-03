@@ -103,22 +103,11 @@ const Shoplogin = ({ history }) => {
             </div>
             <div className="row align-content-stretch">
               <div className="col-lg-6 col-md-12 m-b30">
-                <div className="p-a30 border-1 h100">
-                  <div className="tab-content">
-                    <h3 className="m-b10">New Customer</h3>
-                    <p className="m-b15">By creating an account with our store, you will be able to move through the checkout process faster, view and track your orders in your account and more.</p>
-                    <Link to={"/shop-register"} className="btn btnhover">
-                      Create An Account
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-md-12 m-b30">
                 <div className="p-a30 border-1 radius-sm">
-                  <div className="tab-content tab-form nav">
+                  <div className="tab-content1 tab-form nav">
                     <TabContent activeTab={activeTab}>
                       <TabPane tabId="1">
-                        <form id="login" onSubmit={handleSubmit(onSubmit)} className="tab-pane active col-12 p-a0">
+                        <form id="login" onSubmit={handleSubmit(onSubmit)} className="tab-pane1 active1 col-12 p-a0">
                           <h3 className="m-b5">Login</h3>
                           <p>If you have an account with us, please log in.</p>
                           <div className="form-group">
@@ -176,6 +165,17 @@ const Shoplogin = ({ history }) => {
                         </form>
                       </TabPane>
                     </TabContent>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-6 col-md-12 m-b30">
+                <div className="p-a30 border-1 radius-sm h100">
+                  <div className="tab-contentq">
+                    <h3 className="m-b10">New Customer</h3>
+                    <p className="m-b15">By creating an account with our store, you will be able to move through the checkout process faster, view and track your orders in your account and more.</p>
+                    <Link to={"/shop-register"} className="btn btnhover">
+                      Create An Account
+                    </Link>
                   </div>
                 </div>
               </div>

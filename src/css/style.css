@@ -132,6 +132,7 @@ select.form-control:not([size]):not([multiple]) {
  
   border-radius: none !important;
 }
+
 .main-slider .slideroverlay {
   background: none;
   background-color: #ffffff;
@@ -159,7 +160,7 @@ select.form-control:not([size]):not([multiple]) {
   background-position: center;
   left: 40%;
   top: 50%;
-  opacity: 0.6; 
+  opacity: 0.8; 
   
 }
 .watermarkdiv

@@ -200,7 +200,7 @@ class About extends Component {
               </div>
             </div>
 
-            <div className="section-full content-inner-1 bg-white">
+            <div className="section-full content-inner-1 bg-white d-none">
               <div className="container d-none">
                 <div className="row">
                   <div className="col-lg-12">
