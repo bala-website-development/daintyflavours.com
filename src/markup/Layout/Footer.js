@@ -85,7 +85,7 @@ class Footer extends Component {
                         <span className="day" className="text-dark">
                           <span className="text-dark">Monday to Saturday</span>
                         </span>
-                        <span className="timing text-dark">9.30am to 7.45pm</span>
+                        <span className="timing text-dark">9.30am to 7.30pm</span>
                       </li>
                       <li className="d-none">
                         <span className="day ">

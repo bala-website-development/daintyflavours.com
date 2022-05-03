@@ -302,7 +302,7 @@ const NavBarMenu = () => {
                 <p className="titlename2 text-primary mb-0 font-weight-normal"> {config.websitetitle}</p>
               </Link>
             </a>
-            <div class="collapse navbar-collapse overflow-auto" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
               {/* ---------- */}
 
               <ul className="navbar-nav">
