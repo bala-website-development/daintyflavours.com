@@ -78,7 +78,7 @@ class Footer extends Component {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="widget border-0 ">
-                    <h4 className="footer-title">Order Online/ Store Timings</h4>
+                    <h4 className="footer-title">Store Timings</h4>
 
                     <ul className="work-hour-list">
                       <li>

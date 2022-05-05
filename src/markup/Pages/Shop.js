@@ -500,7 +500,7 @@ const Shop = (props) => {
                       ) : (
                         <div class="position-relative">
                           <div className="p-2 start-50">
-                            <div className="p-2">Fetching products Deails, please wait.....</div>
+                            <div className="p-2">Fetching products details, please wait....</div>
                             <img className="p-2 w-10" src={loadingimg} height="20px"></img>
                           </div>
                         </div>
