@@ -323,7 +323,7 @@ const Shopchekout = () => {
                         )
                       ) : (
                         <div className="p-2">
-                          <div className="p-2">Fetching Cart deails, please wait...</div>
+                          <div className="p-2">Fetching Cart details, please wait...</div>
                           <img className="p-2" src={loadingimg} height="20" alt="Loading.."></img>
                         </div>
                       )}
