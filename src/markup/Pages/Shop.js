@@ -453,12 +453,12 @@ const Shop = (props) => {
                                       </span>
                                     </div>
                                   </Link>{" "} */}
-                                  {product.p_price < product.p_actual_price && product.p_price !== 0 && product.p_price !== "" ? (
+                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
                                     <>
                                       <div className="text-primary">
                                         <span style={{ "text-decoration": "line-through" }}>
                                           {" "}
-                                          <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                                          <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
                                         </span>
                                         {"   |  "}
                                         <span>
@@ -469,7 +469,7 @@ const Shop = (props) => {
                                   ) : (
                                     <div className="text-primary">
                                       <i class="fa fa-inr"> {"   "} </i>
-                                      {"   "} {product.p_price}
+                                      {"   "} {product.p_net_product_price}
                                     </div>
                                   )}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
