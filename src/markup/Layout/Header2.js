@@ -276,7 +276,8 @@ const Header2 = () => {
                                     .filter((fil) => fil.maincategory === mmc.maincategory)
                                     ?.map((mc) => (
                                       <li>
-                                        <Link to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}>
+                                        {/* <Link to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}> */}
+                                        <Link to={"/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category + "&bannerimage=" + mc.banner_image}>
                                           <span className="text-nowrap">{mc?.category}</span>
                                         </Link>
                                       </li>

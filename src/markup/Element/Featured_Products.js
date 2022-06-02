@@ -96,7 +96,7 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="">
+                  <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
                     <div className="p-1 bg-primary-opacity text-white text-center">
                       <span>{fProduct.category}</span>
                     </div>
@@ -114,7 +114,8 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="">
+                  {/* <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className=""> */}
+                  <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
                     <div className="p-1 bg-primary-opacity text-white text-center">
                       <span>{fProduct.category}</span>
                     </div>
@@ -127,6 +128,7 @@ const Featured_Product = (props) => {
           )}
         </div>
       </div>
+      {/* not in use */}
       <div className="row d-none">
         {products.length > 0 &&
           products.map((product) => (

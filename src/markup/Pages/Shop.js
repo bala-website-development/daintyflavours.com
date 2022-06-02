@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { Link, useHistory } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
@@ -8,7 +9,9 @@ import uuid from "react-uuid";
 import { Modal } from "react-bootstrap";
 import loadingimg from "./../../images/load.gif";
 import Header2 from "./../Layout/NavBarMenu";
+import queryString from "query-string";
 const Shop = (props) => {
+  const query = new URLSearchParams(props.location.search);
   const [products, setProducts] = useState([]);
   const [networkError, setNetworkError] = useState("");
   const [smShow, setSmShow] = useState(false);
@@ -18,24 +21,33 @@ const Shop = (props) => {
   const [masterCategory, setMasterCategory] = useState([]);
   const [mcatFilterApp, setMcatFilterApp] = useState(false);
   const [mcatFilterProd, setMcatFilterProd] = useState([]);
+
   // const [postsToShow, setPostsToShow] = useState([]);
   const postsPerPage = 20;
   const [next, setNext] = useState(postsPerPage);
   const [end, setEnd] = useState(0);
   const history = useHistory();
-  let bannerimageurl = props.location.bannerimage;
+
+  // let bannerimageurl = props.location.bannerimage;
+  // let category = props.location.category;
+  // let maincategory = props.location.maincategory;
+  // let searchFilter = props.location.searchFilter;
+  let bannerimageurl = query.get("bannerimage");
+  let category = query.get("category");
+  let maincategory = query.get("maincategory");
+  let searchFilter = props.location.searchFilter;
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
     setLoading((loading) => !loading);
-    console.log("banner image", props.location.bannerimage);
-    console.log("cakecategory", props.location.category);
-    console.log("both", props.location.category, props.location.maincategory);
-    let _filterOption = props.location?.category != "" && props.location?.category !== undefined ? props.location?.category : props.location?.maincategory;
+
+    console.log("all querry", bannerimageurl, category, maincategory, searchFilter);
+
+    let _filterOption = category != "" && category !== undefined ? category : maincategory;
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
-        if (props.location.category) {
+        if (category) {
           let selective = data
             .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
             .map((data) => {
@@ -45,7 +57,7 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
-        } else if (props.location.maincategory) {
+        } else if (maincategory) {
           console.log("mainprod", data);
           let selective = data
             .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
@@ -86,7 +98,7 @@ const Shop = (props) => {
   };
   const getAllProductDetails = async () => {
     setLoading((loading) => !loading);
-    console.log("cakecategory", props.location.category);
+    console.log("cakecategory", category);
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
@@ -152,7 +164,7 @@ const Shop = (props) => {
     // loopWithSlice(0, postsPerPage);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.category, props.location?.maincategory, props.location?.searchFilter]);
+  }, [category, maincategory, props.location?.searchFilter]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);
@@ -268,8 +280,8 @@ const Shop = (props) => {
     });
     setMasterCategory(clearedMCategory);
     setMcatFilterApp(false);
-    props.location.maincategory = undefined;
-    props.location.category = undefined;
+    maincategory = undefined;
+    category = undefined;
     // loopWithSlice(0, next + postsPerPage, false);
     // setNext(postsPerPage);
     let sliced = filter.slice(0, postsPerPage);
@@ -328,10 +340,11 @@ const Shop = (props) => {
       <Header2 active={"shop"} />
 
       <div className="page-content bg-white">
+        {/* <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimageurl !== undefined || bannerimageurl !== "null" ? { backgroundImage: "url(" + banner + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}> */}
         <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">{props.location.category != undefined ? props.location.category : "Shop"}</h1>
+              <h1 className="text-white">{category != undefined ? category : "Shop"}</h1>
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">
@@ -354,7 +367,7 @@ const Shop = (props) => {
                 <div className="col-lg-3">
                   <div className="bg-white px-3 mb-3 d-none">
                     <aside className="side-bar shop-categories sticky-top">
-                      {props.location?.category !== undefined && props.location?.maincategory !== undefined ? (
+                      {category !== undefined && maincategory !== undefined ? (
                         <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
                           Shop All Products
                         </Link>
