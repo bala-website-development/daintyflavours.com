@@ -115,7 +115,7 @@ const Featured_Product = (props) => {
                   }}
                 >
                   {/* <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className=""> */}
-                  <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
+                  <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
                     <div className="p-1 bg-primary-opacity text-white text-center">
                       <span>{fProduct.category}</span>
                     </div>

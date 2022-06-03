@@ -28,11 +28,11 @@ const Shop = (props) => {
   const [end, setEnd] = useState(0);
   const history = useHistory();
 
-  // let bannerimageurl = props.location.bannerimage;
+  let bannerimageurl = props.location.bannerimage;
   // let category = props.location.category;
   // let maincategory = props.location.maincategory;
   // let searchFilter = props.location.searchFilter;
-  let bannerimageurl = query.get("bannerimage");
+  //let bannerimageurl = query.get("bannerimage");
   let category = query.get("category");
   let maincategory = query.get("maincategory");
   let searchFilter = props.location.searchFilter;
@@ -41,7 +41,7 @@ const Shop = (props) => {
   const getProductDetails = async () => {
     setLoading((loading) => !loading);
 
-    console.log("all querry", bannerimageurl, category, maincategory, searchFilter);
+    console.log("all querry", category, maincategory, searchFilter);
 
     let _filterOption = category != "" && category !== undefined ? category : maincategory;
     await fetch(config.service_url + "getproducts")
