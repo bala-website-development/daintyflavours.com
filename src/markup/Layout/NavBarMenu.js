@@ -333,7 +333,7 @@ const NavBarMenu = () => {
                                 ?.map((mc) => (
                                   <li className="small">
                                     {/* <Link className="dropdown-item" to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}> */}
-                                    <Link className="dropdown-item" to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category, bannerimage: mc?.banner_image }}>
+                                    <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
                                   </li>

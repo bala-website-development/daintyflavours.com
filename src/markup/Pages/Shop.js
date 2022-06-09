@@ -12,10 +12,12 @@ import Header2 from "./../Layout/NavBarMenu";
 import queryString from "query-string";
 const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
+  const queryurl = localStorage.getItem("queryurl");
   const [products, setProducts] = useState([]);
   const [networkError, setNetworkError] = useState("");
   const [smShow, setSmShow] = useState(false);
   const [message, setMessage] = useState("");
+  const [bannerimagestate, setBannerimagestate] = useState(localStorage.getItem("bannerurl") || 0);
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState([]);
   const [masterCategory, setMasterCategory] = useState([]);
@@ -28,20 +30,26 @@ const Shop = (props) => {
   const [end, setEnd] = useState(0);
   const history = useHistory();
 
-  let bannerimageurl = props.location.bannerimage;
+  //let bannerimageurl = props.location.bannerimage;
   // let category = props.location.category;
   // let maincategory = props.location.maincategory;
   // let searchFilter = props.location.searchFilter;
   //let bannerimageurl = query.get("bannerimage");
-  let category = query.get("category");
-  let maincategory = query.get("maincategory");
+  const queries = queryString.parse(queryurl);
+  // let category = query.get("category");
+  // let maincategory = query.get("maincategory");
+  let category = queries.category;
+  let maincategory = queries.maincategory;
   let searchFilter = props.location.searchFilter;
+
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
+    console.log("queryyy", queries);
+    console.log("bannerimagestate", bannerimagestate);
     setLoading((loading) => !loading);
 
-    console.log("all querry", category, maincategory, searchFilter);
+    //console.log("all querry", category, maincategory, searchFilter);
 
     let _filterOption = category != "" && category !== undefined ? category : maincategory;
     await fetch(config.service_url + "getproducts")
@@ -159,12 +167,16 @@ const Shop = (props) => {
   };
 
   useEffect(() => {
+    //const query = props.location?.pathname;
+    //console.log(query);
+    const queries = queryString.parse(props.location.search);
+
     getProductDetails();
     getCategories();
     // loopWithSlice(0, postsPerPage);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, maincategory, props.location?.searchFilter]);
+  }, [props.location?.searchFilter, queryurl]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);
@@ -341,7 +353,7 @@ const Shop = (props) => {
 
       <div className="page-content bg-white">
         {/* <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimageurl !== undefined || bannerimageurl !== "null" ? { backgroundImage: "url(" + banner + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}> */}
-        <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+        <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimagestate !== 0 ? { backgroundImage: "url(" + bannerimagestate + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">{category != undefined ? category : "Shop"}</h1>
