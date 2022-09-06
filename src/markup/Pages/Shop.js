@@ -480,7 +480,7 @@ const Shop = (props) => {
                                   </Link>{" "} */}
                                   {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
                                     <>
-                                      <div className="text-primary">
+                                      <div className="text-primary pricefont">
                                         <span style={{ "text-decoration": "line-through" }}>
                                           {" "}
                                           <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
@@ -492,14 +492,19 @@ const Shop = (props) => {
                                       </div>
                                     </>
                                   ) : (
-                                    <div className="text-primary">
+                                    <div className="text-primary pricefont">
                                       <i class="fa fa-inr"> {"   "} </i>
                                       {"   "} {product.p_net_product_price}
                                     </div>
                                   )}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-secondary btn-sm btnhover mb-3">
-                                      <i className="ti-shopping-cart m-r5"></i> Add to cart
+                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
+                                      <div className="d-flex align-items-center mt-1">
+                                        <div className="pl-1">Add to cart</div>
+                                        <div className="align-self-center">
+                                          <i className="ti-shopping-cart mx-1 cartbuttonbg"></i>
+                                        </div>
+                                      </div>
                                     </button>
                                   ) : (
                                     <button disabled={true} className="btn btn-secondary btn-sm btnhover mb-3">
@@ -536,8 +541,9 @@ const Shop = (props) => {
                         <button className="btn btn-sm btnhover" onClick={handleShowMorePosts}>
                           Load more
                         </button>
-                      )}{" "}
-                      <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
+                      )}
+                      <span class="px-2"></span>
+                      <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
                         View all Products
                       </Link>
                     </div>

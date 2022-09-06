@@ -138,7 +138,7 @@ const Shopcart = () => {
                 <div className="table-responsive m-b20">
                   <div className="text-center">
                     <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
-                      <i className="fa fa-angle-right m-r10"></i>Shop all
+                      Shop all <i className="fa fa-angle-right m-r10"></i>
                     </Link>
                   </div>
                   <table className="table check-tbl">

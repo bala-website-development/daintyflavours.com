@@ -146,12 +146,12 @@ const Featured_Product = (props) => {
                             <div className="price text-light">
                               <span style={{ "text-decoration": "line-through" }}>
                                 {" "}
-                                <span className="text-light">
+                                <span className="text-light pricefont">
                                   <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
                                 </span>
                               </span>
                               {"   |  "}
-                              <span className="text-light">
+                              <span className="text-light pricefont">
                                 {"   "} <i class="fa fa-inr"></i> {product.p_price}
                               </span>{" "}
                               <span className="px-1 sale bg-primary text-light">Sale</span>
@@ -180,12 +180,12 @@ const Featured_Product = (props) => {
                           <div className="text-dark">
                             <span style={{ "text-decoration": "line-through" }}>
                               {" "}
-                              <span className="text-dark">
+                              <span className="text-dark pricefont">
                                 <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
                               </span>
                             </span>
                             {"   |  "}
-                            <span className="text-dark">
+                            <span className="text-dark pricefont">
                               {"   "} <i class="fa fa-inr "></i> {product.p_price}
                             </span>{" "}
                             <span className="px-1 sale bg-primary text-light d-none">Sale</span>
@@ -217,10 +217,11 @@ const Featured_Product = (props) => {
             </div>
           ))}
       </div>
-
-      <div className="text-center mt-2">
+      <br />
+      <br />
+      <div className="text-center mt-2 d-none">
         <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
-          <i className="fa fa-angle-right m-r10"></i>Shop all
+          Shop all <i className="fa fa-angle-right m-r10"></i>
         </Link>
       </div>
     </div>

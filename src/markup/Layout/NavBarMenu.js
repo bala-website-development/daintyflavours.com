@@ -306,7 +306,7 @@ const NavBarMenu = () => {
               {/* ---------- */}
 
               <ul className="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item d-none">
                   <a class="dropdown-toggle align-items-center hidden-arrow  nav-link text-primary" href="/">
                     <i class="fa fa-home" aria-hidden="true"></i>
                   </a>
