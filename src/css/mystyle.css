@@ -22,6 +22,11 @@ white-space: nowrap;
   text-transform: Uppercase !important;
 
 }
+.container-fluid
+{
+  justify-content: end !important;
+}
+
 ._3lhLL p {
   color: white;
 }

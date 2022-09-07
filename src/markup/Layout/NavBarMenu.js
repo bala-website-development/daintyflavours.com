@@ -184,7 +184,7 @@ const NavBarMenu = () => {
       <div className="sticky-top top-0">
         <nav class="navbar navbar-expand-lg navbar-light searchbarbg bg-light w-100 py-1 bg-white">
           <div class="container-fluid">
-            <div className="d-flex align-items-center justify-content-end">
+            <div className="d-flex align-items-center justify-content-end mr-3">
               <div className="align-items-center">
                 <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar border px-3" placeholder="Search all our products" />
               </div>
@@ -206,7 +206,7 @@ const NavBarMenu = () => {
                 </span>
               </Link>
 
-              <div class="dropdown d-none">
+              {/* <div class="dropdown d-none">
                 <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                   <i class="fas fa-bell"></i>
                   <span class="badge rounded-pill badge-notification bg-danger">1</span>
@@ -228,7 +228,7 @@ const NavBarMenu = () => {
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
 
               <div class="dropdown">
                 {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? (

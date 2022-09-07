@@ -97,8 +97,10 @@ const Featured_Product = (props) => {
                   }}
                 >
                   <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
-                    <div className="p-1 bg-primary-opacity text-white text-center">
-                      <span>{fProduct.category}</span>
+                    <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                      <span>
+                        {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
+                      </span>
                     </div>
                   </Link>
                 </div>
@@ -116,15 +118,17 @@ const Featured_Product = (props) => {
                 >
                   {/* <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className=""> */}
                   <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
-                    <div className="p-1 bg-primary-opacity text-white text-center">
-                      <span>{fProduct.category}</span>
+                    <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                      <span>
+                        {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
+                      </span>
                     </div>
                   </Link>
                 </div>
               )
             )
           ) : (
-            <span className="container row w-100">Loading please wait...</span>
+            <span className="container row w-100">Loading...</span>
           )}
         </div>
       </div>

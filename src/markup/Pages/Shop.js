@@ -452,7 +452,7 @@ const Shop = (props) => {
                                   <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                                     <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
                                   </Link>
-                                  {product.p_price < product.p_actual_price && product.p_price !== 0 && product.p_price !== "" ? (
+                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "" ? (
                                     <>
                                       <div className="sale bg-primary text-light">Sale</div>
                                     </>
@@ -461,10 +461,10 @@ const Shop = (props) => {
                                   )}
                                 </div>
                                 <div className="item-info text-center">
-                                  <p className="small mb-0">
-                                    <b>
+                                  <p className="small mb-0 textoverflow1">
+                                    <h6 className="px-1">
                                       <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                    </b>{" "}
+                                    </h6>{" "}
                                   </p>
                                   {/* <Link className="">
                                     <div className="">

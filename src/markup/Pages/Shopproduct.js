@@ -113,7 +113,7 @@ const Shopproduct = (props) => {
         .then((response) => response.json())
         .then((data) => {
           setProductDtl(data);
-          console.log("category", data.p_category);
+          console.log("category", data);
           if (data.p_category !== null && data.p_category !== undefined) {
             getRelatedProducts(data.p_category);
           }
@@ -238,12 +238,12 @@ const Shopproduct = (props) => {
                     </div>
                     <div className="relative">
                       <h3 className="m-tb10">
-                        {productDtl.p_price < productDtl.p_actual_price && productDtl.p_price !== 0 && productDtl.p_price !== "" ? (
+                        {productDtl.p_price < productDtl.p_net_product_price && productDtl.p_price !== 0 && productDtl.p_price !== "" ? (
                           <>
                             <div className="text-primary pricefont">
                               <span style={{ "text-decoration": "line-through" }}>
                                 {" "}
-                                <i class="fa fa-inr"></i> {productDtl.p_actual_price || 0}{" "}
+                                <i class="fa fa-inr"></i> {productDtl.p_net_product_price || 0}{" "}
                               </span>
                               {"   |  "}
                               <span>
