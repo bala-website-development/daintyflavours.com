@@ -283,7 +283,7 @@ const NavBarMenu = () => {
         </nav>
 
         <nav class=" d-flex navbar navbar-expand-lg navbar-light bg-light py-1 bg-white w-100 position-relative z-index999">
-          <div class="container-fluid">
+          <div class="container-fluid1 container-fluid">
             <button class="navbar-toggler text-primary" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onClick={toggle}>
               {/* <i class="fas fa-bars"></i> */}
 
@@ -322,7 +322,7 @@ const NavBarMenu = () => {
                       mmc.id != null && (
                         <li class="nav-item dropdown">
                           <a class="dropdown-toggle align-items-center hidden-arrow nav-link text-dark" href="#" id={"navbarDropdownMenuAvatar" + mmc.maincategory} role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                            <span className="small">
+                            <span className="medium">
                               {mmc.maincategory?.toUpperCase()} <i className="fa fa-angle-down"></i>
                             </span>
                           </a>

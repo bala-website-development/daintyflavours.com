@@ -25,6 +25,11 @@ white-space: nowrap;
 .container-fluid
 {
   justify-content: end !important;
+  
+}
+.container-fluid1 {
+  justify-content: space-between !important;
+
 }
 
 ._3lhLL p {
