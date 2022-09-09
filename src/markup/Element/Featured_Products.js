@@ -96,9 +96,11 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="">
-                    <div className="p-1 bg-primary-opacity text-white text-center">
-                      <span>{fProduct.category}</span>
+                  <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
+                    <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                      <span>
+                        {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
+                      </span>
                     </div>
                   </Link>
                 </div>
@@ -114,19 +116,23 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="">
-                    <div className="p-1 bg-primary-opacity text-white text-center">
-                      <span>{fProduct.category}</span>
+                  {/* <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className=""> */}
+                  <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
+                    <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                      <span>
+                        {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
+                      </span>
                     </div>
                   </Link>
                 </div>
               )
             )
           ) : (
-            <span className="container row w-100">Loading please wait...</span>
+            <span className="container row w-100">Loading...</span>
           )}
         </div>
       </div>
+      {/* not in use */}
       <div className="row d-none">
         {products.length > 0 &&
           products.map((product) => (
@@ -144,12 +150,12 @@ const Featured_Product = (props) => {
                             <div className="price text-light">
                               <span style={{ "text-decoration": "line-through" }}>
                                 {" "}
-                                <span className="text-light">
+                                <span className="text-light pricefont">
                                   <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
                                 </span>
                               </span>
                               {"   |  "}
-                              <span className="text-light">
+                              <span className="text-light pricefont">
                                 {"   "} <i class="fa fa-inr"></i> {product.p_price}
                               </span>{" "}
                               <span className="px-1 sale bg-primary text-light">Sale</span>
@@ -178,12 +184,12 @@ const Featured_Product = (props) => {
                           <div className="text-dark">
                             <span style={{ "text-decoration": "line-through" }}>
                               {" "}
-                              <span className="text-dark">
+                              <span className="text-dark pricefont">
                                 <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
                               </span>
                             </span>
                             {"   |  "}
-                            <span className="text-dark">
+                            <span className="text-dark pricefont">
                               {"   "} <i class="fa fa-inr "></i> {product.p_price}
                             </span>{" "}
                             <span className="px-1 sale bg-primary text-light d-none">Sale</span>
@@ -215,10 +221,11 @@ const Featured_Product = (props) => {
             </div>
           ))}
       </div>
-
-      <div className="text-center mt-2">
+      <br />
+      <br />
+      <div className="text-center mt-2 d-none">
         <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
-          <i className="fa fa-angle-right m-r10"></i>Shop all
+          Shop all <i className="fa fa-angle-right m-r10"></i>
         </Link>
       </div>
     </div>

@@ -173,19 +173,19 @@ const New_Products = () => {
                             <div className="text-dark">
                               <span style={{ "text-decoration": "line-through" }}>
                                 {" "}
-                                <span className="text-dark">
+                                <span className="text-dark pricefont">
                                   <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
                                 </span>
                               </span>
                               {"   |  "}
-                              <span className="text-dark">
+                              <span className="text-dark pricefont">
                                 {"   "} <i class="fa fa-inr "></i> {product.p_price}
                               </span>{" "}
                               <span className="px-1 sale bg-primary text-light d-none">Sale</span>
                             </div>
                           </>
                         ) : (
-                          <div className=" text-dark ">
+                          <div className=" text-dark pricefont">
                             <span className="text-dark ">
                               <i class="fa fa-inr"> {"   "} </i>
                               {"   "}
@@ -196,12 +196,13 @@ const New_Products = () => {
                       </div>
                     </span>
 
-                    <div>
+                    <div className="">
                       {" "}
                       <Link className="text-dark" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                         {" "}
-                        <div>
-                          <b className="text-primary">{product.p_name}</b>
+                        <div className="textoverflow1 px-2">
+                          <h6 className="text-primary ">{product.p_name}</h6>
+                          <br />
                         </div>
                       </Link>
                     </div>
@@ -213,7 +214,7 @@ const New_Products = () => {
       </div>
       <div className="text-center mt-2">
         <Link to={"/shop"} className="p-2 px-3  btn btn-md btnhover shadow m-t30">
-          <i className="fa fa-angle-right m-r10"></i>Shop all
+          Shop all <i className="fa fa-angle-right m-r10"></i>
         </Link>
       </div>
     </div>

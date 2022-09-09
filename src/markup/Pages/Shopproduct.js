@@ -113,7 +113,7 @@ const Shopproduct = (props) => {
         .then((response) => response.json())
         .then((data) => {
           setProductDtl(data);
-          console.log("category", data.p_category);
+          console.log("category", data);
           if (data.p_category !== null && data.p_category !== undefined) {
             getRelatedProducts(data.p_category);
           }
@@ -238,12 +238,12 @@ const Shopproduct = (props) => {
                     </div>
                     <div className="relative">
                       <h3 className="m-tb10">
-                        {productDtl.p_price < productDtl.p_actual_price && productDtl.p_price !== 0 && productDtl.p_price !== "" ? (
+                        {productDtl.p_price < productDtl.p_net_product_price && productDtl.p_price !== 0 && productDtl.p_price !== "" ? (
                           <>
-                            <div className="text-primary">
+                            <div className="text-primary pricefont">
                               <span style={{ "text-decoration": "line-through" }}>
                                 {" "}
-                                <i class="fa fa-inr"></i> {productDtl.p_actual_price || 0}{" "}
+                                <i class="fa fa-inr"></i> {productDtl.p_net_product_price || 0}{" "}
                               </span>
                               {"   |  "}
                               <span>
@@ -252,7 +252,7 @@ const Shopproduct = (props) => {
                             </div>
                           </>
                         ) : (
-                          <div className="text-primary">
+                          <div className="text-primary pricefont">
                             <i class="fa fa-inr"> {"   "} </i>
                             {"   "} {productDtl.p_price}
                           </div>
@@ -289,8 +289,13 @@ const Shopproduct = (props) => {
                       <div> Available Quantity - {productDtl.p_quantity}</div>
                     </div>
                     {productDtl.p_quantity > 0 ? (
-                      <button disabled={loading} className="btn btnhover" type="submit">
-                        <i className="ti-shopping-cart"></i>Add To Cart
+                      <button disabled={loading} className="btn btnhover px-1" type="submit">
+                        <div className="d-flex align-items-center justify-content-between mt-1">
+                          <div className="pl-1">Add to cart</div>
+                          <div className="align-self-center">
+                            <i className="ti-shopping-cart mx-1 cartbuttonbg"></i>
+                          </div>
+                        </div>
                       </button>
                     ) : (
                       <button disabled={true} className="btn btnhover">
@@ -435,11 +440,11 @@ const Shopproduct = (props) => {
                             </div>
                           </div>
                           <div class="item-info text-center">
-                            <p class="item-title small">
+                            <p class="item-title">
                               <Link to={`/shop-product-details/${rel.p_id}`}>{rel.p_name}</Link>
                             </p>
-                            <Link to={`/shop-product-details/${rel.p_id}`} class="btn btn-sm  btnhover">
-                              View
+                            <Link to={`/shop-product-details/${rel.p_id}`} class="btn btn-sm px-3 py-2 btnhover">
+                              <div className="py-1">View</div>
                             </Link>
                           </div>
                         </div>

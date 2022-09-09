@@ -184,7 +184,7 @@ const NavBarMenu = () => {
       <div className="sticky-top top-0">
         <nav class="navbar navbar-expand-lg navbar-light searchbarbg bg-light w-100 py-1 bg-white">
           <div class="container-fluid">
-            <div className="d-flex align-items-center justify-content-end">
+            <div className="d-flex align-items-center justify-content-end mr-3">
               <div className="align-items-center">
                 <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar border px-3" placeholder="Search all our products" />
               </div>
@@ -206,7 +206,7 @@ const NavBarMenu = () => {
                 </span>
               </Link>
 
-              <div class="dropdown d-none">
+              {/* <div class="dropdown d-none">
                 <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                   <i class="fas fa-bell"></i>
                   <span class="badge rounded-pill badge-notification bg-danger">1</span>
@@ -228,7 +228,7 @@ const NavBarMenu = () => {
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
 
               <div class="dropdown">
                 {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? (
@@ -283,7 +283,7 @@ const NavBarMenu = () => {
         </nav>
 
         <nav class=" d-flex navbar navbar-expand-lg navbar-light bg-light py-1 bg-white w-100 position-relative z-index999">
-          <div class="container-fluid">
+          <div class="container-fluid1 container-fluid">
             <button class="navbar-toggler text-primary" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onClick={toggle}>
               {/* <i class="fas fa-bars"></i> */}
 
@@ -306,7 +306,7 @@ const NavBarMenu = () => {
               {/* ---------- */}
 
               <ul className="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item d-none">
                   <a class="dropdown-toggle align-items-center hidden-arrow  nav-link text-primary" href="/">
                     <i class="fa fa-home" aria-hidden="true"></i>
                   </a>
@@ -322,7 +322,7 @@ const NavBarMenu = () => {
                       mmc.id != null && (
                         <li class="nav-item dropdown">
                           <a class="dropdown-toggle align-items-center hidden-arrow nav-link text-dark" href="#" id={"navbarDropdownMenuAvatar" + mmc.maincategory} role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                            <span className="small">
+                            <span className="medium">
                               {mmc.maincategory?.toUpperCase()} <i className="fa fa-angle-down"></i>
                             </span>
                           </a>
@@ -332,7 +332,8 @@ const NavBarMenu = () => {
                                 .filter((fil) => fil.maincategory === mmc.maincategory)
                                 ?.map((mc) => (
                                   <li className="small">
-                                    <Link className="dropdown-item" to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}>
+                                    {/* <Link className="dropdown-item" to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}> */}
+                                    <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
                                   </li>

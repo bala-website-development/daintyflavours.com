@@ -1,3 +1,37 @@
+.cartbuttonbg
+{
+border: 1px #ffffff solid;
+border-radius: 50%;
+padding: 9px;
+background-color: #ffffffa4;
+color: #b43b8d;
+}
+.cartbuttonbg:hover{
+color: #b43b8d;
+}
+.pricefont
+{
+  font-family: sans-serif !important;
+}
+.textoverflow1 h6
+{
+  
+white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis !important;
+  text-transform: Uppercase !important;
+
+}
+.container-fluid
+{
+  justify-content: end !important;
+  
+}
+.container-fluid1 {
+  justify-content: space-between !important;
+
+}
+
 ._3lhLL p {
   color: white;
 }
