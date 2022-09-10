@@ -23,7 +23,7 @@ const Shop = (props) => {
   const [masterCategory, setMasterCategory] = useState([]);
   const [mcatFilterApp, setMcatFilterApp] = useState(false);
   const [mcatFilterProd, setMcatFilterProd] = useState([]);
-
+  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
   // const [postsToShow, setPostsToShow] = useState([]);
   const postsPerPage = 20;
   const [next, setNext] = useState(postsPerPage);
@@ -45,7 +45,7 @@ const Shop = (props) => {
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
-    console.log("queryyy", queries);
+    console.log("queryyy", maincategory);
     console.log("bannerimagestate", bannerimagestate);
     setLoading((loading) => !loading);
 
@@ -56,6 +56,7 @@ const Shop = (props) => {
       .then((response) => response.json())
       .then((data) => {
         if (category) {
+          if (category === "all") getAllProductDetails();
           let selective = data
             .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
             .map((data) => {
@@ -69,6 +70,17 @@ const Shop = (props) => {
           console.log("mainprod", data);
           let selective = data
             .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+            .map((data) => {
+              return data;
+            });
+          setProducts(selective);
+          setFilter(selective);
+
+          console.log(selective, "selective");
+        } else if (maincategory === "all") {
+          console.log("mainprod", data);
+          let selective = data
+            .filter((filter) => filter.isactive === 1)
             .map((data) => {
               return data;
             });
@@ -189,14 +201,40 @@ const Shop = (props) => {
     }, 1000);
   };
   const addItemsToCart = (pid, price) => {
-    setLoading((loading) => !loading);
+    // setLoading((loading) => !loading);
     if (localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null) {
+      // let data = [
+      //   {
+      //     userid: "lsuser",
+      //     createddate: new Date(),
+      //     isactive: 1,
+      //     p_id: pid,
+      //     p_quantity: 1,
+      //     updateddate: new Date(),
+      //     p_price: price,
+      //     id: uuid(),
+      //   },
+      // ];
+      // let lsDaintyCart_ = JSON.parse(localStorage.getItem("daintycart"));
+      // if (lsDaintyCart_ === undefined || lsDaintyCart_ === null) {
+      //   console.log("lsDaintyCart", lsDaintyCart_);
+      //   localStorage.setItem("daintycart", JSON.stringify(data));
+      //   setMessage("Item added to cart.");
+      //   handleVisible();
+      // } else {
+      //   localStorage.removeItem("daintycart");
+      //   lsDaintyCart_.push(data);
+      //   localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
+      //   setMessage("Item Updated to cart.");
+      //   handleVisible();
+      //   console.log("else lsDaintyCart_", lsDaintyCart_);
+      // }
       history.push("/shop-login");
     } else {
       let data = {
         userid: localStorage.getItem("uuid"),
         createddate: new Date(),
-        isactive: "1",
+        isactive: 1,
         p_id: pid,
         p_quantity: 1,
         updateddate: new Date(),
@@ -224,7 +262,7 @@ const Shop = (props) => {
           console.log(networkError);
         });
     }
-    setLoading((loading) => !loading);
+    //setLoading((loading) => !loading);
   };
 
   const applyFilter = (searchValue) => {
@@ -356,7 +394,7 @@ const Shop = (props) => {
         <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimagestate !== 0 ? { backgroundImage: "url(" + bannerimagestate + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">{category != undefined ? category : "Shop"}</h1>
+              <h1 className="text-white">{category != undefined ? (category == "all" ? "All Products" : category) : "Shop"}</h1>
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">
@@ -499,9 +537,9 @@ const Shop = (props) => {
                                   )}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
                                     <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
-                                      <div className="d-flex align-items-center mt-1">
+                                      <div className="d-flex align-items-center mt-1 ">
                                         <div className="pl-1">Add to cart</div>
-                                        <div className="align-self-center">
+                                        <div className="align-self-center p-t6">
                                           <i className="ti-shopping-cart mx-1 cartbuttonbg"></i>
                                         </div>
                                       </div>
