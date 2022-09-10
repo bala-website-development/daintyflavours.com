@@ -47,7 +47,7 @@ const NavBarMenu = () => {
     navUl.forEach((el) => el.classList.remove("open"));
     current.classList.add("open");
   }
-
+  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
   const [toggleShow, setToggleShow] = useState(false);
   const [cartDetails, setCartDetails] = useState(false);
   const [cartUpdated, setCartUpdated] = useState(localStorage.getItem("cartUpdated"));
