@@ -200,45 +200,57 @@ const Shop = (props) => {
       setSmShow(false);
     }, 1000);
   };
-  const addItemsToCart = (pid, price) => {
+  const addItemsToCart = (pid, price, product) => {
     // setLoading((loading) => !loading);
     if (localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null) {
-      // let data = [
-      //   {
-      //     userid: "lsuser",
-      //     createddate: new Date(),
-      //     isactive: 1,
-      //     p_id: pid,
-      //     p_quantity: 1,
-      //     updateddate: new Date(),
-      //     p_price: price,
-      //     id: uuid(),
-      //   },
-      // ];
-      // let lsDaintyCart_ = JSON.parse(localStorage.getItem("daintycart"));
-      // if (lsDaintyCart_ === undefined || lsDaintyCart_ === null) {
-      //   console.log("lsDaintyCart", lsDaintyCart_);
-      //   localStorage.setItem("daintycart", JSON.stringify(data));
-      //   setMessage("Item added to cart.");
-      //   handleVisible();
-      // } else {
-      //   localStorage.removeItem("daintycart");
-      //   lsDaintyCart_.push(data);
-      //   localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
-      //   setMessage("Item Updated to cart.");
-      //   handleVisible();
-      //   console.log("else lsDaintyCart_", lsDaintyCart_);
-      // }
-      history.push("/shop-login");
+      // add to cart for Guest user - start
+      let cartarray = [];
+      let data = {
+        userid: "guestuser",
+        createddate: new Date(),
+        isactive: 1,
+        p_id: product.p_id,
+        p_image: product.p_image,
+        p_name: product.p_name,
+        p_net_product_price: product.p_net_product_price,
+        p_returnaccepted: product.p_returnaccepted,
+        p_productweight: product.p_productweight,
+        p_tax: product.p_tax,
+        p_quantity: 1,
+        updateddate: new Date(),
+        p_price: product.p_price,
+        id: uuid(),
+      };
+      console.log("befre", cartarray);
+      cartarray.push(data);
+      console.log("after", cartarray);
+      let lsDaintyCart_ = localStorage.getItem("daintycart");
+      if (lsDaintyCart_ === undefined || lsDaintyCart_ === null) {
+        console.log("lsDaintyCart", lsDaintyCart_);
+        localStorage.setItem("daintycart", JSON.stringify(cartarray));
+        setMessage("Item added to cart.");
+        handleVisible();
+      } else {
+        let cartarraynew = [];
+        cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
+        localStorage.removeItem("daintycart");
+        cartarraynew.push(data);
+        localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
+        setMessage("Item Updated to cart.");
+        handleVisible();
+      }
+      // history.push("/shop-login");
+      // add to cart for Guest user - end
     } else {
+      // add to cart for logged in user - start
       let data = {
         userid: localStorage.getItem("uuid"),
         createddate: new Date(),
         isactive: 1,
-        p_id: pid,
+        p_id: product.p_id,
         p_quantity: 1,
         updateddate: new Date(),
-        p_price: price,
+        p_price: product.p_price,
         id: uuid(),
       };
 
@@ -536,7 +548,7 @@ const Shop = (props) => {
                                     </div>
                                   )}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
+                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
                                       <div className="d-flex align-items-center mt-1 ">
                                         <div className="pl-1">Add to cart</div>
                                         <div className="align-self-center p-t6">

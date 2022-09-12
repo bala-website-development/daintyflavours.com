@@ -27,7 +27,8 @@ const Payment = (props) => {
       orderid: props.orderid, // get from orderid
       payment_capture: 1,
     };
-    fetch(config.service_url + "payment", { method: "POST", headers: { "Content-Type": "application/json", authorization: localStorage.getItem("accessToken") }, body: JSON.stringify({ data: _data }) })
+    let methodname = props.userLoggedin ? "payment" : "gpayment";
+    fetch(config.service_url + methodname, { method: "POST", headers: { "Content-Type": "application/json", authorization: localStorage.getItem("accessToken") }, body: JSON.stringify({ data: _data }) })
       .then((response) => response.json())
       .then((data) => {
         console.log("payment", data);
@@ -48,6 +49,7 @@ const Payment = (props) => {
               //call order api to update the order sucess
               sendEmail(props.name, props.email, props.orderid, "Received", "Completed");
               history.push("/success");
+              localStorage.setItem("daintycart", JSON.stringify([]));
             },
             prefill: {
               name: props.name,

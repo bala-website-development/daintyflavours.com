@@ -149,6 +149,9 @@ const NavBarMenu = () => {
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
+    } else {
+      //get from local storage
+      setCartDetails(lsDaintyCart);
     }
     if (localStorage.getItem("maincategories") === undefined || localStorage.getItem("maincategories") === null) {
       getMainCategories();
@@ -202,7 +205,7 @@ const NavBarMenu = () => {
               <Link class="text-reset me-3 text-primary" to={"/shop-cart"}>
                 <i class="fas fa-shopping-cart"></i>
                 <span class="badge rounded-pill badge-notification mx-1">
-                  <span class="badge rounded-pill badge-notification bg-danger">{cartDetails.length > 0 ? cartDetails.length : 0}</span>
+                  <span class="badge rounded-pill badge-notification bg-danger">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
                 </span>
               </Link>
 

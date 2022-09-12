@@ -14,6 +14,18 @@ color: #b43b8d;
 {
   font-family: sans-serif !important;
 }
+.br30{
+  border-radius: 30px !important;
+}
+.modal-content
+{
+    border-radius: 30px !important;
+    background: #b43b8d !important;
+}
+.modal-header {
+  border-radius: 30px !important;
+  background: #ecb7d4 !important;
+}
 .textoverflow1 h6
 {
   

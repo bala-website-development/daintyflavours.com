@@ -142,6 +142,11 @@ class Footer extends Component {
                   <div className="widget-link">
                     <ul>
                       <li>
+                        <a href={config.admin_url} className="font-weight-light color-white" target="blank">
+                          Admin
+                        </a>{" "}
+                      </li>
+                      <li>
                         <a href="https://www.theuniquecreations.com/contact" className="font-weight-light" target="blank">
                           Contact developer
                         </a>{" "}
