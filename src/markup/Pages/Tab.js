@@ -32,8 +32,6 @@ const Popupss = (props) => {
           setMasterMainCategory(_filter);
           localStorage.setItem("cartUpdated", true);
         } else if (data.status === 400) {
-          setMessage("No Data");
-          handleVisible();
         }
       })
       .catch((err) => {
@@ -51,8 +49,6 @@ const Popupss = (props) => {
           setMasterCategory(_filter);
           localStorage.setItem("cartUpdated", true);
         } else if (data.status === 400) {
-          setMessage("No Data");
-          handleVisible();
         }
       })
       .catch((err) => {
@@ -85,8 +81,10 @@ const Popupss = (props) => {
                         toggle(index);
                       }}
                     >
-                      <img src={mmc.icon_image ? mmc.icon_image : config.defaulticon} alt={config.websitetitle} className={"iconimage"} />
-                      <span>{mmc.maincategory}</span>
+                      {/* <img src={mmc.icon_image ? mmc.icon_image : config.defaulticon} alt={config.websitetitle} className={"iconimage"} /> */}
+                      <div className="item-info text-center">
+                        <span className="item-title font-weight-normal">{mmc.maincategory}</span>
+                      </div>
                     </Link>
                   </li>
                 ))}

@@ -3,5 +3,4 @@ Allow: /
 Allow: /about
 Allow: /contact
 Allow: /shop
-Allow: /gallery
 Sitemap: https://www.daintyflavors.com/sitemap.txt

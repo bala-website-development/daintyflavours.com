@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Payment from "./../Element/Payment";
 import Footer from "./../Layout/Footer";
 import img1 from "./../../images/banner/bnr1.jpg";
@@ -47,7 +47,7 @@ const PaymentPage = (props) => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="page-notfound text-center">
-                      <Payment amount={location.state?.amount} name={location.state?.name} orderid={location.state?.orderid} email={location.state?.email} contactno={location.state?.contactno} orderstatus={location.state?.orderstatus} paymentstatus={location.state?.paymentstatus} />
+                      <Payment amount={location.state?.amount} name={location.state?.name} orderid={location.state?.orderid} email={location.state?.email} contactno={location.state?.contactno} orderstatus={location.state?.orderstatus} paymentstatus={location.state?.paymentstatus} userLoggedin={location.state?.userLoggedin} />
                     </div>
                   </div>
                 </div>

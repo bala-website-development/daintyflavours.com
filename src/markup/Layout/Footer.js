@@ -78,14 +78,14 @@ class Footer extends Component {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="widget border-0 ">
-                    <h4 className="footer-title">Order Online/ Store Timings</h4>
+                    <h4 className="footer-title">Store Timings</h4>
 
                     <ul className="work-hour-list">
                       <li>
                         <span className="day" className="text-dark">
                           <span className="text-dark">Monday to Saturday</span>
                         </span>
-                        <span className="timing text-dark">9.30am to 7.45pm</span>
+                        <span className="timing text-dark">9.30am to 7.30pm</span>
                       </li>
                       <li className="d-none">
                         <span className="day ">
@@ -141,6 +141,11 @@ class Footer extends Component {
                 <div className="col-lg-6 col-md-6 text-right">
                   <div className="widget-link">
                     <ul>
+                      <li>
+                        <a href={config.admin_url} className="font-weight-light color-white" target="blank">
+                          Admin
+                        </a>{" "}
+                      </li>
                       <li>
                         <a href="https://www.theuniquecreations.com/contact" className="font-weight-light" target="blank">
                           Contact developer

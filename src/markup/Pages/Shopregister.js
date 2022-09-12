@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import { useForm } from "react-hook-form";
 import uuid from "react-uuid";
@@ -134,19 +134,20 @@ const Shopregister = ({ history }) => {
                           <div className="form-group col-md-6">
                             <label>Town/City *</label>
                             <input name="city" required type="text" className="form-control" placeholder="Town/City" {...register("city", { required: true })} />
-                            {/* {errors.city && "City is required"} */}
                           </div>
                           <div className="form-group col-md-6">
                             <label>State/Country *</label>
                             <input name="state" required type="text" className="form-control" placeholder="State/Country" {...register("state", { required: true })} />
-                            {/* {errors.state && "State/Country is required"} */}
                           </div>
                         </div>
                         <div className="row">
                           <div className="form-group col-md-6">
                             <label>Postcode/Zip *</label>
                             <input name="pincode" required type="text" className="form-control" placeholder="Pincode" {...register("pincode", { required: true })} />
-                            {/* {errors.pincode && "Pincode is required"} */}
+                          </div>
+                          <div className="form-group col-md-6">
+                            <label>GST Number (Optional)</label>
+                            <input name="gstnumber" required type="text" className="form-control" placeholder="GST number" {...register("gstnumber", { required: false })} />
                           </div>
                         </div>
                         <div className=" form-group  row">

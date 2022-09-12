@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { Link, useHistory } from "react-router-dom";
 import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
@@ -7,35 +8,55 @@ import bnr from "./../../images/banner/bnr1.jpg";
 import uuid from "react-uuid";
 import { Modal } from "react-bootstrap";
 import loadingimg from "./../../images/load.gif";
-import Header2 from "../Layout/Header2";
+import Header2 from "./../Layout/NavBarMenu";
+import queryString from "query-string";
 const Shop = (props) => {
+  const query = new URLSearchParams(props.location.search);
+  const queryurl = localStorage.getItem("queryurl");
   const [products, setProducts] = useState([]);
   const [networkError, setNetworkError] = useState("");
   const [smShow, setSmShow] = useState(false);
   const [message, setMessage] = useState("");
+  const [bannerimagestate, setBannerimagestate] = useState(localStorage.getItem("bannerurl") || 0);
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState([]);
   const [masterCategory, setMasterCategory] = useState([]);
   const [mcatFilterApp, setMcatFilterApp] = useState(false);
   const [mcatFilterProd, setMcatFilterProd] = useState([]);
+  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
   // const [postsToShow, setPostsToShow] = useState([]);
   const postsPerPage = 20;
   const [next, setNext] = useState(postsPerPage);
   const [end, setEnd] = useState(0);
   const history = useHistory();
-  let bannerimageurl = props.location.bannerimage;
+
+  //let bannerimageurl = props.location.bannerimage;
+  // let category = props.location.category;
+  // let maincategory = props.location.maincategory;
+  // let searchFilter = props.location.searchFilter;
+  //let bannerimageurl = query.get("bannerimage");
+  const queries = queryString.parse(queryurl);
+  // let category = query.get("category");
+  // let maincategory = query.get("maincategory");
+  let category = queries.category;
+  let maincategory = queries.maincategory;
+  let searchFilter = props.location.searchFilter;
+
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
+    console.log("queryyy", maincategory);
+    console.log("bannerimagestate", bannerimagestate);
     setLoading((loading) => !loading);
-    console.log("banner image", props.location.bannerimage);
-    console.log("cakecategory", props.location.category);
-    console.log("both", props.location.category, props.location.maincategory);
-    let _filterOption = props.location?.category != "" && props.location?.category !== undefined ? props.location?.category : props.location?.maincategory;
+
+    //console.log("all querry", category, maincategory, searchFilter);
+
+    let _filterOption = category != "" && category !== undefined ? category : maincategory;
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
-        if (props.location.category) {
+        if (category) {
+          if (category === "all") getAllProductDetails();
           let selective = data
             .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
             .map((data) => {
@@ -45,10 +66,21 @@ const Shop = (props) => {
           setFilter(selective);
 
           console.log(selective, "selective");
-        } else if (props.location.maincategory) {
+        } else if (maincategory) {
           console.log("mainprod", data);
           let selective = data
             .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+            .map((data) => {
+              return data;
+            });
+          setProducts(selective);
+          setFilter(selective);
+
+          console.log(selective, "selective");
+        } else if (maincategory === "all") {
+          console.log("mainprod", data);
+          let selective = data
+            .filter((filter) => filter.isactive === 1)
             .map((data) => {
               return data;
             });
@@ -86,7 +118,7 @@ const Shop = (props) => {
   };
   const getAllProductDetails = async () => {
     setLoading((loading) => !loading);
-    console.log("cakecategory", props.location.category);
+    console.log("cakecategory", category);
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
@@ -147,12 +179,16 @@ const Shop = (props) => {
   };
 
   useEffect(() => {
+    //const query = props.location?.pathname;
+    //console.log(query);
+    const queries = queryString.parse(props.location.search);
+
     getProductDetails();
     getCategories();
     // loopWithSlice(0, postsPerPage);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.category, props.location?.maincategory, props.location?.searchFilter]);
+  }, [props.location?.searchFilter, queryurl]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);
@@ -164,19 +200,57 @@ const Shop = (props) => {
       setSmShow(false);
     }, 1000);
   };
-  const addItemsToCart = (pid, price) => {
-    setLoading((loading) => !loading);
+  const addItemsToCart = (pid, price, product) => {
+    // setLoading((loading) => !loading);
     if (localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null) {
-      history.push("/shop-login");
+      // add to cart for Guest user - start
+      let cartarray = [];
+      let data = {
+        userid: "guestuser",
+        createddate: new Date(),
+        isactive: 1,
+        p_id: product.p_id,
+        p_image: product.p_image,
+        p_name: product.p_name,
+        p_net_product_price: product.p_net_product_price,
+        p_returnaccepted: product.p_returnaccepted,
+        p_productweight: product.p_productweight,
+        p_tax: product.p_tax,
+        p_quantity: 1,
+        updateddate: new Date(),
+        p_price: product.p_price,
+        id: uuid(),
+      };
+      console.log("befre", cartarray);
+      cartarray.push(data);
+      console.log("after", cartarray);
+      let lsDaintyCart_ = localStorage.getItem("daintycart");
+      if (lsDaintyCart_ === undefined || lsDaintyCart_ === null) {
+        console.log("lsDaintyCart", lsDaintyCart_);
+        localStorage.setItem("daintycart", JSON.stringify(cartarray));
+        setMessage("Item added to cart.");
+        handleVisible();
+      } else {
+        let cartarraynew = [];
+        cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
+        localStorage.removeItem("daintycart");
+        cartarraynew.push(data);
+        localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
+        setMessage("Item Updated to cart.");
+        handleVisible();
+      }
+      // history.push("/shop-login");
+      // add to cart for Guest user - end
     } else {
+      // add to cart for logged in user - start
       let data = {
         userid: localStorage.getItem("uuid"),
         createddate: new Date(),
-        isactive: "1",
-        p_id: pid,
+        isactive: 1,
+        p_id: product.p_id,
         p_quantity: 1,
         updateddate: new Date(),
-        p_price: price,
+        p_price: product.p_price,
         id: uuid(),
       };
 
@@ -200,7 +274,7 @@ const Shop = (props) => {
           console.log(networkError);
         });
     }
-    setLoading((loading) => !loading);
+    //setLoading((loading) => !loading);
   };
 
   const applyFilter = (searchValue) => {
@@ -227,8 +301,6 @@ const Shop = (props) => {
           setMasterCategory(_filter);
           localStorage.setItem("cartUpdated", true);
         } else if (data.status === 400) {
-          setMessage("No Data");
-          handleVisible();
         }
       })
       .catch((err) => {
@@ -270,8 +342,8 @@ const Shop = (props) => {
     });
     setMasterCategory(clearedMCategory);
     setMcatFilterApp(false);
-    props.location.maincategory = undefined;
-    props.location.category = undefined;
+    maincategory = undefined;
+    category = undefined;
     // loopWithSlice(0, next + postsPerPage, false);
     // setNext(postsPerPage);
     let sliced = filter.slice(0, postsPerPage);
@@ -330,10 +402,11 @@ const Shop = (props) => {
       <Header2 active={"shop"} />
 
       <div className="page-content bg-white">
-        <div className="dlab-bnr-inr " style={bannerimageurl !== undefined ? { backgroundImage: "url(" + bannerimageurl + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+        {/* <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimageurl !== undefined || bannerimageurl !== "null" ? { backgroundImage: "url(" + banner + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}> */}
+        <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimagestate !== 0 ? { backgroundImage: "url(" + bannerimagestate + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">{props.location.category != undefined ? props.location.category : "Shop"}</h1>
+              <h1 className="text-white">{category != undefined ? (category == "all" ? "All Products" : category) : "Shop"}</h1>
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">
@@ -354,9 +427,9 @@ const Shop = (props) => {
             <div className="container">
               <div className="row mt-3">
                 <div className="col-lg-3">
-                  <div className="bg-white px-3 mb-3">
+                  <div className="bg-white px-3 mb-3 d-none">
                     <aside className="side-bar shop-categories sticky-top">
-                      {props.location?.category !== undefined && props.location?.maincategory !== undefined ? (
+                      {category !== undefined && maincategory !== undefined ? (
                         <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
                           Shop All Products
                         </Link>
@@ -412,52 +485,79 @@ const Shop = (props) => {
                   </div>
                 </div>
 
-                <div className="col-lg-9 shopproducts">
+                <div className="col-lg-12 shopproducts">
                   <div>
-                    <input type="text" className="form-control" placeholder="Search Products" name="searchbox" id="searchbox" onChange={(e) => applyFilter(e.target.value)}></input>
+                    <div>
+                      {" "}
+                      <input type="text" className="form-control" placeholder="Search Products" name="searchbox" id="searchbox" onChange={(e) => applyFilter(e.target.value)}></input>
+                    </div>
 
                     <div className="row m-1">
                       {!loading ? (
                         products && products.length > 0 ? (
                           products.map((product) => (
-                            <div className="col-lg-3 col-md-4 col-xl-3 col-sm-3 p-1">
-                              <div className="item-box shop-item">
-                                <div className="item-img">
-                                  <img className="thumbnailimage" src={product.p_image ? product.p_image : config.defaultimage} alt="" />
-                                  {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
+                            <div className="col-lg-3">
+                              <div className="item-box shop-item style text-white shadow rounded">
+                                <div className="item-img1">
+                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
+                                    <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
+                                  </Link>
+                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "" ? (
                                     <>
-                                      <div className="price bg-white">
+                                      <div className="sale bg-primary text-light">Sale</div>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                                <div className="item-info text-center">
+                                  <p className="small mb-0 textoverflow1">
+                                    <h6 className="px-1">
+                                      <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
+                                    </h6>{" "}
+                                  </p>
+                                  {/* <Link className="">
+                                    <div className="">
+                                      <span style={{ "text-decoration": "line-through" }}>
+                                        {" "}
+                                        <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
+                                      </span>
+                                      {"   |  "}
+                                      <span>
+                                        {"   "} <i class="fa fa-inr"></i> {product.p_price}
+                                      </span>
+                                    </div>
+                                  </Link>{" "} */}
+                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
+                                    <>
+                                      <div className="text-primary pricefont">
                                         <span style={{ "text-decoration": "line-through" }}>
                                           {" "}
-                                          <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
+                                          <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
                                         </span>
                                         {"   |  "}
                                         <span>
                                           {"   "} <i class="fa fa-inr"></i> {product.p_price}
                                         </span>
                                       </div>
-                                      <div className="sale bg-primary text-light">Sale</div>
                                     </>
                                   ) : (
-                                    <div className="price bg-white">
+                                    <div className="text-primary pricefont">
                                       <i class="fa fa-inr"> {"   "} </i>
-                                      {"   "} {product.p_price}
+                                      {"   "} {product.p_net_product_price}
                                     </div>
                                   )}
-                                </div>
-                                <div className="item-info text-center">
-                                  <h5 className="">
-                                    <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                  </h5>
-                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }} className="btn btn-secondary btn-sm btnhover">
-                                    Details
-                                  </Link>{" "}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price)} className="btn btn-secondary btn-sm btnhover">
-                                      <i className="ti-shopping-cart m-r5"></i> Add to cart
+                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
+                                      <div className="d-flex align-items-center mt-1 ">
+                                        <div className="pl-1">Add to cart</div>
+                                        <div className="align-self-center p-t6">
+                                          <i className="ti-shopping-cart mx-1 cartbuttonbg"></i>
+                                        </div>
+                                      </div>
                                     </button>
                                   ) : (
-                                    <button disabled={true} className="btn btn-secondary btn-sm btnhover">
+                                    <button disabled={true} className="btn btn-secondary btn-sm btnhover mb-3">
                                       Out of Stock
                                     </button>
                                   )}
@@ -480,8 +580,8 @@ const Shop = (props) => {
                       ) : (
                         <div class="position-relative">
                           <div className="p-2 start-50">
-                            <div className="p-2">Fetching products Deails, please wait.....</div>
-                            <img className="p-2 w-25" src={loadingimg} height="20"></img>
+                            <div className="p-2">Fetching products details, please wait....</div>
+                            <img className="p-2 w-10" src={loadingimg} height="20px"></img>
                           </div>
                         </div>
                       )}
@@ -492,6 +592,10 @@ const Shop = (props) => {
                           Load more
                         </button>
                       )}
+                      <span class="px-2"></span>
+                      <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
+                        View all Products
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -500,7 +604,6 @@ const Shop = (props) => {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

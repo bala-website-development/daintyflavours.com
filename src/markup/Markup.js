@@ -12,6 +12,7 @@ import Construction from "./Pages/Construction";
 import Faq from "./Pages/Faq";
 import Booking from "./Pages/Booking";
 import Error from "./Pages/Error";
+import Loading from "./Pages/Loading";
 import Success from "./Pages/Success";
 import Calendar from "./Pages/Calendar";
 import Team from "./Pages/Team";
@@ -65,7 +66,7 @@ class Markup extends Component {
           <Route path="/gallery" exact component={Gallery} />
           <Route path="/shop-wishlist" exact component={Shopwishlist} />
           <Route path="/construction" exact component={Construction} />
-          <Route path="*" component={Error} />
+          <Route path="*" component={Loading} />
         </Switch>
       </BrowserRouter>
     );

@@ -1,3 +1,54 @@
+.cartbuttonbg
+{
+border: 1px #ffffff solid;
+border-radius: 50%;
+padding: 9px;
+background-color: #ffffffa4;
+color: #b43b8d;
+margin-top: 1px;
+}
+.cartbuttonbg:hover{
+color: #b43b8d;
+}
+.pricefont
+{
+  font-family: sans-serif !important;
+}
+.br30{
+  border-radius: 30px !important;
+}
+.modal-content
+{
+    border-radius: 30px !important;
+    background: #b43b8d !important;
+}
+.modal-header {
+  border-radius: 30px !important;
+  background: #ecb7d4 !important;
+}
+.textoverflow1 h6
+{
+  
+white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis !important;
+  text-transform: Uppercase !important;
+
+}
+.container-fluid
+{
+  justify-content: end !important;
+  
+}
+.container-fluid1 {
+  justify-content: space-between !important;
+
+}
+
+._3lhLL p {
+  color: white;
+}
+
 .tiles-grid {
   position: relative;
   display: grid;

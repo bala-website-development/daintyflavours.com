@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
 import ReactStars from "react-stars";
@@ -56,7 +56,44 @@ const Shopproduct = (props) => {
     setLoading((loading) => !loading);
     e.preventDefault();
     if (localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null) {
-      history.push("/shop-login");
+      // add to cart for Guest user - start
+      let cartarray = [];
+      let data = {
+        userid: "guestuser",
+        createddate: new Date(),
+        isactive: 1,
+        p_id: productDtl.p_id,
+        p_image: productDtl.p_image,
+        p_name: productDtl.p_name,
+        p_net_product_price: productDtl.p_net_product_price,
+        p_returnaccepted: productDtl.p_returnaccepted,
+        p_productweight: productDtl.p_productweight,
+        p_tax: productDtl.p_tax,
+        p_quantity: 1,
+        updateddate: new Date(),
+        p_price: productDtl.price,
+        id: uuid(),
+      };
+      console.log("befre", cartarray);
+      cartarray.push(data);
+      console.log("after", cartarray);
+      let lsDaintyCart_ = localStorage.getItem("daintycart");
+      if (lsDaintyCart_ === undefined || lsDaintyCart_ === null) {
+        console.log("lsDaintyCart", lsDaintyCart_);
+        localStorage.setItem("daintycart", JSON.stringify(cartarray));
+        setSuccessMsg("Item added to cart.");
+        handleVisible();
+      } else {
+        let cartarraynew = [];
+        cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
+        localStorage.removeItem("daintycart");
+        cartarraynew.push(data);
+        localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
+        setSuccessMsg("Item Updated to cart.");
+        handleVisible();
+      }
+      // history.push("/shop-login");
+      // add to cart for Guest user - end
     } else {
       let data = {
         userid: localStorage.getItem("uuid"),
@@ -101,6 +138,7 @@ const Shopproduct = (props) => {
   };
   useEffect(() => {
     const getRelatedProducts = async (category) => {
+      console.log("dailtycategory", category);
       await fetch(config.service_url + `getRelatedProducts/${category}`)
         .then((response) => response.json())
         .then((data) => {
@@ -112,7 +150,7 @@ const Shopproduct = (props) => {
         .then((response) => response.json())
         .then((data) => {
           setProductDtl(data);
-          console.log("category", data.p_category);
+          console.log("category", data);
           if (data.p_category !== null && data.p_category !== undefined) {
             getRelatedProducts(data.p_category);
           }
@@ -173,7 +211,7 @@ const Shopproduct = (props) => {
       </Modal>
       <Header />
       <div className="page-content bg-white">
-        <div className="dlab-bnr-inr  bg-pt" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+        <div className="dlab-bnr-inr overlay-black-light bg-pt" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">Product Details</h1>
@@ -181,7 +219,7 @@ const Shopproduct = (props) => {
               <div className="breadcrumb-row">
                 <ul className="list-inline">
                   <li>
-                    <Link to={"./"}>
+                    <Link to={"/"}>
                       <i className="fa fa-home"></i>
                     </Link>
                   </li>
@@ -198,9 +236,11 @@ const Shopproduct = (props) => {
               <div className="row">
                 <div className="col-lg-6 m-b30">
                   <div className="product-gallery on-show-slider lightgallery" id="lightgallery">
-                    <div className="dlab-box">
-                      <div className="dlab-thum-bx">
-                        <img src={productDtl.p_image ? productDtl.p_image : config.defaultimage} alt="sukhaa" />
+                    <div className="dlab-box prodcutdetailimage" style={productDtl.p_image ? { backgroundImage: "url(" + productDtl.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}>
+                      <div className="d-flex watermarkdiv justify-content-center w-100">
+                        <div className="align-items-center">
+                          <img className="watermark" src={config.watermark} alt={config.websitetitle} />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -214,7 +254,7 @@ const Shopproduct = (props) => {
                               <>
                                 <li>
                                   <div className="dlab-post-thum dlab-img-effect">
-                                    <img src={url} className="galarythumbnailimage" alt="sukhaa" />
+                                    <img src={url} className="galarythumbnailimage" alt={config.websitetitle} />
                                   </div>
                                 </li>
                               </>
@@ -227,7 +267,7 @@ const Shopproduct = (props) => {
                 <div className="col-lg-6 m-b30">
                   <Form className="cart sticky-top" onSubmit={addItemsToCart}>
                     <div className="dlab-post-title">
-                      <h4 className="post-title">{productDtl.p_name}</h4>
+                      <h4 className="post-title medium">{productDtl.p_name}</h4>
                       <p className="m-b10 d-none">{productDtl.p_description}</p>
                       <div className="dlab-divider bg-gray tb15">
                         <i className="icon-dot c-square"></i>
@@ -235,7 +275,25 @@ const Shopproduct = (props) => {
                     </div>
                     <div className="relative">
                       <h3 className="m-tb10">
-                        <i class="fa fa-inr"></i> {productDtl.p_price}
+                        {productDtl.p_price < productDtl.p_net_product_price && productDtl.p_price !== 0 && productDtl.p_price !== "" ? (
+                          <>
+                            <div className="text-primary pricefont">
+                              <span style={{ "text-decoration": "line-through" }}>
+                                {" "}
+                                <i class="fa fa-inr"></i> {productDtl.p_net_product_price || 0}{" "}
+                              </span>
+                              {"   |  "}
+                              <span>
+                                {"   "} <i class="fa fa-inr"></i> {productDtl.p_price}
+                              </span>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="text-primary pricefont">
+                            <i class="fa fa-inr"> {"   "} </i>
+                            {"   "} {productDtl.p_price}
+                          </div>
+                        )}
                       </h3>
                       <div className="shop-item-rating">
                         <span className="rating-bx">
@@ -259,11 +317,22 @@ const Shopproduct = (props) => {
                       <i className="icon-dot c-square"></i>
                     </div>
                     <div className="py-2">
+                      <div> Expiry Date - {productDtl.p_expirydate === "" || productDtl.p_expirydate === undefined || productDtl.p_expirydate === "0001-01-01" ? "N/A" : productDtl.p_expirydate}</div>
+                    </div>
+                    <div className="py-2">
+                      <div> Net Weight - {productDtl.p_productweight === "" || productDtl.p_productweight === undefined ? "N/A" : productDtl.p_productweight + " gms"}</div>
+                    </div>
+                    <div className="py-2">
                       <div> Available Quantity - {productDtl.p_quantity}</div>
                     </div>
                     {productDtl.p_quantity > 0 ? (
-                      <button disabled={loading} className="btn btnhover" type="submit">
-                        <i className="ti-shopping-cart"></i>Add To Cart
+                      <button disabled={loading} className="btn btnhover px-1" type="submit">
+                        <div className="d-flex align-items-center justify-content-between mt-1">
+                          <div className="pl-1">Add to cart</div>
+                          <div className="align-self-center">
+                            <i className="ti-shopping-cart mx-1 cartbuttonbg"></i>
+                          </div>
+                        </div>
                       </button>
                     ) : (
                       <button disabled={true} className="btn btnhover">
@@ -399,18 +468,20 @@ const Shopproduct = (props) => {
                     relatedProd.map((rel) => (
                       <div className="p-a15">
                         <div class="item-box shop-item">
-                          <div class="item-img">
-                            <img src={rel.p_image} alt="" />
-                            <div class="price bg-white">
+                          <div class="item-img1">
+                            <Link to={{ pathname: `/shop-product-details/${rel.p_id}` }}>
+                              <div className="homeimagerecentdivimg" style={rel.p_image ? { backgroundImage: "url(" + rel.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
+                            </Link>
+                            <div class="sale bg-white text-primary d-none">
                               <i class="fa fa-inr"></i> {rel.p_price}
                             </div>
                           </div>
                           <div class="item-info text-center">
-                            <h4 class="item-title">
+                            <p class="item-title">
                               <Link to={`/shop-product-details/${rel.p_id}`}>{rel.p_name}</Link>
-                            </h4>
-                            <Link to={`/shop-product-details/${rel.p_id}`} class="btn btnhover">
-                              View
+                            </p>
+                            <Link to={`/shop-product-details/${rel.p_id}`} class="btn btn-sm px-3 py-2 btnhover">
+                              <div className="py-1">View</div>
                             </Link>
                           </div>
                         </div>

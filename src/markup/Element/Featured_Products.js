@@ -11,50 +11,54 @@ const Featured_Product = (props) => {
   const [products, setProducts] = useState([]);
   const [galleryimage, setGalleryImage] = useState([]);
   const [networkError, setNetworkError] = useState("");
-  const getFeaturedProducts = async () => {
-    console.log("recentpost", products);
-    await fetch(config.service_url + "getHomePageCategory")
+
+  const getHomePageCategoryfromService = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getuserscategory")
       .then((response) => response.json())
-      .then((data1) => {
-        if (data1.status === 200) {
-          let active1 = data1.data
-            .filter((filter1, index) => filter1.isactive === 1 && filter1.isfeatured === 1 && index < config.featuredproduct)
-            .map((data) => {
-              return data;
-            });
+      .then((data) => {
+        if (data.status === 200) {
+          let active1 = data.data.filter((_d) => _d.type === "product" && _d.isactive === 1 && _d.featured === true);
+          active1.sort(function (a, b) {
+            return a.forder - b.forder;
+          });
+          //order by forder ascending
           setProducts(active1);
-          console.log("featuredproduct", active1);
         }
       })
       .catch((err) => {
-        setNetworkError("Something went wrong, Please try again later!!");
+        // setNetworkError("Something went wrong, Please try again later!!");
         // console.log(networkError);
       });
   };
-  const getHomePageCategory = async () => {
+  const getHomePageCategoryfromLocalstorage = async () => {
     console.log("recentpost", products);
+    if (JSON.parse(localStorage.getItem("categories")) !== null) {
+      let active1 = JSON.parse(localStorage.getItem("categories"))
+        .filter((filter1, index) => filter1.isactive === 1 && filter1.featured === true)
+        .map((data) => {
+          return data;
+        });
 
-    let active1 = JSON.parse(localStorage.getItem("categories"))
-      .filter((filter1, index) => filter1.isactive === 1 && filter1.featured === true && index < config.featuredproduct)
-      .map((data) => {
-        return data;
+      active1.sort(function (a, b) {
+        return a.forder - b.forder;
       });
-    setProducts(active1);
-
-    console.log("getHomePageCategory", active1);
+      //order by forder ascending
+      setProducts(active1);
+      console.log("getHomePageCategory", active1);
+    }
   };
 
   useEffect(() => {
-    //getFeaturedProducts();
-    getHomePageCategory();
-    // getGalleryDetails();
+    getHomePageCategoryfromService();
+    // getHomePageCategoryfromLocalstorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="mt-1">
       <div className="text-center">
-        <h3>Our Featured Prodcuts</h3>
+        <h3>Our Featured Products</h3>
         <div className="dlab-separator style1 bg-primary"></div>
       </div>
       <div id="tileview text-center d-none">
@@ -75,11 +79,10 @@ const Featured_Product = (props) => {
           <div data-role="tile" data-size="large" className="w-100"></div>
         </div>
       </div>
-
+      {/* in use */}
       <div id="tileview text-center">
         <div class="tiles-grid d-flex-row justify-content-between w-100">
-          {products &&
-            products.length > 0 &&
+          {products && products.length > 0 ? (
             products.map((fProduct, index) =>
               index === 0 || index === 7 ? (
                 <div
@@ -93,9 +96,11 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="p-1">
-                    <div className="p-1">
-                      <span>{fProduct.category}</span>
+                  <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
+                    <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                      <span>
+                        {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
+                      </span>
                     </div>
                   </Link>
                 </div>
@@ -111,16 +116,23 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className="p-1">
-                    <div className="p-1">
-                      <span>{fProduct.category}</span>
+                  {/* <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className=""> */}
+                  <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
+                    <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                      <span>
+                        {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
+                      </span>
                     </div>
                   </Link>
                 </div>
               )
-            )}
+            )
+          ) : (
+            <span className="container row w-100">Loading...</span>
+          )}
         </div>
       </div>
+      {/* not in use */}
       <div className="row d-none">
         {products.length > 0 &&
           products.map((product) => (
@@ -138,12 +150,12 @@ const Featured_Product = (props) => {
                             <div className="price text-light">
                               <span style={{ "text-decoration": "line-through" }}>
                                 {" "}
-                                <span className="text-light">
+                                <span className="text-light pricefont">
                                   <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
                                 </span>
                               </span>
                               {"   |  "}
-                              <span className="text-light">
+                              <span className="text-light pricefont">
                                 {"   "} <i class="fa fa-inr"></i> {product.p_price}
                               </span>{" "}
                               <span className="px-1 sale bg-primary text-light">Sale</span>
@@ -172,12 +184,12 @@ const Featured_Product = (props) => {
                           <div className="text-dark">
                             <span style={{ "text-decoration": "line-through" }}>
                               {" "}
-                              <span className="text-dark">
+                              <span className="text-dark pricefont">
                                 <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
                               </span>
                             </span>
                             {"   |  "}
-                            <span className="text-dark">
+                            <span className="text-dark pricefont">
                               {"   "} <i class="fa fa-inr "></i> {product.p_price}
                             </span>{" "}
                             <span className="px-1 sale bg-primary text-light d-none">Sale</span>
@@ -209,10 +221,11 @@ const Featured_Product = (props) => {
             </div>
           ))}
       </div>
-
-      <div className="text-center mt-2">
+      <br />
+      <br />
+      <div className="text-center mt-2 d-none">
         <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
-          <i className="fa fa-angle-right m-r10"></i>Shop all
+          Shop all <i className="fa fa-angle-right m-r10"></i>
         </Link>
       </div>
     </div>

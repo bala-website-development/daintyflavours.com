@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
+import NavBarMenu from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import { Link } from "react-router-dom";
 import CountUp from "react-countup";
@@ -65,11 +66,12 @@ const Index1 = () => {
       //add filer type=home
       console.log("latestCat", latestCat);
     };
-    fetchCategories();
+    //fetchCategories();
   }, []);
   return (
     <div>
-      <Header active={"home"} home={true} />
+      {/* <Header active={"home"} home={true} /> */}
+      <NavBarMenu active={"home"} home={true} />
 
       <Slider />
 
@@ -219,7 +221,11 @@ const Index1 = () => {
             <div className="container my-4">
               {/* <OurPartners /> */}
               <div className="section-head text-center">
-                <h3>Find Us on Instagram</h3>
+                <h3>
+                  <a href={config.insta} target="_blank">
+                    Find Us on Instagram
+                  </a>
+                </h3>
               </div>
               <Instagram />
               <div className="row">

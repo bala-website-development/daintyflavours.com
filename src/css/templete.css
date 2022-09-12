@@ -1517,7 +1517,7 @@
   color: #5fcac7;
   background-color: rgba(95, 202, 199, 0.1);
   padding: 5px 10px;
-  border-radius: 6px;
+  border-radius: 0px 50% 50% 0px ;
   position: absolute;
   top: 15px;
   display: table;
@@ -1648,10 +1648,10 @@
 }
 .woo-entry .product-gallery {
   position: relative;
-  border-radius: 6px;
+  border-radius: 3px;
   overflow: hidden;
   margin-right: 0;
-  border: 2px solid rgba(95, 202, 199, 0.3);
+  border: 1px solid rgba(95, 202, 199, 0.3);
 }
 .woo-entry .product-gallery .check-km {
   position: absolute;
@@ -1712,8 +1712,8 @@
 /* Product Description */
 .product-description .tab-content {
   padding: 25px;
-  border: 2px solid #5fcac7;
-  border-radius: 0 6px 6px 6px;
+  border: 1px solid #5fcac7;
+  border-radius: 0 3px 3px 3px;
   background: #fff;
 }
 .product-description .nav-tabs li a {

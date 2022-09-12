@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import OurPartners from "./../Element/OurPartners";
 import CountUp from "react-countup";
@@ -113,7 +113,7 @@ class About extends Component {
               </div>
             </div>
 
-            <div className="section-full my-4 bg-white">
+            <div className="section-full my-4 bg-white d-none">
               <div className="container ">
                 <div className="row">
                   <div className="col-lg-12">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import loadingimg from "./../../images/load.gif";
 import { Form } from "react-bootstrap";
@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 const Shopchekout = () => {
   const [cartDetails, setCartDetails] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
+  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
   const [productWeight, setProductWeight] = useState(0);
   const [networkError, setNetworkError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,8 +27,24 @@ const Shopchekout = () => {
   // const onSubmit = data => console.log(data);
   const [userAddress, setUserAddress] = useState([]);
 
-  // setCartDetails(props.location.cartdetails);
-  // setSubTotal(cartDetails.map(total => { return total.p_price * total.p_quantity }).reduce((a, b) => a + b, 0));
+  const updatecart = (data, ls) => {
+    setSubTotal(
+      data
+        .map((total) => {
+          return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
+        })
+        .reduce((a, b) => a + b, 0)
+    );
+    setProductWeight(
+      data
+        .map((wt) => {
+          return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
+        })
+        .reduce((a, b) => a + b, 0)
+    );
+    //setLoading((loading) => !loading);
+    console.log("cart details", data);
+  };
   const fetchCartDetails = () => {
     setLoading((load) => !load);
     fetch(config.service_url + "getCartProducts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userid: localStorage.getItem("uuid") }) })
@@ -36,34 +53,10 @@ const Shopchekout = () => {
         if (data.status === 500) {
           setSubTotal(0);
           setLoading((loading) => !loading);
-          // return;
         }
         setCartDetails(data);
-
-        // console.log("query_cartDetails", data1);
-        // setSubTotal(
-        //   data
-        //     .map((total) => {
-        //       return total.p_price * total.p_quantity || 0;
-        //     })
-        //     .reduce((a, b) => a + b, 0)
-        // );
-        setSubTotal(
-          data
-            .map((total) => {
-              return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
-            })
-            .reduce((a, b) => a + b, 0)
-        );
-        setProductWeight(
-          data
-            .map((wt) => {
-              return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
-            })
-            .reduce((a, b) => a + b, 0)
-        );
+        updatecart(data, 0);
         setLoading((loading) => !loading);
-        console.log("cart details", data);
       })
       .catch(function (error) {
         setNetworkError("Something went wrong, Please try again later!!");
@@ -95,8 +88,15 @@ const Shopchekout = () => {
   };
 
   useEffect(() => {
-    fetchCartDetails();
-    getUserProfile();
+    if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
+      //user loggined in
+      fetchCartDetails();
+      getUserProfile();
+    } else {
+      setCartDetails(lsDaintyCart);
+      updatecart(lsDaintyCart, 1);
+      // user not logged in
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
   const handleVisible = () => {
@@ -107,12 +107,25 @@ const Shopchekout = () => {
   };
   const onSubmit = (data, e) => {
     e.preventDefault();
-    delete userAddress[0].createddate;
-    delete userAddress[0].userid;
-    delete userAddress[0].password;
-    delete userAddress[0].isactive;
-    delete userAddress[0].updateddate;
-    delete userAddress[0].token;
+    if (userAddress[0]) {
+      delete userAddress[0].createddate;
+      delete userAddress[0].userid;
+      delete userAddress[0].password;
+      delete userAddress[0].isactive;
+      delete userAddress[0].updateddate;
+      delete userAddress[0].token;
+    }
+    let userid_, methodname, userloggedin;
+    if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
+      methodname = "placeOrder";
+      userid_ = localStorage.getItem("uuid");
+      userloggedin = true;
+    } else {
+      //guest user
+      methodname = "gplaceOrder";
+      userid_ = "guestuser_" + uuid();
+      userloggedin = false;
+    }
     let _data = {
       products: cartDetails,
       orderid: uuid(),
@@ -122,13 +135,20 @@ const Shopchekout = () => {
       deliverystatus: "InProgress",
       deliverydate: "",
       orderdate: new Date(),
-      //shipping: subTotal < config.freeshippingcost ? config.shippingcost : 0,
-      //grosstotal: subTotal + (subTotal < config.freeshippingcost ? config.shippingcost : 0),
       shipping: productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost),
       grosstotal: subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)),
-      userid: localStorage.getItem("uuid"),
+      userid: userid_,
       usernotes: notes,
       billingaddress: userAddress[0],
+      billingaddress: {
+        address: data.user_address === "" ? userAddress[0].address : data.user_address,
+        name: data.user_name === "" ? userAddress[0].name : data.user_name,
+        email: data.user_email === "" ? userAddress[0].email : data.user_email,
+        city: data.user_city === "" ? userAddress[0].city : data.user_city,
+        state: data.user_state === "" ? userAddress[0].state : data.user_state,
+        pincode: data.user_pincode === "" ? userAddress[0].pincode : data.user_pincode,
+        phonenumber: data.user_phonenumber === "" ? userAddress[0].phonenumber : data.user_phonenumber,
+      },
       shippingaddress: {
         address: data.address === "" ? userAddress[0].address : data.address,
         name: data.name === "" ? userAddress[0].name : data.name,
@@ -137,12 +157,14 @@ const Shopchekout = () => {
         state: data.state === "" ? userAddress[0].state : data.state,
         pincode: data.pincode === "" ? userAddress[0].pincode : data.pincode,
         phonenumber: data.phonenumber === "" ? userAddress[0].phonenumber : data.phonenumber,
+        country: data.country === "" ? userAddress[0].country : data.country,
       },
     };
     console.log("input", data);
     console.log(_data);
+
     if (cartDetails.length > 0) {
-      fetch(config.service_url + "placeOrder", { method: "POST", headers: { "Content-Type": "application/json", authorization: localStorage.getItem("accessToken") }, body: JSON.stringify({ data: _data }) })
+      fetch(config.service_url + methodname, { method: "POST", headers: { "Content-Type": "application/json", authorization: localStorage.getItem("accessToken") }, body: JSON.stringify({ data: _data }) })
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 200) {
@@ -152,7 +174,7 @@ const Shopchekout = () => {
             // call payemnt
             history.push({
               pathname: "/payment",
-              state: { amount: data.data.grosstotal, orderid: data.data.orderid, orderstatus: data.data.orderstatus, paymentstatus: data.data.paymentstatus, contactno: data.data.billingaddress.phonenumber, name: data.data.billingaddress.name, email: data.data.billingaddress.email },
+              state: { amount: data.data.grosstotal, orderid: data.data.orderid, orderstatus: data.data.orderstatus, paymentstatus: data.data.paymentstatus, contactno: data.data.billingaddress.phonenumber, name: data.data.billingaddress.name, email: data.data.billingaddress.email, userLoggedin: userloggedin },
             });
             setStatus(true);
           } else if (data?.status === 499) {
@@ -200,25 +222,7 @@ const Shopchekout = () => {
               <div className="row">
                 <div className="col-lg-6 col-md-12 m-b30">
                   <h3>Full Shipping Address</h3>
-                  {/* <div className="form-group">
-                    <Form.Group controlId="exampleForm.ControlSelect1">
-                      <Form.Control as="select">
-                        <option value="">Åland Islands</option>
-                        <option value="">Afghanistan</option>
-                        <option value="">Albania</option>
-                        <option value="">Algeria</option>
-                        <option value="">Andorra</option>
-                        <option value="">Angola</option>
-                        <option value="">Anguilla</option>
-                        <option value="">Antarctica</option>
-                        <option value="">Antigua and Barbuda</option>
-                        <option value="">Argentina</option>
-                        <option value="">Armenia</option>
-                        <option value="">Aruba</option>
-                        <option value="">Australia</option>
-                      </Form.Control>
-                    </Form.Group>
-                  </div> */}
+
                   <div className="row">
                     <div className="form-group col-md-6">
                       Name
@@ -250,28 +254,60 @@ const Shopchekout = () => {
                       Pincode
                       <input type="text" className="form-control" placeholder="Pincode" defaultValue={userAddress[0]?.pincode} name="pincode" {...register("pincode")} required />
                     </div>
+                    <div className="form-group">
+                      <select className="form-control" {...register("country")} required name="country" defaultValue={userAddress[0]?.country}>
+                        <option value="India">India</option>
+                        <option value="Others">Others</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-12 m-b30 m-md-b0">
                   <h3>
                     <button className="btn-link text-black " type="button" data-toggle="collapse" data-target="#different-address">
-                      User notes / Instructions / Billing Address <i className="fa fa-angle-down"></i>
+                      Billing Address <i className="fa fa-angle-down"></i>
                     </button>
                   </h3>
-                  <div id="different-address" className="collapse">
-                    <p>If Billing address is different, please updated in your profile</p>
-
+                  <div id="different-address" className="collapse-no">
                     <div className="form-group">
-                      <div className="font-weight-bold">Billing Address:</div>
-                      <div>Name : {userAddress[0]?.name}</div>
-                      <div>Eamil : {userAddress[0]?.email}</div>
-                      <div>
-                        Address : {userAddress[0]?.address}, {userAddress[0]?.city}, {userAddress[0]?.state}, {userAddress[0]?.pincode}{" "}
+                      <div className="row">
+                        <div className="form-group col-md-6">
+                          Name
+                          <input type="text" name="user_name" placeholder="First Name" defaultValue={userAddress[0]?.name} className="form-control" {...register("user_name")} required />
+                        </div>
+                        <div className="form-group col-md-6">
+                          Email
+                          <input type="text" name="user_email" className="form-control" placeholder="Email" defaultValue={userAddress[0]?.email} className="form-control" {...register("user_email")} required />
+                        </div>
                       </div>
-                      <div>Phone : {userAddress[0]?.phonenumber}</div>
+                      <div className="form-group">
+                        Phonenumber
+                        <input type="text" name="user_phonenumber" placeholder="Phonenumber" defaultValue={userAddress[0]?.phonenumber} className="form-control" {...register("user_phonenumber")} required />
+                      </div>
+                      <div className="form-group">
+                        Full Shipping Address
+                        <input type="text" name="user_address" placeholder="Full Address" defaultValue={userAddress[0]?.address} className="form-control" {...register("user_address")} required />
+                      </div>
+                      <div className="form-group">
+                        City/Town
+                        <input type="text" name="user_city" placeholder="Village/Town/City" defaultValue={userAddress[0]?.city} className="form-control" {...register("user_city")} required />
+                      </div>
+                      <div className="row">
+                        <div className="form-group col-md-6">
+                          State
+                          <input type="text" className="form-control" placeholder="State" defaultValue={userAddress[0]?.state} name="user_state" {...register("user_state")} required />
+                        </div>
+                        <div className="form-group col-md-6">
+                          Pincode
+                          <input type="text" className="form-control" placeholder="Pincode" defaultValue={userAddress[0]?.pincode} name="user_pincode" {...register("user_pincode")} required />
+                        </div>
+                      </div>
+                      <p>If Billing address is different, please updated in your profile</p>
                     </div>
                   </div>
+
                   <div className="form-group">
+                    <span>Notes/Special instructions about your order: </span>
                     <textarea type="textarea" rows="3" className="form-control" placeholder="Notes about your order, e.g. special notes for delivery, contact phone number" onChange={(e) => setNotes(e.target.value)}></textarea>
                   </div>
                 </div>
@@ -323,7 +359,7 @@ const Shopchekout = () => {
                         )
                       ) : (
                         <div className="p-2">
-                          <div className="p-2">Fetching Cart deails, please wait...</div>
+                          <div className="p-2">Fetching Cart details, please wait...</div>
                           <img className="p-2" src={loadingimg} height="20" alt="Loading.."></img>
                         </div>
                       )}
@@ -354,7 +390,8 @@ const Shopchekout = () => {
                             <td></td>
                             <td>
                               <div className={"small"}>
-                                Total Product Weight: {productWeight / 1000.0} Kgs. ; Weight/Kg: {config.shippingcost}
+                                Total Product Weight: {productWeight / 1000.0} Kgs. ; Cost/Kg: <i class="fa fa-inr"></i>
+                                {config.shippingcost}
                                 <br />
                                 {config.shippingmessage}
                                 <br />

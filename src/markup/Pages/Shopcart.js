@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header2";
+import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
 import img from "./../../images/banner/bnr3.jpg";
@@ -8,8 +8,10 @@ import loadingimg from "./../../images/load.gif";
 import { Modal } from "react-bootstrap";
 const Shopcart = () => {
   const [cartDetails, setCartDetails] = useState([]);
+  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
   const history = useHistory();
   const [cartUpdated, setCartUpdated] = useState(false);
+  const [userLoggedin, setUserLoggedin] = useState(false);
   const [subTotal, setSubTotal] = useState(0);
   const [productWeight, setProductWeight] = useState(0);
   const [networkError, setNetworkError] = useState("");
@@ -60,37 +62,45 @@ const Shopcart = () => {
       });
   };
 
+  const updatecart = (data, ls) => {
+    setCartDetails(data);
+    console.log("netdata", data);
+    // console.log("query_cartDetails", data1);
+    setSubTotal(
+      data &&
+        data
+          .map((total) => {
+            return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
+          })
+          .reduce((a, b) => a + b, 0)
+    );
+    setProductWeight(
+      data &&
+        data
+          .map((wt) => {
+            return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
+          })
+          .reduce((a, b) => a + b, 0)
+    );
+    //setLoading((loading) => !loading);
+    console.log("cart details", data);
+    setCartUpdated(false);
+    if (ls === 1) {
+      //localStorage.setItem("daintycart", JSON.stringify(cartDetails));
+    }
+  };
   useEffect(() => {
     const fetchCartDetails = () => {
-      setLoading((load) => !load);
+      //setLoading((load) => !load);
       fetch(config.service_url + "getCartProducts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userid: localStorage.getItem("uuid") }) })
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 500) {
             setSubTotal(0);
             setLoading((loading) => !loading);
-            // return;
           }
-          setCartDetails(data);
-          console.log("netdata", data);
-          // console.log("query_cartDetails", data1);
-          setSubTotal(
-            data
-              .map((total) => {
-                return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
-              })
-              .reduce((a, b) => a + b, 0)
-          );
-          setProductWeight(
-            data
-              .map((wt) => {
-                return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
-              })
-              .reduce((a, b) => a + b, 0)
-          );
-          setLoading((loading) => !loading);
-          console.log("cart details", data);
-          setCartUpdated(false);
+          updatecart(data, 0);
+          if (loading) setLoading((loading) => !loading);
         })
         .catch(function (error) {
           setNetworkError("Something went wrong, Please try again later!!");
@@ -98,9 +108,13 @@ const Shopcart = () => {
         });
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
+      setUserLoggedin(true);
       fetchCartDetails();
     } else {
-      history.push("/shop-login");
+      // get from local storage
+      updatecart(lsDaintyCart, 1);
+
+      //history.push("/shop-login");
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -138,8 +152,13 @@ const Shopcart = () => {
                 <div className="table-responsive m-b20">
                   <div className="text-center">
                     <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
-                      <i className="fa fa-angle-right m-r10"></i>Shop all
-                    </Link>
+                      Shop all <i className="fa fa-angle-right m-r10 mt-1"></i>
+                    </Link>{" "}
+                    {!userLoggedin && (
+                      <Link to={"/shop-cart"} onClick={(e) => (localStorage.removeItem("daintycart"), setCartDetails([]))} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
+                        Clear Cart <i class="fa fa-delete-left mt-1"></i>
+                      </Link>
+                    )}
                   </div>
                   <table className="table check-tbl">
                     <thead>
@@ -168,7 +187,7 @@ const Shopcart = () => {
                     </thead>
                     <tbody>
                       {!loading ? (
-                        cartDetails.length > 0 ? (
+                        cartDetails && cartDetails.length > 0 ? (
                           cartDetails.map((cart, key) => (
                             <div className="d-flex justify-content-between align-items-center p-1 my-1 border-bottom">
                               <div className="w-25">
@@ -225,7 +244,7 @@ const Shopcart = () => {
                         )
                       ) : (
                         <div className="p-2">
-                          <div className="p-2">Fetching cart deails, please wait...</div>
+                          <div className="p-2">Fetching cart details, please wait...</div>
                           <img className="p-2" src={loadingimg} height="20" alt="Loading..."></img>
                         </div>
                       )}
@@ -237,7 +256,7 @@ const Shopcart = () => {
 
             <div className="row">
               <div className="col-lg-6 col-md-6 m-b30"></div>
-              {cartDetails.length > 0 && (
+              {cartDetails && cartDetails.length > 0 && (
                 <div className="col-lg-6 col-md-6">
                   <h3>Cart Subtotal</h3>
                   <table className="table-bordered check-tbl">
@@ -261,7 +280,7 @@ const Shopcart = () => {
                           <i class="fa fa-inr"></i> {productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)}
                           <br />
                           <span className={"small"}>
-                            Total Product Weight: {productWeight / 1000.0} Kgs. ; Weight/Kg: {config.shippingcost}
+                            Total Product Weight: {productWeight / 1000.0} Kgs. ; Cost/Kg: <i class="fa fa-inr"></i> {config.shippingcost}
                           </span>
                         </td>
                       </tr>

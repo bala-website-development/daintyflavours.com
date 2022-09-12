@@ -65,7 +65,7 @@ const Header = (props) => {
           <div className="container clearfix d-flex align-items-center justify-content-end">
             <div className="logo-header mostion">
               <Link to={"/"} className="dez-page titlename text-nowrap">
-                <img src={config.logo} className="logoimage pr-1 d-none" alt="sukhaa" />
+                <img src={config.logo} className="logoimage pr-1 d-none" alt={config.websitetitle} />
                 {config.websitetitle}
               </Link>
             </div>
