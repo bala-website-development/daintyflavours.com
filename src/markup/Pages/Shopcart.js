@@ -11,7 +11,7 @@ const Shopcart = () => {
   const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
   const history = useHistory();
   const [cartUpdated, setCartUpdated] = useState(false);
-  const [userLoggedin, setUserLoggedin] = useState(false);
+  const [userLoggedin, setUserLoggedin] = useState(localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null ? true : false);
   const [subTotal, setSubTotal] = useState(0);
   const [productWeight, setProductWeight] = useState(0);
   const [networkError, setNetworkError] = useState("");
@@ -222,21 +222,22 @@ const Shopcart = () => {
                                   {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
                                 </div>
                               </div>
-
                               <div className="w-25 text-nowrap">
                                 {" "}
                                 <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)}
                               </div>
-                              <div className="w-10">
-                                <Link
-                                  onClick={(e) => {
-                                    deleteCart([cart.id]);
-                                  }}
-                                  data-dismiss="alert"
-                                  aria-label="close"
-                                  className="ti-close"
-                                ></Link>
-                              </div>
+                              {userLoggedin && (
+                                <div className="w-10">
+                                  <Link
+                                    onClick={(e) => {
+                                      deleteCart([cart.id]);
+                                    }}
+                                    data-dismiss="alert"
+                                    aria-label="close"
+                                    className="ti-close"
+                                  ></Link>
+                                </div>
+                              )}
                             </div>
                           ))
                         ) : (
@@ -290,7 +291,7 @@ const Shopcart = () => {
                           <i class="fa fa-inr"></i> {(subTotal * config.taxpercentage) / 100}
                         </td>
                       </tr>
-                      <tr className="bg-primary text-light">
+                      <tr className="bg-primary-light text-primary">
                         <td>Total</td>
                         <td>
                           <i class="fa fa-inr"></i> {subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))}

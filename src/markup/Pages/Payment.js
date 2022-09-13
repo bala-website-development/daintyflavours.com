@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import config from "../../config.json";
 
 const PaymentPage = (props) => {
+  console.log("orderid", props.orderid);
   const location = useLocation();
   const history = useHistory();
   useEffect(() => {
