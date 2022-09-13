@@ -148,6 +148,7 @@ const Shopchekout = () => {
         state: data.user_state === "" ? userAddress[0].state : data.user_state,
         pincode: data.user_pincode === "" ? userAddress[0].pincode : data.user_pincode,
         phonenumber: data.user_phonenumber === "" ? userAddress[0].phonenumber : data.user_phonenumber,
+        gstnumber: data.user_gstnumber === "" ? userAddress[0].gstnumber : data.user_gstnumber,
       },
       shippingaddress: {
         address: data.address === "" ? userAddress[0].address : data.address,
@@ -300,6 +301,10 @@ const Shopchekout = () => {
                         <div className="form-group col-md-6">
                           Pincode
                           <input type="text" className="form-control" placeholder="Pincode" defaultValue={userAddress[0]?.pincode} name="user_pincode" {...register("user_pincode")} required />
+                        </div>
+                        <div className="form-group col-md-6">
+                          <label>GST Number (Optional)</label>
+                          <input name="user_gstnumber" required type="text" className="form-control" placeholder="GST number" {...register("user_gstnumber", { required: false })} />
                         </div>
                       </div>
                       <p>If Billing address is different, please updated in your profile</p>

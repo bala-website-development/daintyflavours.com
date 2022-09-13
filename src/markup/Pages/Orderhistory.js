@@ -15,7 +15,7 @@ const Orderhistory = (props) => {
   //const [productReviews, setProductReviews] = useState([]);
   //const [validationMsg, setValidationMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
-
+  const [userLoggedin, setUserLoggedin] = useState(localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null ? true : false);
   const [orderHistory, setOrderHistory] = useState([]);
   const [orderDetails, setOrderDetails] = useState([]);
   const history = useHistory();
@@ -117,16 +117,17 @@ const Orderhistory = (props) => {
                     <div className="dlab-tabs product-description tabs-site-button m-t30">
                       <ul className="nav nav-tabs">
                         <li>
-                          <Link className="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-review">
-                            Order History
+                          <Link className="nav-link active" id="pills-home-tab" data-bs-toggle="pills" data-bs-target="#pills-history">
+                            Order Status/History
                           </Link>
                         </li>
-                        <li>
-                          <Link className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-des">
+
+                        <li className="d-none">
+                          <Link className="nav-link" id="pills-profile-tab" data-bs-toggle="pills" data-bs-target="#pills-status">
                             Order Status
                           </Link>
                         </li>
-                        <li>
+                        <li className="d-none">
                           <Link className="nav-link" id="pills-payment-tab" data-bs-toggle="pill" data-bs-target="#pills-payment">
                             QR / UPI Payment
                           </Link>
@@ -134,7 +135,7 @@ const Orderhistory = (props) => {
                       </ul>
 
                       <div className="tab-content">
-                        <div className="tab-pane " id="pills-des">
+                        <div className="tab-pane active" id="pills-status">
                           <form className="comment-form" onSubmit={handleSubmit(onSubmit)}>
                             <div className="comment-form-author">
                               <div className="row">
@@ -142,7 +143,7 @@ const Orderhistory = (props) => {
                                   <label>
                                     Order id <span className="required">*</span>
                                   </label>
-                                  <input type="text" aria-required="true" size="30" name="orderid" {...register("orderid", { required: true })} id="orderid" />
+                                  <input type="text" className="form-control" aria-required="true" size="30" name="orderid" {...register("orderid", { required: true })} id="orderid" />
                                   {errors.orderid && "Order Id is required"}
                                 </div>
                                 <div className="col">
@@ -150,8 +151,8 @@ const Orderhistory = (props) => {
                                   <button type="submit" className="btn btnhover">
                                     Submit
                                   </button>
-                                  <div>{successMsg}</div>
-                                </div>
+                                </div>{" "}
+                                <div>{successMsg}</div>
                               </div>
                             </div>
                           </form>
@@ -206,12 +207,12 @@ const Orderhistory = (props) => {
                                                       <Link to={{ pathname: `/shop-product-details/${productDtl.p_id}` }}>{productDtl.p_name}</Link>
                                                     </div>
                                                     <div className="mb-2">
-                                                      Price per Unit: <i class="fa fa-inr"></i> {productDtl.p_price} | Qty: {productDtl.p_quantity} | Tax: {productDtl.p_tax ? productDtl.p_tax + "%" : "NA"}%
+                                                      Price per Unit: <i class="fa fa-inr"></i> {productDtl.p_price} | Qty: {productDtl.p_quantity} | Tax: {productDtl.p_tax ? productDtl.p_tax + "%" : "NA"}
                                                     </div>{" "}
                                                     <div>
                                                       <b>
                                                         Total:<i class="fa fa-inr"></i>
-                                                        {productDtl.p_net_product_price}
+                                                        {productDtl.p_quantity * productDtl.p_price}
                                                       </b>
                                                     </div>
                                                   </div>
@@ -228,79 +229,80 @@ const Orderhistory = (props) => {
                             })}
                           </div>
                         </div>
-
-                        <div className="tab-pane active" id="pills-review">
-                          <div id="review_form_wrapper">
-                            <div id="review_form">
-                              <div id="respond" className="comment-respond">
-                                <div className="row">
-                                  <div className="col-lg-12">
-                                    <h3>Your Order</h3>
-                                    <table className="table-bordered check-tbl">
-                                      <thead>
-                                        <tr>
-                                          <th>Order Id</th>
-                                          <th>Order Date</th>
-                                          <th>Order status</th>
-                                          <th>Delivery Status</th>
-                                          <th className="d-none">Delivery Date</th>
-                                          <th>Payment Status</th>
-                                          <th>Total</th>
-                                          <th></th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        {orderHistory?.map((orderhistory) => (
+                        {userLoggedin && (
+                          <div className="tab-pane active" id="pills-history">
+                            <div id="review_form_wrapper">
+                              <div id="review_form">
+                                <div id="respond" className="comment-respond">
+                                  <div className="row">
+                                    <div className="col-lg-12">
+                                      <h3>Your Order</h3>
+                                      <table className="table-bordered check-tbl">
+                                        <thead>
                                           <tr>
-                                            <td className="font-weight-normal">{orderhistory.orderid}</td>
-                                            <td className="font-weight-light">{orderhistory.orderdate}</td>
-                                            <td className="font-weight-light">{orderhistory.orderstatus}</td>
-                                            <td className="font-weight-light">{orderhistory.deliverystatus}</td>
-                                            <td className="font-weight-light d-none">{orderhistory.deliverydate}</td>
-                                            <td className="font-weight-light">{orderhistory.paymentstatus}</td>
-                                            <td className="font-weight-light ">
-                                              <span className="float-left">
-                                                <i class="fa fa-inr"></i> {orderhistory.grosstotal}
-                                              </span>
-                                            </td>
-                                            <td>
-                                              {moment(orderhistory.orderdate).add(config.return_cancel_days, "d") >= moment() ? (
-                                                orderhistory.products?.filter((f) => f.p_returnaccepted === false || f.p_returnaccepted === "false" || f.p_returnaccepted === undefined || f.p_returnaccepted === "").length > 0 ? (
-                                                  orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" || orderhistory.deliverystatus === "Shipped" ? (
+                                            <th>Order Id</th>
+                                            <th>Order Date</th>
+                                            <th>Order status</th>
+                                            <th>Delivery Status</th>
+                                            <th className="d-none">Delivery Date</th>
+                                            <th>Payment Status</th>
+                                            <th>Total</th>
+                                            <th></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {orderHistory?.map((orderhistory) => (
+                                            <tr>
+                                              <td className="font-weight-normal">{orderhistory.orderid}</td>
+                                              <td className="font-weight-light">{orderhistory.orderdate}</td>
+                                              <td className="font-weight-light">{orderhistory.orderstatus}</td>
+                                              <td className="font-weight-light">{orderhistory.deliverystatus}</td>
+                                              <td className="font-weight-light d-none">{orderhistory.deliverydate}</td>
+                                              <td className="font-weight-light">{orderhistory.paymentstatus}</td>
+                                              <td className="font-weight-light ">
+                                                <span className="float-left">
+                                                  <i class="fa fa-inr"></i> {orderhistory.grosstotal}
+                                                </span>
+                                              </td>
+                                              <td>
+                                                {moment(orderhistory.orderdate).add(config.return_cancel_days, "d") >= moment() ? (
+                                                  orderhistory.products?.filter((f) => f.p_returnaccepted === false || f.p_returnaccepted === "false" || f.p_returnaccepted === undefined || f.p_returnaccepted === "").length > 0 ? (
+                                                    orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" || orderhistory.deliverystatus === "Shipped" ? (
+                                                      <></>
+                                                    ) : (
+                                                      <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
+                                                        Cancel
+                                                      </button>
+                                                    )
+                                                  ) : orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" || orderhistory.deliverystatus === "Shipped" ? (
                                                     <></>
                                                   ) : (
-                                                    <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
-                                                      Cancel
-                                                    </button>
+                                                    <>
+                                                      <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_return")}>
+                                                        Return
+                                                      </button>
+                                                      <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
+                                                        Cancel
+                                                      </button>
+                                                    </>
                                                   )
-                                                ) : orderhistory.orderstatus === "Returned" || orderhistory.orderstatus === "Cancelled" || orderhistory.deliverystatus === "Shipped" ? (
-                                                  <></>
                                                 ) : (
-                                                  <>
-                                                    <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_return")}>
-                                                      Return
-                                                    </button>
-                                                    <button className="btn btn-secondary btn-sm btnhover" onClick={(e) => CancelWholeOrder(orderhistory.orderid, "w_cancel")}>
-                                                      Cancel
-                                                    </button>
-                                                  </>
-                                                )
-                                              ) : (
-                                                <></>
-                                              )}
-                                            </td>
-                                          </tr>
-                                        ))}
-                                      </tbody>
-                                    </table>
+                                                  <></>
+                                                )}
+                                              </td>
+                                            </tr>
+                                          ))}
+                                        </tbody>
+                                      </table>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        )}
 
-                        <div className="tab-pane" id="pills-payment">
+                        <div className="tab-pane d-none" id="pills-payment">
                           <div className="mb-2">
                             <h5>Pay Here</h5>
                             <img src={config.qrurl} className="border rounded w-50" />

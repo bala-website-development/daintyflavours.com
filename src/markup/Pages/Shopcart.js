@@ -97,7 +97,7 @@ const Shopcart = () => {
         .then((data) => {
           if (data.status === 500) {
             setSubTotal(0);
-            setLoading((loading) => !loading);
+            //setLoading((loading) => !loading);
           }
           updatecart(data, 0);
           if (loading) setLoading((loading) => !loading);
@@ -201,18 +201,22 @@ const Shopcart = () => {
                               </div>
                               <div className="w-25">{cart.p_price}</div>
                               <div className="w-25">
-                                <select id={key} className="drpquantity" onChange={(e) => updateCartQuantity(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
-                                  <option value={1}>1</option>
-                                  <option value={2}>2</option>
-                                  <option value={3}>3</option>
-                                  <option value={4}>4</option>
-                                  <option value={5}>5</option>
-                                  <option value={6}>6</option>
-                                  <option value={7}>7</option>
-                                  <option value={8}>8</option>
-                                  <option value={9}>9</option>
-                                  <option value={10}>10</option>
-                                </select>
+                                {userLoggedin ? (
+                                  <select id={key} className="drpquantity" onChange={(e) => updateCartQuantity(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                    <option value={5}>5</option>
+                                    <option value={6}>6</option>
+                                    <option value={7}>7</option>
+                                    <option value={8}>8</option>
+                                    <option value={9}>9</option>
+                                    <option value={10}>10</option>
+                                  </select>
+                                ) : (
+                                  1
+                                )}
                               </div>
                               <div className="w-25 text-nowrap">
                                 {" "}
