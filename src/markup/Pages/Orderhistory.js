@@ -206,12 +206,12 @@ const Orderhistory = (props) => {
                                                       <Link to={{ pathname: `/shop-product-details/${productDtl.p_id}` }}>{productDtl.p_name}</Link>
                                                     </div>
                                                     <div className="mb-2">
-                                                      Price per Unit: <i class="fa fa-inr"></i> {productDtl.p_price} | Qty: {productDtl.p_quantity} | Tax: {productDtl.p_tax ? productDtl.p_tax + "%" : "NA"}%
+                                                      Price per Unit: <i class="fa fa-inr"></i> {productDtl.p_price} | Qty: {productDtl.p_quantity} | Tax: {productDtl.p_tax ? productDtl.p_tax + "%" : "NA"}
                                                     </div>{" "}
                                                     <div>
                                                       <b>
                                                         Total:<i class="fa fa-inr"></i>
-                                                        {productDtl.p_net_product_price}
+                                                        {productDtl.p_quantity * productDtl.p_price}
                                                       </b>
                                                     </div>
                                                   </div>
