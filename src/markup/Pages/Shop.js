@@ -291,6 +291,35 @@ const Shop = (props) => {
     }
   };
 
+  const sortAsc = (arr, field) => {
+    const ascdata = arr.sort((a, b) => {
+      console.log(arr, field);
+      if (a[field] > b[field]) {
+        console.log(a[field]);
+        return -1;
+      }
+      if (b[field] > a[field]) {
+        return 1;
+      }
+      return 0;
+    });
+    setProducts(ascdata);
+  };
+  const sortDsc = (arr, field) => {
+    const ascdata = arr.sort((a, b) => {
+      console.log(arr, field);
+      if (a[field] > b[field]) {
+        console.log(a[field]);
+        return 1;
+      }
+      if (b[field] > a[field]) {
+        return -1;
+      }
+      return 0;
+    });
+    setProducts(ascdata);
+  };
+
   const getCategories = async () => {
     await fetch(config.service_url + "getuserscategory")
       .then((response) => response.json())
@@ -490,15 +519,18 @@ const Shop = (props) => {
                       <div className="">
                         {" "}
                         <div className="px-3 sale btn btn-secondary1 color-grey btn-sm disable ">Sort by :</div>{" "}
-                        <Link to={"#"} className="px-3  btn btn-secondary btn-sm btnhover ">
+                        <Link to={"#"} onClick={(e) => sortAsc(products, "p_price")} className="px-3  btn btn-secondary btn-sm btnhover ">
                           Low to High
                         </Link>{" "}
-                        <Link to={"#"} className="px-3 btn btn-secondary btn-sm btnhover ">
+                        <Link to={"#"} onClick={(e) => sortDsc(products, "p_price")} className="px-3 btn btn-secondary btn-sm btnhover ">
                           High to Low
                         </Link>{" "}
-                        <Link to={"#"} className="px-3 btn btn-secondary btn-sm btnhover ">
+                        <Link to={"#"} onClick={(e) => sortDsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
                           Name
                         </Link>{" "}
+                        {/* <Link to={"#"} onClick={(e) => sortAsc(products, "p_name")}  className="px-3 btn btn-secondary btn-sm btnhover ">
+                          Sale
+                        </Link>{" "} */}
                       </div>
                     </div>
                     <div className="col align-self-center">
