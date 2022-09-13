@@ -427,7 +427,7 @@ const Shop = (props) => {
             <div className="container">
               <div className="row mt-3">
                 <div className="col-lg-3">
-                  <div className="bg-white px-3 mb-3 d-none">
+                  <div className=" px-3 mb-3 d-none">
                     <aside className="side-bar shop-categories sticky-top">
                       {category !== undefined && maincategory !== undefined ? (
                         <Link className="btn btnhover" onClick={(e) => getAllProductDetails()}>
@@ -484,15 +484,31 @@ const Shop = (props) => {
                     </aside>
                   </div>
                 </div>
-
-                <div className="col-lg-12 shopproducts">
-                  <div>
-                    <div>
-                      {" "}
+                <div className="mb-4">
+                  <div className="row border br30 p-2 bg-secondary-light">
+                    <div className="col align-self-center bg-secondary-light">
+                      <div className="">
+                        {" "}
+                        <div className="px-3 sale btn btn-secondary1 color-grey btn-sm disable ">Sort by :</div>{" "}
+                        <Link to={"#"} className="px-3  btn btn-secondary btn-sm btnhover ">
+                          Low to High
+                        </Link>{" "}
+                        <Link to={"#"} className="px-3 btn btn-secondary btn-sm btnhover ">
+                          High to Low
+                        </Link>{" "}
+                        <Link to={"#"} className="px-3 btn btn-secondary btn-sm btnhover ">
+                          Name
+                        </Link>{" "}
+                      </div>
+                    </div>
+                    <div className="col align-self-center">
                       <input type="text" className="form-control" placeholder="Search Products" name="searchbox" id="searchbox" onChange={(e) => applyFilter(e.target.value)}></input>
                     </div>
-
-                    <div className="row m-1">
+                  </div>
+                </div>
+                <div className="col-lg-12 shopproducts">
+                  <div>
+                    <div className="row m-1 ">
                       {!loading ? (
                         products && products.length > 0 ? (
                           products.map((product) => (
