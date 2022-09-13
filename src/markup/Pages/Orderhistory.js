@@ -167,9 +167,9 @@ const Orderhistory = (props) => {
                                   <div className="p-1">
                                     <b>Order Status:</b> {dtl.orderstatus}{" "}
                                   </div>
-                                  <div className="p-1">
+                                  {/* <div className="p-1">
                                     <b>Tax:</b> <i class="fa fa-inr"></i> {dtl.tax}{" "}
-                                  </div>
+                                  </div> */}
                                   <div className="p-1">
                                     <b>Shipping:</b> <i class="fa fa-inr"></i> {dtl.shipping}{" "}
                                   </div>
@@ -206,12 +206,12 @@ const Orderhistory = (props) => {
                                                       <Link to={{ pathname: `/shop-product-details/${productDtl.p_id}` }}>{productDtl.p_name}</Link>
                                                     </div>
                                                     <div className="mb-2">
-                                                      Price per Unit: <i class="fa fa-inr"></i> {productDtl.p_price} | Qty: {productDtl.p_quantity}
+                                                      Price per Unit: <i class="fa fa-inr"></i> {productDtl.p_price} | Qty: {productDtl.p_quantity} | Tax: {productDtl.p_tax ? productDtl.p_tax + "%" : "NA"}%
                                                     </div>{" "}
                                                     <div>
                                                       <b>
                                                         Total:<i class="fa fa-inr"></i>
-                                                        {productDtl.p_quantity * productDtl.p_price}
+                                                        {productDtl.p_net_product_price}
                                                       </b>
                                                     </div>
                                                   </div>

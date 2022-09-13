@@ -5,6 +5,7 @@
 :root {
   --color-primary: #b43b8d;
   --color-secondry: #ecb7d4;
+  --color-secondryy:rgb(234, 202, 220)4;
   --color-button: #b43b8d;
   --color-hover: #b43b8d;
   --color-primary-opacity: rgba(180, 59, 142, 0.65);
@@ -124,6 +125,9 @@
 }
 .btn-secondary {
   background-color: var(--color-secondry) !important;
+}
+.bg-secondary-light {
+  background-color: var(--color-secondryy) !important;
 }
 /*Hex color :hover */
 .btn:active,

@@ -5,9 +5,15 @@ const dev = document.domain === "localhost";
 
 const Payment = (props) => {
   const history = useHistory();
+  const [orderidSession, setorderidSession] = useState(props.orderid);
   const [paymentResponse, setPaymentResponse] = useState([]);
   useEffect(() => {
-    displayRazorPay();
+    if (orderidSession !== 0) {
+      displayRazorPay();
+    } else {
+      console.log("out of Razor pay");
+      history.push("/");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -73,6 +79,8 @@ const Payment = (props) => {
             console.log("payement failed");
             // update payment failed in order page
           });
+
+          setorderidSession(0);
         } else if (data?.status === 400) {
           console.log("orderid", "400");
           history.push("/shop-checkout");
@@ -134,7 +142,7 @@ const Payment = (props) => {
       body: JSON.stringify({
         from: config.fromemail,
         to: email + "," + config.fromemail,
-        subject: "Order Received - " + name,
+        subject: config.service_url_prod === config.service_url ? "Order Received - " : "Test - Order Received - " + name,
         text: "",
         html: body,
       }),
@@ -149,7 +157,7 @@ const Payment = (props) => {
   return (
     <div>
       <button className="btn button-lg btnhover btn-block w-auto" type="button" onClick={displayRazorPay}>
-        Payment is {paymentResponse?.data?.status ? paymentResponse?.data?.status : "pending. Please Wait.."}
+        Payment is {paymentResponse?.data?.status ? paymentResponse?.data?.status : "pending. Please Wait. Do not Refresh"}
       </button>
     </div>
   );
