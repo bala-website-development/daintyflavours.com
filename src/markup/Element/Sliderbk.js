@@ -13,22 +13,25 @@ const Slider = () => {
         {slider_content &&
           slider_content.map((slider) => (
             <Carousel.Item>
-              <div className="slide slidebottom" style={{ backgroundColor: "#fffff", backgroundImage: "url(" + slider.image_url + ")" }}>
-                {/* <img className="float-right bottom-0" src={slider.image_url} alt="Dainty Flavors" /> */}
-                <div className="bottom-0 position-absolute right-0 px-3">
+              <div className="slide slidebottom d-flex justify-content-end" style={{ backgroundColor: "#fffff", backgroundImage: "url(" + slider.image_url + ")" }}>
+                <div className=" mt-auto  px-3 ">
+                  {/* <img className=" slidebottom slide w-100" src={slider.image_url} alt="Dainty Flavors" /> */}
                   {/* <span className="prefix">{slider.prefix}</span> */}
                   {/* <h3 className="title">{slider.title}</h3>
                   <h4 className="sub-title">{slider.description}</h4>
                   <Link to={"/shop"} className="btn btnhover border z-index">
                     Shop now
                   </Link> */}
-                  <img className="logoheight" src={config.logo} alt="Dainty Flavors" />
+                  <div classnames=" mt-auto p-2 ">
+                    {" "}
+                    <img className="logoheight" src={config.logo} alt="Dainty Flavors" />
+                  </div>
                 </div>
               </div>
             </Carousel.Item>
           ))}
       </Carousel>
-      <div className="text-center p-3">
+      <div className="text-center p-3 mt-3">
         <Link className="btn btnhover border z-index" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop?maincategory=all&category=all" }}>
           Shop all <i className="fa fa-angle-right m-r10"></i>
         </Link>

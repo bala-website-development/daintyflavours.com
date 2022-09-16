@@ -73,9 +73,7 @@ const Index1 = () => {
     <div>
       {/* <Header active={"home"} home={true} /> */}
       <NavBarMenu active={"home"} home={true} />
-
-      {/* <Slider /> */}
-      <Sliderbk />
+      {config.homeslider ? <Sliderbk /> : <Slider />}
 
       <div className="page-content bg-white">
         <div className="content-block">
