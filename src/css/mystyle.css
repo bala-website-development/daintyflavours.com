@@ -1,3 +1,29 @@
+.carousel-control-next-icon,
+.carousel-control-prev-icon
+{
+  display: none;
+}
+.slidebottom{
+  border-bottom-left-radius: 50% 150px;
+  border-bottom-right-radius: 50% 150px;
+  
+}
+@media only screen and (max-width: 479px) {
+  .slidebottom {
+      border-bottom-left-radius: 50% 50px;
+      border-bottom-right-radius: 50% 50px;
+    }
+    .logoheight {
+      height: 100px !important
+    }
+}
+.carousel-indicators .active
+{
+background-color: #b43b8d;
+}
+.carousel-indicators li  {
+  background-color: #ecb7d4;
+}
 .cartbuttonbg
 {
 border: 1px #ffffff solid;
@@ -21,6 +47,15 @@ color: #b43b8d;
 {
     border-radius: 30px !important;
     background: #b43b8d !important;
+}
+.sliderlogo
+{
+  /* bottom: 0; */
+  position: absolute;
+  right: 0 !important;
+  padding-left: 10px;
+  text-align: right;
+
 }
 .modal-header {
   border-radius: 30px !important;
@@ -64,7 +99,9 @@ white-space: nowrap;
   width: 70px;
   height: 70px;
 }
-
+.logoheight{
+  height: 170px
+}
 .tile-small,
 .tile-medium,
 .tile-wide,
