@@ -14,9 +14,29 @@
   "slider": [
     {
       "title": "",
-      "prefix": "One stop shop for all your Baking needs",
+      "prefix": "One stop shop for all your Baking needs.",
       "description": "Variety of Baking items in one place",
       "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fhomebanner.jpg?alt=media&token=4c624e5c-9dcb-45fd-9db1-6f09a467b994"
+    }
+  ],
+  "sliderbk": [
+    {
+      "title": "",
+      "prefix": "One stop shop for all your Baking needs.",
+      "description": "Variety of Baking items in one place",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fdaintyslide1.jpg?alt=media&token=e7493cc3-28cc-478d-8490-ed528c77a2a9"
+    },
+    {
+      "title": "",
+      "prefix": "One stop shop for all your Baking needs..",
+      "description": "Variety of Baking items in one place",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fdaintyslide2.jpg?alt=media&token=e7493cc3-28cc-478d-8490-ed528c77a2a9"
+    },
+    {
+      "title": "",
+      "prefix": "One stop shop for all your Baking needs..",
+      "description": "Variety of Baking items in one place",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fdaintyslide3.jpg?alt=media&token=e7493cc3-28cc-478d-8490-ed528c77a2a9"
     }
   ],
   "homebannerimg": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fhomebanner.jpg?alt=media&token=4c624e5c-9dcb-45fd-9db1-6f09a467b994",

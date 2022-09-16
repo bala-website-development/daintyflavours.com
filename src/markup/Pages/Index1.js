@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import CountUp from "react-countup";
 import OurPartners from "./../Element/OurPartners";
 import Slider from "./../Element/Slider";
+import Sliderbk from "./../Element/Sliderbk";
 import Accord from "./../Element/Accord";
 import ScrollToTop from "./../Element/ScrollToTop";
 import config from "../../config.json";
@@ -73,7 +74,8 @@ const Index1 = () => {
       {/* <Header active={"home"} home={true} /> */}
       <NavBarMenu active={"home"} home={true} />
 
-      <Slider />
+      {/* <Slider /> */}
+      <Sliderbk />
 
       <div className="page-content bg-white">
         <div className="content-block">
