@@ -512,7 +512,7 @@ const Shop = (props) => {
                     </aside>
                   </div>
                 </div>
-                <div className="p-2">{categoryDes === "undefined" || categoryDes === undefined ? "" : categoryDes}</div>
+                <div className="p-2">{(categoryDes !== "undefined" || categoryDes !== undefined) && category !== "all" ? categoryDes : ""}</div>
                 <div className="mb-4">
                   <div className="row border br30 p-2 bg-secondary-light">
                     <div className="col align-self-center bg-secondary-light">

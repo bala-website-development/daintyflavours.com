@@ -153,9 +153,9 @@ const NavBarMenu = () => {
       //get from local storage
       setCartDetails(lsDaintyCart);
     }
-    if (localStorage.getItem("maincategories") === undefined || localStorage.getItem("maincategories") === null) {
+    if (localStorage.getItem("categories") === undefined || localStorage.getItem("maincategories") === null) {
       getMainCategories();
-      console.log("fromservice");
+      console.log("fromservice main categories");
     } else {
       if (menuMainCategory === undefined || menuMainCategory === null || menuMainCategory?.length === 0) {
         checkExpirationForMainCategories();
@@ -166,7 +166,7 @@ const NavBarMenu = () => {
 
     if (localStorage.getItem("categories") === undefined || localStorage.getItem("categories") === null) {
       getCategories();
-      console.log("fromservice");
+      console.log("fromservice categories");
     } else {
       if (menuCategory === undefined || menuCategory === null || menuCategory?.length === 0) {
         checkExpirationForCategories();
@@ -310,16 +310,23 @@ const NavBarMenu = () => {
               {/* ---------- */}
 
               <ul className="navbar-nav">
-                <li class="nav-item">
-                  <a class="dropdown-toggle align-items-center hidden-arrow text-uppercase nav-link text-primary" href="/">
-                    <i class="fa fa-home d-none" aria-hidden="true"></i>
-                    Home
-                  </a>
+                <li class="nav-item dropdown">
+                  <div>
+                    <a class="dropdown-toggle align-items-center hidden-arrow text-uppercase nav-link  text-primary" href="/">
+                      <i class="fa fa-home d-none" aria-hidden="true"></i>
+                      <span className="small"> Home</span>
+                    </a>
+                  </div>
                 </li>
 
                 {menuMainCategory === null || menuMainCategory === undefined || menuMainCategory.length == 0 ? (
-                  <li>
-                    <Link>Loading...</Link>
+                  <li class="nav-item dropdown">
+                    <div>
+                      <span class="dropdown-toggle align-items-center hidden-arrow text-uppercase nav-link  text-primary" href="/">
+                        <i class="fa fa-home d-none" aria-hidden="true"></i>
+                        <span className="small"> Loading Menu</span>
+                      </span>
+                    </div>
                   </li>
                 ) : (
                   menuMainCategory?.map(
@@ -327,7 +334,7 @@ const NavBarMenu = () => {
                       mmc.id != null && (
                         <li class="nav-item dropdown">
                           <a class="dropdown-toggle align-items-center hidden-arrow nav-link text-dark" href="#" id={"navbarDropdownMenuAvatar" + mmc.maincategory} role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                            <span className="medium">
+                            <span className="small">
                               {mmc.maincategory?.toUpperCase()} <i className="fa fa-angle-down"></i>
                             </span>
                           </a>
@@ -338,7 +345,10 @@ const NavBarMenu = () => {
                                 ?.map((mc) => (
                                   <li className="small">
                                     {/* <Link className="dropdown-item" to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}> */}
-                                    <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
+                                    {/* <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
+                                      <span className="text-nowrap">{mc?.category}</span>
+                                    </Link> */}
+                                    <Link className="dropdown-item text-uppercase" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop", search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
                                   </li>
