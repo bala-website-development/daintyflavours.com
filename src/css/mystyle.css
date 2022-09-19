@@ -93,8 +93,7 @@ color: #b43b8d;
 }
 .textoverflow1 h6
 {
-  
-white-space: nowrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis !important;
   text-transform: Uppercase !important;

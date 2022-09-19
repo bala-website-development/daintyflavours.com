@@ -18,6 +18,8 @@ const Shop = (props) => {
   const [smShow, setSmShow] = useState(false);
   const [message, setMessage] = useState("");
   const [bannerimagestate, setBannerimagestate] = useState(localStorage.getItem("bannerurl") || 0);
+  const [categoryDes, setCategoryDes] = useState(localStorage.getItem("categorydes") || "");
+  const [subcatstate, setSubcatstate] = useState(JSON.parse(localStorage.getItem("categories")));
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState([]);
   const [masterCategory, setMasterCategory] = useState([]);
@@ -45,6 +47,7 @@ const Shop = (props) => {
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
+    console.log("queryyy queries", props.location.searchFilter);
     console.log("queryyy", maincategory);
     console.log("bannerimagestate", bannerimagestate);
     setLoading((loading) => !loading);
@@ -55,19 +58,24 @@ const Shop = (props) => {
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
-        if (category) {
-          if (category === "all") getAllProductDetails();
-          let selective = data
-            .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
-            .map((data) => {
-              return data;
-            });
-          setProducts(selective);
-          setFilter(selective);
-
-          console.log(selective, "selective");
-        } else if (maincategory) {
-          console.log("mainprod", data);
+        if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
+          if (category === "all" || props.location.searchFilter === "") {
+            getAllProductDetails();
+            console.log(category, "=> all active  products");
+          } else {
+            // all active category products
+            let selective = data
+              .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+              .map((data) => {
+                return data;
+              });
+            setProducts(selective);
+            setFilter(selective);
+            console.log("all active category products");
+          }
+        } else if (maincategory && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
+          // Main category products
+          console.log(props.location.searchFilter, maincategory, "maincategory");
           let selective = data
             .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
             .map((data) => {
@@ -75,10 +83,17 @@ const Shop = (props) => {
             });
           setProducts(selective);
           setFilter(selective);
-
-          console.log(selective, "selective");
+          console.log("Main category products");
+        } else if (props.location.searchFilter) {
+          // prodcut that is searched
+          console.log(props.location.searchFilter, "search result");
+          let selective = data.filter((fil) => {
+            return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
+          });
+          setProducts(selective);
+          setFilter(selective);
         } else if (maincategory === "all") {
-          console.log("mainprod", data);
+          console.log("mainprod with all products");
           let selective = data
             .filter((filter) => filter.isactive === 1)
             .map((data) => {
@@ -86,16 +101,8 @@ const Shop = (props) => {
             });
           setProducts(selective);
           setFilter(selective);
-
-          console.log(selective, "selective");
-        } else if (props.location.searchFilter) {
-          let selective = data.filter((fil) => {
-            console.log("searchdata", fil);
-            return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
-          });
-          setProducts(selective);
-          setFilter(selective);
         } else {
+          console.log("all products");
           let active = data
             .filter((filter) => filter.isactive === 1)
             .map((data) => {
@@ -107,7 +114,6 @@ const Shop = (props) => {
           const slicedPosts = active.slice(0, postsPerPage);
           arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
           setProducts(arrayForHoldingPosts);
-          console.log(data, "products");
         }
       })
       .catch((err) => {
@@ -158,11 +164,6 @@ const Shop = (props) => {
   const LoadMoreForFilteredProducts = (IsFiltered, FilteredProduct) => {
     console.log("slice", IsFiltered, FilteredProduct, mcatFilterProd);
     var slicedPosts = [];
-    // let sliced = FilteredProduct.slice(0, postsPerPage);
-    // _arrayForHoldingPosts = [..._arrayForHoldingPosts, ...sliced];
-    // setProducts(_arrayForHoldingPosts);
-    // setNext(0);
-    // setEnd(0);
     setProducts(filter);
     if (IsFiltered || mcatFilterApp) {
       slicedPosts = FilteredProduct.slice(0, postsPerPage);
@@ -179,13 +180,11 @@ const Shop = (props) => {
   };
 
   useEffect(() => {
-    //const query = props.location?.pathname;
-    //console.log(query);
+    console.log("bala shop");
+    //const queries = queryString.parse(queryurl);
     const queries = queryString.parse(props.location.search);
-
     getProductDetails();
     getCategories();
-    // loopWithSlice(0, postsPerPage);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location?.searchFilter, queryurl]);
@@ -513,6 +512,7 @@ const Shop = (props) => {
                     </aside>
                   </div>
                 </div>
+                <div className="p-2">{categoryDes === "undefined" || categoryDes === undefined ? "" : categoryDes}</div>
                 <div className="mb-4">
                   <div className="row border br30 p-2 bg-secondary-light">
                     <div className="col align-self-center bg-secondary-light">
@@ -528,13 +528,13 @@ const Shop = (props) => {
                         <Link to={"#"} onClick={(e) => sortDsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
                           Name
                         </Link>{" "}
-                        {/* <Link to={"#"} onClick={(e) => sortAsc(products, "p_name")}  className="px-3 btn btn-secondary btn-sm btnhover ">
-                          Sale
-                        </Link>{" "} */}
+                        <div to={"#"} className="px-3 btn btn-secondary1 btn-sm d-none">
+                          Total Product : {products.Length || 0}
+                        </div>{" "}
                       </div>
                     </div>
                     <div className="col align-self-center">
-                      <input type="text" className="form-control" placeholder="Search Products" name="searchbox" id="searchbox" onChange={(e) => applyFilter(e.target.value)}></input>
+                      <input type="text" className="form-control" placeholder="Filter Products" name="searchbox" id="searchbox" onChange={(e) => applyFilter(e.target.value)}></input>
                     </div>
                   </div>
                 </div>
@@ -564,18 +564,7 @@ const Shop = (props) => {
                                       <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
                                     </h6>{" "}
                                   </p>
-                                  {/* <Link className="">
-                                    <div className="">
-                                      <span style={{ "text-decoration": "line-through" }}>
-                                        {" "}
-                                        <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
-                                      </span>
-                                      {"   |  "}
-                                      <span>
-                                        {"   "} <i class="fa fa-inr"></i> {product.p_price}
-                                      </span>
-                                    </div>
-                                  </Link>{" "} */}
+
                                   {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
                                     <>
                                       <div className="text-primary pricefont">
@@ -629,7 +618,7 @@ const Shop = (props) => {
                         <div class="position-relative">
                           <div className="p-2 start-50">
                             <div className="p-2">Fetching products details, please wait....</div>
-                            <img className="p-2 w-10" src={loadingimg} height="20px"></img>
+                            <img className="p-2 w-5" src={loadingimg} height="10"></img>
                           </div>
                         </div>
                       )}

@@ -6,11 +6,13 @@ import config from "../../config.json";
 var img1 = require("./../../images/banner/bnr1.jpg");
 var img2 = require("./../../images/background/bg5.jpg");
 
-const Loading = () => {
+const Loading = (props) => {
+  console.log("loading outside");
   //const [count, setCount] = useState(localStorage.getItem("loadcount") || 0);
   useEffect(() => {
-    window.location.reload(false);
+    //window.location.reload(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log("loading inside in use effect");
   }, []);
   return (
     <div>

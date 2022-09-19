@@ -187,6 +187,7 @@ const NavBarMenu = () => {
       <div className="sticky-top top-0">
         <nav class="navbar navbar-expand-lg navbar-light searchbarbg bg-light w-100 py-1 bg-white">
           <div class="container-fluid">
+            <div className="px-2">{config.showoffertext ? config.offertext : ""}</div>
             <div className="d-flex align-items-center justify-content-end mr-3">
               <div className="align-items-center">
                 <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar border px-3" placeholder="Search all our products" />
@@ -309,9 +310,10 @@ const NavBarMenu = () => {
               {/* ---------- */}
 
               <ul className="navbar-nav">
-                <li class="nav-item d-none">
-                  <a class="dropdown-toggle align-items-center hidden-arrow  nav-link text-primary" href="/">
-                    <i class="fa fa-home" aria-hidden="true"></i>
+                <li class="nav-item">
+                  <a class="dropdown-toggle align-items-center hidden-arrow text-uppercase nav-link text-primary" href="/">
+                    <i class="fa fa-home d-none" aria-hidden="true"></i>
+                    Home
                   </a>
                 </li>
 
@@ -336,7 +338,7 @@ const NavBarMenu = () => {
                                 ?.map((mc) => (
                                   <li className="small">
                                     {/* <Link className="dropdown-item" to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}> */}
-                                    <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
+                                    <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
                                   </li>

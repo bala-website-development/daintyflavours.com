@@ -82,7 +82,7 @@ const Shopregister = ({ history }) => {
                 <div className="p-a30 border-1 max-w800 m-auto radius-sm">
                   <div className="tab-content">
                     <form id="login" className="tab-pane active" onSubmit={handleSubmit(onSubmit)}>
-                      <h3 className="m-b5">Personal Information</h3>
+                      <h3 className="m-b5">Personal/Billing Information</h3>
                       <p>If you have an account with us, please log in.</p>
                       <div id="personalinfo">
                         <div className="row">
@@ -147,12 +147,12 @@ const Shopregister = ({ history }) => {
                           </div>
                           <div className="form-group col-md-6">
                             <label>GST Number (Optional)</label>
-                            <input name="gstnumber" required type="text" className="form-control" placeholder="GST number" {...register("gstnumber", { required: false })} />
+                            <input name="gstnumber" type="text" className="form-control" placeholder="GST number" {...register("gstnumber", { required: false })} />
                           </div>
                         </div>
                         <div className=" form-group  row">
                           <div className="form-group col-md-6">
-                            <div className="text-success">{message}</div>
+                            <div className="text-success">{message} Please Log in.</div>
                             <div className="text-red">{valmessage}</div>
                             <button type="submit" className="btn btnhover">
                               Register

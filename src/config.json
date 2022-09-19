@@ -95,6 +95,8 @@
   "pp2": "",
   "pp3": "",
   "pp4": "",
-  "siteconstruction": true,
-  "homeslider": false
+  "siteconstruction": false,
+  "homeslider": true,
+  "offertext": "Offers: No offer currently available",
+  "showoffertext": true
 }
