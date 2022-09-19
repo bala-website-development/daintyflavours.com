@@ -258,7 +258,10 @@ select.form-control:not([size]):not([multiple]) {
   background-position: center;
   }
 }
-.w-10 {
+.w-5 {
+  width: 5%;
+}
+.w-10px {
   width: 10%;
 }
 .w-30 {
@@ -11413,7 +11416,7 @@ footer p {
 }
 footer p,
 footer li {
-  font-size: 13px;
+  /* font-size: 13px; */
   line-height: 22px;
 }
 footer#footer {

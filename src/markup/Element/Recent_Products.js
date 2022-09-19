@@ -111,9 +111,7 @@ const New_Products = () => {
             <div className="container row">
               <div className="col-lg-12">
                 <div className="page-notfound text-center">
-                  <strong>
-                    <i className="fa fa-cog fa-spinner fa-fw text-primary"></i>
-                  </strong>
+                  <i className="fa fa-cog fa-spinner fa-fw text-primary text-small"></i>
                 </div>
               </div>
             </div>
