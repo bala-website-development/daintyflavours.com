@@ -149,10 +149,13 @@ const NavBarMenu = () => {
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
+    } else {
+      //get from local storage
+      setCartDetails(lsDaintyCart);
     }
-    if (localStorage.getItem("maincategories") === undefined || localStorage.getItem("maincategories") === null) {
+    if (localStorage.getItem("categories") === undefined || localStorage.getItem("maincategories") === null) {
       getMainCategories();
-      console.log("fromservice");
+      console.log("fromservice main categories");
     } else {
       if (menuMainCategory === undefined || menuMainCategory === null || menuMainCategory?.length === 0) {
         checkExpirationForMainCategories();
@@ -163,7 +166,7 @@ const NavBarMenu = () => {
 
     if (localStorage.getItem("categories") === undefined || localStorage.getItem("categories") === null) {
       getCategories();
-      console.log("fromservice");
+      console.log("fromservice categories");
     } else {
       if (menuCategory === undefined || menuCategory === null || menuCategory?.length === 0) {
         checkExpirationForCategories();
@@ -184,6 +187,7 @@ const NavBarMenu = () => {
       <div className="sticky-top top-0">
         <nav class="navbar navbar-expand-lg navbar-light searchbarbg bg-light w-100 py-1 bg-white">
           <div class="container-fluid">
+            <div className="px-2">{config.showoffertext ? config.offertext : ""}</div>
             <div className="d-flex align-items-center justify-content-end mr-3">
               <div className="align-items-center">
                 <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar border px-3" placeholder="Search all our products" />
@@ -202,7 +206,7 @@ const NavBarMenu = () => {
               <Link class="text-reset me-3 text-primary" to={"/shop-cart"}>
                 <i class="fas fa-shopping-cart"></i>
                 <span class="badge rounded-pill badge-notification mx-1">
-                  <span class="badge rounded-pill badge-notification bg-danger">{cartDetails.length > 0 ? cartDetails.length : 0}</span>
+                  <span class="badge rounded-pill badge-notification bg-danger">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
                 </span>
               </Link>
 
@@ -306,15 +310,23 @@ const NavBarMenu = () => {
               {/* ---------- */}
 
               <ul className="navbar-nav">
-                <li class="nav-item d-none">
-                  <a class="dropdown-toggle align-items-center hidden-arrow  nav-link text-primary" href="/">
-                    <i class="fa fa-home" aria-hidden="true"></i>
-                  </a>
+                <li class="nav-item dropdown">
+                  <div>
+                    <a class="dropdown-toggle align-items-center hidden-arrow text-uppercase nav-link  text-primary" href="/">
+                      <i class="fa fa-home d-none" aria-hidden="true"></i>
+                      <span className="small"> Home</span>
+                    </a>
+                  </div>
                 </li>
 
                 {menuMainCategory === null || menuMainCategory === undefined || menuMainCategory.length == 0 ? (
-                  <li>
-                    <Link>Loading...</Link>
+                  <li class="nav-item dropdown">
+                    <div>
+                      <span class="dropdown-toggle align-items-center hidden-arrow text-uppercase nav-link  text-primary" href="/">
+                        <i class="fa fa-home d-none" aria-hidden="true"></i>
+                        <span className="small"> Loading Menu</span>
+                      </span>
+                    </div>
                   </li>
                 ) : (
                   menuMainCategory?.map(
@@ -322,7 +334,7 @@ const NavBarMenu = () => {
                       mmc.id != null && (
                         <li class="nav-item dropdown">
                           <a class="dropdown-toggle align-items-center hidden-arrow nav-link text-dark" href="#" id={"navbarDropdownMenuAvatar" + mmc.maincategory} role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                            <span className="medium">
+                            <span className="small">
                               {mmc.maincategory?.toUpperCase()} <i className="fa fa-angle-down"></i>
                             </span>
                           </a>
@@ -333,7 +345,10 @@ const NavBarMenu = () => {
                                 ?.map((mc) => (
                                   <li className="small">
                                     {/* <Link className="dropdown-item" to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}> */}
-                                    <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
+                                    {/* <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
+                                      <span className="text-nowrap">{mc?.category}</span>
+                                    </Link> */}
+                                    <Link className="dropdown-item text-uppercase" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop", search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
                                   </li>

@@ -56,7 +56,44 @@ const Shopproduct = (props) => {
     setLoading((loading) => !loading);
     e.preventDefault();
     if (localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null) {
-      history.push("/shop-login");
+      // add to cart for Guest user - start
+      let cartarray = [];
+      let data = {
+        userid: "guestuser",
+        createddate: new Date(),
+        isactive: 1,
+        p_id: productDtl.p_id,
+        p_image: productDtl.p_image,
+        p_name: productDtl.p_name,
+        p_net_product_price: productDtl.p_net_product_price,
+        p_returnaccepted: productDtl.p_returnaccepted,
+        p_productweight: productDtl.p_productweight,
+        p_tax: productDtl.p_tax,
+        p_quantity: 1,
+        updateddate: new Date(),
+        p_price: productDtl.price,
+        id: uuid(),
+      };
+      console.log("befre", cartarray);
+      cartarray.push(data);
+      console.log("after", cartarray);
+      let lsDaintyCart_ = localStorage.getItem("daintycart");
+      if (lsDaintyCart_ === undefined || lsDaintyCart_ === null) {
+        console.log("lsDaintyCart", lsDaintyCart_);
+        localStorage.setItem("daintycart", JSON.stringify(cartarray));
+        setSuccessMsg("Item added to cart.");
+        handleVisible();
+      } else {
+        let cartarraynew = [];
+        cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
+        localStorage.removeItem("daintycart");
+        cartarraynew.push(data);
+        localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
+        setSuccessMsg("Item Updated to cart.");
+        handleVisible();
+      }
+      // history.push("/shop-login");
+      // add to cart for Guest user - end
     } else {
       let data = {
         userid: localStorage.getItem("uuid"),

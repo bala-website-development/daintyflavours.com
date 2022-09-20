@@ -45,9 +45,9 @@ class Footer extends Component {
                       <li>
                         <Link to={"/about"}>About</Link>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link to={"/our-journey"}>Our Journey</Link>
-                      </li>
+                      </li> */}
 
                       {/* <li>
                       <Link to={"/blog-half-img-sidebar"}>Blog</Link>
@@ -72,6 +72,9 @@ class Footer extends Component {
                       </li>
                       <li>
                         <Link to={"/privacypolicy"}>Privacy Policy</Link>
+                      </li>
+                      <li>
+                        <Link to={"/orderhistory"}>Order Status</Link>
                       </li>
                     </ul>
                   </div>
@@ -141,6 +144,11 @@ class Footer extends Component {
                 <div className="col-lg-6 col-md-6 text-right">
                   <div className="widget-link">
                     <ul>
+                      <li>
+                        <a href={config.admin_url} className="font-weight-light color-white" target="blank">
+                          Admin
+                        </a>{" "}
+                      </li>
                       <li>
                         <a href="https://www.theuniquecreations.com/contact" className="font-weight-light" target="blank">
                           Contact developer

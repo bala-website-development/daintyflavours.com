@@ -52,8 +52,8 @@ class Markup extends Component {
           <Route path="/booking" exact component={Booking} />
           <Route path="/error-404" exact component={Error} />
           <Route path="/success" exact component={Success} />
-          <Route path="/calendar" exact component={Calendar} />
-          <Route path="/team" exact component={Team} />
+          <Route path="/calendar" exact component={Index1} />
+          <Route path="/team" exact component={Index1} />
           <Route path="/password-success" exact component={PasswordChanged} />
           <Route path="/shop" exact component={Shop} />
           <Route path="/shop-product-details/:id" exact component={Shopproduct} />

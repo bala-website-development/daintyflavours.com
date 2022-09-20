@@ -8,8 +8,10 @@ import loadingimg from "./../../images/load.gif";
 import { Modal } from "react-bootstrap";
 const Shopcart = () => {
   const [cartDetails, setCartDetails] = useState([]);
+  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
   const history = useHistory();
   const [cartUpdated, setCartUpdated] = useState(false);
+  const [userLoggedin, setUserLoggedin] = useState(localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null ? true : false);
   const [subTotal, setSubTotal] = useState(0);
   const [productWeight, setProductWeight] = useState(0);
   const [networkError, setNetworkError] = useState("");
@@ -60,37 +62,46 @@ const Shopcart = () => {
       });
   };
 
+  const updatecart = (data, ls) => {
+    setCartDetails(data);
+    console.log("netdata", data);
+    // console.log("query_cartDetails", data1);
+    setSubTotal(
+      data &&
+        data
+          .map((total) => {
+            //return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
+            return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
+          })
+          .reduce((a, b) => a + b, 0)
+    );
+    setProductWeight(
+      data &&
+        data
+          .map((wt) => {
+            return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
+          })
+          .reduce((a, b) => a + b, 0)
+    );
+    //setLoading((loading) => !loading);
+    console.log("cart details", data);
+    setCartUpdated(false);
+    if (ls === 1) {
+      //localStorage.setItem("daintycart", JSON.stringify(cartDetails));
+    }
+  };
   useEffect(() => {
     const fetchCartDetails = () => {
-      setLoading((load) => !load);
+      //setLoading((load) => !load);
       fetch(config.service_url + "getCartProducts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userid: localStorage.getItem("uuid") }) })
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 500) {
             setSubTotal(0);
-            setLoading((loading) => !loading);
-            // return;
+            //setLoading((loading) => !loading);
           }
-          setCartDetails(data);
-          console.log("netdata", data);
-          // console.log("query_cartDetails", data1);
-          setSubTotal(
-            data
-              .map((total) => {
-                return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
-              })
-              .reduce((a, b) => a + b, 0)
-          );
-          setProductWeight(
-            data
-              .map((wt) => {
-                return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
-              })
-              .reduce((a, b) => a + b, 0)
-          );
-          setLoading((loading) => !loading);
-          console.log("cart details", data);
-          setCartUpdated(false);
+          updatecart(data, 0);
+          if (loading) setLoading((loading) => !loading);
         })
         .catch(function (error) {
           setNetworkError("Something went wrong, Please try again later!!");
@@ -98,9 +109,13 @@ const Shopcart = () => {
         });
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
+      setUserLoggedin(true);
       fetchCartDetails();
     } else {
-      history.push("/shop-login");
+      // get from local storage
+      updatecart(lsDaintyCart, 1);
+
+      //history.push("/shop-login");
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -138,8 +153,13 @@ const Shopcart = () => {
                 <div className="table-responsive m-b20">
                   <div className="text-center">
                     <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
-                      Shop all <i className="fa fa-angle-right m-r10"></i>
-                    </Link>
+                      Shop all <i className="fa fa-angle-right m-r10 mt-1"></i>
+                    </Link>{" "}
+                    {!userLoggedin && (
+                      <Link to={"/shop-cart"} onClick={(e) => (localStorage.removeItem("daintycart"), setCartDetails([]))} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
+                        Clear Cart <i class="fa fa-delete-left mt-1"></i>
+                      </Link>
+                    )}
                   </div>
                   <table className="table check-tbl">
                     <thead>
@@ -168,7 +188,7 @@ const Shopcart = () => {
                     </thead>
                     <tbody>
                       {!loading ? (
-                        cartDetails.length > 0 ? (
+                        cartDetails && cartDetails.length > 0 ? (
                           cartDetails.map((cart, key) => (
                             <div className="d-flex justify-content-between align-items-center p-1 my-1 border-bottom">
                               <div className="w-25">
@@ -182,18 +202,22 @@ const Shopcart = () => {
                               </div>
                               <div className="w-25">{cart.p_price}</div>
                               <div className="w-25">
-                                <select id={key} className="drpquantity" onChange={(e) => updateCartQuantity(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
-                                  <option value={1}>1</option>
-                                  <option value={2}>2</option>
-                                  <option value={3}>3</option>
-                                  <option value={4}>4</option>
-                                  <option value={5}>5</option>
-                                  <option value={6}>6</option>
-                                  <option value={7}>7</option>
-                                  <option value={8}>8</option>
-                                  <option value={9}>9</option>
-                                  <option value={10}>10</option>
-                                </select>
+                                {userLoggedin ? (
+                                  <select id={key} className="drpquantity" onChange={(e) => updateCartQuantity(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                    <option value={5}>5</option>
+                                    <option value={6}>6</option>
+                                    <option value={7}>7</option>
+                                    <option value={8}>8</option>
+                                    <option value={9}>9</option>
+                                    <option value={10}>10</option>
+                                  </select>
+                                ) : (
+                                  1
+                                )}
                               </div>
                               <div className="w-25 text-nowrap">
                                 {" "}
@@ -203,21 +227,22 @@ const Shopcart = () => {
                                   {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
                                 </div>
                               </div>
-
                               <div className="w-25 text-nowrap">
                                 {" "}
                                 <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)}
                               </div>
-                              <div className="w-10">
-                                <Link
-                                  onClick={(e) => {
-                                    deleteCart([cart.id]);
-                                  }}
-                                  data-dismiss="alert"
-                                  aria-label="close"
-                                  className="ti-close"
-                                ></Link>
-                              </div>
+                              {userLoggedin && (
+                                <div className="w-10">
+                                  <Link
+                                    onClick={(e) => {
+                                      deleteCart([cart.id]);
+                                    }}
+                                    data-dismiss="alert"
+                                    aria-label="close"
+                                    className="ti-close"
+                                  ></Link>
+                                </div>
+                              )}
                             </div>
                           ))
                         ) : (
@@ -237,7 +262,7 @@ const Shopcart = () => {
 
             <div className="row">
               <div className="col-lg-6 col-md-6 m-b30"></div>
-              {cartDetails.length > 0 && (
+              {cartDetails && cartDetails.length > 0 && (
                 <div className="col-lg-6 col-md-6">
                   <h3>Cart Subtotal</h3>
                   <table className="table-bordered check-tbl">
@@ -271,7 +296,7 @@ const Shopcart = () => {
                           <i class="fa fa-inr"></i> {(subTotal * config.taxpercentage) / 100}
                         </td>
                       </tr>
-                      <tr className="bg-primary text-light">
+                      <tr className="bg-primary-light text-primary">
                         <td>Total</td>
                         <td>
                           <i class="fa fa-inr"></i> {subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))}

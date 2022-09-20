@@ -1,3 +1,59 @@
+:root {
+  --inverted-corners-background: #52525b;
+  --inverted-corners-size: 2rem;
+}
+
+.inverted-corners {
+  background-color: var(--inverted-corners-background);
+
+  /* Used to position the corner */
+  position: relative;
+}
+
+.inverted-corners::before {
+  content: '';
+
+  /* Absolute position */
+  bottom: calc(-2 * var(--inverted-corners-size));
+  left: 0;
+  position: absolute;
+
+  /* Size */
+  height: calc(2 * var(--inverted-corners-size));
+  width: var(--inverted-corners-size);
+
+  /* Border */
+  background-color: transparent;
+  border-top-left-radius: var(--inverted-corners-size);
+  box-shadow: var(--inverted-corners-background) 0px calc(-1 * var(--inverted-corners-size)) 0px 0px;
+}
+.carousel-control-next-icon,
+.carousel-control-prev-icon
+{
+  display: none;
+}
+.slidebottom{
+  border-bottom-left-radius: 50% 150px;
+  border-bottom-right-radius: 50% 150px;
+  
+}
+@media only screen and (max-width: 479px) {
+  .slidebottom {
+      border-bottom-left-radius: 50% 50px;
+      border-bottom-right-radius: 50% 50px;
+    }
+    .logoheight {
+      height: 70px !important
+    }
+}
+.carousel-indicators .active
+{
+background-color: #b43b8d;
+}
+.carousel-indicators li  {
+  background-color: #ecb7d4;
+  width: 10px;
+}
 .cartbuttonbg
 {
 border: 1px #ffffff solid;
@@ -14,10 +70,30 @@ color: #b43b8d;
 {
   font-family: sans-serif !important;
 }
+.br30{
+  border-radius: 30px !important;
+}
+.modal-content
+{
+    border-radius: 30px !important;
+    background: #b43b8d !important;
+}
+.sliderlogo
+{
+  /* bottom: 0; */
+  position: absolute;
+  right: 0 !important;
+  padding-left: 10px;
+  text-align: right;
+
+}
+.modal-header {
+  border-radius: 30px !important;
+  background: #ecb7d4 !important;
+}
 .textoverflow1 h6
 {
-  
-white-space: nowrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis !important;
   text-transform: Uppercase !important;
@@ -52,7 +128,9 @@ white-space: nowrap;
   width: 70px;
   height: 70px;
 }
-
+.logoheight{
+  height: 170px
+}
 .tile-small,
 .tile-medium,
 .tile-wide,

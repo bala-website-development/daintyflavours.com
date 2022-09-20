@@ -14,9 +14,29 @@
   "slider": [
     {
       "title": "",
-      "prefix": "One stop shop for all your Baking needs",
+      "prefix": "One stop shop for all your Baking needs.",
       "description": "Variety of Baking items in one place",
       "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fhomebanner.jpg?alt=media&token=4c624e5c-9dcb-45fd-9db1-6f09a467b994"
+    }
+  ],
+  "sliderbk": [
+    {
+      "title": "",
+      "prefix": "One stop shop for all your Baking needs.",
+      "description": "Variety of Baking items in one place",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fdaintyslide1.jpg?alt=media&token=e7493cc3-28cc-478d-8490-ed528c77a2a9"
+    },
+    {
+      "title": "",
+      "prefix": "One stop shop for all your Baking needs..",
+      "description": "Variety of Baking items in one place",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fdaintyslide2.jpg?alt=media&token=e7493cc3-28cc-478d-8490-ed528c77a2a9"
+    },
+    {
+      "title": "",
+      "prefix": "One stop shop for all your Baking needs..",
+      "description": "Variety of Baking items in one place",
+      "image_url": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fdaintyslide3.jpg?alt=media&token=e7493cc3-28cc-478d-8490-ed528c77a2a9"
     }
   ],
   "homebannerimg": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fslider%2Fhomebanner.jpg?alt=media&token=4c624e5c-9dcb-45fd-9db1-6f09a467b994",
@@ -24,7 +44,7 @@
   "aboutus1": "Dainty Flavors is a one stop shop for all your baking needs!",
   "aboutus2": "Add the perfect finishing touch to your cake with our range of toppers for every occasion",
   "aboutus_aboutpage": "Add the perfect finishing touch to your cake with our range of toppers for every occasion",
-  "aboutus_aboutpage2": "Add the perfect finishing touch to your cake with our range of toppers for every occasion",
+  "aboutus_aboutpage2": "",
   "bannerimg1": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fbanner%2Fbanner1.jpg?alt=media&token=5d911c9a-ede0-43cb-a1a3-f7360c81abfb",
   "aboutus_imageurl1": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Faboutpic.jpg?alt=media&token=902c1db9-ae2d-4280-8c61-aac3205a4ff8",
   "aboutus_imageurl2": "https://firebasestorage.googleapis.com/v0/b/daintyflavours-api.appspot.com/o/DAINTYFLAVOURS%2Fsiteimages%2Faboutpic.jpg?alt=media&token=902c1db9-ae2d-4280-8c61-aac3205a4ff8",
@@ -75,5 +95,8 @@
   "pp2": "",
   "pp3": "",
   "pp4": "",
-  "siteconstruction": true
+  "siteconstruction": false,
+  "homeslider": true,
+  "offertext": "Offers: No offer currently available",
+  "showoffertext": true
 }

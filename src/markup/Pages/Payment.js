@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import config from "../../config.json";
 
 const PaymentPage = (props) => {
+  console.log("orderid", props.orderid);
   const location = useLocation();
   const history = useHistory();
   useEffect(() => {
@@ -47,7 +48,7 @@ const PaymentPage = (props) => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="page-notfound text-center">
-                      <Payment amount={location.state?.amount} name={location.state?.name} orderid={location.state?.orderid} email={location.state?.email} contactno={location.state?.contactno} orderstatus={location.state?.orderstatus} paymentstatus={location.state?.paymentstatus} />
+                      <Payment amount={location.state?.amount} name={location.state?.name} orderid={location.state?.orderid} email={location.state?.email} contactno={location.state?.contactno} orderstatus={location.state?.orderstatus} paymentstatus={location.state?.paymentstatus} userLoggedin={location.state?.userLoggedin} />
                     </div>
                   </div>
                 </div>
