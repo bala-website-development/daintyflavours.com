@@ -31,7 +31,8 @@ const Shopchekout = () => {
     setSubTotal(
       data
         .map((total) => {
-          return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
+          // return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
+          return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
         })
         .reduce((a, b) => a + b, 0)
     );
@@ -353,9 +354,13 @@ const Shopchekout = () => {
                               <td className="product-item-quantity">{cart.p_quantity}</td>
                               <td className="product-item-totle text-nowrap">
                                 <i class="fa fa-inr"></i> {cart.p_price * cart.p_quantity}
+                                <div className="font-weight-light">
+                                  + Tax:
+                                  {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
+                                </div>
                               </td>
                               <td className="product-item-totle">
-                                <i class="fa fa-inr"></i> {(cart.p_net_product_price === undefined ? cart.p_price : cart.p_net_product_price) * cart.p_quantity}
+                                <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)}
                               </td>
                             </tr>
                           ))

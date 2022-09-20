@@ -348,7 +348,7 @@ const NavBarMenu = () => {
                                     {/* <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link> */}
-                                    <Link className="dropdown-item text-uppercase" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop", search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
+                                    <Link className="dropdown-item text-uppercase" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop", search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
                                   </li>

@@ -70,7 +70,8 @@ const Shopcart = () => {
       data &&
         data
           .map((total) => {
-            return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
+            //return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
+            return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
           })
           .reduce((a, b) => a + b, 0)
     );
