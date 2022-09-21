@@ -187,9 +187,12 @@ const NavBarMenu = () => {
       <div className="sticky-top top-0">
         <nav class="navbar navbar-expand-lg navbar-light searchbarbg bg-light w-100 py-1 bg-white">
           <div class="container-fluid">
-            <div className="px-2">{config.showoffertext ? config.offertext : ""}</div>
+            <div className="d-flex w-100">
+              <div className="">{config.showoffertext ? config.offertext : ""}</div>
+              <div></div>
+            </div>
             <div className="d-flex align-items-center justify-content-end mr-3">
-              <div className="align-items-center">
+              <div className="align-items-cente w-100">
                 <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar border px-3" placeholder="Search all our products" />
               </div>
               <div className="px-1"> </div>
@@ -348,7 +351,7 @@ const NavBarMenu = () => {
                                     {/* <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link> */}
-                                    <Link className="dropdown-item text-uppercase" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop", search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
+                                    <Link className="dropdown-item text-uppercase" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop", search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category, bannerimage: mc?.banner_image }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
                                   </li>

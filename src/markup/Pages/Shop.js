@@ -17,7 +17,7 @@ const Shop = (props) => {
   const [networkError, setNetworkError] = useState("");
   const [smShow, setSmShow] = useState(false);
   const [message, setMessage] = useState("");
-  const [bannerimagestate, setBannerimagestate] = useState(localStorage.getItem("bannerurl") || 0);
+  const [bannerimagestate, setBannerimagestate] = useState(props.location.bannerimage ? props.location.bannerimage : localStorage.getItem("bannerurl"));
   const [categoryDes, setCategoryDes] = useState(localStorage.getItem("categorydes") || "");
   const [subcatstate, setSubcatstate] = useState(JSON.parse(localStorage.getItem("categories")));
   const [loading, setLoading] = useState(false);
@@ -43,13 +43,13 @@ const Shop = (props) => {
   let category = queries.category;
   let maincategory = queries.maincategory;
   let searchFilter = props.location.searchFilter;
-
+  console.log("bannerimagestate props", props.location.bannerimage);
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
     console.log("queryyy queries", props.location.searchFilter);
     console.log("queryyy", maincategory);
-    console.log("bannerimagestate", bannerimagestate);
+    //console.log("bannerimagestate", bannerimagestate);
     setLoading((loading) => !loading);
 
     //console.log("all querry", category, maincategory, searchFilter);
@@ -187,7 +187,7 @@ const Shop = (props) => {
     getCategories();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl]);
+  }, [props.location?.searchFilter, queryurl, bannerimagestate]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);
@@ -431,7 +431,7 @@ const Shop = (props) => {
 
       <div className="page-content bg-white">
         {/* <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimageurl !== undefined || bannerimageurl !== "null" ? { backgroundImage: "url(" + banner + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}> */}
-        <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimagestate !== 0 ? { backgroundImage: "url(" + bannerimagestate + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+        <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimagestate !== 0 || bannerimagestate !== undefined ? { backgroundImage: "url(" + bannerimagestate + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">{category != undefined ? (category == "all" ? "All Products" : category) : "Shop"}</h1>
@@ -439,9 +439,7 @@ const Shop = (props) => {
               <div className="breadcrumb-row">
                 <ul className="list-inline">
                   <li>
-                    <Link to={"./"}>
-                      <i className="fa fa-home"></i>
-                    </Link>
+                    <Link to={"./"}>HOME</Link>
                   </li>
                   <li>Shop</li>
                 </ul>
@@ -586,10 +584,10 @@ const Shop = (props) => {
                                   )}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
                                     <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
-                                      <div className="d-flex align-items-center mt-1 ">
+                                      <div className="d-flex align-items-center">
                                         <div className="pl-1">Add to cart</div>
-                                        <div className="align-self-center p-t6">
-                                          <i className="ti-shopping-cart mx-1 cartbuttonbg"></i>
+                                        <div className="align-self-center">
+                                          <i className="fa fa-shopping-cart mx-1 cartbuttonbg"></i>
                                         </div>
                                       </div>
                                     </button>
@@ -625,12 +623,12 @@ const Shop = (props) => {
                     </div>
                     <div className="aligncenter">
                       {end <= filter.length + postsPerPage && (
-                        <button className="btn btn-sm btnhover" onClick={handleShowMorePosts}>
+                        <button className="btn btn-sm btnhover px-2" onClick={handleShowMorePosts}>
                           Load more
                         </button>
                       )}
                       <span class="px-2"></span>
-                      <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
+                      <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
                         View all Products
                       </Link>
                     </div>

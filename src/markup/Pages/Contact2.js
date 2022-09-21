@@ -22,9 +22,7 @@ class Contact2 extends Component {
                 <div className="breadcrumb-row">
                   <ul className="list-inline">
                     <li>
-                      <Link to={"./"}>
-                        <i className="fa fa-home"></i>
-                      </Link>
+                      <Link to={"./"}>HOME</Link>
                     </li>
                     <li>Contact Us 2</li>
                   </ul>
