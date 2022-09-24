@@ -44,6 +44,7 @@ const Shop = (props) => {
   let maincategory = queries.maincategory;
   let searchFilter = props.location.searchFilter;
   console.log("bannerimagestate props", props.location.bannerimage);
+  console.log("bannerimagestate local storage", localStorage.getItem("bannerurl"));
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
@@ -135,6 +136,9 @@ const Shop = (props) => {
           });
         setProducts(active);
         setFilter(active);
+        const slicedPosts = active.slice(0, postsPerPage);
+        arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
+        setProducts(arrayForHoldingPosts);
         console.log(data, "products");
       })
       .catch((err) => {
@@ -197,7 +201,7 @@ const Shop = (props) => {
     setSmShow(true);
     setTimeout(() => {
       setSmShow(false);
-    }, 1000);
+    }, 3000);
   };
   const addItemsToCart = (pid, price, product) => {
     // setLoading((loading) => !loading);
@@ -431,7 +435,7 @@ const Shop = (props) => {
 
       <div className="page-content bg-white">
         {/* <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimageurl !== undefined || bannerimageurl !== "null" ? { backgroundImage: "url(" + banner + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}> */}
-        <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimagestate !== 0 || bannerimagestate !== undefined ? { backgroundImage: "url(" + bannerimagestate + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+        <div className="dlab-bnr-inr overlay-black-light divbg" style={props.location.bannerimage ? { backgroundImage: "url(" + props.location.bannerimage + ")" } : { backgroundImage: "url(" + localStorage.getItem("bannerurl") + +")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">{category != undefined ? (category == "all" ? "All Products" : category) : "Shop"}</h1>
@@ -628,7 +632,10 @@ const Shop = (props) => {
                         </button>
                       )}
                       <span class="px-2"></span>
-                      <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
+                      {/* <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
+                        View all Products
+                      </Link> */}
+                      <Link className="btn btn-sm btnhover px-2" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "maincategory=all&category=all" }}>
                         View all Products
                       </Link>
                     </div>
