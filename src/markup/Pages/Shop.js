@@ -514,25 +514,38 @@ const Shop = (props) => {
                     </aside>
                   </div>
                 </div>
-                <div className="p-2">{(categoryDes !== "undefined" || categoryDes !== undefined) && category !== "all" ? categoryDes : ""}</div>
+                <div className="p-2 text-center">{(categoryDes !== "undefined" || categoryDes !== undefined) && category !== "all" ? categoryDes : ""}</div>
                 <div className="mb-4">
-                  <div className="row border br30 p-2 bg-secondary-light">
+                  <div className="row border br30 p-2 m-0 bg-secondary-light">
                     <div className="col align-self-center bg-secondary-light">
                       <div className="">
-                        {" "}
-                        <div className="px-3 sale btn btn-secondary1 color-grey btn-sm disable ">Sort by :</div>{" "}
-                        <Link to={"#"} onClick={(e) => sortAsc(products, "p_price")} className="px-3  btn btn-secondary btn-sm btnhover ">
-                          Low to High
-                        </Link>{" "}
-                        <Link to={"#"} onClick={(e) => sortDsc(products, "p_price")} className="px-3 btn btn-secondary btn-sm btnhover ">
-                          High to Low
-                        </Link>{" "}
-                        <Link to={"#"} onClick={(e) => sortDsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
-                          Name
-                        </Link>{" "}
-                        <div to={"#"} className="px-3 btn btn-secondary1 btn-sm d-none">
-                          Total Product : {products.Length || 0}
-                        </div>{" "}
+                        <div class="dropdown">
+                          <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filter Products
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">
+                              <Link to={"#"} onClick={(e) => sortAsc(products, "p_price")} className="px-3  btn btn-secondary btn-sm btnhover ">
+                                Price: Low to High
+                              </Link>{" "}
+                            </a>
+                            <a class="dropdown-item" href="#">
+                              <Link to={"#"} onClick={(e) => sortDsc(products, "p_price")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                                Price: High to Low
+                              </Link>{" "}
+                            </a>
+                            <a class="dropdown-item" href="#">
+                              <Link to={"#"} onClick={(e) => sortDsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                                Name : A - Z
+                              </Link>{" "}
+                            </a>
+                            <a class="dropdown-item" href="#">
+                              <Link to={"#"} onClick={(e) => sortAsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                                Name : Z - A
+                              </Link>{" "}
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div className="col align-self-center">

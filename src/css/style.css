@@ -6193,6 +6193,10 @@ ol.comment-list li.comment .comment-respond .comment-form p {
   display: block;
   font-family: "FontAwesome";
 }
+.widget_services ul li:before
+{
+  display: none !important;
+}
 .widget_categories ul li li,
 .widget_archive ul li li,
 .widget_meta ul li li,
@@ -11461,7 +11465,7 @@ footer .widget_services ul li {
   position: relative;
 }
 .footer-bottom {
-  padding: 25px 0;
+  padding: 10px 0;
   color: #fff;
   font-size: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -11485,10 +11489,10 @@ footer .widget_services ul li {
 }
 .widget_services .list-2 li a {
   color: #191918;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 28px;
-  padding: 8px 0 8px 20px;
+  /* padding: 8px 0 8px 20px; */
   display: block;
   text-transform: capitalize;
 }
@@ -12632,7 +12636,7 @@ ol.commentlist li .star-rating {
 30. CONTACT
 ------------------------------------------------ */
 .dlab-social-icon.dlab-social-icon-lg li a {
-  color: #ffffff;
+  color: #000000;
   font-size: 18px;
   height: 40px;
   line-height: 42px;
