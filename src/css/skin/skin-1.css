@@ -317,8 +317,10 @@ blockquote,
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 .bg-primary,
-.footer-bottom {
-  background-color: var(--color-primary) !important;
+.footer-bottom  {
+  /* background-color: var(--color-primary) !important; */
+  background-color: white !important;
+  
 }
 
 /* Text Selection */

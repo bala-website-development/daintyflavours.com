@@ -20,9 +20,7 @@ const Success = () => {
                 <div className="breadcrumb-row">
                   <ul className="list-inline">
                     <li>
-                      <Link to={"./"}>
-                        <i className="fa fa-home"></i>
-                      </Link>
+                      <Link to={"./"}>HOME</Link>
                     </li>
                     <li>Success</li>
                   </ul>

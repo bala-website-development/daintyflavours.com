@@ -63,9 +63,7 @@ const Contact = () => {
               <div className="breadcrumb-row">
                 <ul className="list-inline">
                   <li>
-                    <Link to={"./"}>
-                      <i className="fa fa-home"></i>
-                    </Link>
+                    <Link to={"./"}>HOME</Link>
                   </li>
                   <li>Contact</li>
                 </ul>
@@ -128,7 +126,7 @@ const Contact = () => {
                           <a href={config.insta} target="_blank" className="fa fa-instagram bg-primary mr-1"></a>
                         </li>
                         <li>
-                          <a href={config.whatsappurl} target="_blank" className="fa fa-whatsapp bg-success mr-1"></a>
+                          <a href={config.whatsappurl} target="_blank" className="fa fa-whatsapp bg-primary mr-1"></a>
                         </li>
                       </ul>
                     </div>

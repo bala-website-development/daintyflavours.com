@@ -17,7 +17,7 @@ const Shop = (props) => {
   const [networkError, setNetworkError] = useState("");
   const [smShow, setSmShow] = useState(false);
   const [message, setMessage] = useState("");
-  const [bannerimagestate, setBannerimagestate] = useState(localStorage.getItem("bannerurl") || 0);
+  const [bannerimagestate, setBannerimagestate] = useState(props.location.bannerimage ? props.location.bannerimage : localStorage.getItem("bannerurl"));
   const [categoryDes, setCategoryDes] = useState(localStorage.getItem("categorydes") || "");
   const [subcatstate, setSubcatstate] = useState(JSON.parse(localStorage.getItem("categories")));
   const [loading, setLoading] = useState(false);
@@ -43,13 +43,14 @@ const Shop = (props) => {
   let category = queries.category;
   let maincategory = queries.maincategory;
   let searchFilter = props.location.searchFilter;
-
+  console.log("bannerimagestate props", props.location.bannerimage);
+  console.log("bannerimagestate local storage", localStorage.getItem("bannerurl"));
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
     console.log("queryyy queries", props.location.searchFilter);
     console.log("queryyy", maincategory);
-    console.log("bannerimagestate", bannerimagestate);
+    //console.log("bannerimagestate", bannerimagestate);
     setLoading((loading) => !loading);
 
     //console.log("all querry", category, maincategory, searchFilter);
@@ -135,6 +136,9 @@ const Shop = (props) => {
           });
         setProducts(active);
         setFilter(active);
+        const slicedPosts = active.slice(0, postsPerPage);
+        arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
+        setProducts(arrayForHoldingPosts);
         console.log(data, "products");
       })
       .catch((err) => {
@@ -187,7 +191,7 @@ const Shop = (props) => {
     getCategories();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl]);
+  }, [props.location?.searchFilter, queryurl, bannerimagestate]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);
@@ -197,7 +201,7 @@ const Shop = (props) => {
     setSmShow(true);
     setTimeout(() => {
       setSmShow(false);
-    }, 1000);
+    }, 3000);
   };
   const addItemsToCart = (pid, price, product) => {
     // setLoading((loading) => !loading);
@@ -431,7 +435,7 @@ const Shop = (props) => {
 
       <div className="page-content bg-white">
         {/* <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimageurl !== undefined || bannerimageurl !== "null" ? { backgroundImage: "url(" + banner + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}> */}
-        <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimagestate !== 0 ? { backgroundImage: "url(" + bannerimagestate + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+        <div className="dlab-bnr-inr overlay-black-light divbg" style={props.location.bannerimage ? { backgroundImage: "url(" + props.location.bannerimage + ")" } : { backgroundImage: "url(" + localStorage.getItem("bannerurl") + +")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">{category != undefined ? (category == "all" ? "All Products" : category) : "Shop"}</h1>
@@ -439,9 +443,7 @@ const Shop = (props) => {
               <div className="breadcrumb-row">
                 <ul className="list-inline">
                   <li>
-                    <Link to={"./"}>
-                      <i className="fa fa-home"></i>
-                    </Link>
+                    <Link to={"./"}>HOME</Link>
                   </li>
                   <li>Shop</li>
                 </ul>
@@ -512,25 +514,38 @@ const Shop = (props) => {
                     </aside>
                   </div>
                 </div>
-                <div className="p-2">{(categoryDes !== "undefined" || categoryDes !== undefined) && category !== "all" ? categoryDes : ""}</div>
+                <div className="p-2 text-center">{(categoryDes !== "undefined" || categoryDes !== undefined) && category !== "all" ? categoryDes : ""}</div>
                 <div className="mb-4">
-                  <div className="row border br30 p-2 bg-secondary-light">
+                  <div className="row border br30 p-2 m-0 bg-secondary-light">
                     <div className="col align-self-center bg-secondary-light">
                       <div className="">
-                        {" "}
-                        <div className="px-3 sale btn btn-secondary1 color-grey btn-sm disable ">Sort by :</div>{" "}
-                        <Link to={"#"} onClick={(e) => sortAsc(products, "p_price")} className="px-3  btn btn-secondary btn-sm btnhover ">
-                          Low to High
-                        </Link>{" "}
-                        <Link to={"#"} onClick={(e) => sortDsc(products, "p_price")} className="px-3 btn btn-secondary btn-sm btnhover ">
-                          High to Low
-                        </Link>{" "}
-                        <Link to={"#"} onClick={(e) => sortDsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
-                          Name
-                        </Link>{" "}
-                        <div to={"#"} className="px-3 btn btn-secondary1 btn-sm d-none">
-                          Total Product : {products.Length || 0}
-                        </div>{" "}
+                        <div class="dropdown">
+                          <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filter Products
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">
+                              <Link to={"#"} onClick={(e) => sortAsc(products, "p_price")} className="px-3  btn btn-secondary btn-sm btnhover ">
+                                Price: Low to High
+                              </Link>{" "}
+                            </a>
+                            <a class="dropdown-item" href="#">
+                              <Link to={"#"} onClick={(e) => sortDsc(products, "p_price")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                                Price: High to Low
+                              </Link>{" "}
+                            </a>
+                            <a class="dropdown-item" href="#">
+                              <Link to={"#"} onClick={(e) => sortDsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                                Name : A - Z
+                              </Link>{" "}
+                            </a>
+                            <a class="dropdown-item" href="#">
+                              <Link to={"#"} onClick={(e) => sortAsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                                Name : Z - A
+                              </Link>{" "}
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div className="col align-self-center">
@@ -586,10 +601,10 @@ const Shop = (props) => {
                                   )}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
                                     <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
-                                      <div className="d-flex align-items-center mt-1 ">
+                                      <div className="d-flex align-items-center">
                                         <div className="pl-1">Add to cart</div>
-                                        <div className="align-self-center p-t6">
-                                          <i className="ti-shopping-cart mx-1 cartbuttonbg"></i>
+                                        <div className="align-self-center">
+                                          <i className="fa fa-shopping-cart mx-1 cartbuttonbg"></i>
                                         </div>
                                       </div>
                                     </button>
@@ -625,12 +640,15 @@ const Shop = (props) => {
                     </div>
                     <div className="aligncenter">
                       {end <= filter.length + postsPerPage && (
-                        <button className="btn btn-sm btnhover" onClick={handleShowMorePosts}>
+                        <button className="btn btn-sm btnhover px-2" onClick={handleShowMorePosts}>
                           Load more
                         </button>
                       )}
                       <span class="px-2"></span>
-                      <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
+                      {/* <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
+                        View all Products
+                      </Link> */}
+                      <Link className="btn btn-sm btnhover px-2" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "maincategory=all&category=all" }}>
                         View all Products
                       </Link>
                     </div>

@@ -30,10 +30,6 @@ const NavBarMenu = () => {
     return pizzaHeaderNav.classList.remove("active");
   }
 
-  //pizzaHeaderNav.addEventListener("mouseleave", menuBtnRemoveActive);
-
-  /* Test */
-
   // Sidenav li open close
 
   var navUl = [].slice.call(document.querySelectorAll(".navbar-nav > li"));
@@ -187,9 +183,12 @@ const NavBarMenu = () => {
       <div className="sticky-top top-0">
         <nav class="navbar navbar-expand-lg navbar-light searchbarbg bg-light w-100 py-1 bg-white">
           <div class="container-fluid">
-            <div className="px-2">{config.showoffertext ? config.offertext : ""}</div>
+            <div className="d-flex w-100">
+              <div className="">{config.showoffertext ? config.offertext : ""}</div>
+              <div></div>
+            </div>
             <div className="d-flex align-items-center justify-content-end mr-3">
-              <div className="align-items-center">
+              <div className="align-items-cente w-100">
                 <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar border px-3" placeholder="Search all our products" />
               </div>
               <div className="px-1"> </div>
@@ -209,30 +208,6 @@ const NavBarMenu = () => {
                   <span class="badge rounded-pill badge-notification bg-danger">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
                 </span>
               </Link>
-
-              {/* <div class="dropdown d-none">
-                <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                  <i class="fas fa-bell"></i>
-                  <span class="badge rounded-pill badge-notification bg-danger">1</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      Some news
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      Another news
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </div> */}
 
               <div class="dropdown">
                 {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? (
@@ -306,7 +281,7 @@ const NavBarMenu = () => {
                 <p className="titlename2 text-primary mb-0 font-weight-normal"> {config.websitetitle}</p>
               </Link>
             </a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class={toggleShow ? "collapse navbar-collapse show" : "collapse navbar-collapse"} id="navbarSupportedContent">
               {/* ---------- */}
 
               <ul className="navbar-nav">
@@ -348,7 +323,7 @@ const NavBarMenu = () => {
                                     {/* <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link> */}
-                                    <Link className="dropdown-item text-uppercase" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop", search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
+                                    <Link className="dropdown-item text-uppercase" onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop", search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category, bannerimage: mc?.banner_image }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
                                   </li>

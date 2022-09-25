@@ -157,7 +157,7 @@ const Shopcart = () => {
                     </Link>{" "}
                     {!userLoggedin && (
                       <Link to={"/shop-cart"} onClick={(e) => (localStorage.removeItem("daintycart"), setCartDetails([]))} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
-                        Clear Cart <i class="fa fa-delete-left mt-1"></i>
+                        Clear Cart {/*  <i class="fa fa-delete-left mt-1"></i> */}
                       </Link>
                     )}
                   </div>

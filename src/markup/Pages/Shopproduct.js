@@ -219,9 +219,7 @@ const Shopproduct = (props) => {
               <div className="breadcrumb-row">
                 <ul className="list-inline">
                   <li>
-                    <Link to={"/"}>
-                      <i className="fa fa-home"></i>
-                    </Link>
+                    <Link to={"/"}>HOME</Link>
                   </li>
                   <li>Product Details</li>
                 </ul>
@@ -238,7 +236,7 @@ const Shopproduct = (props) => {
                   <div className="product-gallery on-show-slider lightgallery" id="lightgallery">
                     <div className="dlab-box prodcutdetailimage" style={productDtl.p_image ? { backgroundImage: "url(" + productDtl.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}>
                       <div className="d-flex watermarkdiv justify-content-center w-100">
-                        <div className="align-items-center">
+                        <div className="align-items-center d-none">
                           <img className="watermark" src={config.watermark} alt={config.websitetitle} />
                         </div>
                       </div>
@@ -310,8 +308,8 @@ const Shopproduct = (props) => {
                       </div>
                     </div>
                     <div className="shop-item-tage">
-                      <span>Category / Subcategory :- </span>
-                      <Link to={{ pathname: "/shop", category: productDtl.p_category }}>{productDtl.p_category}</Link>{" "}
+                      <span>Main Category / Category :- </span>
+                      <Link to={{ pathname: "/shop", search: "?maincategory=" + productDtl.p_maincategory, category: productDtl.p_maincategory }}>{productDtl.p_maincategory}</Link> <Link to={{ pathname: "/shop", search: "?category=" + productDtl.p_category, category: productDtl.p_category }}>{productDtl.p_category}</Link> <Link to={{ pathname: "/shop", subcategory: productDtl.p_submaincategory }}>{productDtl.p_submaincategory}</Link>{" "}
                     </div>
                     <div className="dlab-divider bg-gray tb15">
                       <i className="icon-dot c-square"></i>
@@ -326,11 +324,11 @@ const Shopproduct = (props) => {
                       <div> Available Quantity - {productDtl.p_quantity}</div>
                     </div>
                     {productDtl.p_quantity > 0 ? (
-                      <button disabled={loading} className="btn btnhover px-1" type="submit">
-                        <div className="d-flex align-items-center justify-content-between mt-1">
+                      <button disabled={loading} className="btn btnhover p-1" type="submit">
+                        <div className="d-flex align-items-center justify-content-between">
                           <div className="pl-1">Add to cart</div>
                           <div className="align-self-center">
-                            <i className="ti-shopping-cart mx-1 cartbuttonbg"></i>
+                            <i className="fa fa-shopping-cart mx-1 cartbuttonbg"></i>
                           </div>
                         </div>
                       </button>

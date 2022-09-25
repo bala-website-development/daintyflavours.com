@@ -21,9 +21,7 @@ class Calendar extends Component {
                 <div className="breadcrumb-row">
                   <ul className="list-inline">
                     <li>
-                      <Link to={"./"}>
-                        <i className="fa fa-home"></i> Home{" "}
-                      </Link>
+                      <Link to={"./"}>HOME</Link>
                     </li>
                     <li>Booking Calendar</li>
                   </ul>

@@ -11,19 +11,25 @@ class Footer extends Component {
           <div className="footer-top bg-line-top">
             <div className="container">
               <div className="row">
-                <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
-                  <div className="widget widget_getintuch">
-                    <h5 className="footer-title">Contact Us</h5>
+                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                  <div className="widget widget_getintuch py-0">
+                    <h4 className="footer-title">Contact Us</h4>
+                    <p>Have a question? Give us a call or email. We'd love to hear from you.</p>
                     <ul>
                       <li>
                         <i className="fa fa-map-marker"></i>
+
                         <span>{config.contact_address}</span>
+                        <br />
+                        <span>
+                          <p>{config.storetiming}</p>
+                        </span>
                       </li>
                       <li>
                         <i className="fa fa-phone"></i>
                         <p>{config.contact_phone1}</p>
                       </li>
-                      <li>
+                      <li class="d-none">
                         <i className="fa fa-mobile"></i>
                         <p>{config.contact_phone2}</p>
                       </li>
@@ -33,11 +39,27 @@ class Footer extends Component {
                       </li>
                     </ul>
                   </div>
+                  <div className="m-t20">
+                    <ul className="dlab-social-icon dlab-social-icon-lg">
+                      <li>
+                        <a href={config.fb} target="_blank" className="fa fa-facebook bg-primary mr-1"></a>
+                      </li>
+                      <li>
+                        <a href={config.insta} target="_blank" className="fa fa-instagram bg-primary mr-1"></a>
+                      </li>
+                      <li className="d-none">
+                        <a href={config.pins} target="_blank" className="fa fa-pinterest-p bg-primary mr-1"></a>
+                      </li>
+                      <li>
+                        <a href={config.whatsappurl} target="_blank" className="fa fa-whatsapp bg-primary mr-1"></a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="widget widget_services border-0">
-                    <h4 className="footer-title">Quick Links</h4>
+                    <h4 className="footer-title">Quick Links/ Useful Links</h4>
                     <ul className="list-2">
                       <li>
                         <Link to={"/"}>Home</Link>
@@ -79,7 +101,7 @@ class Footer extends Component {
                     </ul>
                   </div>
                 </div>
-                <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6 d-none">
                   <div className="widget border-0 ">
                     <h4 className="footer-title">Store Timings</h4>
 
@@ -131,12 +153,14 @@ class Footer extends Component {
                 <div className="col-lg-6 col-md-6 text-left">
                   {" "}
                   <span>
-                    Developed/Maintained by{" "}
-                    <a href="https://www.theuniquecreations.com" className="font-weight-bold" target="blank">
-                      theuniquecreations
-                    </a>{" "}
-                    <div>
-                      Copyright © {new Date().getFullYear()} Unique Creations & {config.websitetitle}. All rights are reserved.
+                    <div className="d-none">
+                      Developed/Maintained by{" "}
+                      <a href="https://www.theuniquecreations.com" className="font-weight-bold" target="blank">
+                        theuniquecreations
+                      </a>{" "}
+                    </div>
+                    <div class="text-dark">
+                      © {new Date().getFullYear()} Copyright Owned by {config.websitetitle}.
                     </div>
                   </span>{" "}
                 </div>
@@ -145,17 +169,17 @@ class Footer extends Component {
                   <div className="widget-link">
                     <ul>
                       <li>
-                        <a href={config.admin_url} className="font-weight-light color-white" target="blank">
+                        <a href={config.admin_url} className="font-weight-light text-dark" target="blank">
                           Admin
                         </a>{" "}
                       </li>
                       <li>
-                        <a href="https://www.theuniquecreations.com/contact" className="font-weight-light" target="blank">
+                        <a href="https://www.theuniquecreations.com/contact" className="font-weight-light text-dark" target="blank">
                           Contact developer
                         </a>{" "}
                       </li>
                       <li>
-                        <a href="https://www.instagram.com/theuniquecreations.it" className="font-weight-light" target="blank">
+                        <a href="https://www.instagram.com/theuniquecreations.it" className="font-weight-light text-dark" target="blank">
                           <i className="fa fa-instagram" />
                         </a>{" "}
                       </li>
