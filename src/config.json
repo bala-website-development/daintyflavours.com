@@ -1,7 +1,7 @@
 {
   "domain": "DAINTYFLAVORS",
   "storage": "DAINTYFLAVORS",
-  "service_url": "http://localhost:8000/api/",
+  "service_url": "https://asia-south1-tuc-shopping-dev.cloudfunctions.net/daintyflavours_api/api/",
   "admin_url": "https://www.theuniquecreations.com/login/",
   "email_service_url": "https://asia-south1-tucfbclouddb.cloudfunctions.net/tuc_shop_node_api/email/",
   "============================": "==========================",
