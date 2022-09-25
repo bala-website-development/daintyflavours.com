@@ -13,7 +13,7 @@ const Slider = () => {
         {slider_content &&
           slider_content.map((slider) => (
             <Carousel.Item>
-              <div className="slide slidebottom d-flex justify-content-end" style={{ backgroundColor: "#fffff", backgroundImage: "url(" + slider.image_url + ")" }}>
+              <div className="slide slidebottom-none d-flex justify-content-end" style={{ backgroundColor: "#fffff", backgroundImage: "url(" + slider.image_url + ")" }}>
                 <div className=" mt-auto  px-3 ">
                   {/* <img className=" slidebottom slide w-100" src={slider.image_url} alt="Dainty Flavors" /> */}
                   {/* <span className="prefix">{slider.prefix}</span> */}
@@ -22,9 +22,9 @@ const Slider = () => {
                   <Link to={"/shop"} className="btn btnhover border z-index">
                     Shop now
                   </Link> */}
-                  <div classnames=" mt-auto p-2 ">
+                  <div classnames=" mt-auto p-2 d-none">
                     {" "}
-                    <img className="logoheight" src={config.logo} alt="Dainty Flavors" />
+                    <img className="logoheight d-none" src={config.logo} alt="Dainty Flavors" />
                   </div>
                 </div>
               </div>

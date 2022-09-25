@@ -30,7 +30,13 @@
 .carousel-control-next-icon,
 .carousel-control-prev-icon
 {
+  display: block;
+}
+.carousel-control-next-icon:after,
+.carousel-control-prev-icon:after
+{
   display: none;
+  
 }
 .slidebottom{
   border-bottom-left-radius: 50% 150px;
@@ -53,6 +59,7 @@ background-color: #b43b8d;
 .carousel-indicators li  {
   background-color: #ecb7d4;
   width: 10px;
+  border: 1px solid white;
 }
 .cartbuttonbg
 {
@@ -152,6 +159,17 @@ color: #b43b8d;
   -ms-user-select: none;
   user-select: none;
   max-width: none !important;
+
+}
+
+.tile-small:hover,
+.tile-medium:hover,
+.tile-wide:hover,
+.tile-large:hover,
+.tile-xlarge:hover,
+.tile-app:hover
+{
+opacity: 0.9;
 }
 .tiles-grid .tile-small.row-2 {
   grid-row: 2 / span 1;
@@ -207,7 +225,7 @@ color: #b43b8d;
   width: 310px;
   height: 150px;
 }
-
+/* 
 .transform-right,
 .tile-medium.transform-right,
 .tile-small.transform-right,
@@ -343,4 +361,4 @@ color: #b43b8d;
 .tile-wide.transform-bottom.tile-large {
   -webkit-transform: perspective(500px) rotateX(-0.046124rad) !important;
   transform: perspective(500px) rotateX(-0.046124rad) !important;
-}
+} */
