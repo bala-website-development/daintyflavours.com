@@ -41,7 +41,17 @@ const Shopcart = () => {
         console.log(networkError);
       });
   };
+  const updateCartQuantityfromls = (cartid, quantity) => {
+    console.log("lsDaintyCartforquantity update", lsDaintyCart);
+    //need to update the quantity and total in the cart item from this lsDaintyCart and set and reftest cart. q_total = q_quatity* q_net_price.
+    //setlsDaintyCart(uppdatedJson)
+  };
 
+  const deleteCartfromls = (cartid) => {
+    console.log("lsDaintyCartforremove", lsDaintyCart);
+    //need to delete the cart item from this lsDaintyCart and set and reftest cart
+    //setlsDaintyCart(uppdatedJson)
+  };
   const deleteCart = (cartid) => {
     console.log("cartid", cartid);
     fetch(config.service_url + "deleteCart", {
@@ -133,7 +143,6 @@ const Shopcart = () => {
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">Cart</h1>
-
               <div className="breadcrumb-row">
                 <ul className="list-inline">
                   <li>
@@ -183,7 +192,7 @@ const Shopcart = () => {
                         <div className="w-25">
                           <b>Net Amount</b>
                         </div>
-                        <div className="w-10"></div>
+                        <div className="w-10">Remove</div>
                       </div>
                     </thead>
                     <tbody>
@@ -216,7 +225,18 @@ const Shopcart = () => {
                                     <option value={10}>10</option>
                                   </select>
                                 ) : (
-                                  1
+                                  <select id={key} className="drpquantity" onChange={(e) => updateCartQuantityfromls(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                    <option value={5}>5</option>
+                                    <option value={6}>6</option>
+                                    <option value={7}>7</option>
+                                    <option value={8}>8</option>
+                                    <option value={9}>9</option>
+                                    <option value={10}>10</option>
+                                  </select>
                                 )}
                               </div>
                               <div className="w-25 text-nowrap">
@@ -231,11 +251,22 @@ const Shopcart = () => {
                                 {" "}
                                 <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)}
                               </div>
-                              {userLoggedin && (
+                              {userLoggedin ? (
                                 <div className="w-10">
                                   <Link
                                     onClick={(e) => {
                                       deleteCart([cart.id]);
+                                    }}
+                                    data-dismiss="alert"
+                                    aria-label="close"
+                                    className="ti-close"
+                                  ></Link>
+                                </div>
+                              ) : (
+                                <div className="w-10">
+                                  <Link
+                                    onClick={(e) => {
+                                      deleteCartfromls([cart.id]);
                                     }}
                                     data-dismiss="alert"
                                     aria-label="close"
