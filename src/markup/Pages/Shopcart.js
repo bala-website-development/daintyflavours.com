@@ -7,11 +7,13 @@ import img from "./../../images/banner/bnr3.jpg";
 import loadingimg from "./../../images/load.gif";
 import { Modal } from "react-bootstrap";
 const Shopcart = () => {
-  const [cartDetails, setCartDetails] = useState([]);
+  const [userLoggedin, setUserLoggedin] = useState(localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null ? true : false);
   const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
+  const [cartDetails, setCartDetails] = useState(userLoggedin ? [] : lsDaintyCart);
+
   const history = useHistory();
   const [cartUpdated, setCartUpdated] = useState(false);
-  const [userLoggedin, setUserLoggedin] = useState(localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null ? true : false);
+
   const [subTotal, setSubTotal] = useState(0);
   const [productWeight, setProductWeight] = useState(0);
   const [networkError, setNetworkError] = useState("");
@@ -45,12 +47,33 @@ const Shopcart = () => {
     console.log("lsDaintyCartforquantity update", lsDaintyCart);
     //need to update the quantity and total in the cart item from this lsDaintyCart and set and reftest cart. q_total = q_quatity* q_net_price.
     //setlsDaintyCart(uppdatedJson)
+    for (var i = 0; i < lsDaintyCart.length; i++) {
+      if (lsDaintyCart[i].id == cartid) {
+        lsDaintyCart[i].p_net_product_price = parseInt(lsDaintyCart[i].p_price) * lsDaintyCart[i].quantity;
+        lsDaintyCart[i].p_quantity = quantity;
+        // lsDaintyCart[i].p_price=(parseInt(lsDaintyCart[i].p_price)*quantity).toString();
+      }
+    }
+    console.log("lsDaintyCartforupdatequatity", lsDaintyCart);
+    setlsDaintyCart(lsDaintyCart);
+    localStorage.removeItem("daintycart");
+    localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart));
+    console.log("lsDaintyCartforupdatequatitynew", JSON.stringify(lsDaintyCart));
+    setCartUpdated((cartUpdated) => !cartUpdated);
   };
 
   const deleteCartfromls = (cartid) => {
     console.log("lsDaintyCartforremove", lsDaintyCart);
     //need to delete the cart item from this lsDaintyCart and set and reftest cart
     //setlsDaintyCart(uppdatedJson)
+    for (var i = 0; i < lsDaintyCart.length; i++) {
+      if (lsDaintyCart[i].id == cartid) lsDaintyCart.splice(i, 1);
+    }
+    setlsDaintyCart(lsDaintyCart);
+    localStorage.removeItem("daintycart");
+    localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart));
+    console.log("lsDaintyCartforremovenew", JSON.stringify(lsDaintyCart));
+    setCartUpdated((cartUpdated) => !cartUpdated);
   };
   const deleteCart = (cartid) => {
     console.log("cartid", cartid);
