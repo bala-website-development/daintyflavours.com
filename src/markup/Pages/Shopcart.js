@@ -78,6 +78,7 @@ const Shopcart = () => {
     // console.log("query_cartDetails", data1);
     setSubTotal(
       data &&
+        data.length > 0 &&
         data
           .map((total) => {
             //return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
@@ -87,6 +88,7 @@ const Shopcart = () => {
     );
     setProductWeight(
       data &&
+        data.length > 0 &&
         data
           .map((wt) => {
             return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
