@@ -604,7 +604,7 @@ const Shop = (props) => {
                                       <div className="d-flex align-items-center">
                                         <div className="pl-1">Add to cart</div>
                                         <div className="align-self-center">
-                                          <i className="fa fa-shopping-cart mx-1 cartbuttonbg"></i>
+                                          <i className="fa fa-shopping-cart fa-lg mx-1 cartbuttonbg"></i>
                                         </div>
                                       </div>
                                     </button>
