@@ -303,7 +303,7 @@ const Shopcart = () => {
                       <tr>
                         <td>Order Subtotal(with Tax)</td>
                         <td>
-                          <i class="fa fa-inr"></i> {subTotal}
+                          <i class="fa fa-inr"></i> {Number(subTotal).toFixed(2)}
                         </td>
                       </tr>
                       <tr>
@@ -332,7 +332,7 @@ const Shopcart = () => {
                       <tr className="bg-primary-light text-primary">
                         <td>Total</td>
                         <td>
-                          <i class="fa fa-inr"></i> {subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))}
+                          <i class="fa fa-inr"></i> {Number(subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000.0) * config.shippingcost))).toFixed(2)}
                         </td>
                       </tr>
                     </tbody>
