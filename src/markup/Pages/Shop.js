@@ -308,6 +308,20 @@ const Shop = (props) => {
     });
     setProducts(ascdata);
   };
+  const sortSale = (arr, field) => {
+    const ascdata = arr.sort((a, b) => {
+      console.log(arr, field);
+      if (a.p_price < a.p_net_product_price && a.p_price !== 0 && a.p_price !== "") {
+        console.log(a[field]);
+        return -1;
+      }
+      if (b[field] > a[field]) {
+        return 1;
+      }
+      return 0;
+    });
+    setProducts(ascdata);
+  };
   const sortDsc = (arr, field) => {
     const ascdata = arr.sort((a, b) => {
       console.log(arr, field);
@@ -524,6 +538,11 @@ const Shop = (props) => {
                             Filter Products
                           </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">
+                              <Link to={"#"} onClick={(e) => sortSale(products, "p_sale")} className="px-3  btn btn-secondary btn-sm btnhover ">
+                                Sale Items
+                              </Link>{" "}
+                            </a>
                             <a class="dropdown-item" href="#">
                               <Link to={"#"} onClick={(e) => sortAsc(products, "p_price")} className="px-3  btn btn-secondary btn-sm btnhover ">
                                 Price: Low to High
