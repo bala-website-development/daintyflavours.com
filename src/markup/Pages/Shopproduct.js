@@ -323,6 +323,10 @@ const Shopproduct = (props) => {
                     <div className="py-2 d-none">
                       <div> Available Quantity - {productDtl.p_quantity}</div>
                     </div>
+                    <div className="py-2 ">
+                      <div> Return Accepted - {productDtl.p_returnaccepted || "" || undefined ? "Yes" : "No"}</div>
+                    </div>
+
                     {productDtl.p_quantity > 0 ? (
                       <button disabled={loading} className="btn btnhover p-1" type="submit">
                         <div className="d-flex align-items-center justify-content-between">
