@@ -320,7 +320,7 @@ const Shopproduct = (props) => {
                     <div className="py-2">
                       <div> Net Weight - {productDtl.p_productweight === "" || productDtl.p_productweight === undefined ? "N/A" : productDtl.p_productweight + " gms"}</div>
                     </div>
-                    <div className="py-2">
+                    <div className="py-2 d-none">
                       <div> Available Quantity - {productDtl.p_quantity}</div>
                     </div>
                     {productDtl.p_quantity > 0 ? (
