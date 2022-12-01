@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../Layout/Header2";
+
 import Footer from "../Layout/Footer";
 import img1 from "./../../images/banner/bnr1.jpg";
 import img2 from "./../../images/background/bg5.jpg";
@@ -9,8 +9,6 @@ const PasswordChanged = () => {
   return (
     <div>
       <div>
-        <Header />
-
         <div className="page-content bg-white">
           <div className="dlab-bnr-inr  bg-pt" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
             <div className="container">
