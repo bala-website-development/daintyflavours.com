@@ -80,7 +80,7 @@ const NavBarMenu = () => {
       });
   };
 
-  const getCategories = async () => {
+  const getSubCategories = async () => {
     console.log("entered");
     await fetch(config.service_url + "getuserscategory")
       .then((response) => response.json())
@@ -92,6 +92,46 @@ const NavBarMenu = () => {
           localStorage.setItem("categories", JSON.stringify(_filter));
           setMenuCategory(_filter);
           localStorage.setItem("cartUpdated", true);
+        } else if (data.status === 400) {
+          setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
+  const getCategories = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getuserssubcategory")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("subcategory", data);
+          let _filter = data.data.filter((_d) => _d.type === "product");
+          _filter.push({ Expiration: moment().add(1, "d") });
+          localStorage.setItem("subcategories", JSON.stringify(_filter));
+          setMenuCategory(_filter);
+        } else if (data.status === 400) {
+          setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
+  const getBrands = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getusersbrand")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("brands", data);
+          let _filter = data.data.filter((_d) => _d.type === "product");
+          _filter.push({ Expiration: moment().add(1, "d") });
+          localStorage.setItem("brand", JSON.stringify(_filter));
+          setMenuCategory(_filter);
         } else if (data.status === 400) {
           setMenuMainCategory([]);
         }
@@ -141,7 +181,7 @@ const NavBarMenu = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) { });
+        .catch(function (error) {});
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
@@ -162,6 +202,8 @@ const NavBarMenu = () => {
 
     if (localStorage.getItem("categories") === undefined || localStorage.getItem("categories") === null) {
       getCategories();
+      getSubCategories();
+      getBrands();
       console.log("fromservice categories");
     } else {
       if (menuCategory === undefined || menuCategory === null || menuCategory?.length === 0) {
@@ -323,11 +365,14 @@ const NavBarMenu = () => {
                                     {/* <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link> */}
-                                    <Link className="dropdown-item text-uppercase" onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))}
+                                    <Link
+                                      className="dropdown-item text-uppercase"
+                                      onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))}
                                       to={{
-                                        pathname: "/shop", search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category, bannerimage: mc?.banner_image
+                                        pathname: "/shop",
+                                        search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category,
+                                        bannerimage: mc?.banner_image,
                                       }}
-
                                     >
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
