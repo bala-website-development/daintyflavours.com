@@ -315,6 +315,9 @@ const Shopproduct = (props) => {
                       <i className="icon-dot c-square"></i>
                     </div>
                     <div className="py-2">
+                      <div>{productDtl?.p_brand == "" || productDtl?.p_brand == undefined ? "" : " Brand Name - " + productDtl?.p_brand}</div>
+                    </div>
+                    <div className="py-2">
                       <div> Expiry Date - {productDtl.p_expirydate === "" || productDtl.p_expirydate === undefined || productDtl.p_expirydate === "0001-01-01" ? "N/A" : productDtl.p_expirydate}</div>
                     </div>
                     <div className="py-2">
@@ -494,10 +497,10 @@ const Shopproduct = (props) => {
             </div>
           </div>
         </div>
-      </div>
+      </div >
 
       <Footer />
-    </div>
+    </div >
   );
 };
 

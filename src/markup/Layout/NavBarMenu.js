@@ -183,7 +183,7 @@ const NavBarMenu = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) {});
+        .catch(function (error) { });
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
@@ -382,11 +382,51 @@ const NavBarMenu = () => {
                                     </Link>
                                   </li>
                                 ))}
+
                           </ul>
                         </li>
                       )
                   )
                 )}
+
+                <li>
+
+                  <li class="nav-item dropdown">
+                    <a class="dropdown-toggle align-items-center hidden-arrow nav-link text-dark" href="#" id={"navbarDropdownMenuAvatar" + "brand"} role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                      <span className="small">
+                        BRAND <i className="fa fa-angle-down"></i>
+                      </span>
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby={"navbarDropdownMenuAvatar" + "BRAND"}>
+                      {JSON.parse(localStorage.getItem("brand"))?.filter(b => b).map((brand) =>
+                        brand !== null && (
+
+                          <li className="small">
+
+                            <Link
+                              className="dropdown-item text-uppercase"
+                              onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", brand?.banner_image), localStorage.setItem("categorydes", brand?.categorydes == undefined ? "" : brand?.categorydes), localStorage.setItem("queryurl", "brand=" + brand.brand))}
+                              to={{
+                                pathname: "/shop",
+                                search: "?brand=" + brand.brand,
+                                bannerimage: brand?.banner_image,
+                              }}
+                            >
+                              <span className="text-nowrap">{brand?.brand}</span>
+                            </Link>
+                          </li>
+                        )
+
+                      )}
+                    </ul>
+
+
+
+                  </li>
+
+
+                </li>
               </ul>
             </div>
           </div>

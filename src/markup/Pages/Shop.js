@@ -39,7 +39,7 @@ const Shop = (props) => {
   const queries = queryString.parse(queryurl);
   // let category = query.get("category");
   // let maincategory = query.get("maincategory");
-  let category = queries.category;
+  let category = queries.category || queries.brand;
   let maincategory = queries.maincategory;
   let searchFilter = props.location.searchFilter;
   console.log("bannerimagestate props", props.location.bannerimage);
@@ -55,27 +55,46 @@ const Shop = (props) => {
     let _filterOption = "";
     if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
       _filterOption = category != "" && category !== undefined ? category : maincategory;
-    } else {
-      _filterOption = query.get("category") != "" && query.get("category") !== undefined ? query.get("category") : query.get("maincategory");
-      localStorage.setItem("categorydes", props.location.categorydes);
-      localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category"));
-      let _categories = JSON.parse(localStorage.getItem("categories"));
-      console.log("paaru", _categories);
-      let _result = _categories
-        .filter((a) => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
-        .map((b) => {
-          return b;
-        });
-      if (_result.length > 1) {
-        _result = _result
-          .filter((b) => b.maincategory?.toUpperCase() == query.get("maincategory")?.toUpperCase())
-          .map((c) => {
-            return c;
+
+    }
+    else {
+      let _categories;
+      if (query.get("brand") == "" || query.get("brand") == undefined) {
+        _filterOption = query.get("category") != "" && query.get("category") !== undefined ? query.get("category") : query.get("maincategory");
+        localStorage.setItem("categorydes", props.location.categorydes);
+        localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category"));
+        _categories = JSON.parse(localStorage.getItem("categories"));
+        console.log("paaru", _categories);
+        let _result = _categories
+          .filter((a) => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
+          .map((b) => {
+            return b;
           });
+        if (_result.length > 1) {
+          _result = _result
+            .filter((b) => b.maincategory?.toUpperCase() == query.get("maincategory")?.toUpperCase())
+            .map((c) => {
+              return c;
+            });
+        }
+
+        localStorage.setItem("bannerurl", _result[0]?.banner_image);
+        localStorage.setItem("categorydes", _result[0]?.categorydes);
+      }
+      else {
+        _filterOption = JSON.parse(localStorage.getItem("brand"));
+        localStorage.setItem("categorydes", props.location.categorydes);
+        localStorage.setItem("queryurl", "brand=" + query.get("brand"));
+        _categories = JSON.parse(localStorage.getItem("brand"));
+        let _result = _categories
+          .filter((a) => a?.brand?.toUpperCase() == _filterOption?.toUpperCase())
+          .map((b) => {
+            return b;
+          });
+        localStorage.setItem("bannerurl", _result[0]?.banner_image);
+        localStorage.setItem("categorydes", _result[0]?.categorydes);
       }
 
-      localStorage.setItem("bannerurl", _result[0]?.banner_image);
-      localStorage.setItem("categorydes", _result[0]?.categorydes);
     }
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
@@ -85,15 +104,29 @@ const Shop = (props) => {
             getAllProductDetails();
             console.log(category, "=> all active  products");
           } else {
-            // all active category products
-            let selective = data
-              .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
-              .map((data) => {
-                return data;
-              });
-            setProducts(selective);
-            setFilter(selective);
-            console.log("all active category products");
+
+            if (query.get("brand") != "" && query.get("brand") != undefined) {
+              let selective = data
+                .filter((filter) => filter.p_brand?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
+                .map((data) => {
+                  return data;
+                });
+              setProducts(selective);
+              setFilter(selective);
+              console.log("all active category products");
+
+            }
+            else {
+              // all active category products
+              let selective = data
+                .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+                .map((data) => {
+                  return data;
+                });
+              setProducts(selective);
+              setFilter(selective);
+              console.log("all active category products");
+            }
           }
         } else if (maincategory && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
           // Main category products
