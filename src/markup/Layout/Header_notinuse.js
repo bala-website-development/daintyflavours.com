@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import config from "../../config.json";
 import cart from "./../../images/icons/cart.png";
+import user from "./../../images/icons/user.png";
 
 const Header = (props) => {
   const [toggleShow, setToggleShow] = useState(false);

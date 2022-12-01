@@ -2,7 +2,9 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 
 import { Link, useHistory } from "react-router-dom";
-
+import cart from "./../../images/icons/cart.png";
+import scart from "./../../images/icons/shopping-cart.png";
+import user from "./../../images/icons/user.png";
 import config from "../../config.json";
 
 const NavBarMenu = () => {
@@ -245,7 +247,8 @@ const NavBarMenu = () => {
 
             <div class="d-flex align-items-center">
               <Link class="text-reset me-3 text-primary" to={"/shop-cart"}>
-                <i class="fas fa-shopping-cart"></i>
+                <i class="fas fa-shopping-cart d-none"></i>
+                <img src={scart} className="iconsize1" />
                 <span class="badge rounded-pill badge-notification mx-1">
                   <span class="badge rounded-pill badge-notification bg-danger">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
                 </span>
@@ -256,7 +259,8 @@ const NavBarMenu = () => {
                   <>
                     <a>
                       <Link to={"/shop-login"}>
-                        <i className="ti-user"></i>
+                        <i className="ti-user d-none"></i>
+                        <img src={user} className="iconsize1" />
                         <span class="badge rounded-pill badge-notification">
                           <i class="fa-solid fa-circle-xmark text-danger"></i>
                         </span>

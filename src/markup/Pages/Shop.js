@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { Link, useHistory } from "react-router-dom";
-import Header from "./../Layout/Header";
 import Footer from "./../Layout/Footer";
 import config from "../../config.json";
 import bnr from "./../../images/banner/bnr1.jpg";
@@ -56,23 +55,27 @@ const Shop = (props) => {
     let _filterOption = "";
     if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
       _filterOption = category != "" && category !== undefined ? category : maincategory;
-    }
-    else {
+    } else {
       _filterOption = query.get("category") != "" && query.get("category") !== undefined ? query.get("category") : query.get("maincategory");
       localStorage.setItem("categorydes", props.location.categorydes);
       localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category"));
       let _categories = JSON.parse(localStorage.getItem("categories"));
       console.log("paaru", _categories);
       let _result = _categories
-        .filter(a => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
-        .map(b => { return b });
+        .filter((a) => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
+        .map((b) => {
+          return b;
+        });
       if (_result.length > 1) {
-        _result = _result.filter(b => b.maincategory?.toUpperCase() == query.get("maincategory")?.toUpperCase()).map(c => { return c });
+        _result = _result
+          .filter((b) => b.maincategory?.toUpperCase() == query.get("maincategory")?.toUpperCase())
+          .map((c) => {
+            return c;
+          });
       }
 
       localStorage.setItem("bannerurl", _result[0]?.banner_image);
       localStorage.setItem("categorydes", _result[0]?.categorydes);
-
     }
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
