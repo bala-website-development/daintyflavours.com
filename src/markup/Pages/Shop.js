@@ -53,9 +53,27 @@ const Shop = (props) => {
     //console.log("bannerimagestate", bannerimagestate);
     setLoading((loading) => !loading);
 
-    //console.log("all querry", category, maincategory, searchFilter);
+    let _filterOption = "";
+    if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
+      _filterOption = category != "" && category !== undefined ? category : maincategory;
+    }
+    else {
+      _filterOption = query.get("category") != "" && query.get("category") !== undefined ? query.get("category") : query.get("maincategory");
+      localStorage.setItem("categorydes", props.location.categorydes);
+      localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category"));
+      let _categories = JSON.parse(localStorage.getItem("categories"));
+      console.log("paaru", _categories);
+      let _result = _categories
+        .filter(a => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
+        .map(b => { return b });
+      if (_result.length > 1) {
+        _result = _result.filter(b => b.maincategory?.toUpperCase() == query.get("maincategory")?.toUpperCase()).map(c => { return c });
+      }
 
-    let _filterOption = category != "" && category !== undefined ? category : maincategory;
+      localStorage.setItem("bannerurl", _result[0]?.banner_image);
+      localStorage.setItem("categorydes", _result[0]?.categorydes);
+
+    }
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
@@ -191,7 +209,7 @@ const Shop = (props) => {
     getCategories();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, bannerimagestate]);
+  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);
@@ -449,7 +467,7 @@ const Shop = (props) => {
 
       <div className="page-content bg-white">
         {/* <div className="dlab-bnr-inr overlay-black-light divbg" style={bannerimageurl !== undefined || bannerimageurl !== "null" ? { backgroundImage: "url(" + banner + ")" } : { backgroundImage: "url(" + config.bannerimg1 + ")" }}> */}
-        <div className="dlab-bnr-inr overlay-black-light divbg" style={props.location.bannerimage ? { backgroundImage: "url(" + props.location.bannerimage + ")" } : { backgroundImage: "url(" + localStorage.getItem("bannerurl") + +")" }}>
+        <div className="dlab-bnr-inr overlay-black-light divbg" style={{ backgroundImage: "url(" + localStorage.getItem("bannerurl") + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">{category != undefined ? (category == "all" ? "All Products" : category) : "Shop"}</h1>
