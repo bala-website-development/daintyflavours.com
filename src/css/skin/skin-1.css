@@ -316,11 +316,15 @@ blockquote,
 .site-footer .footer-bottom-in {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-.bg-primary,
-.footer-bottom  {
-  /* background-color: var(--color-primary) !important; */
-  background-color: white !important;
+.bg-primary
+ {
+  background-color: var(--color-primary) !important;
+  /* background-color: white !important; */
   
+}
+
+.footer-bottom {
+background-color: white !important;
 }
 
 /* Text Selection */

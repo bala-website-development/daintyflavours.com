@@ -348,7 +348,7 @@ select.form-control:not([size]):not([multiple]) {
   overflow: hidden;
 }
 .shopproducts .btn {
-  padding: 10px;
+  /* padding: 10px; */
   margin-top: 2px;
 }
 @media only screen and (max-width: 479px) {
@@ -4945,7 +4945,7 @@ blockquote cite {
   }
   .dlab-bnr-inr.dlab-bnr-inr-sm,
   .dlab-bnr-inr {
-    height: 350px;
+    height: auto;
   }
 }
 .navicon {
@@ -10381,6 +10381,7 @@ ul[class*="list-"] {
 .breadcrumb-row {
   background: #f9f9f9;
   padding: 20px 0;
+  
 }
 .breadcrumb-row ul {
   margin: 0;

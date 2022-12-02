@@ -7,11 +7,13 @@ import img from "./../../images/banner/bnr3.jpg";
 import loadingimg from "./../../images/load.gif";
 import { Modal } from "react-bootstrap";
 const Shopcart = () => {
-  const [cartDetails, setCartDetails] = useState([]);
+  const [userLoggedin, setUserLoggedin] = useState(localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null ? true : false);
   const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
+  const [cartDetails, setCartDetails] = useState(userLoggedin ? [] : lsDaintyCart);
+
   const history = useHistory();
   const [cartUpdated, setCartUpdated] = useState(false);
-  const [userLoggedin, setUserLoggedin] = useState(localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null ? true : false);
+
   const [subTotal, setSubTotal] = useState(0);
   const [productWeight, setProductWeight] = useState(0);
   const [networkError, setNetworkError] = useState("");
@@ -41,7 +43,38 @@ const Shopcart = () => {
         console.log(networkError);
       });
   };
+  const updateCartQuantityfromls = (cartid, quantity) => {
+    console.log("lsDaintyCartforquantity update", lsDaintyCart);
+    //need to update the quantity and total in the cart item from this lsDaintyCart and set and reftest cart. q_total = q_quatity* q_net_price.
+    //setlsDaintyCart(uppdatedJson)
+    for (var i = 0; i < lsDaintyCart.length; i++) {
+      if (lsDaintyCart[i].id == cartid) {
+        lsDaintyCart[i].p_net_product_price = parseInt(lsDaintyCart[i].p_price) * lsDaintyCart[i].quantity;
+        lsDaintyCart[i].p_quantity = quantity;
+        // lsDaintyCart[i].p_price=(parseInt(lsDaintyCart[i].p_price)*quantity).toString();
+      }
+    }
+    console.log("lsDaintyCartforupdatequatity", lsDaintyCart);
+    setlsDaintyCart(lsDaintyCart);
+    localStorage.removeItem("daintycart");
+    localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart));
+    console.log("lsDaintyCartforupdatequatitynew", JSON.stringify(lsDaintyCart));
+    setCartUpdated((cartUpdated) => !cartUpdated);
+  };
 
+  const deleteCartfromls = (cartid) => {
+    console.log("lsDaintyCartforremove", lsDaintyCart);
+    //need to delete the cart item from this lsDaintyCart and set and reftest cart
+    //setlsDaintyCart(uppdatedJson)
+    for (var i = 0; i < lsDaintyCart.length; i++) {
+      if (lsDaintyCart[i].id == cartid) lsDaintyCart.splice(i, 1);
+    }
+    setlsDaintyCart(lsDaintyCart);
+    localStorage.removeItem("daintycart");
+    localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart));
+    console.log("lsDaintyCartforremovenew", JSON.stringify(lsDaintyCart));
+    setCartUpdated((cartUpdated) => !cartUpdated);
+  };
   const deleteCart = (cartid) => {
     console.log("cartid", cartid);
     fetch(config.service_url + "deleteCart", {
@@ -68,6 +101,7 @@ const Shopcart = () => {
     // console.log("query_cartDetails", data1);
     setSubTotal(
       data &&
+        data.length > 0 &&
         data
           .map((total) => {
             //return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
@@ -77,6 +111,7 @@ const Shopcart = () => {
     );
     setProductWeight(
       data &&
+        data.length > 0 &&
         data
           .map((wt) => {
             return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
@@ -133,7 +168,6 @@ const Shopcart = () => {
           <div className="container">
             <div className="dlab-bnr-inr-entry">
               <h1 className="text-white">Cart</h1>
-
               <div className="breadcrumb-row">
                 <ul className="list-inline">
                   <li>
@@ -183,7 +217,7 @@ const Shopcart = () => {
                         <div className="w-25">
                           <b>Net Amount</b>
                         </div>
-                        <div className="w-10"></div>
+                        <div className="w-10">Remove</div>
                       </div>
                     </thead>
                     <tbody>
@@ -216,7 +250,18 @@ const Shopcart = () => {
                                     <option value={10}>10</option>
                                   </select>
                                 ) : (
-                                  1
+                                  <select id={key} className="drpquantity" onChange={(e) => updateCartQuantityfromls(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                    <option value={5}>5</option>
+                                    <option value={6}>6</option>
+                                    <option value={7}>7</option>
+                                    <option value={8}>8</option>
+                                    <option value={9}>9</option>
+                                    <option value={10}>10</option>
+                                  </select>
                                 )}
                               </div>
                               <div className="w-25 text-nowrap">
@@ -231,11 +276,22 @@ const Shopcart = () => {
                                 {" "}
                                 <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)}
                               </div>
-                              {userLoggedin && (
+                              {userLoggedin ? (
                                 <div className="w-10">
                                   <Link
                                     onClick={(e) => {
                                       deleteCart([cart.id]);
+                                    }}
+                                    data-dismiss="alert"
+                                    aria-label="close"
+                                    className="ti-close"
+                                  ></Link>
+                                </div>
+                              ) : (
+                                <div className="w-10">
+                                  <Link
+                                    onClick={(e) => {
+                                      deleteCartfromls([cart.id]);
                                     }}
                                     data-dismiss="alert"
                                     aria-label="close"
@@ -270,7 +326,7 @@ const Shopcart = () => {
                       <tr>
                         <td>Order Subtotal(with Tax)</td>
                         <td>
-                          <i class="fa fa-inr"></i> {subTotal}
+                          <i class="fa fa-inr"></i> {Number(subTotal).toFixed(2)}
                         </td>
                       </tr>
                       <tr>
@@ -299,7 +355,7 @@ const Shopcart = () => {
                       <tr className="bg-primary-light text-primary">
                         <td>Total</td>
                         <td>
-                          <i class="fa fa-inr"></i> {subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))}
+                          <i class="fa fa-inr"></i> {Number(subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000.0) * config.shippingcost))).toFixed(2)}
                         </td>
                       </tr>
                     </tbody>

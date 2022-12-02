@@ -315,14 +315,21 @@ const Shopproduct = (props) => {
                       <i className="icon-dot c-square"></i>
                     </div>
                     <div className="py-2">
+                      <div>{productDtl?.p_brand == "" || productDtl?.p_brand == undefined ? "" : " Brand Name - " + productDtl?.p_brand}</div>
+                    </div>
+                    <div className="py-2">
                       <div> Expiry Date - {productDtl.p_expirydate === "" || productDtl.p_expirydate === undefined || productDtl.p_expirydate === "0001-01-01" ? "N/A" : productDtl.p_expirydate}</div>
                     </div>
                     <div className="py-2">
                       <div> Net Weight - {productDtl.p_productweight === "" || productDtl.p_productweight === undefined ? "N/A" : productDtl.p_productweight + " gms"}</div>
                     </div>
-                    <div className="py-2">
+                    <div className="py-2 d-none">
                       <div> Available Quantity - {productDtl.p_quantity}</div>
                     </div>
+                    <div className="py-2 ">
+                      <div> Return Accepted - {productDtl.p_returnaccepted || "" || undefined ? "Yes" : "No"}</div>
+                    </div>
+
                     {productDtl.p_quantity > 0 ? (
                       <button disabled={loading} className="btn btnhover p-1" type="submit">
                         <div className="d-flex align-items-center justify-content-between">
@@ -490,10 +497,10 @@ const Shopproduct = (props) => {
             </div>
           </div>
         </div>
-      </div>
+      </div >
 
       <Footer />
-    </div>
+    </div >
   );
 };
 

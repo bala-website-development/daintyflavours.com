@@ -137,7 +137,7 @@ const Shopchekout = () => {
       deliverydate: "",
       orderdate: new Date(),
       shipping: productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost),
-      grosstotal: subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)),
+      grosstotal: Number(subTotal).toFixed(2) + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)),
       userid: userid_,
       usernotes: notes,
       billingaddress: userAddress[0],
@@ -149,7 +149,7 @@ const Shopchekout = () => {
         state: data.user_state === "" ? userAddress[0].state : data.user_state,
         pincode: data.user_pincode === "" ? userAddress[0].pincode : data.user_pincode,
         phonenumber: data.user_phonenumber === "" ? userAddress[0].phonenumber : data.user_phonenumber,
-        gstnumber: data.user_gstnumber === "" ? userAddress[0].gstnumber : data.user_gstnumber,
+        gstnumber: data.user_gstnumber === "" || undefined ? 0 : data.user_gstnumber,
       },
       shippingaddress: {
         address: data.address === "" ? userAddress[0].address : data.address,
@@ -176,7 +176,7 @@ const Shopchekout = () => {
             // call payemnt
             history.push({
               pathname: "/payment",
-              state: { amount: data.data.grosstotal, orderid: data.data.orderid, orderstatus: data.data.orderstatus, paymentstatus: data.data.paymentstatus, contactno: data.data.billingaddress.phonenumber, name: data.data.billingaddress.name, email: data.data.billingaddress.email, userLoggedin: userloggedin },
+              state: { amount: Number(data.data.grosstotal).toFixed(2), orderid: data.data.orderid, orderstatus: data.data.orderstatus, paymentstatus: data.data.paymentstatus, contactno: data.data.billingaddress.phonenumber, name: data.data.billingaddress.name, email: data.data.billingaddress.email, userLoggedin: userloggedin },
             });
             setStatus(true);
           } else if (data?.status === 499) {
@@ -305,7 +305,7 @@ const Shopchekout = () => {
                         </div>
                         <div className="form-group col-md-6">
                           <label>GST Number (Optional)</label>
-                          <input name="user_gstnumber" required type="text" className="form-control" placeholder="GST number" {...register("user_gstnumber", { required: false })} />
+                          <input name="user_gstnumber" type="text" className="form-control" placeholder="GST number" {...register("user_gstnumber", { required: false })} />
                         </div>
                       </div>
                       <p>If Billing address is different, please updated in your profile</p>
@@ -387,7 +387,7 @@ const Shopchekout = () => {
                           <tr>
                             <td>Order Subtotal</td>
                             <td className="product-price">
-                              <i class="fa fa-inr"></i> {subTotal}
+                              <i class="fa fa-inr"></i> {Number(subTotal).toFixed(2)}
                             </td>
                           </tr>
                           <tr>
@@ -419,13 +419,17 @@ const Shopchekout = () => {
                           <tr className="bg-primary text-light">
                             <td>Total</td>
                             <td>
-                              <i class="fa fa-inr"></i> {subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))}
+                              <i class="fa fa-inr"></i> {Number(subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))).toFixed(2)}
                             </td>
                           </tr>
                         </tbody>
                       </table>
                       <h4>Payment Method - Online</h4>
-
+                      <div>
+                        <input type="checkbox" id="terms" name="terms" required value="terms"></input>
+                        <label for="terms">Check here to indicate that you have read and agreed to the terms and conditions for the order.</label>
+                        <br />
+                      </div>
                       <div className="d-none">
                         <div className="form-group">
                           <input type="text" className="form-control" placeholder="Name on Card" />

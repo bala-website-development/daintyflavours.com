@@ -27,6 +27,7 @@ import work_pic3 from "./../../images/our-work/pic3.jpg";
 import pic3 from "./../../images/about/pic3.jpg";
 import A_Newsletter from "./A_Newsletter";
 import Recent_Product from "./../Element/Recent_Products";
+import Sale_Product from "./../Element/Sale_Products";
 import Testimonial from "./../Element/Testimonial";
 import Instagram from "./../Element/InstagramFeed";
 
@@ -106,8 +107,9 @@ const Index1 = () => {
             <div className="container ">
               <div className="faq-area1">
                 <div className="recentproduct">
-                  <Featured_Products></Featured_Products>
-                  <Recent_Product></Recent_Product>
+                  <Featured_Products />
+                  <Sale_Product />
+                  <Recent_Product />
                 </div>
 
                 <div className="col-lg-12 m-b30 d-none">

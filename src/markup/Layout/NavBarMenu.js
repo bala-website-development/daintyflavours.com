@@ -2,7 +2,9 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 
 import { Link, useHistory } from "react-router-dom";
-
+import cart from "./../../images/icons/cart.png";
+import scart from "./../../images/icons/shopping-cart.png";
+import user from "./../../images/icons/user.png";
 import config from "../../config.json";
 
 const NavBarMenu = () => {
@@ -80,7 +82,7 @@ const NavBarMenu = () => {
       });
   };
 
-  const getCategories = async () => {
+  const getSubCategories = async () => {
     console.log("entered");
     await fetch(config.service_url + "getuserscategory")
       .then((response) => response.json())
@@ -92,6 +94,46 @@ const NavBarMenu = () => {
           localStorage.setItem("categories", JSON.stringify(_filter));
           setMenuCategory(_filter);
           localStorage.setItem("cartUpdated", true);
+        } else if (data.status === 400) {
+          setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
+  const getCategories = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getuserssubcategory")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("subcategory", data);
+          let _filter = data.data.filter((_d) => _d.type === "product");
+          _filter.push({ Expiration: moment().add(1, "d") });
+          localStorage.setItem("subcategories", JSON.stringify(_filter));
+          setMenuCategory(_filter);
+        } else if (data.status === 400) {
+          setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
+  const getBrands = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getusersbrand")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("brands", data);
+          let _filter = data.data.filter((_d) => _d.type === "product");
+          _filter.push({ Expiration: moment().add(1, "d") });
+          localStorage.setItem("brand", JSON.stringify(_filter));
+          setMenuCategory(_filter);
         } else if (data.status === 400) {
           setMenuMainCategory([]);
         }
@@ -141,7 +183,7 @@ const NavBarMenu = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) {});
+        .catch(function (error) { });
     };
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
@@ -162,6 +204,8 @@ const NavBarMenu = () => {
 
     if (localStorage.getItem("categories") === undefined || localStorage.getItem("categories") === null) {
       getCategories();
+      getSubCategories();
+      getBrands();
       console.log("fromservice categories");
     } else {
       if (menuCategory === undefined || menuCategory === null || menuCategory?.length === 0) {
@@ -203,7 +247,8 @@ const NavBarMenu = () => {
 
             <div class="d-flex align-items-center">
               <Link class="text-reset me-3 text-primary" to={"/shop-cart"}>
-                <i class="fas fa-shopping-cart"></i>
+                <i class="fas fa-shopping-cart d-none"></i>
+                <img src={scart} className="iconsize1" />
                 <span class="badge rounded-pill badge-notification mx-1">
                   <span class="badge rounded-pill badge-notification bg-danger">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
                 </span>
@@ -214,7 +259,8 @@ const NavBarMenu = () => {
                   <>
                     <a>
                       <Link to={"/shop-login"}>
-                        <i className="ti-user"></i>
+                        <i className="ti-user d-none"></i>
+                        <img src={user} className="iconsize1" />
                         <span class="badge rounded-pill badge-notification">
                           <i class="fa-solid fa-circle-xmark text-danger"></i>
                         </span>
@@ -323,16 +369,64 @@ const NavBarMenu = () => {
                                     {/* <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link> */}
-                                    <Link className="dropdown-item text-uppercase" onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop", search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category, bannerimage: mc?.banner_image }}>
+                                    <Link
+                                      className="dropdown-item text-uppercase"
+                                      onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))}
+                                      to={{
+                                        pathname: "/shop",
+                                        search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category,
+                                        bannerimage: mc?.banner_image,
+                                      }}
+                                    >
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
                                   </li>
                                 ))}
+
                           </ul>
                         </li>
                       )
                   )
                 )}
+
+                <li>
+
+                  <li class="nav-item dropdown">
+                    <a class="dropdown-toggle align-items-center hidden-arrow nav-link text-dark" href="#" id={"navbarDropdownMenuAvatar" + "brand"} role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                      <span className="small">
+                        BRAND <i className="fa fa-angle-down"></i>
+                      </span>
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby={"navbarDropdownMenuAvatar" + "BRAND"}>
+                      {JSON.parse(localStorage.getItem("brand"))?.filter(b => b).map((brand) =>
+                        brand !== null && (
+
+                          <li className="small">
+
+                            <Link
+                              className="dropdown-item text-uppercase"
+                              onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", brand?.banner_image), localStorage.setItem("categorydes", brand?.categorydes == undefined ? "" : brand?.categorydes), localStorage.setItem("queryurl", "brand=" + brand.brand))}
+                              to={{
+                                pathname: "/shop",
+                                search: "?brand=" + brand.brand,
+                                bannerimage: brand?.banner_image,
+                              }}
+                            >
+                              <span className="text-nowrap">{brand?.brand}</span>
+                            </Link>
+                          </li>
+                        )
+
+                      )}
+                    </ul>
+
+
+
+                  </li>
+
+
+                </li>
               </ul>
             </div>
           </div>
