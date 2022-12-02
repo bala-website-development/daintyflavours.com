@@ -120,7 +120,7 @@ const New_Products = () => {
             !loading &&
             products.map((product) => (
               <div className="col-lg-3">
-                <div className="item-box shop-item style text-white my-2 shadow rounded">
+                <div className="item-box shop-item mr-1 ml-1 style text-white my-2 shadow rounded">
                   <div className="">
                     <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                       {/* <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} /> */}
@@ -128,40 +128,7 @@ const New_Products = () => {
                       <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
                     </Link>
                   </div>
-                  <div className="dlab-info d-none">
-                    <h4 className="title ">
-                      <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                        <div>
-                          {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
-                            <>
-                              <div className="price text-light">
-                                <span style={{ "text-decoration": "line-through" }}>
-                                  {" "}
-                                  <span className="text-light">
-                                    <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
-                                  </span>
-                                </span>
-                                {"   |  "}
-                                <span className="text-light">
-                                  {"   "} <i class="fa fa-inr"></i> {product.p_price}
-                                </span>{" "}
-                                <span className="px-1 sale bg-primary text-light">Sale</span>
-                              </div>
-                            </>
-                          ) : (
-                            <div className="price text-light ">
-                              <span className="text-light ">
-                                <i class="fa fa-inr"> {"   "} </i>
-                                {"   "}
-                                {product.p_price}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-                        <div>{product.p_name}</div>
-                      </Link>
-                    </h4>
-                  </div>
+
                   <div className="item-info text-center">
                     <span className="">
                       {" "}
