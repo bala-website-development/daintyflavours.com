@@ -94,11 +94,11 @@ const Featured_Product = (props) => {
             products && products.length > 0 ? (
               products.map((fProduct, index) =>
                 index === 0 || index === 7 ? (
-                  <Link
+                  <a
                     data-role="tile"
                     data-size="xlarge"
                     className="w-100"
-                    to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
+                    href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
                     style={{
                       backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                       backgroundSize: "100%",
@@ -106,20 +106,20 @@ const Featured_Product = (props) => {
                       overflow: "hidden",
                     }}
                   >
-                    <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
+                    <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
                       <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                         <span>
                           {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
                         </span>
                       </div>
-                    </Link>
-                  </Link>
+                    </a>
+                  </a>
                 ) : (
-                  <Link
+                  <a
                     data-role="tile"
                     data-size="large"
                     className="w-100"
-                    to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
+                    href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
                     style={{
                       backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                       backgroundSize: "100%",
@@ -127,20 +127,22 @@ const Featured_Product = (props) => {
                       overflow: "hidden",
                     }}
                   >
-                    <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
+                    <a href={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
                       <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                         <span>
                           {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
                         </span>
                       </div>
-                    </Link>
-                  </Link>
+                    </a>
+                  </a>
                 )
               )
             ) : (
               <span className="container row w-100">Loading...</span>
             )
-          ) : products && products.length > 0 ? (
+          ) : // for mobile view
+
+          products && products.length > 0 ? (
             products.map((fProduct, index) =>
               index === 0 || index === 7 ? (
                 <div
@@ -154,13 +156,13 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
+                  <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
                     <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                       <span>
                         {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
                       </span>
                     </div>
-                  </Link>
+                  </a>
                 </div>
               ) : (
                 <div
@@ -174,13 +176,13 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
+                  <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
                     <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                       <span>
                         {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
                       </span>
                     </div>
-                  </Link>
+                  </a>
                 </div>
               )
             )
