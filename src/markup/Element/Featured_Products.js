@@ -90,14 +90,63 @@ const Featured_Product = (props) => {
       {/* in use */}
       <div id="tileview text-center">
         <div class="tiles-grid d-flex-row justify-content-between w-100">
-          {products && products.length > 0 ? (
+          {windowSize.innerWidth > 500 ? (
+            products && products.length > 0 ? (
+              products.map((fProduct, index) =>
+                index === 0 || index === 7 ? (
+                  <Link
+                    data-role="tile"
+                    data-size="xlarge"
+                    className="w-100"
+                    to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
+                    style={{
+                      backgroundImage: "url(" + fProduct.thumbnail_image + ")",
+                      backgroundSize: "100%",
+                      backgroundSize: "cover",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
+                      <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                        <span>
+                          {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
+                        </span>
+                      </div>
+                    </Link>
+                  </Link>
+                ) : (
+                  <Link
+                    data-role="tile"
+                    data-size="large"
+                    className="w-100"
+                    to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
+                    style={{
+                      backgroundImage: "url(" + fProduct.thumbnail_image + ")",
+                      backgroundSize: "100%",
+                      backgroundSize: "cover",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
+                      <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                        <span>
+                          {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
+                        </span>
+                      </div>
+                    </Link>
+                  </Link>
+                )
+              )
+            ) : (
+              <span className="container row w-100">Loading...</span>
+            )
+          ) : products && products.length > 0 ? (
             products.map((fProduct, index) =>
               index === 0 || index === 7 ? (
-                <Link
+                <div
                   data-role="tile"
                   data-size="xlarge"
                   className="w-100"
-                  to={windowSize.innerWidth > 600 ? "/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image : "#"}
                   style={{
                     backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                     backgroundSize: "100%",
@@ -112,13 +161,12 @@ const Featured_Product = (props) => {
                       </span>
                     </div>
                   </Link>
-                </Link>
+                </div>
               ) : (
-                <Link
+                <div
                   data-role="tile"
                   data-size="large"
                   className="w-100"
-                  to={windowSize.innerWidth > 600 ? "/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image : "#"}
                   style={{
                     backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                     backgroundSize: "100%",
@@ -126,7 +174,6 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  {/* <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className=""> */}
                   <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
                     <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                       <span>
@@ -134,7 +181,7 @@ const Featured_Product = (props) => {
                       </span>
                     </div>
                   </Link>
-                </Link>
+                </div>
               )
             )
           ) : (

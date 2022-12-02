@@ -592,12 +592,12 @@ const Shop = (props) => {
                               </Link>{" "}
                             </a>
                             <a class="dropdown-item" href="#">
-                              <Link to={"#"} onClick={(e) => sortAsc(products, "p_price")} className="px-3  btn btn-secondary btn-sm btnhover ">
+                              <Link to={"#"} onClick={(e) => sortDsc(products, "p_price")} className="px-3  btn btn-secondary btn-sm btnhover ">
                                 Price: Low to High
                               </Link>{" "}
                             </a>
                             <a class="dropdown-item" href="#">
-                              <Link to={"#"} onClick={(e) => sortDsc(products, "p_price")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                              <Link to={"#"} onClick={(e) => sortAsc(products, "p_price")} className="px-3 btn btn-secondary btn-sm btnhover ">
                                 Price: High to Low
                               </Link>{" "}
                             </a>
@@ -626,7 +626,7 @@ const Shop = (props) => {
                       {products && products.length > 0 ? (
                         products.map((product) => (
                           <div className="col-lg-3">
-                            <div className="item-box shop-item style text-white shadow rounded">
+                            <div className="item-box shop-item mr-1 style text-white shadow rounded">
                               <div className="item-img1">
                                 <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                                   <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
@@ -686,7 +686,9 @@ const Shop = (props) => {
                       ) : (
                         <div className="p-2">
                           {" "}
-                          No Records to display{" "}
+                          No Products found or Prodcutis are being loaded. Please wait for few seconds
+                          <br />
+                          <img className="p-2 w-5" src={loadingimg} height="10"></img>
                           <div>
                             {" "}
                             <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
@@ -697,7 +699,7 @@ const Shop = (props) => {
                       )}
                       <div class="position-relative d-none">
                         <div className="p-2 start-50">
-                          <div className="p-2">Fetching products details, please wait....</div>
+                          <div className="p-2">Fetching products details, please wait for few seconds.</div>
                           <img className="p-2 w-5" src={loadingimg} height="10"></img>
                         </div>
                       </div>
