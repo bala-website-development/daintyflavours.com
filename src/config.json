@@ -1,7 +1,7 @@
 {
   "domain": "DAINTYFLAVORS",
   "storage": "DAINTYFLAVORS",
-  "service_url": "https://asia-south1-tuc-shopping-dev.cloudfunctions.net/daintyflavours_api/api/",
+  "service_url": "https://asia-south1-daintyflavours-api.cloudfunctions.net/daintyflavours_api/api/",
   "admin_url": "https://www.theuniquecreations.com/login/",
   "email_service_url": "https://asia-south1-tucfbclouddb.cloudfunctions.net/tuc_shop_node_api/email/",
   "============================": "==========================",
@@ -73,6 +73,7 @@
   "recentproduct": 9,
   "featuredproduct": 10,
   "newarrivalsproduct": 8,
+  "saleproduct": 8,
   "freeshippingcost": 3000,
   "freeshippingmessage": "Free shipping for the order over, ",
   "shippingmessage": "Delivery Estimate with in India:  2 - 4 business days",

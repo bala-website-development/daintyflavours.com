@@ -211,9 +211,9 @@ const New_Products = () => {
         </div>
       </div>
       <div className="text-center mt-2">
-        <Link className="p-2 px-3 btn btn-md btnhover shadow m-t30" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop?maincategory=all&category=all" }}>
+        <a className="p-2 px-3 btn btn-md btnhover shadow m-t10" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} href={"/shop?maincategory=all&category=all"}>
           Shop all <i className="fa fa-angle-right m-r10"></i>
-        </Link>
+        </a>
       </div>
     </div>
   );

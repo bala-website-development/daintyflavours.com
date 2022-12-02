@@ -11,6 +11,7 @@ const Featured_Product = (props) => {
   const [products, setProducts] = useState([]);
   const [galleryimage, setGalleryImage] = useState([]);
   const [networkError, setNetworkError] = useState("");
+  const [windowSize, setWindowSize] = useState(getWindowSize());
 
   const getHomePageCategoryfromService = async () => {
     console.log("entered");
@@ -31,6 +32,12 @@ const Featured_Product = (props) => {
         // console.log(networkError);
       });
   };
+
+  function getWindowSize() {
+    const { innerWidth, innerHeight } = window;
+
+    return { innerWidth };
+  }
   const getHomePageCategoryfromLocalstorage = async () => {
     console.log("recentpost", products);
     if (JSON.parse(localStorage.getItem("categories")) !== null) {
@@ -51,6 +58,7 @@ const Featured_Product = (props) => {
 
   useEffect(() => {
     getHomePageCategoryfromService();
+    console.log("windowSize", windowSize.innerWidth);
     // getHomePageCategoryfromLocalstorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -89,7 +97,7 @@ const Featured_Product = (props) => {
                   data-role="tile"
                   data-size="xlarge"
                   className="w-100"
-                  to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
+                  to={windowSize.innerWidth > 600 ? "/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image : "#"}
                   style={{
                     backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                     backgroundSize: "100%",
@@ -97,20 +105,20 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <div to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
+                  <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
                     <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                       <span>
                         {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
                       </span>
                     </div>
-                  </div>
+                  </Link>
                 </Link>
               ) : (
                 <Link
                   data-role="tile"
                   data-size="large"
                   className="w-100"
-                  to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
+                  to={windowSize.innerWidth > 600 ? "/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image : "#"}
                   style={{
                     backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                     backgroundSize: "100%",
@@ -119,13 +127,13 @@ const Featured_Product = (props) => {
                   }}
                 >
                   {/* <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className=""> */}
-                  <div to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
+                  <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
                     <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                       <span>
                         {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
                       </span>
                     </div>
-                  </div>
+                  </Link>
                 </Link>
               )
             )
@@ -135,94 +143,7 @@ const Featured_Product = (props) => {
         </div>
       </div>
       {/* not in use */}
-      <div className="row d-none">
-        {products.length > 0 &&
-          products.map((product) => (
-            <div className="col-lg-3">
-              <div className="item-box shop-item style text-white my-2">
-                <div className="">
-                  <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} />
-                </div>
-                <div className="dlab-info d-none">
-                  <h4 className="title ">
-                    <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                      <div>
-                        {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
-                          <>
-                            <div className="price text-light">
-                              <span style={{ "text-decoration": "line-through" }}>
-                                {" "}
-                                <span className="text-light pricefont">
-                                  <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
-                                </span>
-                              </span>
-                              {"   |  "}
-                              <span className="text-light pricefont">
-                                {"   "} <i class="fa fa-inr"></i> {product.p_price}
-                              </span>{" "}
-                              <span className="px-1 sale bg-primary text-light">Sale</span>
-                            </div>
-                          </>
-                        ) : (
-                          <div className="price text-light ">
-                            <span className="text-light ">
-                              <i class="fa fa-inr"> {"   "} </i>
-                              {"   "}
-                              {product.p_price}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                      <div>{product.p_name}</div>
-                    </Link>
-                  </h4>
-                </div>
-                <div className="item-info text-center">
-                  <span className="">
-                    {" "}
-                    <div className="cart-btn">
-                      {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
-                        <>
-                          <div className="text-dark">
-                            <span style={{ "text-decoration": "line-through" }}>
-                              {" "}
-                              <span className="text-dark pricefont">
-                                <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
-                              </span>
-                            </span>
-                            {"   |  "}
-                            <span className="text-dark pricefont">
-                              {"   "} <i class="fa fa-inr "></i> {product.p_price}
-                            </span>{" "}
-                            <span className="px-1 sale bg-primary text-light d-none">Sale</span>
-                          </div>
-                        </>
-                      ) : (
-                        <div className=" text-dark ">
-                          <span className="text-dark ">
-                            <i class="fa fa-inr"> {"   "} </i>
-                            {"   "}
-                            {product.p_price}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </span>
 
-                  <div>
-                    {" "}
-                    <Link className="text-dark" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                      {" "}
-                      <div>
-                        <b className="text-primary">{product.p_name}</b>
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-      </div>
       <br />
       <br />
       <div className="text-center mt-2 d-none">
