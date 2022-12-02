@@ -607,11 +607,11 @@ table {
   float: none;
 }
 ::-moz-selection {
-  background: #3396d1;
+  background: #b43b8d;
   color: #fff;
 }
 ::selection {
-  background: #3396d1;
+  background: #b43b8d;
   color: #fff;
 }
 .op {
@@ -2914,7 +2914,7 @@ input[type="radio"] + label {
 }
 input[type="checkbox"] + label:hover:before,
 input[type="radio"] + label:hover:before {
-  border-color: #3396d1;
+  border-color: #b43b8d;
 }
 input[type="checkbox"] + label:before,
 input[type="radio"] + label:before {
@@ -2971,7 +2971,7 @@ input[type="radio"] + label:before {
   content: "";
 }
 input[type="radio"]:checked + label:before {
-  border-color: #3396d1;
+  border-color: #b43b8d;
   border-width: 5px;
 }
 .form-inline .checkbox input[type="checkbox"],
@@ -3073,7 +3073,7 @@ input[type="radio"]:checked + label:before {
   color: #c8c8c8;
 }
 .rating-container .rating-stars {
-  color: #3396d1;
+  color: #b43b8d;
 }
 /*validation symbol*/
 
@@ -5625,7 +5625,7 @@ blockquote cite {
 }
 .pagination .page-numbers.current,
 .pagination a.page-numbers:hover {
-  background: #3396d1;
+  background: #b43b8d;
   color: #fff;
 }
 .pagination i {
@@ -5640,7 +5640,7 @@ blockquote cite {
 .nav-links .nav-previous a,
 .nav-links .nav-next a {
   display: inline-block;
-  color: #3396d1;
+  color: #b43b8d;
   font-weight: 600;
   margin-bottom: 20px;
   outline: none !important;
@@ -6475,7 +6475,7 @@ ol.comment-list li.comment .comment-respond .comment-form p {
   color: #333;
 }
 .widget_rss ul .rss-date {
-  color: #3396d1;
+  color: #b43b8d;
 }
 .widget_rss ul .rssSummary {
   padding: 5px 0;

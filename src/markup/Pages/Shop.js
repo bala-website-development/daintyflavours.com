@@ -13,6 +13,7 @@ const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
   const queryurl = localStorage.getItem("queryurl");
   const [products, setProducts] = useState([]);
+  const [allproducts, setAllProducts] = useState([]);
   const [networkError, setNetworkError] = useState("");
   const [smShow, setSmShow] = useState(false);
   const [message, setMessage] = useState("");
@@ -148,6 +149,7 @@ const Shop = (props) => {
             .map((data) => {
               return data;
             });
+
           setProducts(selective);
           setFilter(selective);
         } else {
@@ -157,6 +159,7 @@ const Shop = (props) => {
             .map((data) => {
               return data;
             });
+
           setProducts(active);
           setFilter(active);
           //loopWithSlice(0, postsPerPage);
@@ -183,6 +186,7 @@ const Shop = (props) => {
             return data;
           });
         setProducts(active);
+        setAllProducts(data);
         setFilter(active);
         const slicedPosts = active.slice(0, postsPerPage);
         arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
@@ -237,6 +241,7 @@ const Shop = (props) => {
     const queries = queryString.parse(props.location.search);
     getProductDetails();
     getCategories();
+    setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category]);
@@ -500,7 +505,7 @@ const Shop = (props) => {
         <div className="dlab-bnr-inr overlay-black-light divbg" style={{ backgroundImage: "url(" + localStorage.getItem("bannerurl") + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">{category != undefined ? (category == "all" ? "All Products" : category) : "Shop"}</h1>
+              <h1 className="text-white">{category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop"}</h1>
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">
@@ -622,102 +627,117 @@ const Shop = (props) => {
                 </div>
                 <div className="col-lg-12 shopproducts">
                   <div>
+                    {!loading && (
+                      <div className="p-2">
+                        {products.length + "/" + allproducts.length} Products found.{" "}
+                        {end <= filter.length + postsPerPage && (
+                          <a href="#" className="p-2 bold text-primary" onClick={handleShowMorePosts}>
+                            <b> Load more</b>
+                          </a>
+                        )}
+                      </div>
+                    )}
                     <div className="row m-1 ">
-                      {products && products.length > 0 ? (
-                        products.map((product) => (
-                          <div className="col-lg-3">
-                            <div className="item-box shop-item mr-1 style text-white shadow rounded">
-                              <div className="item-img1">
-                                <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                                  <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
-                                </Link>
-                                {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "" ? (
-                                  <>
-                                    <div className="sale bg-primary text-light">Sale</div>
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
-                              </div>
-                              <div className="item-info text-center">
-                                <p className="small mb-0 textoverflow1">
-                                  <h6 className="px-1">
-                                    <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                  </h6>{" "}
-                                </p>
+                      {!loading ? (
+                        !loading && products && products.length > 0 ? (
+                          products.map((product) => (
+                            <div className="col-lg-3">
+                              <div className="item-box shop-item mr-1 style text-white shadow rounded">
+                                <div className="item-img1">
+                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
+                                    <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
+                                  </Link>
+                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "" ? (
+                                    <>
+                                      <div className="sale bg-primary text-light">Sale</div>
+                                    </>
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                                <div className="item-info text-center">
+                                  <p className="small mb-0 textoverflow1">
+                                    <h6 className="px-1">
+                                      <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
+                                    </h6>{" "}
+                                  </p>
 
-                                {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
-                                  <>
-                                    <div className="text-primary pricefont">
-                                      <span style={{ "text-decoration": "line-through" }}>
-                                        {" "}
-                                        <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
-                                      </span>
-                                      {"   |  "}
-                                      <span>
-                                        {"   "} <i class="fa fa-inr"></i> {product.p_price}
-                                      </span>
-                                    </div>
-                                  </>
-                                ) : (
-                                  <div className="text-primary pricefont">
-                                    <i class="fa fa-inr"> {"   "} </i>
-                                    {"   "} {product.p_net_product_price}
-                                  </div>
-                                )}
-                                {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                  <button disabled={product.p_quantity > 0 ? false : true} onClick={(e) => addItemsToCart(product.p_id, product.p_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
-                                    <div className="d-flex align-items-center">
-                                      <div className="pl-1">Add to cart</div>
-                                      <div className="align-self-center">
-                                        <i className="fa fa-shopping-cart fa-lg mx-1 cartbuttonbg"></i>
+                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
+                                    <>
+                                      <div className="text-primary pricefont">
+                                        <span style={{ "text-decoration": "line-through" }}>
+                                          {" "}
+                                          <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
+                                        </span>
+                                        {"   |  "}
+                                        <span>
+                                          {"   "} <i class="fa fa-inr"></i> {product.p_price}
+                                        </span>
                                       </div>
+                                    </>
+                                  ) : (
+                                    <div className="text-primary pricefont">
+                                      <i class="fa fa-inr"> {"   "} </i>
+                                      {"   "} {product.p_net_product_price}
                                     </div>
-                                  </button>
-                                ) : (
-                                  <button disabled={true} className="btn btn-secondary btn-sm btnhover mb-3">
-                                    Out of Stock
-                                  </button>
-                                )}
+                                  )}
+                                  {product.p_quantity > 0 || product.p_quantity != 0 ? (
+                                    <button disabled={product.p_quantity > 0 ? false : true} onClick={(e) => addItemsToCart(product.p_id, product.p_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
+                                      <div className="d-flex align-items-center">
+                                        <div className="pl-1">Add to cart</div>
+                                        <div className="align-self-center">
+                                          <i className="fa fa-shopping-cart fa-lg mx-1 cartbuttonbg"></i>
+                                        </div>
+                                      </div>
+                                    </button>
+                                  ) : (
+                                    <button disabled={true} className="btn btn-secondary btn-sm btnhover mb-3">
+                                      Out of Stock
+                                    </button>
+                                  )}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="p-2">
-                          {" "}
-                          No Products found or Prodcutis are being loaded. Please wait for few seconds
-                          <br />
-                          <img className="p-2 w-5" src={loadingimg} height="10"></img>
-                          <div>
+                          ))
+                        ) : (
+                          <div className="p-2">
                             {" "}
-                            <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
-                              View All
-                            </Link>
+                            {allproducts.length} Products found.
+                            <br />
+                            <div>
+                              {" "}
+                              <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
+                                View All
+                              </Link>
+                            </div>
+                          </div>
+                        )
+                      ) : (
+                        <div class="position-relative">
+                          <div className="p-2 start-50">
+                            <div className="p-2">Fetching products, please wait for few seconds.</div>
+                            <img className="p-2 w-5" src={loadingimg} height="10"></img>
                           </div>
                         </div>
                       )}
-                      <div class="position-relative d-none">
-                        <div className="p-2 start-50">
-                          <div className="p-2">Fetching products details, please wait for few seconds.</div>
-                          <img className="p-2 w-5" src={loadingimg} height="10"></img>
-                        </div>
-                      </div>
                     </div>
-                    <div className="aligncenter">
-                      {end <= filter.length + postsPerPage && (
-                        <button className="btn btn-sm btnhover px-2" onClick={handleShowMorePosts}>
-                          Load more
-                        </button>
-                      )}
-                      <span class="px-2"></span>
-                      {/* <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
+                    {!loading && (
+                      <div className="aligncenter">
+                        {!loading && <div className="p-1">{products.length + "/" + allproducts.length} Products found.</div>}
+                        {end <= filter.length + postsPerPage && (
+                          <button className="btn btn-sm btnhover px-2" onClick={handleShowMorePosts}>
+                            Load more
+                          </button>
+                        )}
+                        <span class="px-2"></span>
+                        {/* <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
                         View all Products
                       </Link> */}
-                      <Link className="btn btn-sm btnhover px-2" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "maincategory=all&category=all" }}>
-                        View all Products
-                      </Link>
-                    </div>
+                        <Link className="btn btn-sm btnhover px-2" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "maincategory=all&category=all" }}>
+                          View all Products
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
