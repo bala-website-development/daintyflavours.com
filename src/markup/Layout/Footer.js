@@ -40,18 +40,18 @@ class Footer extends Component {
                     </ul>
                   </div>
                   <div className="m-t20">
-                    <ul className="dlab-social-icon dlab-social-icon-lg">
+                    <ul className="dlab-social-icon dlab-social-icon-lg1">
                       <li>
-                        <a href={config.fb} target="_blank" className="fa fa-facebook bg-primary text-light mr-1"></a>
+                        <a href={config.fb} target="_blank" className="fa  fa-facebook bg-primary1 text-dark mr-1"></a>
                       </li>
                       <li>
-                        <a href={config.insta} target="_blank" className="fa fa-instagram bg-primary text-light mr-1"></a>
+                        <a href={config.insta} target="_blank" className="fa fa-instagram bg-primary1 text-dark mr-2"></a>
                       </li>
                       <li className="d-none">
-                        <a href={config.pins} target="_blank" className="fa fa-pinterest-p bg-primary mr-1"></a>
+                        <a href={config.pins} target="_blank" className="fa fa-pinterest-p bg-primary1 mr-2"></a>
                       </li>
                       <li>
-                        <a href={config.whatsappurl} target="_blank" className="fa fa-whatsapp bg-primary text-light mr-1"></a>
+                        <a href={config.whatsappurl} target="_blank" className="fa fa-whatsapp bg-primary1 text-dark mr-2"></a>
                       </li>
                     </ul>
                   </div>

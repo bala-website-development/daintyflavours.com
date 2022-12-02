@@ -50,14 +50,11 @@ const Shop = (props) => {
     console.log("queryyy queries", props.location.searchFilter);
     console.log("queryyy", maincategory);
     //console.log("bannerimagestate", bannerimagestate);
-    setLoading((loading) => !loading);
 
     let _filterOption = "";
     if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
       _filterOption = category != "" && category !== undefined ? category : maincategory;
-
-    }
-    else {
+    } else {
       let _categories;
       if (query.get("brand") == "" || query.get("brand") == undefined) {
         _filterOption = query.get("category") != "" && query.get("category") !== undefined ? query.get("category") : query.get("maincategory");
@@ -65,11 +62,13 @@ const Shop = (props) => {
         localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category"));
         _categories = JSON.parse(localStorage.getItem("categories"));
         console.log("paaru", _categories);
-        let _result = _categories
-          .filter((a) => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
-          .map((b) => {
-            return b;
-          });
+        let _result =
+          _categories &&
+          _categories
+            .filter((a) => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
+            .map((b) => {
+              return b;
+            });
         if (_result.length > 1) {
           _result = _result
             .filter((b) => b.maincategory?.toUpperCase() == query.get("maincategory")?.toUpperCase())
@@ -80,8 +79,7 @@ const Shop = (props) => {
 
         localStorage.setItem("bannerurl", _result[0]?.banner_image);
         localStorage.setItem("categorydes", _result[0]?.categorydes);
-      }
-      else {
+      } else {
         _filterOption = JSON.parse(localStorage.getItem("brand"));
         localStorage.setItem("categorydes", props.location.categorydes);
         localStorage.setItem("queryurl", "brand=" + query.get("brand"));
@@ -94,7 +92,6 @@ const Shop = (props) => {
         localStorage.setItem("bannerurl", _result[0]?.banner_image);
         localStorage.setItem("categorydes", _result[0]?.categorydes);
       }
-
     }
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
@@ -104,7 +101,6 @@ const Shop = (props) => {
             getAllProductDetails();
             console.log(category, "=> all active  products");
           } else {
-
             if (query.get("brand") != "" && query.get("brand") != undefined) {
               let selective = data
                 .filter((filter) => filter.p_brand?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
@@ -114,9 +110,7 @@ const Shop = (props) => {
               setProducts(selective);
               setFilter(selective);
               console.log("all active category products");
-
-            }
-            else {
+            } else {
               // all active category products
               let selective = data
                 .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
@@ -147,7 +141,7 @@ const Shop = (props) => {
           });
           setProducts(selective);
           setFilter(selective);
-        } else if (maincategory === "all") {
+        } else if (maincategory === "all" || maincategory === "") {
           console.log("mainprod with all products");
           let selective = data
             .filter((filter) => filter.isactive === 1)
@@ -582,7 +576,7 @@ const Shop = (props) => {
                     </aside>
                   </div>
                 </div>
-                <div className="p-2 text-center">{(categoryDes !== "undefined" || categoryDes !== undefined) && category !== "all" ? categoryDes : ""}</div>
+                <div className="p-2 text-center">{categoryDes === "undefined" ? "" : (categoryDes !== "undefined" || categoryDes !== undefined) && category !== "all" ? categoryDes : ""}</div>
                 <div className="mb-4">
                   <div className="row border br30 p-2 m-0 bg-secondary-light">
                     <div className="col align-self-center bg-secondary-light">
@@ -629,87 +623,84 @@ const Shop = (props) => {
                 <div className="col-lg-12 shopproducts">
                   <div>
                     <div className="row m-1 ">
-                      {!loading ? (
-                        products && products.length > 0 ? (
-                          products.map((product) => (
-                            <div className="col-lg-3">
-                              <div className="item-box shop-item style text-white shadow rounded">
-                                <div className="item-img1">
-                                  <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                                    <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
-                                  </Link>
-                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "" ? (
-                                    <>
-                                      <div className="sale bg-primary text-light">Sale</div>
-                                    </>
-                                  ) : (
-                                    <></>
-                                  )}
-                                </div>
-                                <div className="item-info text-center">
-                                  <p className="small mb-0 textoverflow1">
-                                    <h6 className="px-1">
-                                      <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
-                                    </h6>{" "}
-                                  </p>
+                      {products && products.length > 0 ? (
+                        products.map((product) => (
+                          <div className="col-lg-3">
+                            <div className="item-box shop-item style text-white shadow rounded">
+                              <div className="item-img1">
+                                <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
+                                  <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
+                                </Link>
+                                {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "" ? (
+                                  <>
+                                    <div className="sale bg-primary text-light">Sale</div>
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+                              </div>
+                              <div className="item-info text-center">
+                                <p className="small mb-0 textoverflow1">
+                                  <h6 className="px-1">
+                                    <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
+                                  </h6>{" "}
+                                </p>
 
-                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
-                                    <>
-                                      <div className="text-primary pricefont">
-                                        <span style={{ "text-decoration": "line-through" }}>
-                                          {" "}
-                                          <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
-                                        </span>
-                                        {"   |  "}
-                                        <span>
-                                          {"   "} <i class="fa fa-inr"></i> {product.p_price}
-                                        </span>
-                                      </div>
-                                    </>
-                                  ) : (
+                                {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
+                                  <>
                                     <div className="text-primary pricefont">
-                                      <i class="fa fa-inr"> {"   "} </i>
-                                      {"   "} {product.p_net_product_price}
+                                      <span style={{ "text-decoration": "line-through" }}>
+                                        {" "}
+                                        <i class="fa fa-inr"></i> {product.p_net_product_price || 0}{" "}
+                                      </span>
+                                      {"   |  "}
+                                      <span>
+                                        {"   "} <i class="fa fa-inr"></i> {product.p_price}
+                                      </span>
                                     </div>
-                                  )}
-                                  {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                    <button disabled={loading} onClick={(e) => addItemsToCart(product.p_id, product.p_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
-                                      <div className="d-flex align-items-center">
-                                        <div className="pl-1">Add to cart</div>
-                                        <div className="align-self-center">
-                                          <i className="fa fa-shopping-cart fa-lg mx-1 cartbuttonbg"></i>
-                                        </div>
+                                  </>
+                                ) : (
+                                  <div className="text-primary pricefont">
+                                    <i class="fa fa-inr"> {"   "} </i>
+                                    {"   "} {product.p_net_product_price}
+                                  </div>
+                                )}
+                                {product.p_quantity > 0 || product.p_quantity != 0 ? (
+                                  <button disabled={product.p_quantity > 0 ? false : true} onClick={(e) => addItemsToCart(product.p_id, product.p_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
+                                    <div className="d-flex align-items-center">
+                                      <div className="pl-1">Add to cart</div>
+                                      <div className="align-self-center">
+                                        <i className="fa fa-shopping-cart fa-lg mx-1 cartbuttonbg"></i>
                                       </div>
-                                    </button>
-                                  ) : (
-                                    <button disabled={true} className="btn btn-secondary btn-sm btnhover mb-3">
-                                      Out of Stock
-                                    </button>
-                                  )}
-                                </div>
+                                    </div>
+                                  </button>
+                                ) : (
+                                  <button disabled={true} className="btn btn-secondary btn-sm btnhover mb-3">
+                                    Out of Stock
+                                  </button>
+                                )}
                               </div>
                             </div>
-                          ))
-                        ) : (
-                          <div className="p-2">
-                            {" "}
-                            No Records to display{" "}
-                            <div>
-                              {" "}
-                              <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
-                                View All
-                              </Link>
-                            </div>
                           </div>
-                        )
+                        ))
                       ) : (
-                        <div class="position-relative">
-                          <div className="p-2 start-50">
-                            <div className="p-2">Fetching products details, please wait....</div>
-                            <img className="p-2 w-5" src={loadingimg} height="10"></img>
+                        <div className="p-2">
+                          {" "}
+                          No Records to display{" "}
+                          <div>
+                            {" "}
+                            <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
+                              View All
+                            </Link>
                           </div>
                         </div>
                       )}
+                      <div class="position-relative d-none">
+                        <div className="p-2 start-50">
+                          <div className="p-2">Fetching products details, please wait....</div>
+                          <img className="p-2 w-5" src={loadingimg} height="10"></img>
+                        </div>
+                      </div>
                     </div>
                     <div className="aligncenter">
                       {end <= filter.length + postsPerPage && (
