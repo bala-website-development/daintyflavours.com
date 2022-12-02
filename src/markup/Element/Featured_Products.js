@@ -11,6 +11,7 @@ const Featured_Product = (props) => {
   const [products, setProducts] = useState([]);
   const [galleryimage, setGalleryImage] = useState([]);
   const [networkError, setNetworkError] = useState("");
+  const [windowSize, setWindowSize] = useState(getWindowSize());
 
   const getHomePageCategoryfromService = async () => {
     console.log("entered");
@@ -31,6 +32,12 @@ const Featured_Product = (props) => {
         // console.log(networkError);
       });
   };
+
+  function getWindowSize() {
+    const { innerWidth, innerHeight } = window;
+
+    return { innerWidth };
+  }
   const getHomePageCategoryfromLocalstorage = async () => {
     console.log("recentpost", products);
     if (JSON.parse(localStorage.getItem("categories")) !== null) {
@@ -51,6 +58,7 @@ const Featured_Product = (props) => {
 
   useEffect(() => {
     getHomePageCategoryfromService();
+    console.log("windowSize", windowSize.innerWidth);
     // getHomePageCategoryfromLocalstorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -89,7 +97,7 @@ const Featured_Product = (props) => {
                   data-role="tile"
                   data-size="xlarge"
                   className="w-100"
-                  to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
+                  to={windowSize.innerWidth > 600 ? "/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image : "#"}
                   style={{
                     backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                     backgroundSize: "100%",
@@ -97,20 +105,20 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <div to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
+                  <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
                     <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                       <span>
                         {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
                       </span>
                     </div>
-                  </div>
+                  </Link>
                 </Link>
               ) : (
                 <Link
                   data-role="tile"
                   data-size="large"
                   className="w-100"
-                  to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
+                  to={windowSize.innerWidth > 600 ? "/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image : "#"}
                   style={{
                     backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                     backgroundSize: "100%",
@@ -119,13 +127,13 @@ const Featured_Product = (props) => {
                   }}
                 >
                   {/* <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className=""> */}
-                  <div to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
+                  <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
                     <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                       <span>
                         {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
                       </span>
                     </div>
-                  </div>
+                  </Link>
                 </Link>
               )
             )

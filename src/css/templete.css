@@ -233,6 +233,7 @@
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 5px;
 }
 .dlab-bnr-inr .breadcrumb-row ul li a {
   opacity: 1;
@@ -1524,7 +1525,7 @@
   font-weight: 600;
 }
 .shop-item .sale {
-  left: 15px;
+  
   font-size: 14px;
   height: 24px;
 }

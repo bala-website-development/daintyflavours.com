@@ -425,7 +425,11 @@ const Shopchekout = () => {
                         </tbody>
                       </table>
                       <h4>Payment Method - Online</h4>
-
+                      <div>
+                        <input type="checkbox" id="terms" name="terms" required value="terms"></input>
+                        <label for="terms">Check here to indicate that you have read and agreed to the terms and conditions for the order.</label>
+                        <br />
+                      </div>
                       <div className="d-none">
                         <div className="form-group">
                           <input type="text" className="form-control" placeholder="Name on Card" />

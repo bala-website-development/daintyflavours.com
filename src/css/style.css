@@ -4945,7 +4945,7 @@ blockquote cite {
   }
   .dlab-bnr-inr.dlab-bnr-inr-sm,
   .dlab-bnr-inr {
-    height: 350px;
+    height: auto;
   }
 }
 .navicon {
@@ -10381,6 +10381,7 @@ ul[class*="list-"] {
 .breadcrumb-row {
   background: #f9f9f9;
   padding: 20px 0;
+  
 }
 .breadcrumb-row ul {
   margin: 0;
