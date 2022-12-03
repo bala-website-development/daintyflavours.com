@@ -9,11 +9,12 @@ import bnr from "./../../images/banner/bnr1.jpg";
 import uuid from "react-uuid";
 import { Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-
+import secureLocalStorage from "react-secure-storage";
 const Shopchekout = () => {
   const [cartDetails, setCartDetails] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
-  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
+  //const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
+  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(secureLocalStorage.getItem("daintycart")));
   const [productWeight, setProductWeight] = useState(0);
   const [networkError, setNetworkError] = useState("");
   const [loading, setLoading] = useState(false);
