@@ -14,6 +14,7 @@ import img1 from "./../../images/banner/bnr1.jpg";
 import { Modal } from "react-bootstrap";
 import SimpleReactLightbox from "simple-react-lightbox";
 import { SRLWrapper } from "simple-react-lightbox";
+import secureLocalStorage from "react-secure-storage";
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -77,22 +78,19 @@ const Shopproduct = (props) => {
       console.log("befre", cartarray);
       cartarray.push(data);
       console.log("after", cartarray);
-      let lsDaintyCart_ = localStorage.getItem("daintycart");
+      //let lsDaintyCart_ = localStorage.getItem("daintycart");
+      let lsDaintyCart_ = secureLocalStorage.getItem("daintycart");
       if (lsDaintyCart_ === undefined || lsDaintyCart_ === null) {
         console.log("lsDaintyCart", lsDaintyCart_);
-        localStorage.setItem("daintycart", JSON.stringify(cartarray));
+        //localStorage.setItem("daintycart", JSON.stringify(cartarray));
+        secureLocalStorage.setItem("daintycart", JSON.stringify(cartarray));
         setSuccessMsg("Item added to cart.");
         handleVisible();
       } else {
-        let cartarraynew = [];
-        cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
-        localStorage.removeItem("daintycart");
-        cartarraynew.push(data);
-        localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
+        updateCartQuantityfromls(data, JSON.parse(lsDaintyCart_));
         setSuccessMsg("Item Updated to cart.");
         handleVisible();
       }
-      // history.push("/shop-login");
       // add to cart for Guest user - end
     } else {
       let data = {
@@ -121,6 +119,23 @@ const Shopproduct = (props) => {
         });
     }
     setLoading((loading) => !loading);
+  };
+  const updateCartQuantityfromls = (newproduct, lsDaintyCart_) => {
+    console.log("first if before");
+    if (lsDaintyCart_.filter((a) => a.p_id == newproduct.p_id).length > 0) {
+      console.log("first if2");
+      let array = lsDaintyCart_.filter((a) => a.p_id == newproduct.p_id);
+      let index = lsDaintyCart_.findIndex((fi) => fi.p_id == newproduct.p_id);
+      lsDaintyCart_[index].p_quantity = parseInt(lsDaintyCart_[index].p_quantity) + 1;
+      lsDaintyCart_[index].p_net_product_price = parseInt(lsDaintyCart_[index].p_price) * parseInt(lsDaintyCart_[index].quantity);
+    } else {
+      console.log("second else");
+      lsDaintyCart_.push(newproduct);
+    }
+    //localStorage.removeItem("daintycart");
+    secureLocalStorage.removeItem("daintycart");
+    //localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
+    secureLocalStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
   };
   const getProductReviews = async () => {
     await fetch(config.service_url + `getProductReviews/${id}`)
@@ -207,7 +222,9 @@ const Shopproduct = (props) => {
   return (
     <div>
       <Modal size="sm" show={smShow} onHide={() => setSmShow(false)}>
-        <Modal.Header closeButton>{successMsg}</Modal.Header>
+        <Modal.Header closeButton>
+          {successMsg} {successMsg.includes("cart") ? <a href="/shop-cart"> View cart</a> : ""}
+        </Modal.Header>
       </Modal>
       <Header />
       <div className="page-content bg-white">
@@ -497,10 +514,10 @@ const Shopproduct = (props) => {
             </div>
           </div>
         </div>
-      </div >
+      </div>
 
       <Footer />
-    </div >
+    </div>
   );
 };
 

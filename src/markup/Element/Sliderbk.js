@@ -32,10 +32,11 @@ const Slider = () => {
           ))}
       </Carousel>
       <div className="text-center p-3 mt-3">
-        <Link className="btn btnhover border z-index" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "?maincategory=all&category=all" }}>
-          Shop all <i className="fa fa-angle-right m-r10"></i>
+        <Link className="dbtn-primary z-index" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "?maincategory=all&category=all" }}>
+          Shop all <i className="fa fa-angle-right"></i>
         </Link>
-        <p className="font-weight-normal text-primary">{slider_content[0].prefix}</p>
+
+        <p className="mt-2 font-weight-normal text-primary">{slider_content[0].prefix}</p>
       </div>
     </div>
   );

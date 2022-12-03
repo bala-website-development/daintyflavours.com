@@ -9,6 +9,7 @@ import { Modal } from "react-bootstrap";
 import loadingimg from "./../../images/load.gif";
 import Header2 from "./../Layout/NavBarMenu";
 import queryString from "query-string";
+import secureLocalStorage from "react-secure-storage";
 const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
   const queryurl = localStorage.getItem("queryurl");
@@ -280,18 +281,16 @@ const Shop = (props) => {
       console.log("befre", cartarray);
       cartarray.push(data);
       console.log("after", cartarray);
-      let lsDaintyCart_ = localStorage.getItem("daintycart");
-      if (lsDaintyCart_ === undefined || lsDaintyCart_ === null) {
+      // let lsDaintyCart_ = localStorage.getItem("daintycart");
+      let lsDaintyCart_ = secureLocalStorage.getItem("daintycart");
+      if (lsDaintyCart_ === undefined || lsDaintyCart_ === null || lsDaintyCart_?.length == 0) {
         console.log("lsDaintyCart", lsDaintyCart_);
-        localStorage.setItem("daintycart", JSON.stringify(cartarray));
+        // localStorage.setItem("daintycart", JSON.stringify(cartarray));
+        secureLocalStorage.setItem("daintycart", JSON.stringify(cartarray));
         setMessage("Item added to cart.");
         handleVisible();
       } else {
-        let cartarraynew = [];
-        cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
-        localStorage.removeItem("daintycart");
-        cartarraynew.push(data);
-        localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
+        updateCartQuantityfromls(data, JSON.parse(lsDaintyCart_));
         setMessage("Item Updated to cart.");
         handleVisible();
       }
@@ -332,7 +331,25 @@ const Shop = (props) => {
     }
     //setLoading((loading) => !loading);
   };
+  const updateCartQuantityfromls = (newproduct, lsDaintyCart_) => {
+    console.log("lsDaintyCartforquantity update", lsDaintyCart_);
 
+    if (lsDaintyCart_.filter((a) => a.p_id == newproduct.p_id).length > 0) {
+      console.log("first if");
+      let array = lsDaintyCart_.filter((a) => a.p_id == newproduct.p_id);
+      // let count = array[0].length + 1;
+      let index = lsDaintyCart_.findIndex((fi) => fi.p_id == newproduct.p_id);
+      lsDaintyCart_[index].p_quantity = parseInt(lsDaintyCart_[index].p_quantity) + 1;
+      lsDaintyCart_[index].p_net_product_price = parseInt(lsDaintyCart_[index].p_price) * parseInt(lsDaintyCart_[index].quantity);
+    } else {
+      console.log("second else");
+      lsDaintyCart_.push(newproduct);
+    }
+    //localStorage.removeItem("daintycart");
+    secureLocalStorage.removeItem("daintycart");
+    //localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
+    secureLocalStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
+  };
   const applyFilter = (searchValue) => {
     console.log("searchvalue", searchValue);
     if (searchValue !== "") {
@@ -496,7 +513,9 @@ const Shop = (props) => {
   return (
     <div>
       <Modal size="sm" show={smShow} onHide={() => setSmShow(false)}>
-        <Modal.Header closeButton>{message}</Modal.Header>
+        <Modal.Header closeButton>
+          {message} {message.includes("cart") ? <a href="/shop-cart"> View cart</a> : ""}
+        </Modal.Header>
       </Modal>
       <Header2 active={"shop"} />
 
@@ -725,15 +744,15 @@ const Shop = (props) => {
                       <div className="aligncenter">
                         {!loading && <div className="p-1">{products.length + "/" + allproducts.length} Products found.</div>}
                         {end <= filter.length + postsPerPage && (
-                          <button className="btn btn-sm btnhover px-2" onClick={handleShowMorePosts}>
+                          <a href="#" className="dbtn-primary" onClick={handleShowMorePosts}>
                             Load more
-                          </button>
+                          </a>
                         )}
                         <span class="px-2"></span>
                         {/* <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
                         View all Products
                       </Link> */}
-                        <Link className="btn btn-sm btnhover px-2" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "maincategory=all&category=all" }}>
+                        <Link className="dbtn-primary" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "maincategory=all&category=all" }}>
                           View all Products
                         </Link>
                       </div>

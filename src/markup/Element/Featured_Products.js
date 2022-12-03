@@ -196,7 +196,7 @@ const Featured_Product = (props) => {
       <br />
       <br />
       <div className="text-center mt-2 d-none">
-        <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
+        <Link to={"/shop"} className="p-2 px-3 dbtn-primary btn-md btnhover shadow m-t30">
           Shop all <i className="fa fa-angle-right m-r10"></i>
         </Link>
       </div>

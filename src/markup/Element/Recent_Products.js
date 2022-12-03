@@ -49,63 +49,7 @@ const New_Products = () => {
           <h3>Our New Arrivals</h3>
           <div className="dlab-separator style1 bg-primary"></div>
         </div>
-        <div id="tileview text-center">
-          <div class="tiles-grid d-flex-row justify-content-between w-100 d-none">
-            {products &&
-              products.length > 0 &&
-              products.map((fProduct, index) =>
-                index === 0 || index === 3 ? (
-                  <div
-                    to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}
-                    data-role="tile"
-                    data-size="large"
-                    className="w-100"
-                    style={{
-                      backgroundImage: "url(" + fProduct.p_image + ")",
-                      backgroundSize: "100%",
-                      backgroundSize: "cover",
-                      overflow: "hidden",
-                      border: "1px solid rgb(180 59 141 / 40%)",
-                    }}
-                  >
-                    <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}>
-                      <div className="p-1">
-                        <span>{fProduct.p_name}</span>
-                        <div>₹ {fProduct.p_price}</div>
-                        <div></div>
-                      </div>
-                    </Link>
-                  </div>
-                ) : (
-                  <div
-                    data-role="tile"
-                    data-size="medium"
-                    className="w-100"
-                    style={{
-                      backgroundImage: "url(" + fProduct.p_image + ")",
-                      backgroundSize: "100%",
-                      backgroundSize: "cover",
-                      overflow: "hidden",
-                      border: "1px solid rgb(180 59 141 / 40%)",
-                    }}
-                  >
-                    <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}>
-                      <div className="p-1">
-                        <span>{fProduct.p_name}</span>
-                        <div>₹ {fProduct.p_price}</div>
-                      </div>
-                    </Link>
-                  </div>
-                )
-              )}
-            <Link to={"/shop"} data-role="tile" data-size="medium" className="w-100">
-              <div className="p-1">
-                <span>Shop All</span>
-                <div></div>
-              </div>
-            </Link>
-          </div>
-        </div>
+
         <div className="row">
           {loading && (
             <div className="container row">
@@ -178,8 +122,8 @@ const New_Products = () => {
         </div>
       </div>
       <div className="text-center mt-2">
-        <a className="p-2 px-3 btn btn-md btnhover shadow m-t10" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} href={"/shop?maincategory=all&category=all"}>
-          Shop all <i className="fa fa-angle-right m-r10"></i>
+        <a className="dbtn-primary  shadow" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} href={"/shop?maincategory=all&category=all"}>
+          Shop all <i className="fa fa-angle-right"></i>
         </a>
       </div>
     </div>

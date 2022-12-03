@@ -124,8 +124,8 @@ const Sale_Products = () => {
         </div>
       </div>
       <div className="text-center mt-1">
-        <a className="p-2 px-3 btn btn-md btnhover shadow m-t10" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} href={"/shop?maincategory=all&category=all"}>
-          Shop all <i className="fa fa-angle-right m-r10"></i>
+        <a className="dbtn-primary" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} href={"/shop?maincategory=all&category=all"}>
+          Shop all <i className="fa fa-angle-right"></i>
         </a>
       </div>
     </div>
