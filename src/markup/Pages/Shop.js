@@ -281,7 +281,7 @@ const Shop = (props) => {
       cartarray.push(data);
       console.log("after", cartarray);
       let lsDaintyCart_ = localStorage.getItem("daintycart");
-      if (lsDaintyCart_ === undefined || lsDaintyCart_ === null) {
+      if (lsDaintyCart_ === undefined || lsDaintyCart_ === null || lsDaintyCart_?.length == 0) {
         console.log("lsDaintyCart", lsDaintyCart_);
         localStorage.setItem("daintycart", JSON.stringify(cartarray));
         setMessage("Item added to cart.");
@@ -335,14 +335,28 @@ const Shop = (props) => {
   };
   const updateCartQuantityfromls = (newproduct, lsDaintyCart_) => {
     console.log("lsDaintyCartforquantity update", lsDaintyCart_);
-    for (var i = 0; i < lsDaintyCart_.length; i++) {
-      console.log(lsDaintyCart_[i], "from local");
-      console.log(newproduct, "from db");
-      if (lsDaintyCart_[i].p_id == newproduct.p_id) {
-        lsDaintyCart_[i].p_quantity = lsDaintyCart_[i].p_quantity + 1;
-        lsDaintyCart_[i].p_net_product_price = parseInt(lsDaintyCart_[i].p_price) * lsDaintyCart_[i].quantity;
-      }
+
+    if (lsDaintyCart_.filter(a => a.p_id == newproduct.p_id).length > 0) {
+      console.log("first if")
+      let array = lsDaintyCart_.filter(a => a.p_id == newproduct.p_id);
+      // let count = array[0].length + 1;
+      let index = lsDaintyCart_.findIndex(fi => fi.p_id == newproduct.p_id);
+      lsDaintyCart_[index].p_quantity = lsDaintyCart_[index].p_quantity + 1;
+      lsDaintyCart_[index].p_net_product_price = parseInt(lsDaintyCart_[index].p_price) * lsDaintyCart_[index].quantity;
     }
+    else {
+      console.log("second else")
+      lsDaintyCart_.push(newproduct);
+    }
+
+    // for (var i = 0; i < lsDaintyCart_.length; i++) {
+    //   console.log(lsDaintyCart_[i], "from local");
+    //   console.log(newproduct, "from db");
+    //   if (lsDaintyCart_[i].p_id == newproduct.p_id) {
+    //     lsDaintyCart_[i].p_quantity = lsDaintyCart_[i].p_quantity + 1;
+    //     lsDaintyCart_[i].p_net_product_price = parseInt(lsDaintyCart_[i].p_price) * lsDaintyCart_[i].quantity;
+    //   }
+    // }
     console.log("lsDaintyCartforupdatequatity", lsDaintyCart_);
     localStorage.removeItem("daintycart");
     localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
