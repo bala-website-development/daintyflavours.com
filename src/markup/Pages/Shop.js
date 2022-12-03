@@ -9,6 +9,7 @@ import { Modal } from "react-bootstrap";
 import loadingimg from "./../../images/load.gif";
 import Header2 from "./../Layout/NavBarMenu";
 import queryString from "query-string";
+import secureLocalStorage from "react-secure-storage";
 const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
   const queryurl = localStorage.getItem("queryurl");
@@ -280,19 +281,16 @@ const Shop = (props) => {
       console.log("befre", cartarray);
       cartarray.push(data);
       console.log("after", cartarray);
-      let lsDaintyCart_ = localStorage.getItem("daintycart");
+      // let lsDaintyCart_ = localStorage.getItem("daintycart");
+      let lsDaintyCart_ = secureLocalStorage.getItem("daintycart");
       if (lsDaintyCart_ === undefined || lsDaintyCart_ === null || lsDaintyCart_?.length == 0) {
         console.log("lsDaintyCart", lsDaintyCart_);
-        localStorage.setItem("daintycart", JSON.stringify(cartarray));
+        // localStorage.setItem("daintycart", JSON.stringify(cartarray));
+        secureLocalStorage.setItem("daintycart", JSON.stringify(cartarray));
         setMessage("Item added to cart.");
         handleVisible();
       } else {
         updateCartQuantityfromls(data, JSON.parse(lsDaintyCart_));
-        // let cartarraynew = [];
-        // cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
-        // localStorage.removeItem("daintycart");
-        // cartarraynew.push(data);
-        // localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
         setMessage("Item Updated to cart.");
         handleVisible();
       }
@@ -341,25 +339,16 @@ const Shop = (props) => {
       let array = lsDaintyCart_.filter((a) => a.p_id == newproduct.p_id);
       // let count = array[0].length + 1;
       let index = lsDaintyCart_.findIndex((fi) => fi.p_id == newproduct.p_id);
-      lsDaintyCart_[index].p_quantity = lsDaintyCart_[index].p_quantity + 1;
-      lsDaintyCart_[index].p_net_product_price = parseInt(lsDaintyCart_[index].p_price) * lsDaintyCart_[index].quantity;
+      lsDaintyCart_[index].p_quantity = parseInt(lsDaintyCart_[index].p_quantity) + 1;
+      lsDaintyCart_[index].p_net_product_price = parseInt(lsDaintyCart_[index].p_price) * parseInt(lsDaintyCart_[index].quantity);
     } else {
       console.log("second else");
       lsDaintyCart_.push(newproduct);
     }
-
-    // for (var i = 0; i < lsDaintyCart_.length; i++) {
-    //   console.log(lsDaintyCart_[i], "from local");
-    //   console.log(newproduct, "from db");
-    //   if (lsDaintyCart_[i].p_id == newproduct.p_id) {
-    //     lsDaintyCart_[i].p_quantity = lsDaintyCart_[i].p_quantity + 1;
-    //     lsDaintyCart_[i].p_net_product_price = parseInt(lsDaintyCart_[i].p_price) * lsDaintyCart_[i].quantity;
-    //   }
-    // }
-    console.log("lsDaintyCartforupdatequatity", lsDaintyCart_);
-    localStorage.removeItem("daintycart");
-    localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
-    console.log("lsDaintyCartforupdatequatitynew", JSON.stringify(lsDaintyCart_));
+    //localStorage.removeItem("daintycart");
+    secureLocalStorage.removeItem("daintycart");
+    //localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
+    secureLocalStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
   };
   const applyFilter = (searchValue) => {
     console.log("searchvalue", searchValue);

@@ -6,9 +6,12 @@ import config from "../../config.json";
 import img from "./../../images/banner/bnr3.jpg";
 import loadingimg from "./../../images/load.gif";
 import { Modal } from "react-bootstrap";
+import secureLocalStorage from "react-secure-storage";
 const Shopcart = () => {
   const [userLoggedin, setUserLoggedin] = useState(localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null ? true : false);
-  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
+  // const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
+  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(secureLocalStorage.getItem("daintycart")));
+
   const [cartDetails, setCartDetails] = useState(userLoggedin ? [] : lsDaintyCart);
 
   const history = useHistory();
@@ -46,19 +49,19 @@ const Shopcart = () => {
   const updateCartQuantityfromls = (cartid, quantity) => {
     console.log("lsDaintyCartforquantity update", lsDaintyCart);
     //need to update the quantity and total in the cart item from this lsDaintyCart and set and reftest cart. q_total = q_quatity* q_net_price.
-    //setlsDaintyCart(uppdatedJson)
     for (var i = 0; i < lsDaintyCart.length; i++) {
       if (lsDaintyCart[i].id == cartid) {
-        lsDaintyCart[i].p_net_product_price = parseInt(lsDaintyCart[i].p_price) * lsDaintyCart[i].quantity;
+        lsDaintyCart[i].p_net_product_price = parseInt(lsDaintyCart[i].p_price) * parseInt(lsDaintyCart[i].quantity);
         lsDaintyCart[i].p_quantity = quantity;
-        // lsDaintyCart[i].p_price=(parseInt(lsDaintyCart[i].p_price)*quantity).toString();
       }
     }
-    console.log("lsDaintyCartforupdatequatity", lsDaintyCart);
+    //console.log("lsDaintyCartforupdatequatity", lsDaintyCart);
     setlsDaintyCart(lsDaintyCart);
-    localStorage.removeItem("daintycart");
-    localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart));
-    console.log("lsDaintyCartforupdatequatitynew", JSON.stringify(lsDaintyCart));
+    //localStorage.removeItem("daintycart");
+    secureLocalStorage.removeItem("daintycart");
+    //localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
+    secureLocalStorage.setItem("daintycart", JSON.stringify(lsDaintyCart));
+    //console.log("lsDaintyCartforupdatequatitynew", JSON.stringify(lsDaintyCart));
     setCartUpdated((cartUpdated) => !cartUpdated);
   };
 
