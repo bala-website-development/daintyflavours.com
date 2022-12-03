@@ -10,6 +10,17 @@
   --color-hover: #b43b8d;
   --color-primary-opacity: rgba(180, 59, 142, 0.65);
 }
+.dbtn-primary {
+background-color: var(--color-primary) !important;
+border-radius: 30px;
+text-transform: uppercase;
+padding:10px 10px 9px 10px !important;
+color:white;
+}
+.dbtn-primary:hover {
+  background-color: #c7449e !important;
+color: white !important;
+}
 .main-bar,
 .mo-left .header-nav.show {
   /* background-color: #f4bb41 !important; */

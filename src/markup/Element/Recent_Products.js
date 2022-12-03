@@ -49,63 +49,7 @@ const New_Products = () => {
           <h3>Our New Arrivals</h3>
           <div className="dlab-separator style1 bg-primary"></div>
         </div>
-        <div id="tileview text-center">
-          <div class="tiles-grid d-flex-row justify-content-between w-100 d-none">
-            {products &&
-              products.length > 0 &&
-              products.map((fProduct, index) =>
-                index === 0 || index === 3 ? (
-                  <div
-                    to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}
-                    data-role="tile"
-                    data-size="large"
-                    className="w-100"
-                    style={{
-                      backgroundImage: "url(" + fProduct.p_image + ")",
-                      backgroundSize: "100%",
-                      backgroundSize: "cover",
-                      overflow: "hidden",
-                      border: "1px solid rgb(180 59 141 / 40%)",
-                    }}
-                  >
-                    <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}>
-                      <div className="p-1">
-                        <span>{fProduct.p_name}</span>
-                        <div>₹ {fProduct.p_price}</div>
-                        <div></div>
-                      </div>
-                    </Link>
-                  </div>
-                ) : (
-                  <div
-                    data-role="tile"
-                    data-size="medium"
-                    className="w-100"
-                    style={{
-                      backgroundImage: "url(" + fProduct.p_image + ")",
-                      backgroundSize: "100%",
-                      backgroundSize: "cover",
-                      overflow: "hidden",
-                      border: "1px solid rgb(180 59 141 / 40%)",
-                    }}
-                  >
-                    <Link to={{ pathname: `/shop-product-details/${fProduct.p_id}` }}>
-                      <div className="p-1">
-                        <span>{fProduct.p_name}</span>
-                        <div>₹ {fProduct.p_price}</div>
-                      </div>
-                    </Link>
-                  </div>
-                )
-              )}
-            <Link to={"/shop"} data-role="tile" data-size="medium" className="w-100">
-              <div className="p-1">
-                <span>Shop All</span>
-                <div></div>
-              </div>
-            </Link>
-          </div>
-        </div>
+
         <div className="row">
           {loading && (
             <div className="container row">
@@ -120,7 +64,7 @@ const New_Products = () => {
             !loading &&
             products.map((product) => (
               <div className="col-lg-3">
-                <div className="item-box shop-item style text-white my-2 shadow rounded">
+                <div className="item-box shop-item mr-1 ml-1 style text-white my-2 shadow rounded">
                   <div className="">
                     <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                       {/* <img className="homeimagerecent" src={product.p_image ? product.p_image : config.defaultimage} alt={config.websitetitle} /> */}
@@ -128,40 +72,7 @@ const New_Products = () => {
                       <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
                     </Link>
                   </div>
-                  <div className="dlab-info d-none">
-                    <h4 className="title ">
-                      <Link className="text-light" to={{ pathname: `/shop-product-details/${product.p_id}` }}>
-                        <div>
-                          {product.p_actual_price !== product.p_price && product.p_price !== 0 && product.p_price !== "" ? (
-                            <>
-                              <div className="price text-light">
-                                <span style={{ "text-decoration": "line-through" }}>
-                                  {" "}
-                                  <span className="text-light">
-                                    <i class="fa fa-inr"></i> {product.p_actual_price || 0}{" "}
-                                  </span>
-                                </span>
-                                {"   |  "}
-                                <span className="text-light">
-                                  {"   "} <i class="fa fa-inr"></i> {product.p_price}
-                                </span>{" "}
-                                <span className="px-1 sale bg-primary text-light">Sale</span>
-                              </div>
-                            </>
-                          ) : (
-                            <div className="price text-light ">
-                              <span className="text-light ">
-                                <i class="fa fa-inr"> {"   "} </i>
-                                {"   "}
-                                {product.p_price}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-                        <div>{product.p_name}</div>
-                      </Link>
-                    </h4>
-                  </div>
+
                   <div className="item-info text-center">
                     <span className="">
                       {" "}
@@ -211,8 +122,8 @@ const New_Products = () => {
         </div>
       </div>
       <div className="text-center mt-2">
-        <a className="p-2 px-3 btn btn-md btnhover shadow m-t10" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} href={"/shop?maincategory=all&category=all"}>
-          Shop all <i className="fa fa-angle-right m-r10"></i>
+        <a className="dbtn-primary  shadow" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} href={"/shop?maincategory=all&category=all"}>
+          Shop all <i className="fa fa-angle-right"></i>
         </a>
       </div>
     </div>

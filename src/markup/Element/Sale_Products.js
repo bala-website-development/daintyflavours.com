@@ -67,7 +67,7 @@ const Sale_Products = () => {
               saleproducts && saleproducts.length > 0 ? (
                 saleproducts.map((product) => (
                   <div className="col-lg-3">
-                    <div className="item-box shop-item style text-white shadow rounded">
+                    <div className="item-box shop-item mr-1 style text-white shadow rounded">
                       <div className="item-img1">
                         <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                           <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
@@ -124,8 +124,8 @@ const Sale_Products = () => {
         </div>
       </div>
       <div className="text-center mt-1">
-        <a className="p-2 px-3 btn btn-md btnhover shadow m-t10" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} href={"/shop?maincategory=all&category=all"}>
-          Shop all <i className="fa fa-angle-right m-r10"></i>
+        <a className="dbtn-primary" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} href={"/shop?maincategory=all&category=all"}>
+          Shop all <i className="fa fa-angle-right"></i>
         </a>
       </div>
     </div>

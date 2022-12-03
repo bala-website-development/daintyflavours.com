@@ -90,14 +90,65 @@ const Featured_Product = (props) => {
       {/* in use */}
       <div id="tileview text-center">
         <div class="tiles-grid d-flex-row justify-content-between w-100">
-          {products && products.length > 0 ? (
+          {windowSize.innerWidth > 500 ? (
+            products && products.length > 0 ? (
+              products.map((fProduct, index) =>
+                index === 0 || index === 7 ? (
+                  <a
+                    data-role="tile"
+                    data-size="xlarge"
+                    className="w-100"
+                    href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
+                    style={{
+                      backgroundImage: "url(" + fProduct.thumbnail_image + ")",
+                      backgroundSize: "100%",
+                      backgroundSize: "cover",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
+                      <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                        <span>
+                          {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
+                        </span>
+                      </div>
+                    </a>
+                  </a>
+                ) : (
+                  <a
+                    data-role="tile"
+                    data-size="large"
+                    className="w-100"
+                    href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
+                    style={{
+                      backgroundImage: "url(" + fProduct.thumbnail_image + ")",
+                      backgroundSize: "100%",
+                      backgroundSize: "cover",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <a href={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
+                      <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                        <span>
+                          {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
+                        </span>
+                      </div>
+                    </a>
+                  </a>
+                )
+              )
+            ) : (
+              <span className="container row w-100">Loading...</span>
+            )
+          ) : // for mobile view
+
+          products && products.length > 0 ? (
             products.map((fProduct, index) =>
               index === 0 || index === 7 ? (
-                <Link
+                <div
                   data-role="tile"
                   data-size="xlarge"
                   className="w-100"
-                  to={windowSize.innerWidth > 600 ? "/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image : "#"}
                   style={{
                     backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                     backgroundSize: "100%",
@@ -105,20 +156,19 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  <Link to={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
+                  <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
                     <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                       <span>
                         {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
                       </span>
                     </div>
-                  </Link>
-                </Link>
+                  </a>
+                </div>
               ) : (
-                <Link
+                <div
                   data-role="tile"
                   data-size="large"
                   className="w-100"
-                  to={windowSize.innerWidth > 600 ? "/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image : "#"}
                   style={{
                     backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                     backgroundSize: "100%",
@@ -126,15 +176,14 @@ const Featured_Product = (props) => {
                     overflow: "hidden",
                   }}
                 >
-                  {/* <Link to={{ pathname: "/shop", category: fProduct.category, bannerimage: fProduct.banner_image }} className=""> */}
-                  <Link to={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
+                  <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
                     <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                       <span>
                         {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
                       </span>
                     </div>
-                  </Link>
-                </Link>
+                  </a>
+                </div>
               )
             )
           ) : (
@@ -147,7 +196,7 @@ const Featured_Product = (props) => {
       <br />
       <br />
       <div className="text-center mt-2 d-none">
-        <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
+        <Link to={"/shop"} className="p-2 px-3 dbtn-primary btn-md btnhover shadow m-t30">
           Shop all <i className="fa fa-angle-right m-r10"></i>
         </Link>
       </div>

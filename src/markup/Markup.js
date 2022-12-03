@@ -66,7 +66,7 @@ class Markup extends Component {
           <Route path="/gallery" exact component={Gallery} />
           <Route path="/shop-wishlist" exact component={Shopwishlist} />
           <Route path="/construction" exact component={Construction} />
-          <Route path="*" component={Loading} />
+          {/* <Route path="*" component={Loading} /> */}
         </Switch>
       </BrowserRouter>
     );
