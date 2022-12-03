@@ -185,12 +185,12 @@ const Shopcart = () => {
             <div className="row">
               <div className="col-lg-12">
                 <div className="table-responsive m-b20">
-                  <div className="text-center">
-                    <Link to={"/shop"} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
-                      Shop all <i className="fa fa-angle-right m-r10 mt-1"></i>
+                  <div className="text-center m-t20">
+                    <Link to={"/shop"} className="dbtn-primary m-t30">
+                      Shop all <i className="fa fa-angle-right mt-1"></i>
                     </Link>{" "}
                     {!userLoggedin && (
-                      <Link to={"/shop-cart"} onClick={(e) => (localStorage.removeItem("daintycart"), setCartDetails([]))} className="p-2 px-3 btn btn-md btnhover shadow m-t30">
+                      <Link to={"/shop-cart"} onClick={(e) => (localStorage.removeItem("daintycart"), setCartDetails([]))} className="dbtn-primary m-t30">
                         Clear Cart {/*  <i class="fa fa-delete-left mt-1"></i> */}
                       </Link>
                     )}

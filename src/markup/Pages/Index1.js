@@ -128,8 +128,8 @@ const Index1 = () => {
 
                     <span className="text-white">{config.about_service}</span>
                     <div className="text-center mt-2">
-                      <Link to={"/our-journey"} className="btn btn-sm btnhover shadow m-t30">
-                        <i className="fa fa-angle-right m-r10"></i>More..
+                      <Link to={"/our-journey"} className="dbtn-primary m-t30">
+                        More <i className="fa fa-angle-right"></i>
                       </Link>
                     </div>
                   </div>

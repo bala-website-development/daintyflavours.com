@@ -287,6 +287,7 @@ const Shop = (props) => {
         setMessage("Item added to cart.");
         handleVisible();
       } else {
+        // updateCartQuantityfromls(data, lsDaintyCart_);
         let cartarraynew = [];
         cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
         localStorage.removeItem("daintycart");
@@ -332,7 +333,19 @@ const Shop = (props) => {
     }
     //setLoading((loading) => !loading);
   };
-
+  const updateCartQuantityfromls = (newproduct, lsDaintyCart_) => {
+    console.log("lsDaintyCartforquantity update", lsDaintyCart_);
+    for (var i = 0; i < lsDaintyCart_.length; i++) {
+      if (lsDaintyCart_[i].p_id == newproduct.p_id) {
+        lsDaintyCart_[i].p_quantity = lsDaintyCart_[i].p_quantity + 1;
+        lsDaintyCart_[i].p_net_product_price = parseInt(lsDaintyCart_[i].p_price) * lsDaintyCart_[i].quantity;
+      }
+    }
+    console.log("lsDaintyCartforupdatequatity", lsDaintyCart_);
+    localStorage.removeItem("daintycart");
+    localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
+    console.log("lsDaintyCartforupdatequatitynew", JSON.stringify(lsDaintyCart_));
+  };
   const applyFilter = (searchValue) => {
     console.log("searchvalue", searchValue);
     if (searchValue !== "") {
@@ -725,15 +738,15 @@ const Shop = (props) => {
                       <div className="aligncenter">
                         {!loading && <div className="p-1">{products.length + "/" + allproducts.length} Products found.</div>}
                         {end <= filter.length + postsPerPage && (
-                          <button className="btn btn-sm btnhover px-2" onClick={handleShowMorePosts}>
+                          <a href="#" className="dbtn-primary" onClick={handleShowMorePosts}>
                             Load more
-                          </button>
+                          </a>
                         )}
                         <span class="px-2"></span>
                         {/* <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
                         View all Products
                       </Link> */}
-                        <Link className="btn btn-sm btnhover px-2" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "maincategory=all&category=all" }}>
+                        <Link className="dbtn-primary" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "maincategory=all&category=all" }}>
                           View all Products
                         </Link>
                       </div>
