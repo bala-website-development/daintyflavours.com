@@ -84,11 +84,12 @@ const Shopproduct = (props) => {
         setSuccessMsg("Item added to cart.");
         handleVisible();
       } else {
-        let cartarraynew = [];
-        cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
-        localStorage.removeItem("daintycart");
-        cartarraynew.push(data);
-        localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
+        updateCartQuantityfromls(data, JSON.parse(lsDaintyCart_));
+        // let cartarraynew = [];
+        // cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
+        // localStorage.removeItem("daintycart");
+        // cartarraynew.push(data);
+        // localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
         setSuccessMsg("Item Updated to cart.");
         handleVisible();
       }
@@ -121,6 +122,21 @@ const Shopproduct = (props) => {
         });
     }
     setLoading((loading) => !loading);
+  };
+  const updateCartQuantityfromls = (newproduct, lsDaintyCart_) => {
+    console.log("first if before");
+    if (lsDaintyCart_.filter((a) => a.p_id == newproduct.p_id).length > 0) {
+      console.log("first if2");
+      let array = lsDaintyCart_.filter((a) => a.p_id == newproduct.p_id);
+      let index = lsDaintyCart_.findIndex((fi) => fi.p_id == newproduct.p_id);
+      lsDaintyCart_[index].p_quantity = lsDaintyCart_[index].p_quantity + 1;
+      lsDaintyCart_[index].p_net_product_price = parseInt(lsDaintyCart_[index].p_price) * lsDaintyCart_[index].quantity;
+    } else {
+      console.log("second else");
+      lsDaintyCart_.push(newproduct);
+    }
+    localStorage.removeItem("daintycart");
+    localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
   };
   const getProductReviews = async () => {
     await fetch(config.service_url + `getProductReviews/${id}`)
@@ -207,7 +223,9 @@ const Shopproduct = (props) => {
   return (
     <div>
       <Modal size="sm" show={smShow} onHide={() => setSmShow(false)}>
-        <Modal.Header closeButton>{successMsg}</Modal.Header>
+        <Modal.Header closeButton>
+          {successMsg} {successMsg.includes("cart") ? <a href="/shop-cart"> View cart</a> : ""}
+        </Modal.Header>
       </Modal>
       <Header />
       <div className="page-content bg-white">

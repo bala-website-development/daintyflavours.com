@@ -336,16 +336,15 @@ const Shop = (props) => {
   const updateCartQuantityfromls = (newproduct, lsDaintyCart_) => {
     console.log("lsDaintyCartforquantity update", lsDaintyCart_);
 
-    if (lsDaintyCart_.filter(a => a.p_id == newproduct.p_id).length > 0) {
-      console.log("first if")
-      let array = lsDaintyCart_.filter(a => a.p_id == newproduct.p_id);
+    if (lsDaintyCart_.filter((a) => a.p_id == newproduct.p_id).length > 0) {
+      console.log("first if");
+      let array = lsDaintyCart_.filter((a) => a.p_id == newproduct.p_id);
       // let count = array[0].length + 1;
-      let index = lsDaintyCart_.findIndex(fi => fi.p_id == newproduct.p_id);
+      let index = lsDaintyCart_.findIndex((fi) => fi.p_id == newproduct.p_id);
       lsDaintyCart_[index].p_quantity = lsDaintyCart_[index].p_quantity + 1;
       lsDaintyCart_[index].p_net_product_price = parseInt(lsDaintyCart_[index].p_price) * lsDaintyCart_[index].quantity;
-    }
-    else {
-      console.log("second else")
+    } else {
+      console.log("second else");
       lsDaintyCart_.push(newproduct);
     }
 
@@ -525,7 +524,9 @@ const Shop = (props) => {
   return (
     <div>
       <Modal size="sm" show={smShow} onHide={() => setSmShow(false)}>
-        <Modal.Header closeButton>{message}</Modal.Header>
+        <Modal.Header closeButton>
+          {message} {message.includes("cart") ? <a href="/shop-cart"> View cart</a> : ""}
+        </Modal.Header>
       </Modal>
       <Header2 active={"shop"} />
 
