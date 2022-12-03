@@ -287,12 +287,12 @@ const Shop = (props) => {
         setMessage("Item added to cart.");
         handleVisible();
       } else {
-        // updateCartQuantityfromls(data, lsDaintyCart_);
-        let cartarraynew = [];
-        cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
-        localStorage.removeItem("daintycart");
-        cartarraynew.push(data);
-        localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
+        updateCartQuantityfromls(data, JSON.parse(lsDaintyCart_));
+        // let cartarraynew = [];
+        // cartarraynew = JSON.parse(localStorage.getItem("daintycart"));
+        // localStorage.removeItem("daintycart");
+        // cartarraynew.push(data);
+        // localStorage.setItem("daintycart", JSON.stringify(cartarraynew));
         setMessage("Item Updated to cart.");
         handleVisible();
       }
@@ -336,6 +336,8 @@ const Shop = (props) => {
   const updateCartQuantityfromls = (newproduct, lsDaintyCart_) => {
     console.log("lsDaintyCartforquantity update", lsDaintyCart_);
     for (var i = 0; i < lsDaintyCart_.length; i++) {
+      console.log(lsDaintyCart_[i], "from local");
+      console.log(newproduct, "from db");
       if (lsDaintyCart_[i].p_id == newproduct.p_id) {
         lsDaintyCart_[i].p_quantity = lsDaintyCart_[i].p_quantity + 1;
         lsDaintyCart_[i].p_net_product_price = parseInt(lsDaintyCart_[i].p_price) * lsDaintyCart_[i].quantity;
