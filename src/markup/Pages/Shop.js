@@ -13,6 +13,7 @@ import secureLocalStorage from "react-secure-storage";
 const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
   const queryurl = localStorage.getItem("queryurl");
+  const [totalProduct, setTotalProduct] = useState(0);
   const [products, setProducts] = useState([]);
   const [allproducts, setAllProducts] = useState([]);
   const [networkError, setNetworkError] = useState("");
@@ -104,6 +105,7 @@ const Shop = (props) => {
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
+        setTotalProduct(data.filter(a => a.isactive === 1).length);
         if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
           if (category === "all" || props.location.searchFilter === "") {
             getAllProductDetails();
@@ -210,7 +212,7 @@ const Shop = (props) => {
         const slicedPosts = active.slice(0, postsPerPage);
         arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
         setProducts(arrayForHoldingPosts);
-        console.log(data, "products");
+        console.log(data, "products checkda");
       })
       .catch((err) => {
         setNetworkError("Something went wrong, Please try again later!!");
@@ -666,7 +668,7 @@ const Shop = (props) => {
                   <div>
                     {!loading && (
                       <div className="p-2">
-                        {products.length + "/" + allproducts.length} Products found.{" "}
+                        {products.length + "/" + totalProduct} Products found.{" "}
                         {end <= filter.length + postsPerPage && (
                           <a href="#" className="p-2 bold text-primary" onClick={handleShowMorePosts}>
                             <b> Load more</b>
