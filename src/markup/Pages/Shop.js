@@ -44,6 +44,7 @@ const Shop = (props) => {
   let category = queries.category || queries.brand;
   let maincategory = queries.maincategory;
   let searchFilter = props.location.searchFilter;
+  let subcategory = queries.subcategory;
   console.log("bannerimagestate props", props.location.bannerimage);
   console.log("bannerimagestate local storage", localStorage.getItem("bannerurl"));
   let arrayForHoldingPosts = [];
@@ -54,8 +55,16 @@ const Shop = (props) => {
     //console.log("bannerimagestate", bannerimagestate);
 
     let _filterOption = "";
-    if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
-      _filterOption = category != "" && category !== undefined ? category : maincategory;
+    if ((query.get("subcategory") == "" || query.get("subcategory") == undefined)) {
+      _filterOption = subcategory != "" && subcategory !== undefined ? subcategory : "";
+    }
+    else if ((query.get("subcategory") != "" || query.get("subcategory") != undefined)) {
+      _filterOption = query.get("subcategory");
+      localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category") + "&subcategory=" + query.get("subcategory"));
+    }
+    else if ((query.get("category") == "" || query.get("category") == undefined)
+      && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
+      _filterOption = subcategory != "" && subcategory != undefined ? subcategory : (category != "" && category !== undefined ? category : maincategory);
     } else {
       let _categories;
       if (query.get("brand") == "" || query.get("brand") == undefined) {
@@ -112,7 +121,19 @@ const Shop = (props) => {
               setProducts(selective);
               setFilter(selective);
               console.log("all active category products");
-            } else {
+            }
+            else if (query.get("subcategory") != "" && query.get("subcategory") != undefined) {
+              let selective = data
+                .filter((filter) => filter?.p_subcategory?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
+                .map((data) => {
+                  return data;
+                });
+              setProducts(selective);
+              setFilter(selective);
+              console.log("all sub category products");
+            }
+            else {
+
               // all active category products
               let selective = data
                 .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
