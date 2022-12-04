@@ -55,12 +55,9 @@ const Shop = (props) => {
     //console.log("bannerimagestate", bannerimagestate);
 
     let _filterOption = "";
-    if ((query.get("subcategory") == "" || query.get("subcategory") == undefined)) {
-      _filterOption = subcategory != "" && subcategory !== undefined ? subcategory : "";
-    }
-    else if ((query.get("subcategory") != "" || query.get("subcategory") != undefined)) {
-      _filterOption = query.get("subcategory");
-      localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category") + "&subcategory=" + query.get("subcategory"));
+    if ((query.get("subcategory") != "" || query.get("subcategory") != undefined) && (subcategory != "" && subcategory !== undefined)) {
+      _filterOption = subcategory != "" && subcategory !== undefined ? subcategory : query.get("subcategory");
+      localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category") + "&subcategory=" + _filterOption);
     }
     else if ((query.get("category") == "" || query.get("category") == undefined)
       && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
