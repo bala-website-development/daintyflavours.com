@@ -56,13 +56,11 @@ const Shop = (props) => {
     //console.log("bannerimagestate", bannerimagestate);
 
     let _filterOption = "";
-    if ((query.get("subcategory") != "" || query.get("subcategory") != undefined) && (subcategory != "" && subcategory !== undefined)) {
+    if ((query.get("subcategory") != "" || query.get("subcategory") != undefined) && subcategory != "" && subcategory !== undefined) {
       _filterOption = subcategory != "" && subcategory !== undefined ? subcategory : query.get("subcategory");
       localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category") + "&subcategory=" + _filterOption);
-    }
-    else if ((query.get("category") == "" || query.get("category") == undefined)
-      && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
-      _filterOption = subcategory != "" && subcategory != undefined ? subcategory : (category != "" && category !== undefined ? category : maincategory);
+    } else if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
+      _filterOption = subcategory != "" && subcategory != undefined ? subcategory : category != "" && category !== undefined ? category : maincategory;
     } else {
       let _categories;
       if (query.get("brand") == "" || query.get("brand") == undefined) {
@@ -105,7 +103,7 @@ const Shop = (props) => {
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
-        setTotalProduct(data.filter(a => a.isactive === 1).length);
+        setTotalProduct(data.filter((a) => a.isactive === 1).length);
         if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
           if (category === "all" || props.location.searchFilter === "") {
             getAllProductDetails();
@@ -120,8 +118,7 @@ const Shop = (props) => {
               setProducts(selective);
               setFilter(selective);
               console.log("all active category products");
-            }
-            else if (query.get("subcategory") != "" && query.get("subcategory") != undefined) {
+            } else if (query.get("subcategory") != "" && query.get("subcategory") != undefined) {
               let selective = data
                 .filter((filter) => filter?.p_subcategory?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
                 .map((data) => {
@@ -130,9 +127,7 @@ const Shop = (props) => {
               setProducts(selective);
               setFilter(selective);
               console.log("all sub category products");
-            }
-            else {
-
+            } else {
               // all active category products
               let selective = data
                 .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
@@ -762,7 +757,7 @@ const Shop = (props) => {
                     </div>
                     {!loading && (
                       <div className="aligncenter">
-                        {!loading && <div className="p-1">{products.length + "/" + allproducts.length} Products found.</div>}
+                        {!loading && <div className="p-1">{products.length + "/" + totalProduct} Products found.</div>}
                         {end <= filter.length + postsPerPage && (
                           <a href="#" className="dbtn-primary" onClick={handleShowMorePosts}>
                             Load more

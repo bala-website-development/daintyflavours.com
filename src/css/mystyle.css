@@ -2,6 +2,11 @@
   --inverted-corners-background: #52525b;
   --inverted-corners-size: 2rem;
 }
+.submenu {
+  color: #b43b8d;
+}
+
+
 .iconsize1
 {
   height: 17px;
