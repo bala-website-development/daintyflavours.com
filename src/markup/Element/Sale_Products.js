@@ -48,7 +48,7 @@ const Sale_Products = () => {
     <div>
       <div className="mt-3">
         <div className=" text-center">
-          <h3>Produsts on Sale</h3>
+          <h3>Products on Sale</h3>
           <div className="dlab-separator style1 bg-primary"></div>
         </div>
 

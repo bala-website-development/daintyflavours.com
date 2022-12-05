@@ -50,6 +50,7 @@ const NavBarMenu = () => {
   const [cartDetails, setCartDetails] = useState(false);
   const [cartUpdated, setCartUpdated] = useState(localStorage.getItem("cartUpdated"));
   const [menuMainCategory, setMenuMainCategory] = useState([]);
+  const [offer, setOffer] = useState([]);
   const [menuCategory, setMenuCategory] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
   const [menuSubCategory, setMenuSubCategory] = useState([]);
@@ -75,6 +76,26 @@ const NavBarMenu = () => {
           localStorage.setItem("cartUpdated", true);
         } else if (data.status === 400) {
           setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
+  const getOffer = async () => {
+    console.log("getOffer");
+    await fetch(config.service_url + "getoffer")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("offers", data);
+          let _filter = data.data.filter((_d) => _d.type === "offer" && _d.isactive === 1);
+          _filter.push({ Expiration: moment().add(1, "d") });
+          localStorage.setItem("offer", JSON.stringify(_filter));
+          setOffer(_filter.filter((a) => a.isactive === 1));
+        } else if (data.status === 400) {
+          setOffer([]);
         }
       })
       .catch((err) => {
@@ -187,6 +208,7 @@ const NavBarMenu = () => {
         })
         .catch(function (error) {});
     };
+    getOffer();
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
     } else {
@@ -240,7 +262,8 @@ const NavBarMenu = () => {
         <nav class="navbar navbar-expand-lg navbar-light searchbarbg bg-light w-100 py-1 bg-white">
           <div class="container-fluid">
             <div className="d-flex w-100">
-              <div className="">{config.showoffertext ? config.offertext : ""}</div>
+              {/* <div className="">{config.showoffertext ? config.offertext : ""}</div> */}
+              {config.showoffertext ? <div className="p-0" dangerouslySetInnerHTML={{ __html: offer?.map((off) => off.text + " ") }} /> : config.offertext}
               <div></div>
             </div>
             <div className="d-flex align-items-center justify-content-end mr-3">
