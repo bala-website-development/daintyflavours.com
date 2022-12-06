@@ -22,10 +22,11 @@ const Shopchekout = () => {
   const [status, setStatus] = useState(false);
   const [message, setMessage] = useState("");
   const [notes, setNotes] = useState("");
+  const [pickup, setPickup] = useState(false);
+  const grossTotal = pickup ? Number(subTotal).toFixed(2) : Number(subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))).toFixed(2);
 
   const history = useHistory();
   const { register, handleSubmit } = useForm({ defaultValues: {} });
-  // const onSubmit = data => console.log(data);
   const [userAddress, setUserAddress] = useState([]);
 
   const updatecart = (data, ls) => {
@@ -136,9 +137,10 @@ const Shopchekout = () => {
       paymentmethod: "Online",
       deliverystatus: "InProgress",
       deliverydate: "",
+      deliverymethod: pickup ? "Pickup" : "Shipping",
       orderdate: new Date(),
-      shipping: productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost),
-      grosstotal: Number(subTotal).toFixed(2) + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)),
+      shipping: pickup ? 0 : productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost),
+      grosstotal: grossTotal,
       userid: userid_,
       usernotes: notes,
       billingaddress: userAddress[0],
@@ -163,7 +165,7 @@ const Shopchekout = () => {
         country: data.country === "" ? userAddress[0].country : data.country,
       },
     };
-    console.log("input", data);
+    console.log("checkout input", _data);
     console.log(_data);
 
     if (cartDetails.length > 0) {
@@ -219,12 +221,26 @@ const Shopchekout = () => {
           </div>
         </div>
 
-        <div className="section-full content-inner">
+        <div className="section-full">
           <div className="container">
             <form className="shop-form" onSubmit={handleSubmit(onSubmit)}>
               <div className="row">
+                <div className="row p-3">
+                  <div className="col-lg-8">
+                    <input type="checkbox" id="pickup" name="pickup" value="pickup" onClick={(e) => setPickup(e.target.checked)}></input>
+                    <label for="pickup">Check here, if you are picking the order</label>
+                    {pickup ? " Pick up Address: " + config.pickup_address : ""}
+                  </div>
+                  <div className="col-lg-4">
+                    <h4 className="text-primary">
+                      Total Amount: <i class="fa fa-inr mb-0"> </i>
+                      <b> {grossTotal}</b>
+                    </h4>
+                  </div>
+                </div>
+                <hr />
                 <div className="col-lg-6 col-md-12 m-b30">
-                  <h3>Full Shipping Address</h3>
+                  <h3>{pickup ? "Your Address" : "Shipping Address"}</h3>
 
                   <div className="row">
                     <div className="form-group col-md-6">
@@ -394,7 +410,7 @@ const Shopchekout = () => {
                           <tr>
                             <td>Shipping</td>
                             <td class="align-right">
-                              <i class="fa fa-inr"></i> {productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)}
+                              <i class="fa fa-inr"></i> {pickup ? 0 : productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)}
                             </td>
                           </tr>
                           <tr>
@@ -411,16 +427,12 @@ const Shopchekout = () => {
                               </div>
                             </td>
                           </tr>
-                          {/* <tr>
-                            <td>Tax({config.taxpercentage}%)</td>
-                            <td>
-                              <i class="fa fa-inr"></i> {(subTotal * (config.taxpercentage / 100)).toFixed(2)}
-                            </td>
-                          </tr> */}
+
                           <tr className="bg-primary text-light">
                             <td>Total</td>
                             <td>
-                              <i class="fa fa-inr"></i> {Number(subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))).toFixed(2)}
+                              <i class="fa fa-inr"></i> {grossTotal}
+                              {/* {pickup ? Number(subTotal).toFixed(2) : Number(subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))).toFixed(2)} */}
                             </td>
                           </tr>
                         </tbody>
