@@ -5,7 +5,10 @@
 .submenu {
   color: #b43b8d;
 }
-
+.submenu-col2{
+    column-count: 2 !important;
+    column-rule: dotted 1px #333 !important;
+}
 
 .iconsize1
 {
