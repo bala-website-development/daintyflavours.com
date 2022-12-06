@@ -263,7 +263,7 @@ const NavBarMenu = () => {
           <div class="container-fluid">
             <div className="d-flex w-100">
               {/* <div className="">{config.showoffertext ? config.offertext : ""}</div> */}
-              {config.showoffertext ? <div className="p-0" dangerouslySetInnerHTML={{ __html: offer?.map((off) => off.textyes) }} /> : config.offertext}
+              {config.showoffertext ? <div className="p-0" dangerouslySetInnerHTML={{ __html: offer?.map((off) => off.text) }} /> : config.offertext}
               <div></div>
             </div>
             <div className="d-flex align-items-center justify-content-end mr-3">
