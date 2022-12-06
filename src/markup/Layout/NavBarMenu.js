@@ -6,7 +6,7 @@ import cart from "./../../images/icons/cart.png";
 import scart from "./../../images/icons/shopping-cart.png";
 import user from "./../../images/icons/user.png";
 import config from "../../config.json";
-
+import secureLocalStorage from "react-secure-storage";
 const NavBarMenu = () => {
   const slider_content = config.slider;
   var btn = document.querySelector(".navicon");
@@ -45,7 +45,7 @@ const NavBarMenu = () => {
     navUl.forEach((el) => el.classList.remove("open"));
     current.classList.add("open");
   }
-  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(localStorage.getItem("daintycart")));
+  const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(secureLocalStorage.getItem("daintycart")));
   const [toggleShow, setToggleShow] = useState(false);
   const [cartDetails, setCartDetails] = useState(false);
   const [cartUpdated, setCartUpdated] = useState(localStorage.getItem("cartUpdated"));
