@@ -19,7 +19,7 @@ const Sale_Products = () => {
       .then((data) => {
         if (data) {
           let active = data
-            .filter((filter, index) => filter.isactive === 1 && filter.p_price < filter.p_net_product_price && index < config.saleproduct)
+            .filter((filter, index) => filter.isactive === 1 && filter.isonsale === 1 && index < config.saleproduct)
             .map((data) => {
               return data;
             });
@@ -48,7 +48,7 @@ const Sale_Products = () => {
     <div>
       <div className="mt-3">
         <div className=" text-center">
-          <h3>Produsts on Sale</h3>
+          <h3>Products on Sale</h3>
           <div className="dlab-separator style1 bg-primary"></div>
         </div>
 

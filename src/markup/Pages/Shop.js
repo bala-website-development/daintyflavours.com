@@ -13,6 +13,7 @@ import secureLocalStorage from "react-secure-storage";
 const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
   const queryurl = localStorage.getItem("queryurl");
+  const [totalProduct, setTotalProduct] = useState(0);
   const [products, setProducts] = useState([]);
   const [allproducts, setAllProducts] = useState([]);
   const [networkError, setNetworkError] = useState("");
@@ -44,6 +45,7 @@ const Shop = (props) => {
   let category = queries.category || queries.brand;
   let maincategory = queries.maincategory;
   let searchFilter = props.location.searchFilter;
+  let subcategory = queries.subcategory;
   console.log("bannerimagestate props", props.location.bannerimage);
   console.log("bannerimagestate local storage", localStorage.getItem("bannerurl"));
   let arrayForHoldingPosts = [];
@@ -54,8 +56,11 @@ const Shop = (props) => {
     //console.log("bannerimagestate", bannerimagestate);
 
     let _filterOption = "";
-    if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
-      _filterOption = category != "" && category !== undefined ? category : maincategory;
+    if ((query.get("subcategory") != "" || query.get("subcategory") != undefined) && subcategory != "" && subcategory !== undefined) {
+      _filterOption = subcategory != "" && subcategory !== undefined ? subcategory : query.get("subcategory");
+      localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category") + "&subcategory=" + _filterOption);
+    } else if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
+      _filterOption = subcategory != "" && subcategory != undefined ? subcategory : category != "" && category !== undefined ? category : maincategory;
     } else {
       let _categories;
       if (query.get("brand") == "" || query.get("brand") == undefined) {
@@ -98,6 +103,7 @@ const Shop = (props) => {
     await fetch(config.service_url + "getproducts")
       .then((response) => response.json())
       .then((data) => {
+        setTotalProduct(data.filter((a) => a.isactive === 1).length);
         if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
           if (category === "all" || props.location.searchFilter === "") {
             getAllProductDetails();
@@ -112,6 +118,15 @@ const Shop = (props) => {
               setProducts(selective);
               setFilter(selective);
               console.log("all active category products");
+            } else if (query.get("subcategory") != "" && query.get("subcategory") != undefined) {
+              let selective = data
+                .filter((filter) => filter?.p_subcategory?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
+                .map((data) => {
+                  return data;
+                });
+              setProducts(selective);
+              setFilter(selective);
+              console.log("all sub category products");
             } else {
               // all active category products
               let selective = data
@@ -192,7 +207,7 @@ const Shop = (props) => {
         const slicedPosts = active.slice(0, postsPerPage);
         arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
         setProducts(arrayForHoldingPosts);
-        console.log(data, "products");
+        console.log(data, "products checkda");
       })
       .catch((err) => {
         setNetworkError("Something went wrong, Please try again later!!");
@@ -648,7 +663,7 @@ const Shop = (props) => {
                   <div>
                     {!loading && (
                       <div className="p-2">
-                        {products.length + "/" + allproducts.length} Products found.{" "}
+                        {products.length + "/" + totalProduct} Products found.{" "}
                         {end <= filter.length + postsPerPage && (
                           <a href="#" className="p-2 bold text-primary" onClick={handleShowMorePosts}>
                             <b> Load more</b>
@@ -742,7 +757,7 @@ const Shop = (props) => {
                     </div>
                     {!loading && (
                       <div className="aligncenter">
-                        {!loading && <div className="p-1">{products.length + "/" + allproducts.length} Products found.</div>}
+                        {!loading && <div className="p-1">{products.length + "/" + totalProduct} Products found.</div>}
                         {end <= filter.length + postsPerPage && (
                           <a href="#" className="dbtn-primary" onClick={handleShowMorePosts}>
                             Load more

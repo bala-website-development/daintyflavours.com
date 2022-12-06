@@ -50,8 +50,10 @@ const NavBarMenu = () => {
   const [cartDetails, setCartDetails] = useState(false);
   const [cartUpdated, setCartUpdated] = useState(localStorage.getItem("cartUpdated"));
   const [menuMainCategory, setMenuMainCategory] = useState([]);
+  const [offer, setOffer] = useState([]);
   const [menuCategory, setMenuCategory] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
+  const [menuSubCategory, setMenuSubCategory] = useState([]);
   const toggle = () => {
     setToggleShow((toggleShow) => !toggleShow);
   };
@@ -81,8 +83,28 @@ const NavBarMenu = () => {
         // console.log(networkError);
       });
   };
+  const getOffer = async () => {
+    console.log("getOffer");
+    await fetch(config.service_url + "getoffer")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("offers", data);
+          let _filter = data.data.filter((_d) => _d.type === "offer" && _d.isactive === 1);
+          _filter.push({ Expiration: moment().add(1, "d") });
+          localStorage.setItem("offer", JSON.stringify(_filter));
+          setOffer(_filter.filter((a) => a.isactive === 1));
+        } else if (data.status === 400) {
+          setOffer([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
 
-  const getSubCategories = async () => {
+  const getCategories = async () => {
     console.log("entered");
     await fetch(config.service_url + "getuserscategory")
       .then((response) => response.json())
@@ -103,7 +125,7 @@ const NavBarMenu = () => {
         // console.log(networkError);
       });
   };
-  const getCategories = async () => {
+  const getSubCategories = async () => {
     console.log("entered");
     await fetch(config.service_url + "getuserssubcategory")
       .then((response) => response.json())
@@ -113,7 +135,7 @@ const NavBarMenu = () => {
           let _filter = data.data.filter((_d) => _d.type === "product");
           _filter.push({ Expiration: moment().add(1, "d") });
           localStorage.setItem("subcategories", JSON.stringify(_filter));
-          setMenuCategory(_filter);
+          setMenuSubCategory(_filter);
         } else if (data.status === 400) {
           setMenuMainCategory([]);
         }
@@ -170,6 +192,7 @@ const NavBarMenu = () => {
     if (_expDate <= moment()) {
       console.log("goinside");
       getCategories();
+      getSubCategories();
     }
   };
 
@@ -183,8 +206,9 @@ const NavBarMenu = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) { });
+        .catch(function (error) {});
     };
+    getOffer();
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       fetchCartDetails();
     } else {
@@ -202,6 +226,11 @@ const NavBarMenu = () => {
       }
     }
 
+    if (localStorage.getItem("subcategories") === undefined || localStorage.getItem("subcategories") === null) {
+      getSubCategories();
+      console.log("fromservice main categories");
+    }
+
     if (localStorage.getItem("categories") === undefined || localStorage.getItem("categories") === null) {
       getCategories();
       getSubCategories();
@@ -212,6 +241,11 @@ const NavBarMenu = () => {
         checkExpirationForCategories();
         setMenuCategory(JSON.parse(localStorage.getItem("categories")));
         console.log(menuCategory, "ls");
+      }
+      if (menuSubCategory === undefined || menuSubCategory === null || menuSubCategory?.length === 0) {
+        checkExpirationForCategories();
+        setMenuSubCategory(JSON.parse(localStorage.getItem("subcategories")));
+        console.log(menuSubCategory, "ls");
       }
     }
 
@@ -228,7 +262,8 @@ const NavBarMenu = () => {
         <nav class="navbar navbar-expand-lg navbar-light searchbarbg bg-light w-100 py-1 bg-white">
           <div class="container-fluid">
             <div className="d-flex w-100">
-              <div className="">{config.showoffertext ? config.offertext : ""}</div>
+              {/* <div className="">{config.showoffertext ? config.offertext : ""}</div> */}
+              {config.showoffertext ? <div className="p-0" dangerouslySetInnerHTML={{ __html: offer?.map((off) => off.text) }} /> : config.offertext}
               <div></div>
             </div>
             <div className="d-flex align-items-center justify-content-end mr-3">
@@ -365,10 +400,6 @@ const NavBarMenu = () => {
                                 .filter((fil) => fil.maincategory === mmc.maincategory)
                                 ?.map((mc) => (
                                   <li className="small">
-                                    {/* <Link className="dropdown-item" to={{ pathname: "/shop", maincategory: mmc?.maincategory, bannerimage: mc?.banner_image, category: mc?.category }}> */}
-                                    {/* <Link className="dropdown-item" onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))} to={{ pathname: "/shop?maincategory=" + mmc.maincategory + "&category=" + mc.category }}>
-                                      <span className="text-nowrap">{mc?.category}</span>
-                                    </Link> */}
                                     <Link
                                       className="dropdown-item text-uppercase"
                                       onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))}
@@ -380,9 +411,28 @@ const NavBarMenu = () => {
                                     >
                                       <span className="text-nowrap">{mc?.category}</span>
                                     </Link>
+                                    <ul class="dropdown-sub-menu list-unstyled" aria-labelledby={"navbarDropdownMenuAvatar" + mc.category}>
+                                      {menuSubCategory &&
+                                        menuSubCategory
+                                          .filter((f) => f.maincategory === mmc.maincategory && f.category === mc.category)
+                                          ?.map((sm) => (
+                                            <li className="small">
+                                              <Link
+                                                className="submenu dropdown-item text-uppercase"
+                                                onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category + "&subcategory=" + sm.subcategory))}
+                                                to={{
+                                                  pathname: "/shop",
+                                                  search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category + "&subcategory=" + sm.subcategory,
+                                                  bannerimage: mc?.banner_image,
+                                                }}
+                                              >
+                                                <span className=" text-nowrap">{sm?.subcategory}</span>
+                                              </Link>
+                                            </li>
+                                          ))}
+                                    </ul>
                                   </li>
                                 ))}
-
                           </ul>
                         </li>
                       )
@@ -390,7 +440,6 @@ const NavBarMenu = () => {
                 )}
 
                 <li>
-
                   <li class="nav-item dropdown">
                     <a class="dropdown-toggle align-items-center hidden-arrow nav-link text-dark" href="#" id={"navbarDropdownMenuAvatar" + "brand"} role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                       <span className="small">
@@ -398,34 +447,29 @@ const NavBarMenu = () => {
                       </span>
                     </a>
 
-                    <ul class="dropdown-menu" aria-labelledby={"navbarDropdownMenuAvatar" + "BRAND"}>
-                      {JSON.parse(localStorage.getItem("brand"))?.filter(b => b).map((brand) =>
-                        brand !== null && (
-
-                          <li className="small">
-
-                            <Link
-                              className="dropdown-item text-uppercase"
-                              onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", brand?.banner_image), localStorage.setItem("categorydes", brand?.categorydes == undefined ? "" : brand?.categorydes), localStorage.setItem("queryurl", "brand=" + brand.brand))}
-                              to={{
-                                pathname: "/shop",
-                                search: "?brand=" + brand.brand,
-                                bannerimage: brand?.banner_image,
-                              }}
-                            >
-                              <span className="text-nowrap">{brand?.brand}</span>
-                            </Link>
-                          </li>
-                        )
-
-                      )}
+                    <ul class="submenu-col2 dropdown-menu" aria-labelledby={"navbarDropdownMenuAvatar" + "BRAND"}>
+                      {JSON.parse(localStorage.getItem("brand"))
+                        ?.filter((b) => b)
+                        .map(
+                          (brand) =>
+                            brand !== null && (
+                              <li className="small">
+                                <Link
+                                  className="dropdown-item text-uppercase"
+                                  onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", brand?.banner_image), localStorage.setItem("categorydes", brand?.categorydes == undefined ? "" : brand?.categorydes), localStorage.setItem("queryurl", "brand=" + brand.brand))}
+                                  to={{
+                                    pathname: "/shop",
+                                    search: "?brand=" + brand.brand,
+                                    bannerimage: brand?.banner_image,
+                                  }}
+                                >
+                                  <span className="text-nowrap">{brand?.brand}</span>
+                                </Link>
+                              </li>
+                            )
+                        )}
                     </ul>
-
-
-
                   </li>
-
-
                 </li>
               </ul>
             </div>
