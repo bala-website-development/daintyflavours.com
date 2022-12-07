@@ -49,7 +49,7 @@ const Sale_Products = () => {
       <div className="mt-3">
         <div className=" text-center">
           <h3>Products on Sale</h3>
-          <div className="dlab-separator style1 bg-primary"></div>
+          <div className="dlab-separator style1 bg-primary d-none"></div>
         </div>
 
         <div className="row">

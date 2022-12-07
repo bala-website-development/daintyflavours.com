@@ -195,6 +195,11 @@ const NavBarMenu = () => {
       getSubCategories();
     }
   };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      history.push({ pathname: "/shop", searchFilter: searchFilter });
+    }
+  };
 
   useEffect(() => {
     const fetchCartDetails = () => {
@@ -268,7 +273,7 @@ const NavBarMenu = () => {
             </div>
             <div className="d-flex align-items-center justify-content-end mr-3">
               <div className="align-items-cente w-100">
-                <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar border px-3" placeholder="Search all our products" />
+                <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} onKeyDown={handleKeyDown} type="text" className="searchbar border px-3" placeholder="Search all our products" />
               </div>
               <div className="px-1"> </div>
               <div className="align-items-center">
@@ -296,7 +301,7 @@ const NavBarMenu = () => {
                       <Link to={"/shop-login"}>
                         <i className="ti-user d-none"></i>
                         <img src={user} className="iconsize1" />
-                        <span class="badge rounded-pill badge-notification">
+                        <span class="badge rounded-pill badge-notification d-none">
                           <i class="fa-solid fa-circle-xmark text-danger"></i>
                         </span>
                       </Link>

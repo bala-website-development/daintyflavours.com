@@ -242,7 +242,7 @@ const Index1 = () => {
         </div>
       </div>
       <div className="text-center ">
-        <h3 className=" font-weight-light">Join the BakeryBits club for offers, new products, recepies, tips and much more!</h3>
+        <h3 className=" font-weight-light">Join the Dainty Flavors email list for offers, new products, recepies, tips and much more!</h3>
       </div>
       <A_Newsletter />
       <ScrollToTop />

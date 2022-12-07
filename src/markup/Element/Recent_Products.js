@@ -47,7 +47,7 @@ const New_Products = () => {
       <div className="mt-3">
         <div className=" text-center">
           <h3>Our New Arrivals</h3>
-          <div className="dlab-separator style1 bg-primary"></div>
+          <div className="dlab-separator style1 bg-primary d-none"></div>
         </div>
 
         <div className="row">
