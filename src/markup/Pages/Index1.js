@@ -84,7 +84,7 @@ const Index1 = () => {
     };
     //fetchCategories();
     getProductDetails();
-  }, []);
+  }, [daintyproducts]);
   return (
     <div>
       {/* <Header active={"home"} home={true} /> */}
