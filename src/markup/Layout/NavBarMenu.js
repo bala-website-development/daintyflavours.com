@@ -1,6 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-
+import { UIStore } from "./../Store/UIStore";
 import { Link, useHistory } from "react-router-dom";
 import cart from "./../../images/icons/cart.png";
 import scart from "./../../images/icons/shopping-cart.png";
@@ -54,6 +54,7 @@ const NavBarMenu = () => {
   const [menuCategory, setMenuCategory] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
   const [menuSubCategory, setMenuSubCategory] = useState([]);
+  const cartcount = UIStore.useState((s) => s.cartcount);
   const toggle = () => {
     setToggleShow((toggleShow) => !toggleShow);
   };
@@ -290,7 +291,9 @@ const NavBarMenu = () => {
                 <i class="fas fa-shopping-cart d-none"></i>
                 <img src={scart} className="iconsize1" />
                 <span class="badge rounded-pill badge-notification mx-1">
-                  <span class="badge rounded-pill badge-notification bg-danger">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
+                  <span class="badge rounded-pill badge-notification bg-danger d-none">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
+
+                  <span class="badge rounded-pill badge-notification bg-danger"> {cartcount}</span>
                 </span>
               </Link>
 

@@ -10,6 +10,7 @@ import loadingimg from "./../../images/load.gif";
 import Header2 from "./../Layout/NavBarMenu";
 import queryString from "query-string";
 import secureLocalStorage from "react-secure-storage";
+import { UIStore } from "./../Store/UIStore";
 const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
   const queryurl = localStorage.getItem("queryurl");
@@ -33,7 +34,7 @@ const Shop = (props) => {
   const [next, setNext] = useState(postsPerPage);
   const [end, setEnd] = useState(0);
   const history = useHistory();
-
+  const cartcount = UIStore.useState((s) => s.cartcount);
   //let bannerimageurl = props.location.bannerimage;
   // let category = props.location.category;
   // let maincategory = props.location.maincategory;
@@ -303,11 +304,12 @@ const Shop = (props) => {
         // localStorage.setItem("daintycart", JSON.stringify(cartarray));
         secureLocalStorage.setItem("daintycart", JSON.stringify(cartarray));
         setMessage("Item added to cart.");
+        UIStore.update((s) => {
+          s.cartcount = cartcount + 1;
+        });
         handleVisible();
       } else {
         updateCartQuantityfromls(data, JSON.parse(lsDaintyCart_));
-        setMessage("Item Updated to cart.");
-        handleVisible();
       }
       // history.push("/shop-login");
       // add to cart for Guest user - end
@@ -356,9 +358,16 @@ const Shop = (props) => {
       let index = lsDaintyCart_.findIndex((fi) => fi.p_id == newproduct.p_id);
       lsDaintyCart_[index].p_quantity = parseInt(lsDaintyCart_[index].p_quantity) + 1;
       lsDaintyCart_[index].p_net_product_price = parseInt(lsDaintyCart_[index].p_price) * parseInt(lsDaintyCart_[index].quantity);
+      setMessage("Item Updated to cart.");
+      handleVisible();
     } else {
       console.log("second else");
       lsDaintyCart_.push(newproduct);
+      UIStore.update((s) => {
+        s.cartcount = cartcount + 1;
+      });
+      setMessage("Item Added to cart.");
+      handleVisible();
     }
     //localStorage.removeItem("daintycart");
     secureLocalStorage.removeItem("daintycart");
