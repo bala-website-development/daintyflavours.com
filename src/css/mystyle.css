@@ -9,6 +9,43 @@
     column-count: 2 !important;
     column-rule: dotted 1px #333 !important;
 }
+#dnav li
+{
+    width: 300px;
+}
+ #dnav ul ul {
+   position: absolute;
+   padding: 2;
+   left: 0;
+   display: none;
+  background-color: #ffffff !important;
+   /* hides sublists */
+    margin-left: 300px !important;
+      margin-top: -65px;
+ }
+
+ #dnav li:hover ul ul {
+   display: none;
+ }
+
+ /* hides sub-sublists */
+
+ #dnav li:hover ul {
+   display: block;
+ }
+
+ /* shows sublist on hover */
+
+ #dnav li li:hover ul {
+   display: block;
+position: absolute;
+   /* shows sub-sublist on hover */
+  
+   /* this should be the same width as the parent list item */
+ 
+   /* aligns top of sub menu with top of list item */
+ }
+
 
 .iconsize1
 {
