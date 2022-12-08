@@ -22,15 +22,30 @@
    /* hides sublists */
     margin-left: 300px !important;
       margin-top: -65px;
-   
-     
+ }
+ #dnav ul ul li {
+   border-bottom: #eac9db solid 1px !important;
+
+ }
+ @media only screen and (max-width: 479px) {
+  #dnav ul ul {
+     border: #eac9db solid 1px !important;
+      margin-left: 50px !important;
+      margin-top: 0;
+      background-color: #ffffff !important;
+      z-index: 10000;
+      
  }
  #dnav ul ul li {
   border-bottom: #eac9db solid 1px !important;
+  
  }
-
+ #dnav ul ul:hover{
+  display: block;
+ }
+ }
  #dnav li:hover ul ul {
-   display: none;
+   display: block;
  }
 
  /* hides sub-sublists */
