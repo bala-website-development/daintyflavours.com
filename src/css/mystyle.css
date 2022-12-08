@@ -22,6 +22,11 @@
    /* hides sublists */
     margin-left: 300px !important;
       margin-top: -65px;
+   
+     
+ }
+ #dnav ul ul li {
+  border-bottom: #eac9db solid 1px !important;
  }
 
  #dnav li:hover ul ul {
