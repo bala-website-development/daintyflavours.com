@@ -35,6 +35,7 @@ const Shop = (props) => {
   const [end, setEnd] = useState(0);
   const history = useHistory();
   const cartcount = UIStore.useState((s) => s.cartcount);
+  const daintyproducts = UIStore.useState((s) => s.daintyproducts);
   //let bannerimageurl = props.location.bannerimage;
   // let category = props.location.category;
   // let maincategory = props.location.maincategory;
@@ -47,6 +48,7 @@ const Shop = (props) => {
   let maincategory = queries.maincategory;
   let searchFilter = props.location.searchFilter;
   let subcategory = queries.subcategory;
+  let bannerimage = queries.bannerimage;
   console.log("bannerimagestate props", props.location.bannerimage);
   console.log("bannerimagestate local storage", localStorage.getItem("bannerurl"));
   let arrayForHoldingPosts = [];
@@ -257,7 +259,7 @@ const Shop = (props) => {
     //const queries = queryString.parse(queryurl);
     const queries = queryString.parse(props.location.search);
     getProductDetails();
-    getCategories();
+    //getCategories();// un comment if you need you see the category in side bar
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

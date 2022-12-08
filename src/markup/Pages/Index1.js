@@ -30,22 +30,36 @@ import Recent_Product from "./../Element/Recent_Products";
 import Sale_Product from "./../Element/Sale_Products";
 import Testimonial from "./../Element/Testimonial";
 import Instagram from "./../Element/InstagramFeed";
-
+import secureLocalStorage from "react-secure-storage";
 import Featured_Products from "./../Element/Featured_Products";
 import SideBar from "./../Element/SideBar";
 import Tab from "./../Pages/Tab";
-//Images
-// var img1 = require("./../../images/background/bg5.jpg");
-// var serblog1 = require("./../../images/our-services/pic1.jpg");
-// var serblog2 = require("./../../images/our-services/pic2.jpg");
-// var serblog3 = require("./../../images/our-services/pic3.jpg");
-// var serblog4 = require("./../../images/our-services/pic4.jpg");
-// var img2 = require("./../../images/background/bg1.jpg");
-// var img3 = require("./../../images/background/bg5.jpg");
-// var img4 = require("./../../images/background/bg4.jpg");
+import { UIStore } from "./../Store/UIStore";
 
 const Index1 = () => {
   const [latestCat, setLatestCat] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  const getProductDetails = async () => {
+    await fetch(config.service_url + "getproducts")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          let active = data
+            .filter((filter, index) => filter.isactive === 1)
+            .map((data) => {
+              return data;
+            });
+          setProducts(active);
+          secureLocalStorage.setItem("daintyproducts", JSON.stringify(active));
+          console.log("fetched active prodcuts");
+        }
+      })
+      .catch((err) => {
+        console.log("recentpost2", err);
+      });
+  };
+  const daintyproducts = UIStore.useState((s) => s.daintyproducts);
   useEffect(() => {
     const fetchCategories = async () => {
       await fetch(config.service_url + "getHomePageCategory")
@@ -69,6 +83,7 @@ const Index1 = () => {
       console.log("latestCat", latestCat);
     };
     //fetchCategories();
+    getProductDetails();
   }, []);
   return (
     <div>
@@ -108,8 +123,8 @@ const Index1 = () => {
               <div className="faq-area1">
                 <div className="recentproduct">
                   <Featured_Products />
-                  <Sale_Product />
-                  <Recent_Product />
+                  <Sale_Product daintyproducts={daintyproducts} />
+                  <Recent_Product daintyproducts={daintyproducts} />
                 </div>
 
                 <div className="col-lg-12 m-b30 d-none">
