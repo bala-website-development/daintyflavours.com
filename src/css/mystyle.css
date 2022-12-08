@@ -9,6 +9,10 @@
     column-count: 2 !important;
     column-rule: dotted 1px #333 !important;
 }
+.zindex800
+{
+  z-index: 800;
+}
 #dnav li
 {
     width: 300px;
@@ -22,6 +26,7 @@
    /* hides sublists */
     margin-left: 300px !important;
       margin-top: -65px;
+        z-index: 10000 !important;
  }
  #dnav ul ul li {
    border-bottom: #eac9db solid 1px !important;
@@ -33,7 +38,7 @@
       margin-left: 50px !important;
       margin-top: 0;
       background-color: #ffffff !important;
-      z-index: 10000;
+      z-index: 10000 !important;
       
  }
  #dnav ul ul li {

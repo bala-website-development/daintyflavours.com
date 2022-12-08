@@ -279,7 +279,7 @@ const Shopproduct = (props) => {
                     </SimpleReactLightbox>
                   </div>
                 </div>
-                <div className="col-lg-6 m-b30">
+                <div className="col-lg-6 m-b30 zindex800">
                   <Form className="cart sticky-top" onSubmit={addItemsToCart}>
                     <div className="dlab-post-title">
                       <h4 className="post-title medium">{productDtl.p_name}</h4>
