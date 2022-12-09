@@ -29,6 +29,7 @@
     "react-masonry-component": "^6.2.1",
     "react-masonry-css": "^1.0.14",
     "react-multi-carousel": "^2.6.1",
+    "react-paginate": "^8.1.4",
     "react-photo-gallery": "^8.0.0",
     "react-rev-slider": "^1.0.1",
     "react-router-dom": "^5.2.0",

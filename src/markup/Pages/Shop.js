@@ -11,12 +11,18 @@ import Header2 from "./../Layout/NavBarMenu";
 import queryString from "query-string";
 import secureLocalStorage from "react-secure-storage";
 import { UIStore } from "./../Store/UIStore";
+import ReactPaginate from "react-paginate";
+import Pagination from "./../Scripts/Pagination";
 const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const queryurl = localStorage.getItem("queryurl");
   const [totalProduct, setTotalProduct] = useState(0);
+  const daintyproducts = UIStore.useState((s) => s.daintyproducts);
   const [products, setProducts] = useState([]);
-  const [allproducts, setAllProducts] = useState([]);
+  const [currentItem, setCurrentItem] = useState([]);
+  const [allproducts, setAllProducts] = useState(daintyproducts);
   const [networkError, setNetworkError] = useState("");
   const [smShow, setSmShow] = useState(false);
   const [message, setMessage] = useState("");
@@ -35,7 +41,7 @@ const Shop = (props) => {
   const [end, setEnd] = useState(0);
   const history = useHistory();
   const cartcount = UIStore.useState((s) => s.cartcount);
-  const daintyproducts = UIStore.useState((s) => s.daintyproducts);
+
   //let bannerimageurl = props.location.bannerimage;
   // let category = props.location.category;
   // let maincategory = props.location.maincategory;
@@ -50,7 +56,7 @@ const Shop = (props) => {
   let subcategory = queries.subcategory;
   let bannerimage = queries.bannerimage;
   console.log("bannerimagestate props", props.location.bannerimage);
-  console.log("bannerimagestate local storage", localStorage.getItem("bannerurl"));
+  console.log("daintyproducts", daintyproducts);
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   const getProductDetails = async () => {
@@ -103,119 +109,119 @@ const Shop = (props) => {
         localStorage.setItem("categorydes", _result[0]?.categorydes);
       }
     }
-    await fetch(config.service_url + "getproducts")
-      .then((response) => response.json())
-      .then((data) => {
-        setTotalProduct(data.filter((a) => a.isactive === 1).length);
-        if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
-          if (category === "all" || props.location.searchFilter === "") {
-            getAllProductDetails();
-            console.log(category, "=> all active  products");
-          } else {
-            if (query.get("brand") != "" && query.get("brand") != undefined) {
-              let selective = data
-                .filter((filter) => filter.p_brand?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
-                .map((data) => {
-                  return data;
-                });
-              setProducts(selective);
-              setFilter(selective);
-              console.log("all active category products");
-            } else if (query.get("subcategory") != "" && query.get("subcategory") != undefined) {
-              let selective = data
-                .filter((filter) => filter?.p_subcategory?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
-                .map((data) => {
-                  return data;
-                });
-              setProducts(selective);
-              setFilter(selective);
-              console.log("all sub category products");
-            } else {
-              // all active category products
-              let selective = data
-                .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
-                .map((data) => {
-                  return data;
-                });
-              setProducts(selective);
-              setFilter(selective);
-              console.log("all active category products");
-            }
-          }
-        } else if (maincategory && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
-          // Main category products
-          console.log(props.location.searchFilter, maincategory, "maincategory");
-          let selective = data
-            .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
-            .map((data) => {
-              return data;
-            });
-          setProducts(selective);
-          setFilter(selective);
-          console.log("Main category products");
-        } else if (props.location.searchFilter) {
-          // prodcut that is searched
-          console.log(props.location.searchFilter, "search result");
-          let selective = data.filter((fil) => {
-            return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
-          });
-          setProducts(selective);
-          setFilter(selective);
-        } else if (maincategory === "all" || maincategory === "") {
-          console.log("mainprod with all products");
-          let selective = data
-            .filter((filter) => filter.isactive === 1)
-            .map((data) => {
-              return data;
-            });
 
+    const data = allproducts;
+    setTotalProduct(data.filter((a) => a.isactive === 1).length);
+    if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
+      if (category === "all" || props.location.searchFilter === "") {
+        setProducts(data);
+        console.log(products, "=> all active  products");
+      } else {
+        if (query.get("brand") != "" && query.get("brand") != undefined) {
+          let selective = data
+            .filter((filter) => filter.p_brand?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
+            .map((data) => {
+              return data;
+            });
           setProducts(selective);
           setFilter(selective);
+          console.log("all active category products");
+        } else if (query.get("subcategory") != "" && query.get("subcategory") != undefined) {
+          let selective = data
+            .filter((filter) => filter?.p_subcategory?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
+            .map((data) => {
+              return data;
+            });
+          setProducts(selective);
+          setFilter(selective);
+          console.log("all sub category products");
         } else {
-          console.log("all products");
-          let active = data
-            .filter((filter) => filter.isactive === 1)
+          // all active category products
+          let selective = data
+            .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
             .map((data) => {
               return data;
             });
-
-          setProducts(active);
-          setFilter(active);
-          //loopWithSlice(0, postsPerPage);
-          const slicedPosts = active.slice(0, postsPerPage);
-          arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-          setProducts(arrayForHoldingPosts);
+          setProducts(selective);
+          setFilter(selective);
+          console.log("all active category products");
         }
-      })
-      .catch((err) => {
-        setNetworkError("Something went wrong, Please try again later!!");
-        console.log(networkError);
+      }
+    } else if (maincategory && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
+      // Main category products
+      console.log(props.location.searchFilter, maincategory, "maincategory");
+      let selective = data
+        .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+        .map((data) => {
+          return data;
+        });
+      setProducts(selective);
+      setFilter(selective);
+      console.log("Main category products");
+    } else if (props.location.searchFilter) {
+      // prodcut that is searched
+      console.log(props.location.searchFilter, "search result");
+      let selective = data.filter((fil) => {
+        return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
       });
+      setProducts(selective);
+      setFilter(selective);
+    } else if (maincategory === "all" || maincategory === "") {
+      console.log("mainprod with all products");
+      let selective = data
+        .filter((filter) => filter.isactive === 1)
+        .map((data) => {
+          return data;
+        });
+
+      setProducts(selective);
+      setFilter(selective);
+    } else {
+      console.log("all products");
+      let active = data
+        .filter((filter) => filter.isactive === 1)
+        .map((data) => {
+          return data;
+        });
+
+      setProducts(active);
+      setFilter(active);
+
+      // const slicedPosts = active.slice(0, postsPerPage);
+      // arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
+      // setProducts(arrayForHoldingPosts);
+    }
+
     setLoading((loading) => !loading);
   };
   const getAllProductDetails = async () => {
     setLoading((loading) => !loading);
     console.log("cakecategory", category);
-    await fetch(config.service_url + "getproducts")
-      .then((response) => response.json())
-      .then((data) => {
-        let active = data
-          .filter((filter) => filter.isactive === 1)
-          .map((data) => {
-            return data;
-          });
-        setProducts(active);
-        setAllProducts(data);
-        setFilter(active);
-        const slicedPosts = active.slice(0, postsPerPage);
-        arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-        setProducts(arrayForHoldingPosts);
-        console.log(data, "products checkda");
-      })
-      .catch((err) => {
-        setNetworkError("Something went wrong, Please try again later!!");
-        console.log(networkError);
-      });
+    if (daintyproducts.length <= 0) {
+      await fetch(config.service_url + "getproducts")
+        .then((response) => response.json())
+        .then((data) => {
+          let active = data
+            .filter((filter) => filter.isactive === 1)
+            .map((data) => {
+              return data;
+            });
+          setProducts(active);
+          setAllProducts(data);
+          setFilter(active);
+          const slicedPosts = active.slice(0, postsPerPage);
+          arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
+          setProducts(arrayForHoldingPosts);
+          console.log(data, "products checkda");
+        })
+        .catch((err) => {
+          setNetworkError("Something went wrong, Please try again later!!");
+          console.log(networkError);
+        });
+    } else {
+      setAllProducts(daintyproducts);
+      console.log("prodcuts from local", daintyproducts);
+    }
     setLoading((loading) => !loading);
   };
   // paging
@@ -235,7 +241,9 @@ const Shop = (props) => {
     setProducts(arrayForHoldingPosts);
     console.log("sliced products", arrayForHoldingPosts);
   };
+  //const [currentPage, setCurrentPage] = useState(1);
 
+  /// old load more logic
   const LoadMoreForFilteredProducts = (IsFiltered, FilteredProduct) => {
     console.log("slice", IsFiltered, FilteredProduct, mcatFilterProd);
     var slicedPosts = [];
@@ -253,17 +261,26 @@ const Shop = (props) => {
     setProducts(arrayForHoldingPosts);
     console.log("sliced products", products);
   };
+  const Paginate = () => {
+    const indexOfLastItem = currentPage * postsPerPage;
+    const indexOfFirstItem = indexOfLastItem - postsPerPage;
+    const currentItem = products.slice(indexOfFirstItem, indexOfLastItem);
+    console.log("currentItem_", currentItem);
+    setCurrentItem(currentItem);
+  };
 
   useEffect(() => {
     console.log("bala shop");
     //const queries = queryString.parse(queryurl);
     const queries = queryString.parse(props.location.search);
     getProductDetails();
+    Paginate();
     //getCategories();// un comment if you need you see the category in side bar
+
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category]);
+  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, loading]);
   const handleShowMorePosts = () => {
     console.log("page", next, next + postsPerPage);
     loopWithSlice(0, next + postsPerPage);
@@ -379,7 +396,8 @@ const Shop = (props) => {
   const applyFilter = (searchValue) => {
     console.log("searchvalue", searchValue);
     if (searchValue !== "") {
-      const filteredData = filter.filter((data) => {
+      const alldata = daintyproducts;
+      const filteredData = alldata.filter((data) => {
         console.log("searchdata", data);
         return Object.keys(data).some((k) => data[k]?.toString().toLowerCase().includes(searchValue.toLowerCase().trim()));
       });
@@ -388,6 +406,7 @@ const Shop = (props) => {
     } else {
       setProducts(products);
     }
+    Paginate();
   };
 
   const sortAsc = (arr, field) => {
@@ -674,18 +693,13 @@ const Shop = (props) => {
                   <div>
                     {!loading && (
                       <div className="p-2">
-                        {products.length + "/" + totalProduct} Products found.{" "}
-                        {end <= filter.length + postsPerPage && (
-                          <a href="#" className="p-2 bold text-primary" onClick={handleShowMorePosts}>
-                            <b> Load more</b>
-                          </a>
-                        )}
+                        {products.length}/{totalProduct} Products found.{" "}
                       </div>
                     )}
                     <div className="row m-1 ">
                       {!loading ? (
-                        !loading && products && products.length > 0 ? (
-                          products.map((product) => (
+                        !loading && currentItem && currentItem.length > 0 ? (
+                          currentItem.map((product) => (
                             <div className="col-lg-3">
                               <div className="item-box shop-item mr-1 style text-white shadow rounded">
                                 <div className="item-img1">
@@ -702,8 +716,10 @@ const Shop = (props) => {
                                 </div>
                                 <div className="item-info text-center">
                                   <p className="small mb-0 textoverflow1">
-                                    <h6 className="px-1">
+                                    <h6 className="px-1 py-0">
                                       <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
+                                      <br />
+                                      <span className="text-primary small">{product.p_maincategory + " | " + product.p_category}</span>
                                     </h6>{" "}
                                   </p>
 
@@ -746,14 +762,11 @@ const Shop = (props) => {
                           ))
                         ) : (
                           <div className="p-2">
-                            {" "}
-                            {allproducts.length} Products found.
-                            <br />
                             <div>
                               {" "}
-                              <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
+                              <a className="btn btn-sm btnhover" href="/shop?maincategory=all&category=all">
                                 View All
-                              </Link>
+                              </a>
                             </div>
                           </div>
                         )
@@ -767,8 +780,7 @@ const Shop = (props) => {
                       )}
                     </div>
                     {!loading && (
-                      <div className="aligncenter">
-                        {!loading && <div className="p-1">{products.length + "/" + totalProduct} Products found.</div>}
+                      <div className="aligncenter d-none">
                         {end <= filter.length + postsPerPage && (
                           <a href="#" className="dbtn-primary" onClick={handleShowMorePosts}>
                             Load more
@@ -778,11 +790,12 @@ const Shop = (props) => {
                         {/* <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
                         View all Products
                       </Link> */}
-                        <Link className="dbtn-primary" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "maincategory=all&category=all" }}>
+                        <Link className="dbtn-primary" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop?maincategory=all&category=all", search: "maincategory=all&category=all" }}>
                           View all Products
                         </Link>
                       </div>
                     )}
+                    {!loading && <Pagination contentPerPage={postsPerPage} totalContent={products.length} paginate={paginate} currentPage={currentPage} />}
                   </div>
                 </div>
               </div>
