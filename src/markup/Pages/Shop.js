@@ -41,15 +41,7 @@ const Shop = (props) => {
   const [end, setEnd] = useState(0);
   const history = useHistory();
   const cartcount = UIStore.useState((s) => s.cartcount);
-
-  //let bannerimageurl = props.location.bannerimage;
-  // let category = props.location.category;
-  // let maincategory = props.location.maincategory;
-  // let searchFilter = props.location.searchFilter;
-  //let bannerimageurl = query.get("bannerimage");
   const queries = queryString.parse(queryurl);
-  // let category = query.get("category");
-  // let maincategory = query.get("maincategory");
   let category = queries.category || queries.brand;
   let maincategory = queries.maincategory;
   let searchFilter = props.location.searchFilter;
@@ -225,42 +217,7 @@ const Shop = (props) => {
     setLoading((loading) => !loading);
   };
   // paging
-  const loopWithSlice = (start, end) => {
-    console.log("slice", start, end, mcatFilterApp);
-    var slicedPosts = [];
 
-    if (mcatFilterApp) {
-      slicedPosts = mcatFilterProd.slice(start, end);
-      setEnd(end);
-      console.log("sliced products inside apply", products);
-    } else {
-      slicedPosts = filter.slice(start, end);
-      setEnd(end);
-    }
-    arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-    setProducts(arrayForHoldingPosts);
-    console.log("sliced products", arrayForHoldingPosts);
-  };
-  //const [currentPage, setCurrentPage] = useState(1);
-
-  /// old load more logic
-  const LoadMoreForFilteredProducts = (IsFiltered, FilteredProduct) => {
-    console.log("slice", IsFiltered, FilteredProduct, mcatFilterProd);
-    var slicedPosts = [];
-    setProducts(filter);
-    if (IsFiltered || mcatFilterApp) {
-      slicedPosts = FilteredProduct.slice(0, postsPerPage);
-      setNext(0 + postsPerPage);
-      setEnd(end);
-      console.log("inside check", products, next, end);
-    } else {
-      slicedPosts = filter.slice(0, end);
-      setEnd(end);
-    }
-    arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-    setProducts(arrayForHoldingPosts);
-    console.log("sliced products", products);
-  };
   const Paginate = () => {
     const indexOfLastItem = currentPage * postsPerPage;
     const indexOfFirstItem = indexOfLastItem - postsPerPage;
@@ -276,16 +233,11 @@ const Shop = (props) => {
     getProductDetails();
     Paginate();
     //getCategories();// un comment if you need you see the category in side bar
-
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, loading]);
-  const handleShowMorePosts = () => {
-    console.log("page", next, next + postsPerPage);
-    loopWithSlice(0, next + postsPerPage);
-    setNext(next + postsPerPage);
-  };
+
   const handleVisible = () => {
     setSmShow(true);
     setTimeout(() => {
@@ -537,21 +489,9 @@ const Shop = (props) => {
       console.log(finalDATa);
       setMcatFilterProd(finalDATa);
       setProducts(finalDATa);
-      // let sliced = finalDATa.slice(0, postsPerPage);
-      // _arrayForHoldingPosts = [..._arrayForHoldingPosts, ...sliced];
-      // setProducts(_arrayForHoldingPosts);
-      // setNext(postsPerPage);
-      // setEnd(0);
-      LoadMoreForFilteredProducts(true, finalDATa);
     } else {
-      // let sliced = filter.slice(0, postsPerPage);
-      // _arrayForHoldingPosts = [..._arrayForHoldingPosts, ...sliced];
-      // setProducts(_arrayForHoldingPosts);
-      // setNext(postsPerPage);
-      // setEnd(0);
       setMcatFilterProd(filter);
       setProducts(filter);
-      LoadMoreForFilteredProducts(true, filter);
     }
   };
 
@@ -779,22 +719,7 @@ const Shop = (props) => {
                         </div>
                       )}
                     </div>
-                    {!loading && (
-                      <div className="aligncenter d-none">
-                        {end <= filter.length + postsPerPage && (
-                          <a href="#" className="dbtn-primary" onClick={handleShowMorePosts}>
-                            Load more
-                          </a>
-                        )}
-                        <span class="px-2"></span>
-                        {/* <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
-                        View all Products
-                      </Link> */}
-                        <Link className="dbtn-primary" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop?maincategory=all&category=all", search: "maincategory=all&category=all" }}>
-                          View all Products
-                        </Link>
-                      </div>
-                    )}
+
                     {!loading && <Pagination contentPerPage={postsPerPage} totalContent={products.length} paginate={paginate} currentPage={currentPage} />}
                   </div>
                 </div>
