@@ -15,7 +15,7 @@ import ReactPaginate from "react-paginate";
 import Pagination from "./../Scripts/Pagination";
 const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const queryurl = localStorage.getItem("queryurl");
   const [totalProduct, setTotalProduct] = useState(0);
@@ -101,8 +101,8 @@ const Shop = (props) => {
         localStorage.setItem("categorydes", _result[0]?.categorydes);
       }
     }
+    const data = daintyproducts.length > 0 ? daintyproducts : allproducts;
 
-    const data = allproducts;
     setTotalProduct(data.filter((a) => a.isactive === 1).length);
     if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
       if (category === "all" || props.location.searchFilter === "") {
@@ -199,12 +199,9 @@ const Shop = (props) => {
               return data;
             });
           setProducts(active);
-          setAllProducts(data);
+          setAllProducts(active);
           setFilter(active);
-          const slicedPosts = active.slice(0, postsPerPage);
-          arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-          setProducts(arrayForHoldingPosts);
-          console.log(data, "products checkda");
+          setCurrentPage(1);
         })
         .catch((err) => {
           setNetworkError("Something went wrong, Please try again later!!");
@@ -230,13 +227,14 @@ const Shop = (props) => {
     console.log("bala shop");
     //const queries = queryString.parse(queryurl);
     const queries = queryString.parse(props.location.search);
+    if (daintyproducts && daintyproducts.length <= 0 && allproducts.length <= 0) getAllProductDetails();
     getProductDetails();
     Paginate();
     //getCategories();// un comment if you need you see the category in side bar
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, loading]);
+  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage]);
 
   const handleVisible = () => {
     setSmShow(true);
