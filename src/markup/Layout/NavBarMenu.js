@@ -212,7 +212,7 @@ const NavBarMenu = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) {});
+        .catch(function (error) { });
     };
     getOffer();
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
@@ -417,7 +417,7 @@ const NavBarMenu = () => {
                                         bannerimage: mc?.banner_image,
                                       }}
                                     >
-                                      <span className="text-nowrap">{mc?.category} » </span>
+                                      <span className="text-nowrap">{mc?.category} {menuSubCategory && menuSubCategory.filter((f) => f.maincategory === mmc.maincategory && f.category === mc.category)?.length > 0 ? "»" : ""} </span>
                                     </Link>
 
                                     <ul class="list-unstyled" aria-labelledby={"navbarDropdownMenuAvatar" + mc.category}>
