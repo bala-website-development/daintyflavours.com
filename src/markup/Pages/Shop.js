@@ -51,12 +51,13 @@ const Shop = (props) => {
   console.log("daintyproducts", daintyproducts);
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
+  let _filterOption = "";
   const getProductDetails = async () => {
     console.log("queryyy queries", props.location.searchFilter);
     console.log("queryyy", maincategory);
     //console.log("bannerimagestate", bannerimagestate);
 
-    let _filterOption = "";
+    // let _filterOption = "";
     if ((query.get("subcategory") != "" || query.get("subcategory") != undefined) && subcategory != "" && subcategory !== undefined) {
       _filterOption = subcategory != "" && subcategory !== undefined ? subcategory : query.get("subcategory");
       localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category") + "&subcategory=" + _filterOption);
@@ -107,6 +108,7 @@ const Shop = (props) => {
     if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
       if (category === "all" || props.location.searchFilter === "") {
         setProducts(data);
+
         console.log(products, "=> all active  products");
       } else {
         if (query.get("brand") != "" && query.get("brand") != undefined) {
@@ -136,6 +138,7 @@ const Shop = (props) => {
             });
           setProducts(selective);
           setFilter(selective);
+          Paginate();
           console.log("all active category products");
         }
       }
@@ -158,6 +161,7 @@ const Shop = (props) => {
       });
       setProducts(selective);
       setFilter(selective);
+      Paginate();
     } else if (maincategory === "all" || maincategory === "") {
       console.log("mainprod with all products");
       let selective = data
@@ -168,6 +172,7 @@ const Shop = (props) => {
 
       setProducts(selective);
       setFilter(selective);
+      Paginate();
     } else {
       console.log("all products");
       let active = data
@@ -234,7 +239,7 @@ const Shop = (props) => {
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage]);
+  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, _filterOption]);
 
   const handleVisible = () => {
     setSmShow(true);
@@ -354,7 +359,7 @@ const Shop = (props) => {
 
       setProducts(filteredData);
     } else {
-      setProducts(products);
+      setProducts(allproducts);
     }
     Paginate();
   };
@@ -622,6 +627,7 @@ const Shop = (props) => {
                         </div>
                       </div>
                     </div>
+
                     <div className="col align-self-center">
                       <input type="text" className="form-control" placeholder="Filter Products" name="searchbox" id="searchbox" onChange={(e) => applyFilter(e.target.value)}></input>
                     </div>
