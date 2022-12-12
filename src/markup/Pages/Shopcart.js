@@ -207,6 +207,7 @@ const Shopcart = () => {
                         <div className="w-30">
                           <b>Name</b>
                         </div>
+
                         <div className="w-25">
                           <b>Price</b>
                         </div>
@@ -228,11 +229,16 @@ const Shopcart = () => {
                         cartDetails && cartDetails.length > 0 ? (
                           cartDetails.map((cart, key) => (
                             <div className="d-flex justify-content-between align-items-center p-1 my-1 border-bottom">
-                              <div className="w-25">
-                                <img className="smallimage" src={cart.p_image ? cart.p_image : config.defaultimage} alt={cart.p_name} />
+                              <div className="w-25 p-0">
+                                <Link className="p-0" to={{ pathname: `/shop-product-details/${cart.p_id}` }}>
+                                  <div className="cartimage border rounded" style={cart.p_image ? { backgroundImage: "url(" + cart.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
+                                </Link>
+                                <br />
                               </div>
                               <div className="w-30">
-                                {cart.p_name}
+                                <Link className="small" to={{ pathname: `/shop-product-details/${cart.p_id}` }}>
+                                  {cart.p_name}
+                                </Link>
                                 <div>
                                   <i>{cart.p_productweight && " Wt.: " + cart.p_productweight + "gms"}</i>
                                 </div>

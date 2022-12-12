@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
 import config from "../../config.json";
 import { Link, useHistory } from "react-router-dom";
+import secureLocalStorage from "react-secure-storage";
 const dev = document.domain === "localhost";
 
 const Payment = (props) => {
@@ -55,7 +56,7 @@ const Payment = (props) => {
               //call order api to update the order sucess
               sendEmail(props.name, props.email, props.orderid, "Received", "Completed");
               history.push("/success");
-              localStorage.setItem("daintycart", JSON.stringify([]));
+              secureLocalStorage.setItem("daintycart", JSON.stringify([]));
             },
             prefill: {
               name: props.name,

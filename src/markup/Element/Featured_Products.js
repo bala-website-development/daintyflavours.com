@@ -127,7 +127,7 @@ const Featured_Product = (props) => {
                       overflow: "hidden",
                     }}
                   >
-                    <a href={{ pathname: "/shop?category=" + fProduct.category, bannerimage: fProduct.banner_image }}>
+                    <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}>
                       <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                         <span>
                           {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}

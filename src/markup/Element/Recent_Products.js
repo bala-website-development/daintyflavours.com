@@ -7,7 +7,7 @@ import work_pic1 from "./../../images/our-work/pic1.jpg";
 import work_pic2 from "./../../images/our-work/pic1.jpg";
 import work_pic3 from "./../../images/our-work/pic1.jpg";
 import config from "../../config.json";
-const New_Products = () => {
+const New_Products = (daintyproducts) => {
   const [products, setProducts] = useState([]);
   const [galleryimage, setGalleryImage] = useState([]);
   const [networkError, setNetworkError] = useState("");
@@ -37,7 +37,15 @@ const New_Products = () => {
   };
 
   useEffect(() => {
-    getNewarrivalsProducts();
+    // getNewarrivalsProducts();
+    let active = daintyproducts.daintyproducts
+      .filter((filter, index) => filter.isfeatured === 1 && filter.isactive === 1 && index < config.newarrivalsproduct)
+      .map((data) => {
+        return data;
+      });
+    setProducts([]);
+    setProducts(active);
+    console.log("new daintyproducts", active);
     //coverting Latest product to Featured product. it is newest arrival as per this client.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -47,7 +55,7 @@ const New_Products = () => {
       <div className="mt-3">
         <div className=" text-center">
           <h3>Our New Arrivals</h3>
-          <div className="dlab-separator style1 bg-primary"></div>
+          <div className="dlab-separator style1 bg-primary d-none"></div>
         </div>
 
         <div className="row">
