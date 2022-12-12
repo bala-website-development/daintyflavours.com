@@ -21,7 +21,7 @@ const Shop = (props) => {
   const [totalProduct, setTotalProduct] = useState(0);
   const daintyproducts = UIStore.useState((s) => s.daintyproducts);
   const [products, setProducts] = useState([]);
-  const [currentItem, setCurrentItem] = useState([]);
+  // const [currentItem, setCurrentItem] = useState([]);
   const [allproducts, setAllProducts] = useState(daintyproducts);
   const [networkError, setNetworkError] = useState("");
   const [smShow, setSmShow] = useState(false);
@@ -52,6 +52,10 @@ const Shop = (props) => {
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
   let _filterOption = "";
+  const indexOfLastItem = currentPage * postsPerPage;
+  const indexOfFirstItem = indexOfLastItem - postsPerPage;
+  const currentItem_ = products.slice(indexOfFirstItem, indexOfLastItem);
+  const [currentItem, setCurrentItem] = useState(currentItem_);
   const getProductDetails = async () => {
     console.log("queryyy queries", props.location.searchFilter);
     console.log("queryyy", maincategory);
@@ -108,7 +112,6 @@ const Shop = (props) => {
     if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
       if (category === "all" || props.location.searchFilter === "") {
         setProducts(data);
-
         console.log(products, "=> all active  products");
       } else {
         if (query.get("brand") != "" && query.get("brand") != undefined) {
@@ -221,11 +224,11 @@ const Shop = (props) => {
   // paging
 
   const Paginate = () => {
-    const indexOfLastItem = currentPage * postsPerPage;
-    const indexOfFirstItem = indexOfLastItem - postsPerPage;
-    const currentItem = products.slice(indexOfFirstItem, indexOfLastItem);
-    console.log("currentItem_", currentItem);
-    setCurrentItem(currentItem);
+    // const indexOfLastItem = currentPage * postsPerPage;
+    // const indexOfFirstItem = indexOfLastItem - postsPerPage;
+    // const currentItem = products.slice(indexOfFirstItem, indexOfLastItem);
+    console.log("currentItem_", currentItem_);
+    setCurrentItem(currentItem_);
   };
 
   useEffect(() => {
@@ -239,7 +242,7 @@ const Shop = (props) => {
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, _filterOption]);
+  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, currentItem_.length, products.length, allproducts.length]);
 
   const handleVisible = () => {
     setSmShow(true);
@@ -361,7 +364,7 @@ const Shop = (props) => {
     } else {
       setProducts(allproducts);
     }
-    Paginate();
+    //Paginate();
   };
 
   const sortAsc = (arr, field) => {
@@ -377,6 +380,7 @@ const Shop = (props) => {
       return 0;
     });
     setProducts(ascdata);
+    Paginate();
   };
   const sortSale = (arr, field) => {
     const ascdata = arr.sort((a, b) => {
@@ -391,6 +395,7 @@ const Shop = (props) => {
       return 0;
     });
     setProducts(ascdata);
+    Paginate();
   };
   const sortDsc = (arr, field) => {
     const ascdata = arr.sort((a, b) => {
@@ -405,6 +410,7 @@ const Shop = (props) => {
       return 0;
     });
     setProducts(ascdata);
+    Paginate();
   };
 
   const getCategories = async () => {
@@ -614,12 +620,12 @@ const Shop = (props) => {
                               </Link>{" "}
                             </a>
                             <a class="dropdown-item" href="#">
-                              <Link to={"#"} onClick={(e) => sortDsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                              <Link to={"#"} onClick={(e) => sortAsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
                                 Name : A - Z
                               </Link>{" "}
                             </a>
                             <a class="dropdown-item" href="#">
-                              <Link to={"#"} onClick={(e) => sortAsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                              <Link to={"#"} onClick={(e) => sortDsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
                                 Name : Z - A
                               </Link>{" "}
                             </a>
@@ -628,7 +634,7 @@ const Shop = (props) => {
                       </div>
                     </div>
 
-                    <div className="col align-self-center">
+                    <div className="col align-self-center d-none">
                       <input type="text" className="form-control" placeholder="Filter Products" name="searchbox" id="searchbox" onChange={(e) => applyFilter(e.target.value)}></input>
                     </div>
                   </div>
