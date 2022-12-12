@@ -57,142 +57,146 @@ const Shop = (props) => {
   const currentItem_ = products.slice(indexOfFirstItem, indexOfLastItem);
   const [currentItem, setCurrentItem] = useState(currentItem_);
   const getProductDetails = async () => {
-    console.log("queryyy queries", props.location.searchFilter);
-    console.log("queryyy", maincategory);
-    //console.log("bannerimagestate", bannerimagestate);
+    try {
+      console.log("queryyy queries", props.location.searchFilter);
+      console.log("queryyy", maincategory);
+      //console.log("bannerimagestate", bannerimagestate);
 
-    // let _filterOption = "";
-    if ((query.get("subcategory") != "" || query.get("subcategory") != undefined) && subcategory != "" && subcategory !== undefined) {
-      _filterOption = subcategory != "" && subcategory !== undefined ? subcategory : query.get("subcategory");
-      localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category") + "&subcategory=" + _filterOption);
-    } else if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
-      _filterOption = subcategory != "" && subcategory != undefined ? subcategory : category != "" && category !== undefined ? category : maincategory;
-    } else {
-      let _categories;
-      if (query.get("brand") == "" || query.get("brand") == undefined) {
-        _filterOption = query.get("category") != "" && query.get("category") !== undefined ? query.get("category") : query.get("maincategory");
-        localStorage.setItem("categorydes", props.location.categorydes);
-        localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category"));
-        _categories = JSON.parse(localStorage.getItem("categories"));
-        console.log("paaru", _categories);
-        let _result =
-          _categories &&
-          _categories
-            .filter((a) => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
+      // let _filterOption = "";
+      if ((query.get("subcategory") != "" || query.get("subcategory") != undefined) && subcategory != "" && subcategory !== undefined) {
+        _filterOption = subcategory != "" && subcategory !== undefined ? subcategory : query.get("subcategory");
+        localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category") + "&subcategory=" + _filterOption);
+      } else if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
+        _filterOption = subcategory != "" && subcategory != undefined ? subcategory : category != "" && category !== undefined ? category : maincategory;
+      } else {
+        let _categories;
+        if (query.get("brand") == "" || query.get("brand") == undefined) {
+          _filterOption = query.get("category") != "" && query.get("category") !== undefined ? query.get("category") : query.get("maincategory");
+          localStorage.setItem("categorydes", props.location.categorydes);
+          localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category"));
+          _categories = JSON.parse(localStorage.getItem("categories"));
+          console.log("paaru", _categories);
+          let _result =
+            _categories &&
+            _categories
+              .filter((a) => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
+              .map((b) => {
+                return b;
+              });
+          if (_result?.length > 1) {
+            _result = _result
+              .filter((b) => b.maincategory?.toUpperCase() == query.get("maincategory")?.toUpperCase())
+              .map((c) => {
+                return c;
+              });
+          }
+
+          localStorage.setItem("bannerurl", _result[0]?.banner_image);
+          localStorage.setItem("categorydes", _result[0]?.categorydes);
+        } else {
+          _filterOption = JSON.parse(localStorage.getItem("brand"));
+          localStorage.setItem("categorydes", props.location.categorydes);
+          localStorage.setItem("queryurl", "brand=" + query.get("brand"));
+          _categories = JSON.parse(localStorage.getItem("brand"));
+          let _result = _categories
+            .filter((a) => a?.brand?.toUpperCase() == _filterOption?.toUpperCase())
             .map((b) => {
               return b;
             });
-        if (_result.length > 1) {
-          _result = _result
-            .filter((b) => b.maincategory?.toUpperCase() == query.get("maincategory")?.toUpperCase())
-            .map((c) => {
-              return c;
-            });
+          localStorage.setItem("bannerurl", _result[0]?.banner_image);
+          localStorage.setItem("categorydes", _result[0]?.categorydes);
         }
-
-        localStorage.setItem("bannerurl", _result[0]?.banner_image);
-        localStorage.setItem("categorydes", _result[0]?.categorydes);
-      } else {
-        _filterOption = JSON.parse(localStorage.getItem("brand"));
-        localStorage.setItem("categorydes", props.location.categorydes);
-        localStorage.setItem("queryurl", "brand=" + query.get("brand"));
-        _categories = JSON.parse(localStorage.getItem("brand"));
-        let _result = _categories
-          .filter((a) => a?.brand?.toUpperCase() == _filterOption?.toUpperCase())
-          .map((b) => {
-            return b;
-          });
-        localStorage.setItem("bannerurl", _result[0]?.banner_image);
-        localStorage.setItem("categorydes", _result[0]?.categorydes);
       }
-    }
-    const data = daintyproducts.length > 0 ? daintyproducts : allproducts;
+      const data = daintyproducts.length > 0 ? daintyproducts : allproducts;
 
-    setTotalProduct(data.filter((a) => a.isactive === 1).length);
-    if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
-      if (category === "all" || props.location.searchFilter === "") {
-        setProducts(data);
-        console.log(products, "=> all active  products");
-      } else {
-        if (query.get("brand") != "" && query.get("brand") != undefined) {
-          let selective = data
-            .filter((filter) => filter.p_brand?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
-            .map((data) => {
-              return data;
-            });
-          setProducts(selective);
-          setFilter(selective);
-          console.log("all active category products");
-        } else if (query.get("subcategory") != "" && query.get("subcategory") != undefined) {
-          let selective = data
-            .filter((filter) => filter?.p_subcategory?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
-            .map((data) => {
-              return data;
-            });
-          setProducts(selective);
-          setFilter(selective);
-          console.log("all sub category products");
+      setTotalProduct(data.filter((a) => a.isactive === 1).length);
+      if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
+        if (category === "all" || props.location.searchFilter === "") {
+          setProducts(data);
+          console.log(products, "=> all active  products");
         } else {
-          // all active category products
-          let selective = data
-            .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
-            .map((data) => {
-              return data;
-            });
-          setProducts(selective);
-          setFilter(selective);
-          Paginate();
-          console.log("all active category products");
+          if (query.get("brand") != "" && query.get("brand") != undefined) {
+            let selective = data
+              .filter((filter) => filter.p_brand?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
+              .map((data) => {
+                return data;
+              });
+            setProducts(selective);
+            setFilter(selective);
+            console.log("all active category products");
+          } else if (query.get("subcategory") != "" && query.get("subcategory") != undefined) {
+            let selective = data
+              .filter((filter) => filter?.p_subcategory?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
+              .map((data) => {
+                return data;
+              });
+            setProducts(selective);
+            setFilter(selective);
+            console.log("all sub category products");
+          } else {
+            // all active category products
+            let selective = data
+              .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+              .map((data) => {
+                return data;
+              });
+            setProducts(selective);
+            setFilter(selective);
+            Paginate();
+            console.log("all active category products");
+          }
         }
+      } else if (maincategory && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
+        // Main category products
+        console.log(props.location.searchFilter, maincategory, "maincategory");
+        let selective = data
+          .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+          .map((data) => {
+            return data;
+          });
+        setProducts(selective);
+        setFilter(selective);
+        console.log("Main category products");
+      } else if (props.location.searchFilter) {
+        // prodcut that is searched
+        console.log(props.location.searchFilter, "search result");
+        let selective = data.filter((fil) => {
+          return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
+        });
+        setProducts(selective);
+        setFilter(selective);
+        Paginate();
+      } else if (maincategory === "all" || maincategory === "") {
+        console.log("mainprod with all products");
+        let selective = data
+          .filter((filter) => filter.isactive === 1)
+          .map((data) => {
+            return data;
+          });
+
+        setProducts(selective);
+        setFilter(selective);
+        Paginate();
+      } else {
+        console.log("all products");
+        let active = data
+          .filter((filter) => filter.isactive === 1)
+          .map((data) => {
+            return data;
+          });
+
+        setProducts(active);
+        setFilter(active);
+
+        // const slicedPosts = active.slice(0, postsPerPage);
+        // arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
+        // setProducts(arrayForHoldingPosts);
       }
-    } else if (maincategory && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
-      // Main category products
-      console.log(props.location.searchFilter, maincategory, "maincategory");
-      let selective = data
-        .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
-        .map((data) => {
-          return data;
-        });
-      setProducts(selective);
-      setFilter(selective);
-      console.log("Main category products");
-    } else if (props.location.searchFilter) {
-      // prodcut that is searched
-      console.log(props.location.searchFilter, "search result");
-      let selective = data.filter((fil) => {
-        return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
-      });
-      setProducts(selective);
-      setFilter(selective);
-      Paginate();
-    } else if (maincategory === "all" || maincategory === "") {
-      console.log("mainprod with all products");
-      let selective = data
-        .filter((filter) => filter.isactive === 1)
-        .map((data) => {
-          return data;
-        });
 
-      setProducts(selective);
-      setFilter(selective);
-      Paginate();
-    } else {
-      console.log("all products");
-      let active = data
-        .filter((filter) => filter.isactive === 1)
-        .map((data) => {
-          return data;
-        });
-
-      setProducts(active);
-      setFilter(active);
-
-      // const slicedPosts = active.slice(0, postsPerPage);
-      // arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-      // setProducts(arrayForHoldingPosts);
+      setLoading((loading) => !loading);
+    } catch {
+      loading && setLoading(false);
     }
-
-    setLoading((loading) => !loading);
   };
   const getAllProductDetails = async () => {
     setLoading((loading) => !loading);
@@ -210,6 +214,7 @@ const Shop = (props) => {
           setAllProducts(active);
           setFilter(active);
           setCurrentPage(1);
+          secureLocalStorage.setItem("daintyproducts", JSON.stringify(active));
         })
         .catch((err) => {
           setNetworkError("Something went wrong, Please try again later!!");
@@ -242,9 +247,7 @@ const Shop = (props) => {
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter
-    , queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category
-    , currentPage, currentItem_.length, products.length, allproducts.length]);
+  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, currentItem_.length, products.length, allproducts.length]);
 
   const handleVisible = () => {
     setSmShow(true);
@@ -732,7 +735,7 @@ const Shop = (props) => {
                       )}
                     </div>
 
-                    {!loading && <Pagination contentPerPage={postsPerPage} totalContent={products.length} paginate={paginate} currentPage={currentPage} />}
+                    {!loading && <Pagination contentPerPage={postsPerPage} totalContent={products.length} paginate={paginate} currentPage={currentPage} productperpage={postsPerPage} />}
                   </div>
                 </div>
               </div>

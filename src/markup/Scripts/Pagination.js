@@ -1,10 +1,11 @@
 import React from "react";
 
-const Pagination = ({ contentPerPage, totalContent, paginate, currentPage }) => {
+const Pagination = ({ contentPerPage, totalContent, paginate, currentPage, productperpage }) => {
   const PageNumbers = [];
   const state = {
     ActivePage: currentPage,
   };
+  console.log("Pagination", contentPerPage, totalContent, paginate, currentPage, productperpage);
   const nPages = Math.ceil(totalContent / contentPerPage);
   for (let i = 1; i <= Math.ceil(totalContent / contentPerPage); i++) {
     PageNumbers.push(i);
@@ -23,9 +24,15 @@ const Pagination = ({ contentPerPage, totalContent, paginate, currentPage }) => 
   return (
     <div className="pagination">
       <div>
-        <a onClick={prevPage} href="#">
-          Previous
-        </a>{" "}
+        {totalContent > productperpage && currentPage != 1 ? (
+          <>
+            <a onClick={prevPage} href="#">
+              Previous
+            </a>{" "}
+          </>
+        ) : (
+          ""
+        )}
         <span>&nbsp;</span>
         {PageNumbers.map((number) => (
           <span key={number}>
@@ -34,9 +41,13 @@ const Pagination = ({ contentPerPage, totalContent, paginate, currentPage }) => 
             </a>
           </span>
         ))}
-        <a onClick={nextPage} href="#">
-          Next
-        </a>
+        {totalContent > productperpage ? (
+          <a onClick={nextPage} href="#">
+            Next
+          </a>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
