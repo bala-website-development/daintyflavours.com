@@ -15,7 +15,7 @@ import ReactPaginate from "react-paginate";
 import Pagination from "./../Scripts/Pagination";
 const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const queryurl = localStorage.getItem("queryurl");
   const [totalProduct, setTotalProduct] = useState(0);
@@ -242,7 +242,9 @@ const Shop = (props) => {
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, currentItem_.length, products.length, allproducts.length]);
+  }, [props.location?.searchFilter
+    , queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category
+    , currentPage, currentItem_.length, products.length, allproducts.length]);
 
   const handleVisible = () => {
     setSmShow(true);
