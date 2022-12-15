@@ -247,7 +247,9 @@ const Shop = (props) => {
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, currentItem_.length, products.length, allproducts.length]);
+  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl")
+    , query.get("category") != queryString.parse(queryurl)?.category
+    , currentPage, currentItem_.length, products.length, allproducts.length, currentItem_ && currentItem_[0]?.p_category != query.get("category")]);
 
   const handleVisible = () => {
     setSmShow(true);
@@ -523,7 +525,10 @@ const Shop = (props) => {
         <div className="dlab-bnr-inr overlay-black-light divbg" style={{ backgroundImage: "url(" + localStorage.getItem("bannerurl") + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">{category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop"}</h1>
+              <h1 className="text-white">
+                {subcategory != undefined && subcategory != "" ? subcategory?.toUpperCase() : (category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop")}
+
+              </h1>
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">
@@ -734,8 +739,10 @@ const Shop = (props) => {
                         </div>
                       )}
                     </div>
+                    {/* 
+                    {!loading && <Pagination contentPerPage={postsPerPage} totalContent={products.length} paginate={paginate} currentPage={currentPage} productperpage={postsPerPage} />} */}
 
-                    {!loading && <Pagination contentPerPage={postsPerPage} totalContent={products.length} paginate={paginate} currentPage={currentPage} productperpage={postsPerPage} />}
+                    {!loading && <Pagination dataPerPage={postsPerPage} totalDataCount={products.length} paginate={paginate} currentPage={currentPage} />}
                   </div>
                 </div>
               </div>
