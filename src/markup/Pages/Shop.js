@@ -237,7 +237,7 @@ const Shop = (props) => {
   };
 
   useEffect(() => {
-    console.log("bala shop");
+    console.log("bala shop", currentItem_[0]?.category);
     //const queries = queryString.parse(queryurl);
     const queries = queryString.parse(props.location.search);
     if (daintyproducts && daintyproducts.length <= 0 && allproducts.length <= 0) getAllProductDetails();
@@ -247,7 +247,9 @@ const Shop = (props) => {
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, currentItem_.length, products.length, allproducts.length]);
+  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl")
+    , query.get("category") != queryString.parse(queryurl)?.category
+    , currentPage, currentItem_.length, products.length, allproducts.length, currentItem_ && currentItem_[0]?.p_category != query.get("category")]);
 
   const handleVisible = () => {
     setSmShow(true);
