@@ -734,8 +734,10 @@ const Shop = (props) => {
                         </div>
                       )}
                     </div>
+                    {/* 
+                    {!loading && <Pagination contentPerPage={postsPerPage} totalContent={products.length} paginate={paginate} currentPage={currentPage} productperpage={postsPerPage} />} */}
 
-                    {!loading && <Pagination contentPerPage={postsPerPage} totalContent={products.length} paginate={paginate} currentPage={currentPage} productperpage={postsPerPage} />}
+                    {!loading && <Pagination dataPerPage={postsPerPage} totalDataCount={products.length} paginate={paginate} currentPage={currentPage} />}
                   </div>
                 </div>
               </div>
