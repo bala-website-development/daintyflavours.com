@@ -237,7 +237,7 @@ const Shop = (props) => {
   };
 
   useEffect(() => {
-    console.log("bala shop", currentItem_[0]?.category);
+    console.log("bala shop");
     //const queries = queryString.parse(queryurl);
     const queries = queryString.parse(props.location.search);
     if (daintyproducts && daintyproducts.length <= 0 && allproducts.length <= 0) getAllProductDetails();
