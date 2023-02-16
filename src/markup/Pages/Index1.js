@@ -153,7 +153,7 @@ const Index1 = () => {
             </div>
           </div>
 
-          <div id="testimonial" className="container">
+          <div id="testimonial" className="container d-none">
             <Testimonial />
           </div>
           <div className="section-full bg-white">
