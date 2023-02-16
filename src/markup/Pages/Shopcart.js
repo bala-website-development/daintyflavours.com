@@ -72,15 +72,14 @@ const Shopcart = () => {
     for (var i = 0; i < lsDaintyCart.length; i++) {
       if (lsDaintyCart[i].id == cartid) lsDaintyCart.splice(i, 1);
     }
-
     let updatedcart = lsDaintyCart;
-
     localStorage.removeItem("daintycart");
     //localStorage.setItem("daintycart", JSON.stringify(updatedcart));
     secureLocalStorage.setItem("daintycart", JSON.stringify(updatedcart));
     setlsDaintyCart(JSON.parse(secureLocalStorage.getItem("daintycart")));
     console.log("lsDaintyCartforremovenew", updatedcart);
     setCartUpdated((cartUpdated) => !cartUpdated);
+    window.location.reload(false);
   };
   const deleteCart = (cartid) => {
     console.log("cartid", cartid);
