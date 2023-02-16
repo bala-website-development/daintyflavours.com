@@ -64,9 +64,9 @@ class Footer extends Component {
                       <li>
                         <Link to={"/"}>Home</Link>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link to={"/about"}>About</Link>
-                      </li>
+                      </li> */}
                       {/* <li>
                         <Link to={"/our-journey"}>Our Journey</Link>
                       </li> */}
@@ -74,9 +74,9 @@ class Footer extends Component {
                       {/* <li>
                       <Link to={"/blog-half-img-sidebar"}>Blog</Link>
                     </li> */}
-                      <li>
+                      {/* <li>
                         <Link to={"/gallery"}>Gallery</Link>
-                      </li>
+                      </li> */}
                       <li>
                         <Link to={"/maincategories"}>Category</Link>
                       </li>

@@ -67,12 +67,12 @@ const Shopproduct = (props) => {
         p_image: productDtl.p_image,
         p_name: productDtl.p_name,
         p_net_product_price: productDtl.p_net_product_price,
+        p_price: productDtl.p_price,
         p_returnaccepted: productDtl.p_returnaccepted,
         p_productweight: productDtl.p_productweight,
         p_tax: productDtl.p_tax,
         p_quantity: 1,
         updateddate: new Date(),
-        p_price: productDtl.price,
         id: uuid(),
       };
       console.log("befre", cartarray);

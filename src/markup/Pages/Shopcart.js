@@ -66,17 +66,20 @@ const Shopcart = () => {
   };
 
   const deleteCartfromls = (cartid) => {
-    console.log("lsDaintyCartforremove", lsDaintyCart);
+    console.log("DaintyCart", lsDaintyCart);
     //need to delete the cart item from this lsDaintyCart and set and reftest cart
     //setlsDaintyCart(uppdatedJson)
     for (var i = 0; i < lsDaintyCart.length; i++) {
       if (lsDaintyCart[i].id == cartid) lsDaintyCart.splice(i, 1);
     }
-    setlsDaintyCart(lsDaintyCart);
+    let updatedcart = lsDaintyCart;
     localStorage.removeItem("daintycart");
-    localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart));
-    console.log("lsDaintyCartforremovenew", JSON.stringify(lsDaintyCart));
+    //localStorage.setItem("daintycart", JSON.stringify(updatedcart));
+    secureLocalStorage.setItem("daintycart", JSON.stringify(updatedcart));
+    setlsDaintyCart(JSON.parse(secureLocalStorage.getItem("daintycart")));
+    console.log("lsDaintyCartforremovenew", updatedcart);
     setCartUpdated((cartUpdated) => !cartUpdated);
+    window.location.reload(false);
   };
   const deleteCart = (cartid) => {
     console.log("cartid", cartid);
@@ -157,7 +160,7 @@ const Shopcart = () => {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartUpdated]);
+  }, [cartUpdated, lsDaintyCart]);
 
   return (
     <div>
