@@ -34,7 +34,8 @@ const Shopchekout = () => {
       data
         .map((total) => {
           // return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
-          return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
+          // return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
+          return parseInt(total.p_price * total.p_quantity);
         })
         .reduce((a, b) => a + b, 0)
     );
@@ -347,7 +348,7 @@ const Shopchekout = () => {
                       <tr>
                         <th>Product</th>
                         <th class="d-none">Product name</th>
-                        <th>Unit Price</th>
+
                         <th>Quantity</th>
                         <th>Total</th>
                         <th>Net Amount</th>
@@ -359,25 +360,25 @@ const Shopchekout = () => {
                           cartDetails.map((cart, key) => (
                             <tr className="font-weight-normal">
                               <td className="product-item-img">
-                                <img src={cart.p_image ? cart.p_image : config.defaultimage} alt={cart.p_name} />
-                                <div>
+                                <img className="d-none" src={cart.p_image ? cart.p_image : config.defaultimage} alt={cart.p_name} />
+                                <div className="small">
                                   {cart.p_name}{" "}
                                   <div>
                                     <i>{cart.p_productweight && " Wt.: " + cart.p_productweight + "gms"}</i>
                                   </div>
                                 </div>{" "}
                               </td>
-                              <td className="product-item-price">{cart.p_price}</td>
+
                               <td className="product-item-quantity">{cart.p_quantity}</td>
                               <td className="product-item-totle text-nowrap">
                                 <i class="fa fa-inr"></i> {cart.p_price * cart.p_quantity}
-                                <div className="font-weight-light">
-                                  + Tax:
+                                <div className="font-weight-light small">
+                                  Inclusive of Tax:
                                   {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
                                 </div>
                               </td>
                               <td className="product-item-totle">
-                                <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)}
+                                <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity)}
                               </td>
                             </tr>
                           ))

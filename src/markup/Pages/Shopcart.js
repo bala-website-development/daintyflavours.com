@@ -111,7 +111,9 @@ const Shopcart = () => {
         data
           .map((total) => {
             //return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
-            return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
+            // removing tax
+            // return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
+            return parseInt(total.p_price * total.p_quantity);
           })
           .reduce((a, b) => a + b, 0)
     );
@@ -196,7 +198,7 @@ const Shopcart = () => {
                       Shop all <i className="fa fa-angle-right mt-1"></i>
                     </Link>{" "}
                     {!userLoggedin && (
-                      <Link to={"/shop-cart"} onClick={(e) => (localStorage.removeItem("daintycart"), setCartDetails([]))} className="dbtn-primary m-t30">
+                      <Link to={"/shop-cart"} onClick={(e) => (secureLocalStorage.removeItem("daintycart"), setCartDetails([]))} className="dbtn-primary m-t30">
                         Clear Cart {/*  <i class="fa fa-delete-left mt-1"></i> */}
                       </Link>
                     )}
@@ -211,18 +213,18 @@ const Shopcart = () => {
                           <b>Name</b>
                         </div>
 
-                        <div className="w-25">
+                        <div className="w-25 d-none">
                           <b>Price</b>
                         </div>
                         <div className="w-25">
                           <b>Qty.</b>
                         </div>
                         <div className="w-25">
-                          <b>Total</b>
+                          <b>Price</b>
                         </div>
 
                         <div className="w-25">
-                          <b>Net Amount</b>
+                          <b>Total</b>
                         </div>
                         <div className="w-10">Remove</div>
                       </div>
@@ -246,7 +248,7 @@ const Shopcart = () => {
                                   <i>{cart.p_productweight && " Wt.: " + cart.p_productweight + "gms"}</i>
                                 </div>
                               </div>
-                              <div className="w-25">{cart.p_price}</div>
+                              <div className="w-25 d-none">{cart.p_price}</div>
                               <div className="w-25">
                                 {userLoggedin ? (
                                   <select id={key} className="drpquantity" onChange={(e) => updateCartQuantity(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
@@ -260,6 +262,16 @@ const Shopcart = () => {
                                     <option value={8}>8</option>
                                     <option value={9}>9</option>
                                     <option value={10}>10</option>
+                                    <option value={11}>11</option>
+                                    <option value={12}>12</option>
+                                    <option value={13}>13</option>
+                                    <option value={14}>14</option>
+                                    <option value={15}>15</option>
+                                    <option value={16}>16</option>
+                                    <option value={17}>17</option>
+                                    <option value={18}>18</option>
+                                    <option value={19}>19</option>
+                                    <option value={20}>20</option>
                                   </select>
                                 ) : (
                                   <select id={key} className="drpquantity" onChange={(e) => updateCartQuantityfromls(cart.id, e.target.value)} defaultValue={cart.p_quantity}>
@@ -273,20 +285,31 @@ const Shopcart = () => {
                                     <option value={8}>8</option>
                                     <option value={9}>9</option>
                                     <option value={10}>10</option>
+                                    <option value={11}>11</option>
+                                    <option value={12}>12</option>
+                                    <option value={13}>13</option>
+                                    <option value={14}>14</option>
+                                    <option value={15}>15</option>
+                                    <option value={16}>16</option>
+                                    <option value={17}>17</option>
+                                    <option value={18}>18</option>
+                                    <option value={19}>19</option>
+                                    <option value={20}>20</option>
                                   </select>
                                 )}
                               </div>
                               <div className="w-25 text-nowrap">
                                 {" "}
-                                <i class="fa fa-inr"></i> {cart.p_price * cart.p_quantity}
-                                <div>
-                                  + Tax:
+                                <i class="fa fa-inr"></i> {cart.p_price}
+                                <div className="small">
+                                  Inclusive of Tax:
                                   {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
                                 </div>
                               </div>
                               <div className="w-25 text-nowrap">
-                                {" "}
-                                <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)}
+                                {/* inclusive of tax - removed on 02/23 as per mithun request*/}
+                                {/* <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)} */}
+                                <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity)}
                               </div>
                               {userLoggedin ? (
                                 <div className="w-10">
@@ -351,10 +374,13 @@ const Shopcart = () => {
                           </span>
                         </td>
                         <td>
-                          <i class="fa fa-inr"></i> {productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost)}
+                          <i class="fa fa-inr"></i> {productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000.0) * config.shippingcost)}
                           <br />
                           <span className={"small"}>
-                            Total Product Weight: {productWeight / 1000.0} Kgs. ; Cost/Kg: <i class="fa fa-inr"></i> {config.shippingcost}
+                            Total Product Weight: {productWeight / 1000.0} Kgs. ; Cost/Kg:{" "}
+                            <span className="text-nowrap">
+                              <i class="fa fa-inr"></i> {config.shippingcost}
+                            </span>
                           </span>
                         </td>
                       </tr>
