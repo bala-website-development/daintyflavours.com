@@ -136,7 +136,7 @@ const Shopchekout = () => {
       orderstatus: "Ordered",
       paymentstatus: "NotReceived",
       paymentmethod: "Online",
-      deliverystatus: "InProgress",
+      deliverystatus: pickup ? "Pickup" : "InProgress",
       deliverydate: "",
       deliverymethod: pickup ? "Pickup" : "Shipping",
       orderdate: new Date(),
