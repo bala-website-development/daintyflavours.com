@@ -247,9 +247,7 @@ const Shop = (props) => {
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl")
-    , query.get("category") != queryString.parse(queryurl)?.category
-    , currentPage, currentItem_.length, products.length, allproducts.length, currentItem_ && currentItem_[0]?.p_category != query.get("category")]);
+  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, currentItem_.length, products.length, allproducts.length, currentItem_ && currentItem_[0]?.p_category != query.get("category")]);
 
   const handleVisible = () => {
     setSmShow(true);
@@ -275,7 +273,7 @@ const Shop = (props) => {
         p_tax: product.p_tax,
         p_quantity: 1,
         updateddate: new Date(),
-        p_price: product.p_price,
+        p_price: product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? product.p_price : product.p_net_product_price,
         id: uuid(),
       };
       console.log("befre", cartarray);
@@ -392,7 +390,7 @@ const Shop = (props) => {
   const sortSale = (arr, field) => {
     const ascdata = arr.sort((a, b) => {
       console.log(arr, field);
-      if (a.p_price < a.p_net_product_price && a.p_price !== 0 && a.p_price !== "") {
+      if (a.p_price < a.p_net_product_price && a.p_price !== 0 && a.p_price != "" && a.p_price !== "") {
         console.log(a[field]);
         return -1;
       }
@@ -525,10 +523,7 @@ const Shop = (props) => {
         <div className="dlab-bnr-inr overlay-black-light divbg" style={{ backgroundImage: "url(" + localStorage.getItem("bannerurl") + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">
-                {subcategory != undefined && subcategory != "" ? subcategory?.toUpperCase() : (category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop")}
-
-              </h1>
+              <h1 className="text-white">{subcategory != undefined && subcategory != "" ? subcategory?.toUpperCase() : category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop"}</h1>
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">
@@ -666,7 +661,7 @@ const Shop = (props) => {
                                   <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                                     <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
                                   </Link>
-                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "" ? (
+                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
                                     <>
                                       <div className="sale bg-primary text-light">Sale</div>
                                     </>
@@ -682,7 +677,7 @@ const Shop = (props) => {
                                       <span className="text-primary small">{product.p_maincategory + " | " + product.p_category}</span>
                                     </h6>{" "}
                                   </p>
-
+                                  {/* p_price is offer price  */}
                                   {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
                                     <>
                                       <div className="text-primary pricefont">
@@ -703,7 +698,7 @@ const Shop = (props) => {
                                     </div>
                                   )}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                    <button disabled={product.p_quantity > 0 ? false : true} onClick={(e) => addItemsToCart(product.p_id, product.p_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
+                                    <button disabled={product.p_quantity > 0 ? false : true} onClick={(e) => addItemsToCart(product.p_id, product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price != "" ? product.p_price : product.p_net_product_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
                                       <div className="d-flex align-items-center">
                                         <div className="pl-1">Add to cart</div>
                                         <div className="align-self-center">
