@@ -180,7 +180,7 @@ const Shopchekout = () => {
             // call payemnt
             history.push({
               pathname: "/payment",
-              state: { amount: Number(data.data.grosstotal).toFixed(2), orderid: data.data.orderid, orderstatus: data.data.orderstatus, paymentstatus: data.data.paymentstatus, contactno: data.data.billingaddress.phonenumber, name: data.data.billingaddress.name, email: data.data.billingaddress.email, userLoggedin: userloggedin },
+              state: { amount: Number(data.data.grosstotal).toFixed(2), orderid: data.data.orderid, orderstatus: data.data.orderstatus, paymentstatus: data.data.paymentstatus, contactno: data.data.billingaddress.phonenumber, name: data.data.billingaddress.name, email: data.data.billingaddress.email, deliverymethod: data.data.deliverymethod, userLoggedin: userloggedin },
             });
             setStatus(true);
           } else if (data?.status === 499) {

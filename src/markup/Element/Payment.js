@@ -54,7 +54,7 @@ const Payment = (props) => {
               console.log("razorpay response", response);
               UpdateOrderPayemntStatus(props.orderid, "Received", "Completed");
               //call order api to update the order sucess
-              sendEmail(props.name, props.email, props.orderid, "Received", "Completed");
+              sendEmail(props.name, props.email, props.orderid, "Received", "Completed", props.amount, props.deliverymethod);
               history.push("/success");
               secureLocalStorage.setItem("daintycart", JSON.stringify([]));
             },
@@ -76,7 +76,7 @@ const Payment = (props) => {
             // log failure message
             UpdateOrderPayemntStatus(props.orderid, "Failed", "Pending");
             // email service
-            sendEmail(props.name, props.email, props.orderid, "Failed", "Pending");
+            sendEmail(props.name, props.email, props.orderid, "Failed", "Pending", props.amount, props.deliverymethod);
             console.log("payement failed");
             // update payment failed in order page
           });
@@ -135,8 +135,8 @@ const Payment = (props) => {
         console.log(err.message);
       });
   };
-  const sendEmail = (name, email, orderid, paymentstatus, orderstatus) => {
-    const body = "<p>Hello ," + "</p>" + "<p>Your Order has been placed Sucessfully. Below is the status: </p>" + "<br/><p>Regards,</p> <p><a href=" + config.website + ">" + config.contact_name + "</a></p>" + "<table  style='border: 1px solid black'>" + "<tr style='border: 1px solid black'><td> <i>Name:</i></td> <td> <i>" + name + "</i></td></tr>" + "<tr style='border: 1px solid black'><td> <i>Email:</i></td> <td> <i>" + email + "</i></td></tr>" + "<tr style='border: 1px solid black'><td> <i>Orderid:</i></td> <td> <i>" + orderid + "</i></td></tr>" + "<tr style='border: 1px solid black'><td><i>Payment Status:</i></td><td> <i>" + paymentstatus + "</i></td></tr>" + "<tr style='border: 1px solid black'><td><i>Order Status:</i></td><td> <i>" + orderstatus + "</i></td></tr>" + "</table>";
+  const sendEmail = (name, email, orderid, paymentstatus, orderstatus, grossTotal, deliverymethod) => {
+    const body = "<p>Hello ," + "</p>" + "<p>Your Order has been placed Sucessfully. Below is the status: </p>" + "<br/><p>Regards,</p> <p><a href=" + config.website + ">" + config.contact_name + "</a></p>" + "<table  style='border: 1px solid black'>" + "<tr style='border: 1px solid black'><td> <i>Name:</i></td> <td> <i>" + name + "</i></td></tr>" + "<tr style='border: 1px solid black'><td> <i>Email:</i></td> <td> <i>" + email + "</i></td></tr>" + "<tr style='border: 1px solid black'><td> <i>Orderid:</i></td> <td> <i>" + orderid + "</i></td></tr>" + "<tr style='border: 1px solid black'><td><i>Payment Status:</i></td><td> <i>" + paymentstatus + "</i></td></tr>" + "<tr style='border: 1px solid black'><td><i>Order Status:</i></td><td> <i>" + orderstatus + "</i></td></tr>" + "<tr style='border: 1px solid black'><td><i>Total:</i></td><td> <i>₹." + grossTotal + "</i></td></tr>" + "<tr style='border: 1px solid black'><td><i>Delivery mode:</i></td><td> <i>" + deliverymethod + "</i></td></tr>" + "</table>";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
