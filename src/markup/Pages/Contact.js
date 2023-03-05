@@ -22,12 +22,12 @@ const Contact = () => {
     console.log("data123", data);
     // const emailBody = <>
     //   <div>
-    //     <p>{"Hello", `${data.c_name}`} <br /> Thanks for reaching us, we will get back to you shortly.</p>
+    //     <p>{"Hello", `${data.c_name}`} <br /> Thank you for reaching out to us, we will get back to you shortly.</p>
     //     <br />
     //     <p>{"Regards,"}<br /><a href="https://www.tsalastudio.com">Tsala Studio Team</a> </p>
 
     //   </div></>
-    const body = "<p>Hello " + data.c_name + "," + "</p>" + "<p>Thanks for reaching us, we will get back to you shorlty.</p>" + "<br/><p>Regards,</p> <p><a href='" + config.website + "'>" + config.websitetitle + "</a></p>" + "<table  style='border: 1px solid black'>" + " <tr  style='border: 1px solid black'><td> <i>Name:</i></td> <td> <i>" + data.c_name + "</i></td></tr>" + "<tr style='border: 1px solid black'><td><i>Email:</i></td><td> <i>" + data.c_email + "</i></td></tr>" + "<tr style='border: 1px solid black'><td><i>Message:</i></td><td> <i>" + data.c_message + "</i></td></tr>" + "</table>";
+    const body = "<p>Hello " + data.c_name + "," + "</p>" + "<p>Thank you for reaching out to us, we will get back to you shorlty.</p>" + "<br/><p>Regards,</p> <p><a href='" + config.website + "'>" + config.websitetitle + "</a></p>" + "<table  style='border: 1px solid black'>" + " <tr  style='border: 1px solid black'><td> <i>Name:</i></td> <td> <i>" + data.c_name + "</i></td></tr>" + "<tr style='border: 1px solid black'><td><i>Email:</i></td><td> <i>" + data.c_email + "</i></td></tr>" + "<tr style='border: 1px solid black'><td><i>Message:</i></td><td> <i>" + data.c_message + "</i></td></tr>" + "</table>";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

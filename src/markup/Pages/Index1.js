@@ -165,7 +165,7 @@ const Index1 = () => {
                       <img src={cake1} alt="" />
                     </div>
                     <h3>We Are Professional at Our Skills</h3>
-                    <p>More than 100+ customers trusted us</p>
+                    <p>More than 100+ customers trust us</p>
                   </div>
                 </div>
               </div>
@@ -248,7 +248,7 @@ const Index1 = () => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="section-head text-center">
-                    <h3>Thanks for reaching us.</h3>
+                    <h3>Thank you for reaching out to us.</h3>
                   </div>
                 </div>
               </div>
