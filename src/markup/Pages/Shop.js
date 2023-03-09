@@ -523,7 +523,7 @@ const Shop = (props) => {
         <div className="dlab-bnr-inr overlay-black-light divbg" style={{ backgroundImage: "url(" + localStorage.getItem("bannerurl") + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">{subcategory != undefined && subcategory != "" ? subcategory?.toUpperCase() : category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop"}</h1>
+              {searchFilter ? <h1 className="text-white">{"Search Result for : " + searchFilter}</h1> : <h1 className="text-white">{subcategory != undefined && subcategory != "" ? subcategory?.toUpperCase() : category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop"}</h1>}
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">
