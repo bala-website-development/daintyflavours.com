@@ -23,6 +23,14 @@ const Shopchekout = () => {
   const [message, setMessage] = useState("");
   const [notes, setNotes] = useState("");
   const [pickup, setPickup] = useState(false);
+  const [name, setName] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [address, setAddress] = useState("");
+  const [checked, setChecked] = useState(false);
   const grossTotal = pickup ? Number(subTotal).toFixed(2) : Number(subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))).toFixed(2);
 
   const history = useHistory();
@@ -30,24 +38,26 @@ const Shopchekout = () => {
   const [userAddress, setUserAddress] = useState([]);
 
   const updatecart = (data, ls) => {
-    setSubTotal(
-      data
-        .map((total) => {
-          // return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
-          // return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
-          return parseInt(total.p_price * total.p_quantity);
-        })
-        .reduce((a, b) => a + b, 0)
-    );
-    setProductWeight(
-      data
-        .map((wt) => {
-          return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
-        })
-        .reduce((a, b) => a + b, 0)
-    );
-    //setLoading((loading) => !loading);
-    console.log("cart details", data);
+    try {
+      setSubTotal(
+        data
+          .map((total) => {
+            // return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
+            // return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
+            return parseInt(total.p_price < total.p_net_product_price && total.p_price !== 0 && total.p_price !== "0" && total.p_price !== "" ? total.p_price : total.p_net_product_price * total.p_quantity);
+          })
+          .reduce((a, b) => a + b, 0)
+      );
+      setProductWeight(
+        data
+          .map((wt) => {
+            return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
+          })
+          .reduce((a, b) => a + b, 0)
+      );
+      //setLoading((loading) => !loading);
+      console.log("cart details", data);
+    } catch {}
   };
   const fetchCartDetails = () => {
     setLoading((load) => !load);
@@ -91,14 +101,55 @@ const Shopchekout = () => {
       });
   };
 
+  const onChangeYesBillingaddress = (event) => {
+    //setChecked(event);
+    if (event) {
+      console.log(event);
+      var n1 = document.getElementById("name");
+      var n2 = document.getElementById("user_name");
+      var e1 = document.getElementById("email");
+      var e2 = document.getElementById("user_email");
+      var po1 = document.getElementById("phonenumber");
+      var po2 = document.getElementById("user_phonenumber");
+      var a1 = document.getElementById("address");
+      var a2 = document.getElementById("user_address");
+      var c1 = document.getElementById("city");
+      var c2 = document.getElementById("user_city");
+      var s1 = document.getElementById("state");
+      var s2 = document.getElementById("user_state");
+      var p1 = document.getElementById("pincode");
+      var p2 = document.getElementById("user_pincode");
+      n2.value = "";
+      setName(n1.value);
+      setEmail(e1.value);
+      setPhonenumber(po1.value);
+      setAddress(a1.value);
+      setCity(c1.value);
+      setState(s1.value);
+      setPincode(p1.value);
+      // e2.value = "";
+      // po2.value = "";
+      // a2.value = "";
+      // c2.value = "";
+      // s2.value = "";
+      // p2.value = "";
+      setChecked(true);
+    } else {
+      setChecked(false);
+    }
+  };
   useEffect(() => {
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
       //user loggined in
       fetchCartDetails();
       getUserProfile();
     } else {
-      setCartDetails(lsDaintyCart);
-      updatecart(lsDaintyCart, 1);
+      if (lsDaintyCart && lsDaintyCart.length > 0) {
+        setCartDetails(lsDaintyCart);
+        updatecart(lsDaintyCart, 1);
+      } else {
+        history.push("/");
+      }
       // user not logged in
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -110,6 +161,7 @@ const Shopchekout = () => {
     }, 1000);
   };
   const onSubmit = (data, e) => {
+    console.log("checkout input", data);
     e.preventDefault();
     if (userAddress[0]) {
       delete userAddress[0].createddate;
@@ -146,13 +198,22 @@ const Shopchekout = () => {
       usernotes: notes,
       billingaddress: userAddress[0],
       billingaddress: {
-        address: data.user_address === "" ? userAddress[0].address : data.user_address,
-        name: data.user_name === "" ? userAddress[0].name : data.user_name,
-        email: data.user_email === "" ? userAddress[0].email : data.user_email,
-        city: data.user_city === "" ? userAddress[0].city : data.user_city,
-        state: data.user_state === "" ? userAddress[0].state : data.user_state,
-        pincode: data.user_pincode === "" ? userAddress[0].pincode : data.user_pincode,
-        phonenumber: data.user_phonenumber === "" ? userAddress[0].phonenumber : data.user_phonenumber,
+        // address: !checked ? address : data.user_address === "" ? userAddress[0].address : data.user_address,
+        // name: !checked ? name : data.user_name === "" ? userAddress[0].name : data.user_name,
+        // email: !checked ? email : data.user_email === "" ? userAddress[0].email : data.user_email,
+        // city: !checked ? city : data.user_city === "" ? userAddress[0].city : data.user_city,
+        // state: !checked ? state : data.user_state === "" ? userAddress[0].state : data.user_state,
+        // pincode: !checked ? pincode : data.user_pincode === "" ? userAddress[0].pincode : data.user_pincode,
+        // phonenumber: !checked ? phonenumber : data.user_phonenumber === "" ? userAddress[0].phonenumber : data.user_phonenumber,
+        // gstnumber: !data.user_gstnumber === "" || undefined ? 0 : data.user_gstnumber,
+
+        address: address,
+        name: name,
+        email: email,
+        city: city,
+        state: state,
+        pincode: pincode,
+        phonenumber: phonenumber,
         gstnumber: data.user_gstnumber === "" || undefined ? 0 : data.user_gstnumber,
       },
       shippingaddress: {
@@ -234,7 +295,7 @@ const Shopchekout = () => {
                   </div>
                   <div className="col-lg-4">
                     <h4 className="text-primary">
-                      Total Amount: <i class="fa fa-inr mb-0"> </i>
+                      Ordert Total: <i class="fa fa-inr mb-0"> </i>
                       <b> {grossTotal}</b>
                     </h4>
                   </div>
@@ -246,36 +307,36 @@ const Shopchekout = () => {
                   <div className="row">
                     <div className="form-group col-md-6">
                       Name
-                      <input type="text" name="name" placeholder="First Name" defaultValue={userAddress[0]?.name} className="form-control" {...register("name")} required />
+                      <input id="name" type="text" name="name" placeholder="First Name" defaultValue={userAddress[0]?.name} className="form-control" {...register("name")} required onChange={(e) => setName(e.target.value)} />
                     </div>
                     <div className="form-group col-md-6">
                       Email
-                      <input type="text" name="email" className="form-control" placeholder="Email" defaultValue={userAddress[0]?.email} className="form-control" {...register("email")} required />
+                      <input id="email" type="text" name="email" className="form-control" placeholder="Email" defaultValue={userAddress[0]?.email} className="form-control" {...register("email")} required onChange={(e) => setEmail(e.target.value)} />
                     </div>
                   </div>
                   <div className="form-group">
-                    Phonenumber
-                    <input type="text" name="phonenumber" placeholder="Phonenumber" defaultValue={userAddress[0]?.phonenumber} className="form-control" {...register("phonenumber")} required />
+                    Phonenumber +91-
+                    <input id="phonenumber" type="tel" min={0} maxlength="10" name="phonenumber" placeholder="Phonenumber" defaultValue={userAddress[0]?.phonenumber} className="form-control" {...register("phonenumber")} required onChange={(e) => setPhonenumber(e.target.value)} />
                   </div>
                   <div className="form-group">
                     Full Shipping Address
-                    <input type="text" name="address" placeholder="Full Address" defaultValue={userAddress[0]?.address} className="form-control" {...register("address")} required />
+                    <input id="address" type="text" name="address" placeholder="Full Address" defaultValue={userAddress[0]?.address} className="form-control" {...register("address")} required onChange={(e) => setAddress(e.target.value)} />
                   </div>
                   <div className="form-group">
                     City/Town
-                    <input type="text" name="city" placeholder="Village/Town/City" defaultValue={userAddress[0]?.city} className="form-control" {...register("city")} required />
+                    <input id="city" type="text" name="city" placeholder="Village/Town/City" defaultValue={userAddress[0]?.city} className="form-control" {...register("city")} required onChange={(e) => setCity(e.target.value)} />
                   </div>
                   <div className="row">
                     <div className="form-group col-md-6">
                       State
-                      <input type="text" className="form-control" placeholder="State" defaultValue={userAddress[0]?.state} name="state" {...register("state")} required />
+                      <input id="state" type="text" className="form-control" placeholder="State" defaultValue={userAddress[0]?.state} name="state" {...register("state")} required onChange={(e) => setState(e.target.value)} />
                     </div>
                     <div className="form-group col-md-6">
                       Pincode
-                      <input type="text" className="form-control" placeholder="Pincode" defaultValue={userAddress[0]?.pincode} name="pincode" {...register("pincode")} required />
+                      <input id="pincode" type="tel" min={0} maxlength="6" className="form-control" placeholder="Pincode" defaultValue={userAddress[0]?.pincode} name="pincode" {...register("pincode")} required onChange={(e) => setPincode(e.target.value)} />
                     </div>
                     <div className="form-group">
-                      <select className="form-control" {...register("country")} required name="country" defaultValue={userAddress[0]?.country}>
+                      <select id="country" className="form-control" {...register("country")} required name="country" defaultValue={userAddress[0]?.country}>
                         <option value="India">India</option>
                         <option value="Others">Others</option>
                       </select>
@@ -283,9 +344,12 @@ const Shopchekout = () => {
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-12 m-b30 m-md-b0">
+                  <input type="checkbox" id="checked" name="checked" value={checked} onClick={(e) => onChangeYesBillingaddress(e.target.checked)}></input>
+                  <label for="checked"> Use same shipping address</label>
+
                   <h3>
-                    <button className="btn-link text-black " type="button" data-toggle="collapse" data-target="#different-address">
-                      Billing Address <i className="fa fa-angle-down"></i>
+                    <button className="btn-link text-black " type="button" data-toggle="collapses" data-target="#different-address">
+                      Billing Address <i className="fa fa-angle-downs"></i>
                     </button>
                   </h3>
                   <div id="different-address" className="collapse-no">
@@ -293,33 +357,33 @@ const Shopchekout = () => {
                       <div className="row">
                         <div className="form-group col-md-6">
                           Name
-                          <input type="text" name="user_name" placeholder="First Name" defaultValue={userAddress[0]?.name} className="form-control" {...register("user_name")} required />
+                          <input id="user_name" type="text" name="user_name" disabled={checked} placeholder="First Name" value={name} className="form-control" {...register("user_name")} required onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div className="form-group col-md-6">
                           Email
-                          <input type="text" name="user_email" className="form-control" placeholder="Email" defaultValue={userAddress[0]?.email} className="form-control" {...register("user_email")} required />
+                          <input id="user_email" type="text" name="user_email" value={email} disabled={checked} className="form-control" placeholder="Email" className="form-control" {...register("user_email")} required onChange={(e) => setEmail(e.target.value)} />
                         </div>
                       </div>
                       <div className="form-group">
-                        Phonenumber
-                        <input type="text" name="user_phonenumber" placeholder="Phonenumber" defaultValue={userAddress[0]?.phonenumber} className="form-control" {...register("user_phonenumber")} required />
+                        Phonenumber +91-
+                        <input id="user_phonenumber" type="tel" min={0} maxlength="10" name="user_phonenumber" disabled={checked} value={phonenumber} placeholder="Phonenumber" className="form-control" {...register("user_phonenumber")} required onChange={(e) => setPhonenumber(e.target.value)} />
                       </div>
                       <div className="form-group">
                         Full Shipping Address
-                        <input type="text" name="user_address" placeholder="Full Address" defaultValue={userAddress[0]?.address} className="form-control" {...register("user_address")} required />
+                        <input id="user_address" type="text" name="user_address" disabled={checked} value={address} placeholder="Full Address" className="form-control" {...register("user_address")} required onChange={(e) => setAddress(e.target.value)} />
                       </div>
                       <div className="form-group">
                         City/Town
-                        <input type="text" name="user_city" placeholder="Village/Town/City" defaultValue={userAddress[0]?.city} className="form-control" {...register("user_city")} required />
+                        <input id="user_city" type="text" name="user_city" disabled={checked} placeholder="Village/Town/City" value={city} className="form-control" {...register("user_city")} required onChange={(e) => setCity(e.target.value)} />
                       </div>
                       <div className="row">
                         <div className="form-group col-md-6">
                           State
-                          <input type="text" className="form-control" placeholder="State" defaultValue={userAddress[0]?.state} name="user_state" {...register("user_state")} required />
+                          <input id="user_state" type="text" className="form-control" disabled={checked} value={state} placeholder="State" name="user_state" {...register("user_state")} required onChange={(e) => setState(e.target.value)} />
                         </div>
                         <div className="form-group col-md-6">
                           Pincode
-                          <input type="text" className="form-control" placeholder="Pincode" defaultValue={userAddress[0]?.pincode} name="user_pincode" {...register("user_pincode")} required />
+                          <input id="user_pincode" type="number" min={0} maxlength="6" className="form-control" disabled={checked} value={pincode} placeholder="Pincode" name="user_pincode" {...register("user_pincode")} required onChange={(e) => setPincode(e.target.value)} />
                         </div>
                         <div className="form-group col-md-6">
                           <label>GST Number (Optional)</label>
@@ -329,7 +393,6 @@ const Shopchekout = () => {
                       <p>If Billing address is different, please updated in your profile</p>
                     </div>
                   </div>
-
                   <div className="form-group">
                     <span>Notes/Special instructions about your order: </span>
                     <textarea type="textarea" rows="3" className="form-control" placeholder="Notes about your order, e.g. special notes for delivery, contact phone number" onChange={(e) => setNotes(e.target.value)}></textarea>
@@ -350,13 +413,13 @@ const Shopchekout = () => {
                         <th class="d-none">Product name</th>
 
                         <th>Quantity</th>
+                        <th>Price</th>
                         <th>Total</th>
-                        <th>Net Amount</th>
                       </tr>
                     </thead>
                     <tbody>
                       {!loading ? (
-                        cartDetails.length > 0 && status === false ? (
+                        cartDetails && cartDetails.length > 0 && status === false ? (
                           cartDetails.map((cart, key) => (
                             <tr className="font-weight-normal">
                               <td className="product-item-img">
@@ -371,19 +434,25 @@ const Shopchekout = () => {
 
                               <td className="product-item-quantity">{cart.p_quantity}</td>
                               <td className="product-item-totle text-nowrap">
-                                <i class="fa fa-inr"></i> {cart.p_price * cart.p_quantity}
+                                <i class="fa fa-inr"></i> {cart.p_price < cart.p_net_product_price && cart.p_price !== 0 && cart.p_price !== "0" && cart.p_price !== "" ? cart.p_price : cart.p_net_product_price * cart.p_quantity}
                                 <div className="font-weight-light small">
                                   Inclusive of Tax:
                                   {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
                                 </div>
                               </td>
                               <td className="product-item-totle">
-                                <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity)}
+                                <i class="fa fa-inr"></i> {parseInt(cart.p_price < cart.p_net_product_price && cart.p_price !== 0 && cart.p_price !== "0" && cart.p_price !== "" ? cart.p_price : cart.p_net_product_price * cart.p_quantity)}
                               </td>
                             </tr>
                           ))
                         ) : (
-                          "No items in your Cart for check out."
+                          <>
+                            No items in your Cart for check out.
+                            <br />
+                            <Link to={"/shop"} className="dbtn-primary m-t30">
+                              Shop all <i className="fa fa-angle-right mt-1"></i>
+                            </Link>{" "}
+                          </>
                         )
                       ) : (
                         <div className="p-2">
@@ -395,6 +464,7 @@ const Shopchekout = () => {
                   </table>
                 </div>
                 {!loading ? (
+                  cartDetails &&
                   cartDetails.length > 0 &&
                   status === false && (
                     <div className="col-lg-6">
@@ -403,7 +473,7 @@ const Shopchekout = () => {
                       <table className="table-bordered check-tbl">
                         <tbody>
                           <tr>
-                            <td>Order Subtotal</td>
+                            <td>Subtotal</td>
                             <td className="product-price">
                               <i class="fa fa-inr"></i> {Number(subTotal).toFixed(2)}
                             </td>
@@ -429,9 +499,9 @@ const Shopchekout = () => {
                             </td>
                           </tr>
 
-                          <tr className="bg-primary text-light">
-                            <td>Total</td>
-                            <td>
+                          <tr className="fs-4">
+                            <td className="text-primary">Ordert Total</td>
+                            <td className="text-primary">
                               <i class="fa fa-inr"></i> {grossTotal}
                               {/* {pickup ? Number(subTotal).toFixed(2) : Number(subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000) * config.shippingcost))).toFixed(2)} */}
                             </td>

@@ -59,7 +59,7 @@ class Footer extends Component {
 
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="widget widget_services border-0">
-                    <h4 className="footer-title">Quick Links/ Useful Links</h4>
+                    <h4 className="footer-title">Quick Links</h4>
                     <ul className="list-2">
                       <li>
                         <Link to={"/"}>Home</Link>

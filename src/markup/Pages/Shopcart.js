@@ -38,7 +38,7 @@ const Shopcart = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("cart details", data);
+        console.log("cart details updateCartQuantity", quantity, data);
         setCartUpdated(true);
       })
       .catch((err) => {
@@ -51,7 +51,7 @@ const Shopcart = () => {
     //need to update the quantity and total in the cart item from this lsDaintyCart and set and reftest cart. q_total = q_quatity* q_net_price.
     for (var i = 0; i < lsDaintyCart.length; i++) {
       if (lsDaintyCart[i].id == cartid) {
-        lsDaintyCart[i].p_net_product_price = parseInt(lsDaintyCart[i].p_price) * parseInt(lsDaintyCart[i].quantity);
+        lsDaintyCart[i].p_net_product_price = parseInt(lsDaintyCart[i].p_price) * parseInt(quantity);
         lsDaintyCart[i].p_quantity = quantity;
       }
     }
@@ -102,35 +102,40 @@ const Shopcart = () => {
   };
 
   const updatecart = (data, ls) => {
-    setCartDetails(data);
-    console.log("netdata", data);
-    // console.log("query_cartDetails", data1);
-    setSubTotal(
-      data &&
-        data.length > 0 &&
-        data
-          .map((total) => {
-            //return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
-            // removing tax
-            // return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
-            return parseInt(total.p_price * total.p_quantity);
-          })
-          .reduce((a, b) => a + b, 0)
-    );
-    setProductWeight(
-      data &&
-        data.length > 0 &&
-        data
-          .map((wt) => {
-            return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
-          })
-          .reduce((a, b) => a + b, 0)
-    );
-    //setLoading((loading) => !loading);
-    console.log("cart details", data);
-    setCartUpdated(false);
-    if (ls === 1) {
-      //localStorage.setItem("daintycart", JSON.stringify(cartDetails));
+    try {
+      setCartDetails(data);
+      console.log("netdata", data);
+      // console.log("query_cartDetails", data1);
+      setSubTotal(
+        data &&
+          data.length > 0 &&
+          data
+            .map((total) => {
+              //return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
+              // removing tax
+              // return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
+              return parseInt(total.p_price === "0" || total.p_price === 0 ? total.p_net_product_price * total.p_quantity : total.p_price * total.p_quantity);
+            })
+            .reduce((a, b) => a + b, 0)
+      );
+      setProductWeight(
+        data &&
+          data.length > 0 &&
+          data
+            .map((wt) => {
+              return parseInt(wt.p_productweight === 0 ? 0 : wt.p_productweight * wt.p_quantity) || 0;
+            })
+            .reduce((a, b) => a + b, 0)
+      );
+      //setLoading((loading) => !loading);
+      console.log("cart details", data);
+      console.log("query_cartDetails", subTotal);
+      setCartUpdated(false);
+      if (ls === 1) {
+        //localStorage.setItem("daintycart", JSON.stringify(cartDetails));
+      }
+    } catch (ex) {
+      console.log("carterror", ex);
     }
   };
   useEffect(() => {
@@ -143,6 +148,7 @@ const Shopcart = () => {
             setSubTotal(0);
             //setLoading((loading) => !loading);
           }
+          console.log("cart details form db", data);
           updatecart(data, 0);
           if (loading) setLoading((loading) => !loading);
         })
@@ -300,16 +306,17 @@ const Shopcart = () => {
                               </div>
                               <div className="w-25 text-nowrap">
                                 {" "}
-                                <i class="fa fa-inr"></i> {cart.p_price}
+                                <i class="fa fa-inr"></i> {cart.p_price < cart.p_net_product_price && cart.p_price !== 0 && cart.p_price !== "0" && cart.p_price !== "" ? cart.p_price : cart.p_net_product_price}
                                 <div className="small">
                                   Inclusive of Tax:
                                   {cart.p_tax === undefined ? 0 : cart.p_tax} {"%"}
                                 </div>
                               </div>
+
                               <div className="w-25 text-nowrap">
                                 {/* inclusive of tax - removed on 02/23 as per mithun request*/}
                                 {/* <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity) + cart.p_price * cart.p_quantity * ((cart.p_tax === undefined ? 0 : parseInt(cart.p_tax)) / 100)} */}
-                                <i class="fa fa-inr"></i> {parseInt(cart.p_price * cart.p_quantity)}
+                                <i class="fa fa-inr"></i> {parseInt((cart.p_price < cart.p_net_product_price && cart.p_price !== 0 && cart.p_price !== "0" && cart.p_price !== "" ? cart.p_price : cart.p_net_product_price) * cart.p_quantity)}
                               </div>
                               {userLoggedin ? (
                                 <div className="w-10">

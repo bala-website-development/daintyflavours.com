@@ -304,10 +304,10 @@ const Shop = (props) => {
         p_id: product.p_id,
         p_quantity: 1,
         updateddate: new Date(),
-        p_price: product.p_price,
+        p_price_c: product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? product.p_price : product.p_net_product_price,
         id: uuid(),
       };
-
+      console.log("cart items before db", data);
       fetch(config.service_url + "addCart", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data }) })
         .then((response) => response.json())
         .then((data) => {
@@ -523,7 +523,7 @@ const Shop = (props) => {
         <div className="dlab-bnr-inr overlay-black-light divbg" style={{ backgroundImage: "url(" + localStorage.getItem("bannerurl") + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">{subcategory != undefined && subcategory != "" ? subcategory?.toUpperCase() : category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop"}</h1>
+              {searchFilter ? <h1 className="text-white">{"Search Result for : " + searchFilter}</h1> : <h1 className="text-white">{subcategory != undefined && subcategory != "" ? subcategory?.toUpperCase() : category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop"}</h1>}
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">
