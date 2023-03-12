@@ -1,6 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-
+import { UIStore } from "./../Store/UIStore";
 import { Link, useHistory } from "react-router-dom";
 import cart from "./../../images/icons/cart.png";
 import scart from "./../../images/icons/shopping-cart.png";
@@ -54,6 +54,7 @@ const NavBarMenu = () => {
   const [menuCategory, setMenuCategory] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
   const [menuSubCategory, setMenuSubCategory] = useState([]);
+  const cartcount = UIStore.useState((s) => s.cartcount);
   const toggle = () => {
     setToggleShow((toggleShow) => !toggleShow);
   };
@@ -195,6 +196,11 @@ const NavBarMenu = () => {
       getSubCategories();
     }
   };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      history.push({ pathname: "/shop", searchFilter: searchFilter });
+    }
+  };
 
   useEffect(() => {
     const fetchCartDetails = () => {
@@ -206,7 +212,7 @@ const NavBarMenu = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) {});
+        .catch(function (error) { });
     };
     getOffer();
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
@@ -268,7 +274,7 @@ const NavBarMenu = () => {
             </div>
             <div className="d-flex align-items-center justify-content-end mr-3">
               <div className="align-items-cente w-100">
-                <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} type="text" className="searchbar border px-3" placeholder="Search all our products" />
+                <input name="search" onChange={(e) => setSearchFilter(e.target.value)} value={searchFilter} onKeyDown={handleKeyDown} type="text" className="searchbar border px-3" placeholder="Search all our products" />
               </div>
               <div className="px-1"> </div>
               <div className="align-items-center">
@@ -285,7 +291,9 @@ const NavBarMenu = () => {
                 <i class="fas fa-shopping-cart d-none"></i>
                 <img src={scart} className="iconsize1" />
                 <span class="badge rounded-pill badge-notification mx-1">
-                  <span class="badge rounded-pill badge-notification bg-danger">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
+                  <span class="badge rounded-pill badge-notification bg-danger d-none">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
+
+                  <span class="badge rounded-pill badge-notification bg-danger"> {cartcount}</span>
                 </span>
               </Link>
 
@@ -296,7 +304,7 @@ const NavBarMenu = () => {
                       <Link to={"/shop-login"}>
                         <i className="ti-user d-none"></i>
                         <img src={user} className="iconsize1" />
-                        <span class="badge rounded-pill badge-notification">
+                        <span class="badge rounded-pill badge-notification d-none">
                           <i class="fa-solid fa-circle-xmark text-danger"></i>
                         </span>
                       </Link>
@@ -388,7 +396,7 @@ const NavBarMenu = () => {
                   menuMainCategory?.map(
                     (mmc) =>
                       mmc.id != null && (
-                        <li class="nav-item dropdown">
+                        <li id="dnav" class="dnav nav-item dropdown">
                           <a class="dropdown-toggle align-items-center hidden-arrow nav-link text-dark" href="#" id={"navbarDropdownMenuAvatar" + mmc.maincategory} role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                             <span className="small">
                               {mmc.maincategory?.toUpperCase()} <i className="fa fa-angle-down"></i>
@@ -399,7 +407,7 @@ const NavBarMenu = () => {
                               menuCategory
                                 .filter((fil) => fil.maincategory === mmc.maincategory)
                                 ?.map((mc) => (
-                                  <li className="small">
+                                  <li className=" small ">
                                     <Link
                                       className="dropdown-item text-uppercase"
                                       onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))}
@@ -409,16 +417,17 @@ const NavBarMenu = () => {
                                         bannerimage: mc?.banner_image,
                                       }}
                                     >
-                                      <span className="text-nowrap">{mc?.category}</span>
+                                      <span className="text-nowrap">{mc?.category} {menuSubCategory && menuSubCategory.filter((f) => f.maincategory === mmc.maincategory && f.category === mc.category)?.length > 0 ? "»" : ""} </span>
                                     </Link>
-                                    <ul class="dropdown-sub-menu list-unstyled" aria-labelledby={"navbarDropdownMenuAvatar" + mc.category}>
+
+                                    <ul class="list-unstyled" aria-labelledby={"navbarDropdownMenuAvatar" + mc.category}>
                                       {menuSubCategory &&
                                         menuSubCategory
                                           .filter((f) => f.maincategory === mmc.maincategory && f.category === mc.category)
                                           ?.map((sm) => (
                                             <li className="small">
                                               <Link
-                                                className="submenu dropdown-item text-uppercase"
+                                                className=" dropdown-item text-uppercase"
                                                 onClick={(e) => (setToggleShow((toggleShow) => !toggleShow), localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category + "&subcategory=" + sm.subcategory))}
                                                 to={{
                                                   pathname: "/shop",
@@ -426,7 +435,7 @@ const NavBarMenu = () => {
                                                   bannerimage: mc?.banner_image,
                                                 }}
                                               >
-                                                <span className=" text-nowrap">{sm?.subcategory}</span>
+                                                <span className="text-nowrap">{sm?.subcategory}</span>
                                               </Link>
                                             </li>
                                           ))}

@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 // import slider1 from "./../../images/main-slider/slide1.jpg";
@@ -6,10 +6,14 @@ import { Carousel } from "react-bootstrap";
 import config from "../../config.json";
 
 const Slider = () => {
+  const [index, setIndex] = useState(2);
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
   const slider_content = config.sliderbk;
   return (
     <div className="main-slider">
-      <Carousel indicators={true}>
+      <Carousel indicators={true} interval={10000} pause="false" activeIndex={index} onSelect={handleSelect}>
         {slider_content &&
           slider_content.map((slider) => (
             <Carousel.Item>

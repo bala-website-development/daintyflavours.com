@@ -9,6 +9,90 @@
     column-count: 2 !important;
     column-rule: dotted 1px #333 !important;
 }
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+.pagination a.active {
+  background-color: #b43b8d;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
+.zindex800
+{
+  z-index: 800;
+}
+#dnav li
+{
+    width: 300px;
+}
+ #dnav ul ul {
+   position: absolute;
+   padding: 2;
+   left: 0;
+   display: none;
+  background-color: #ffffff !important;
+   /* hides sublists */
+    margin-left: 300px !important;
+      margin-top: -65px;
+        z-index: 10000 !important;
+ }
+ #dnav ul ul li {
+   border-bottom: #b43b8d solid 1px !important;
+  background-color: #eac9db !important;
+
+ }
+ @media only screen and (max-width: 479px) {
+  #dnav ul ul {
+     border: #eac9db solid 1px !important;
+      margin-left: 50px !important;
+      margin-top: 0;
+      background-color: #ffffff !important;
+      z-index: 10000 !important;
+      
+ }
+ #dnav ul ul li {
+  border-bottom: #b43b8d solid 1px !important;
+    background-color: #eac9db !important;
+  
+ }
+ #dnav ul ul:hover{
+  display: block;
+ }
+ }
+ #dnav li:hover ul ul {
+   display: block;
+ }
+
+ /* hides sub-sublists */
+
+ #dnav li:hover ul {
+   display: block;
+ }
+
+ /* shows sublist on hover */
+
+ #dnav li li:hover ul {
+   display: block;
+position: absolute;
+   /* shows sub-sublist on hover */
+  
+   /* this should be the same width as the parent list item */
+ 
+   /* aligns top of sub menu with top of list item */
+ }
+
 
 .iconsize1
 {

@@ -59,14 +59,14 @@ class Footer extends Component {
 
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="widget widget_services border-0">
-                    <h4 className="footer-title">Quick Links/ Useful Links</h4>
+                    <h4 className="footer-title">Quick Links</h4>
                     <ul className="list-2">
                       <li>
                         <Link to={"/"}>Home</Link>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link to={"/about"}>About</Link>
-                      </li>
+                      </li> */}
                       {/* <li>
                         <Link to={"/our-journey"}>Our Journey</Link>
                       </li> */}
@@ -74,9 +74,9 @@ class Footer extends Component {
                       {/* <li>
                       <Link to={"/blog-half-img-sidebar"}>Blog</Link>
                     </li> */}
-                      <li>
+                      {/* <li>
                         <Link to={"/gallery"}>Gallery</Link>
-                      </li>
+                      </li> */}
                       <li>
                         <Link to={"/maincategories"}>Category</Link>
                       </li>

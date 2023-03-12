@@ -46,7 +46,7 @@ const PaymentPage = (props) => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="page-notfound text-center">
-                      <Payment amount={location.state?.amount} name={location.state?.name} orderid={location.state?.orderid} email={location.state?.email} contactno={location.state?.contactno} orderstatus={location.state?.orderstatus} paymentstatus={location.state?.paymentstatus} userLoggedin={location.state?.userLoggedin} />
+                      <Payment amount={location.state?.amount} name={location.state?.name} orderid={location.state?.orderid} email={location.state?.email} contactno={location.state?.contactno} orderstatus={location.state?.orderstatus} paymentstatus={location.state?.paymentstatus} userLoggedin={location.state?.userLoggedin} deliverymethod={location.state?.deliverymethod} />
                     </div>
                   </div>
                 </div>

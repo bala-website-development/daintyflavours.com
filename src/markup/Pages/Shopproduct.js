@@ -67,12 +67,12 @@ const Shopproduct = (props) => {
         p_image: productDtl.p_image,
         p_name: productDtl.p_name,
         p_net_product_price: productDtl.p_net_product_price,
+        p_price: productDtl.p_price < productDtl.p_net_product_price && productDtl.p_price !== 0 && productDtl.p_price !== "0" && productDtl.p_price !== "" ? productDtl.p_price : productDtl.p_net_product_price,
         p_returnaccepted: productDtl.p_returnaccepted,
         p_productweight: productDtl.p_productweight,
         p_tax: productDtl.p_tax,
         p_quantity: 1,
         updateddate: new Date(),
-        p_price: productDtl.price,
         id: uuid(),
       };
       console.log("befre", cartarray);
@@ -100,7 +100,7 @@ const Shopproduct = (props) => {
         p_id: productDtl.p_id,
         p_quantity: 1,
         updateddate: new Date(),
-        p_price: productDtl.p_price,
+        p_price: productDtl.p_price < productDtl.p_net_product_price && productDtl.p_price !== 0 && productDtl.p_price !== "0" && productDtl.p_price !== "" ? productDtl.p_price : productDtl.p_net_product_price,
         id: uuid(),
       };
 
@@ -279,7 +279,7 @@ const Shopproduct = (props) => {
                     </SimpleReactLightbox>
                   </div>
                 </div>
-                <div className="col-lg-6 m-b30">
+                <div className="col-lg-6 m-b30 zindex800">
                   <Form className="cart sticky-top" onSubmit={addItemsToCart}>
                     <div className="dlab-post-title">
                       <h4 className="post-title medium">{productDtl.p_name}</h4>
@@ -290,7 +290,7 @@ const Shopproduct = (props) => {
                     </div>
                     <div className="relative">
                       <h3 className="m-tb10">
-                        {productDtl.p_price < productDtl.p_net_product_price && productDtl.p_price !== 0 && productDtl.p_price !== "" ? (
+                        {productDtl.p_price < productDtl.p_net_product_price && productDtl.p_price !== 0 && productDtl.p_price !== "0" && productDtl.p_price !== "" ? (
                           <>
                             <div className="text-primary pricefont">
                               <span style={{ "text-decoration": "line-through" }}>
@@ -306,7 +306,7 @@ const Shopproduct = (props) => {
                         ) : (
                           <div className="text-primary pricefont">
                             <i class="fa fa-inr"> {"   "} </i>
-                            {"   "} {productDtl.p_price}
+                            {"   "} {productDtl.p_net_product_price}
                           </div>
                         )}
                       </h3>
@@ -334,7 +334,7 @@ const Shopproduct = (props) => {
                     <div className="py-2">
                       <div>{productDtl?.p_brand == "" || productDtl?.p_brand == undefined ? "" : " Brand Name - " + productDtl?.p_brand}</div>
                     </div>
-                    <div className="py-2">
+                    <div className="py-2 d-none">
                       <div> Expiry Date - {productDtl.p_expirydate === "" || productDtl.p_expirydate === undefined || productDtl.p_expirydate === "0001-01-01" ? "N/A" : productDtl.p_expirydate}</div>
                     </div>
                     <div className="py-2">
@@ -343,7 +343,7 @@ const Shopproduct = (props) => {
                     <div className="py-2 d-none">
                       <div> Available Quantity - {productDtl.p_quantity}</div>
                     </div>
-                    <div className="py-2 ">
+                    <div className="py-2 d-none">
                       <div> Return Accepted - {productDtl.p_returnaccepted || "" || undefined ? "Yes" : "No"}</div>
                     </div>
 

@@ -146,7 +146,7 @@ class About extends Component {
                   <div className="col-lg-12">
                     <div className="section-head text-center text-white">
                       <h3 className="text-white">We Are Professional at Our Skills</h3>
-                      <p>More than 2000+ customers trusted us</p>
+                      <p>More than 2000+ customers trust us</p>
                     </div>
                   </div>
                 </div>
@@ -242,7 +242,7 @@ class About extends Component {
                   <div class="row">
                     <div class="col-lg-12">
                       <div class="section-head text-center">
-                        <h3>Thanks for reaching us</h3>
+                        <h3>Thank you for reaching out to us</h3>
                         <p>We love our customers, so feel free to contact us.</p>
                         <Link to={"contact"} className="btn-secondry   btn btnhover btn-md">
                           <i className="fas fas-cart"></i>Contact us

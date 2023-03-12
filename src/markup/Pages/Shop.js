@@ -10,12 +10,19 @@ import loadingimg from "./../../images/load.gif";
 import Header2 from "./../Layout/NavBarMenu";
 import queryString from "query-string";
 import secureLocalStorage from "react-secure-storage";
+import { UIStore } from "./../Store/UIStore";
+import ReactPaginate from "react-paginate";
+import Pagination from "./../Scripts/Pagination";
 const Shop = (props) => {
   const query = new URLSearchParams(props.location.search);
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const queryurl = localStorage.getItem("queryurl");
   const [totalProduct, setTotalProduct] = useState(0);
+  const daintyproducts = UIStore.useState((s) => s.daintyproducts);
   const [products, setProducts] = useState([]);
-  const [allproducts, setAllProducts] = useState([]);
+  // const [currentItem, setCurrentItem] = useState([]);
+  const [allproducts, setAllProducts] = useState(daintyproducts);
   const [networkError, setNetworkError] = useState("");
   const [smShow, setSmShow] = useState(false);
   const [message, setMessage] = useState("");
@@ -33,239 +40,215 @@ const Shop = (props) => {
   const [next, setNext] = useState(postsPerPage);
   const [end, setEnd] = useState(0);
   const history = useHistory();
-
-  //let bannerimageurl = props.location.bannerimage;
-  // let category = props.location.category;
-  // let maincategory = props.location.maincategory;
-  // let searchFilter = props.location.searchFilter;
-  //let bannerimageurl = query.get("bannerimage");
+  const cartcount = UIStore.useState((s) => s.cartcount);
   const queries = queryString.parse(queryurl);
-  // let category = query.get("category");
-  // let maincategory = query.get("maincategory");
   let category = queries.category || queries.brand;
   let maincategory = queries.maincategory;
   let searchFilter = props.location.searchFilter;
   let subcategory = queries.subcategory;
+  let bannerimage = queries.bannerimage;
   console.log("bannerimagestate props", props.location.bannerimage);
-  console.log("bannerimagestate local storage", localStorage.getItem("bannerurl"));
+  console.log("daintyproducts", daintyproducts);
   let arrayForHoldingPosts = [];
   let _arrayForHoldingPosts = [];
+  let _filterOption = "";
+  const indexOfLastItem = currentPage * postsPerPage;
+  const indexOfFirstItem = indexOfLastItem - postsPerPage;
+  const currentItem_ = products.slice(indexOfFirstItem, indexOfLastItem);
+  const [currentItem, setCurrentItem] = useState(currentItem_);
   const getProductDetails = async () => {
-    console.log("queryyy queries", props.location.searchFilter);
-    console.log("queryyy", maincategory);
-    //console.log("bannerimagestate", bannerimagestate);
+    try {
+      console.log("queryyy queries", props.location.searchFilter);
+      console.log("queryyy", maincategory);
+      //console.log("bannerimagestate", bannerimagestate);
 
-    let _filterOption = "";
-    if ((query.get("subcategory") != "" || query.get("subcategory") != undefined) && subcategory != "" && subcategory !== undefined) {
-      _filterOption = subcategory != "" && subcategory !== undefined ? subcategory : query.get("subcategory");
-      localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category") + "&subcategory=" + _filterOption);
-    } else if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
-      _filterOption = subcategory != "" && subcategory != undefined ? subcategory : category != "" && category !== undefined ? category : maincategory;
-    } else {
-      let _categories;
-      if (query.get("brand") == "" || query.get("brand") == undefined) {
-        _filterOption = query.get("category") != "" && query.get("category") !== undefined ? query.get("category") : query.get("maincategory");
-        localStorage.setItem("categorydes", props.location.categorydes);
-        localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category"));
-        _categories = JSON.parse(localStorage.getItem("categories"));
-        console.log("paaru", _categories);
-        let _result =
-          _categories &&
-          _categories
-            .filter((a) => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
+      // let _filterOption = "";
+      if ((query.get("subcategory") != "" || query.get("subcategory") != undefined) && subcategory != "" && subcategory !== undefined) {
+        _filterOption = subcategory != "" && subcategory !== undefined ? subcategory : query.get("subcategory");
+        localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category") + "&subcategory=" + _filterOption);
+      } else if ((query.get("category") == "" || query.get("category") == undefined) && (query.get("maincategory") == "" || query.get("maincategory") == undefined)) {
+        _filterOption = subcategory != "" && subcategory != undefined ? subcategory : category != "" && category !== undefined ? category : maincategory;
+      } else {
+        let _categories;
+        if (query.get("brand") == "" || query.get("brand") == undefined) {
+          _filterOption = query.get("category") != "" && query.get("category") !== undefined ? query.get("category") : query.get("maincategory");
+          localStorage.setItem("categorydes", props.location.categorydes);
+          localStorage.setItem("queryurl", "maincategory=" + query.get("maincategory") + "&category=" + query.get("category"));
+          _categories = JSON.parse(localStorage.getItem("categories"));
+          console.log("paaru", _categories);
+          let _result =
+            _categories &&
+            _categories
+              .filter((a) => a.category?.toUpperCase() == _filterOption?.toUpperCase() || a.maincategory == _filterOption)
+              .map((b) => {
+                return b;
+              });
+          if (_result?.length > 1) {
+            _result = _result
+              .filter((b) => b.maincategory?.toUpperCase() == query.get("maincategory")?.toUpperCase())
+              .map((c) => {
+                return c;
+              });
+          }
+
+          localStorage.setItem("bannerurl", _result[0]?.banner_image);
+          localStorage.setItem("categorydes", _result[0]?.categorydes);
+        } else {
+          _filterOption = JSON.parse(localStorage.getItem("brand"));
+          localStorage.setItem("categorydes", props.location.categorydes);
+          localStorage.setItem("queryurl", "brand=" + query.get("brand"));
+          _categories = JSON.parse(localStorage.getItem("brand"));
+          let _result = _categories
+            .filter((a) => a?.brand?.toUpperCase() == _filterOption?.toUpperCase())
             .map((b) => {
               return b;
             });
-        if (_result.length > 1) {
-          _result = _result
-            .filter((b) => b.maincategory?.toUpperCase() == query.get("maincategory")?.toUpperCase())
-            .map((c) => {
-              return c;
-            });
+          localStorage.setItem("bannerurl", _result[0]?.banner_image);
+          localStorage.setItem("categorydes", _result[0]?.categorydes);
         }
-
-        localStorage.setItem("bannerurl", _result[0]?.banner_image);
-        localStorage.setItem("categorydes", _result[0]?.categorydes);
-      } else {
-        _filterOption = JSON.parse(localStorage.getItem("brand"));
-        localStorage.setItem("categorydes", props.location.categorydes);
-        localStorage.setItem("queryurl", "brand=" + query.get("brand"));
-        _categories = JSON.parse(localStorage.getItem("brand"));
-        let _result = _categories
-          .filter((a) => a?.brand?.toUpperCase() == _filterOption?.toUpperCase())
-          .map((b) => {
-            return b;
-          });
-        localStorage.setItem("bannerurl", _result[0]?.banner_image);
-        localStorage.setItem("categorydes", _result[0]?.categorydes);
       }
-    }
-    await fetch(config.service_url + "getproducts")
-      .then((response) => response.json())
-      .then((data) => {
-        setTotalProduct(data.filter((a) => a.isactive === 1).length);
-        if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
-          if (category === "all" || props.location.searchFilter === "") {
-            getAllProductDetails();
-            console.log(category, "=> all active  products");
-          } else {
-            if (query.get("brand") != "" && query.get("brand") != undefined) {
-              let selective = data
-                .filter((filter) => filter.p_brand?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
-                .map((data) => {
-                  return data;
-                });
-              setProducts(selective);
-              setFilter(selective);
-              console.log("all active category products");
-            } else if (query.get("subcategory") != "" && query.get("subcategory") != undefined) {
-              let selective = data
-                .filter((filter) => filter?.p_subcategory?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
-                .map((data) => {
-                  return data;
-                });
-              setProducts(selective);
-              setFilter(selective);
-              console.log("all sub category products");
-            } else {
-              // all active category products
-              let selective = data
-                .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
-                .map((data) => {
-                  return data;
-                });
-              setProducts(selective);
-              setFilter(selective);
-              console.log("all active category products");
-            }
-          }
-        } else if (maincategory && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
-          // Main category products
-          console.log(props.location.searchFilter, maincategory, "maincategory");
-          let selective = data
-            .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
-            .map((data) => {
-              return data;
-            });
-          setProducts(selective);
-          setFilter(selective);
-          console.log("Main category products");
-        } else if (props.location.searchFilter) {
-          // prodcut that is searched
-          console.log(props.location.searchFilter, "search result");
-          let selective = data.filter((fil) => {
-            return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
-          });
-          setProducts(selective);
-          setFilter(selective);
-        } else if (maincategory === "all" || maincategory === "") {
-          console.log("mainprod with all products");
-          let selective = data
-            .filter((filter) => filter.isactive === 1)
-            .map((data) => {
-              return data;
-            });
+      const data = daintyproducts.length > 0 ? daintyproducts : allproducts;
 
-          setProducts(selective);
-          setFilter(selective);
+      setTotalProduct(data.filter((a) => a.isactive === 1).length);
+      if (category && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
+        if (category === "all" || props.location.searchFilter === "") {
+          setProducts(data);
+          console.log(products, "=> all active  products");
         } else {
-          console.log("all products");
-          let active = data
-            .filter((filter) => filter.isactive === 1)
-            .map((data) => {
-              return data;
-            });
-
-          setProducts(active);
-          setFilter(active);
-          //loopWithSlice(0, postsPerPage);
-          const slicedPosts = active.slice(0, postsPerPage);
-          arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-          setProducts(arrayForHoldingPosts);
+          if (query.get("brand") != "" && query.get("brand") != undefined) {
+            let selective = data
+              .filter((filter) => filter.p_brand?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
+              .map((data) => {
+                return data;
+              });
+            setProducts(selective);
+            setFilter(selective);
+            console.log("all active category products");
+          } else if (query.get("subcategory") != "" && query.get("subcategory") != undefined) {
+            let selective = data
+              .filter((filter) => filter?.p_subcategory?.toUpperCase() === _filterOption?.toUpperCase() && filter.isactive === 1)
+              .map((data) => {
+                return data;
+              });
+            setProducts(selective);
+            setFilter(selective);
+            console.log("all sub category products");
+          } else {
+            // all active category products
+            let selective = data
+              .filter((filter) => filter.p_category.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+              .map((data) => {
+                return data;
+              });
+            setProducts(selective);
+            setFilter(selective);
+            Paginate();
+            console.log("all active category products");
+          }
         }
-      })
-      .catch((err) => {
-        setNetworkError("Something went wrong, Please try again later!!");
-        console.log(networkError);
-      });
-    setLoading((loading) => !loading);
-  };
-  const getAllProductDetails = async () => {
-    setLoading((loading) => !loading);
-    console.log("cakecategory", category);
-    await fetch(config.service_url + "getproducts")
-      .then((response) => response.json())
-      .then((data) => {
+      } else if (maincategory && (props.location.searchFilter === "" || props.location.searchFilter === undefined)) {
+        // Main category products
+        console.log(props.location.searchFilter, maincategory, "maincategory");
+        let selective = data
+          .filter((filter) => filter.p_maincategory?.toUpperCase() === _filterOption.toUpperCase() && filter.isactive === 1)
+          .map((data) => {
+            return data;
+          });
+        setProducts(selective);
+        setFilter(selective);
+        console.log("Main category products");
+      } else if (props.location.searchFilter) {
+        // prodcut that is searched
+        console.log(props.location.searchFilter, "search result");
+        let selective = data.filter((fil) => {
+          return Object.keys(fil).some((k) => fil[k]?.toString().toLowerCase().includes(props.location.searchFilter.toLowerCase().trim()));
+        });
+        setProducts(selective);
+        setFilter(selective);
+        Paginate();
+      } else if (maincategory === "all" || maincategory === "") {
+        console.log("mainprod with all products");
+        let selective = data
+          .filter((filter) => filter.isactive === 1)
+          .map((data) => {
+            return data;
+          });
+
+        setProducts(selective);
+        setFilter(selective);
+        Paginate();
+      } else {
+        console.log("all products");
         let active = data
           .filter((filter) => filter.isactive === 1)
           .map((data) => {
             return data;
           });
+
         setProducts(active);
-        setAllProducts(data);
         setFilter(active);
-        const slicedPosts = active.slice(0, postsPerPage);
-        arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-        setProducts(arrayForHoldingPosts);
-        console.log(data, "products checkda");
-      })
-      .catch((err) => {
-        setNetworkError("Something went wrong, Please try again later!!");
-        console.log(networkError);
-      });
+
+        // const slicedPosts = active.slice(0, postsPerPage);
+        // arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
+        // setProducts(arrayForHoldingPosts);
+      }
+
+      setLoading((loading) => !loading);
+    } catch {
+      loading && setLoading(false);
+    }
+  };
+  const getAllProductDetails = async () => {
+    setLoading((loading) => !loading);
+    console.log("cakecategory", category);
+    if (daintyproducts.length <= 0) {
+      await fetch(config.service_url + "getproducts")
+        .then((response) => response.json())
+        .then((data) => {
+          let active = data
+            .filter((filter) => filter.isactive === 1)
+            .map((data) => {
+              return data;
+            });
+          setProducts(active);
+          setAllProducts(active);
+          setFilter(active);
+          setCurrentPage(1);
+          secureLocalStorage.setItem("daintyproducts", JSON.stringify(active));
+        })
+        .catch((err) => {
+          setNetworkError("Something went wrong, Please try again later!!");
+          console.log(networkError);
+        });
+    } else {
+      setAllProducts(daintyproducts);
+      console.log("prodcuts from local", daintyproducts);
+    }
     setLoading((loading) => !loading);
   };
   // paging
-  const loopWithSlice = (start, end) => {
-    console.log("slice", start, end, mcatFilterApp);
-    var slicedPosts = [];
 
-    if (mcatFilterApp) {
-      slicedPosts = mcatFilterProd.slice(start, end);
-      setEnd(end);
-      console.log("sliced products inside apply", products);
-    } else {
-      slicedPosts = filter.slice(start, end);
-      setEnd(end);
-    }
-    arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-    setProducts(arrayForHoldingPosts);
-    console.log("sliced products", arrayForHoldingPosts);
-  };
-
-  const LoadMoreForFilteredProducts = (IsFiltered, FilteredProduct) => {
-    console.log("slice", IsFiltered, FilteredProduct, mcatFilterProd);
-    var slicedPosts = [];
-    setProducts(filter);
-    if (IsFiltered || mcatFilterApp) {
-      slicedPosts = FilteredProduct.slice(0, postsPerPage);
-      setNext(0 + postsPerPage);
-      setEnd(end);
-      console.log("inside check", products, next, end);
-    } else {
-      slicedPosts = filter.slice(0, end);
-      setEnd(end);
-    }
-    arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
-    setProducts(arrayForHoldingPosts);
-    console.log("sliced products", products);
+  const Paginate = () => {
+    // const indexOfLastItem = currentPage * postsPerPage;
+    // const indexOfFirstItem = indexOfLastItem - postsPerPage;
+    // const currentItem = products.slice(indexOfFirstItem, indexOfLastItem);
+    console.log("currentItem_", currentItem_);
+    setCurrentItem(currentItem_);
   };
 
   useEffect(() => {
     console.log("bala shop");
     //const queries = queryString.parse(queryurl);
     const queries = queryString.parse(props.location.search);
+    if (daintyproducts && daintyproducts.length <= 0 && allproducts.length <= 0) getAllProductDetails();
     getProductDetails();
-    getCategories();
+    Paginate();
+    //getCategories();// un comment if you need you see the category in side bar
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category]);
-  const handleShowMorePosts = () => {
-    console.log("page", next, next + postsPerPage);
-    loopWithSlice(0, next + postsPerPage);
-    setNext(next + postsPerPage);
-  };
+  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, currentItem_.length, products.length, allproducts.length, currentItem_ && currentItem_[0]?.p_category != query.get("category")]);
+
   const handleVisible = () => {
     setSmShow(true);
     setTimeout(() => {
@@ -290,7 +273,7 @@ const Shop = (props) => {
         p_tax: product.p_tax,
         p_quantity: 1,
         updateddate: new Date(),
-        p_price: product.p_price,
+        p_price: product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? product.p_price : product.p_net_product_price,
         id: uuid(),
       };
       console.log("befre", cartarray);
@@ -303,11 +286,12 @@ const Shop = (props) => {
         // localStorage.setItem("daintycart", JSON.stringify(cartarray));
         secureLocalStorage.setItem("daintycart", JSON.stringify(cartarray));
         setMessage("Item added to cart.");
+        UIStore.update((s) => {
+          s.cartcount = cartcount + 1;
+        });
         handleVisible();
       } else {
         updateCartQuantityfromls(data, JSON.parse(lsDaintyCart_));
-        setMessage("Item Updated to cart.");
-        handleVisible();
       }
       // history.push("/shop-login");
       // add to cart for Guest user - end
@@ -320,10 +304,10 @@ const Shop = (props) => {
         p_id: product.p_id,
         p_quantity: 1,
         updateddate: new Date(),
-        p_price: product.p_price,
+        p_price_c: product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? product.p_price : product.p_net_product_price,
         id: uuid(),
       };
-
+      console.log("cart items before db", data);
       fetch(config.service_url + "addCart", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data }) })
         .then((response) => response.json())
         .then((data) => {
@@ -356,9 +340,16 @@ const Shop = (props) => {
       let index = lsDaintyCart_.findIndex((fi) => fi.p_id == newproduct.p_id);
       lsDaintyCart_[index].p_quantity = parseInt(lsDaintyCart_[index].p_quantity) + 1;
       lsDaintyCart_[index].p_net_product_price = parseInt(lsDaintyCart_[index].p_price) * parseInt(lsDaintyCart_[index].quantity);
+      setMessage("Item Updated to cart.");
+      handleVisible();
     } else {
       console.log("second else");
       lsDaintyCart_.push(newproduct);
+      UIStore.update((s) => {
+        s.cartcount = cartcount + 1;
+      });
+      setMessage("Item Added to cart.");
+      handleVisible();
     }
     //localStorage.removeItem("daintycart");
     secureLocalStorage.removeItem("daintycart");
@@ -368,15 +359,17 @@ const Shop = (props) => {
   const applyFilter = (searchValue) => {
     console.log("searchvalue", searchValue);
     if (searchValue !== "") {
-      const filteredData = filter.filter((data) => {
+      const alldata = daintyproducts;
+      const filteredData = alldata.filter((data) => {
         console.log("searchdata", data);
         return Object.keys(data).some((k) => data[k]?.toString().toLowerCase().includes(searchValue.toLowerCase().trim()));
       });
 
       setProducts(filteredData);
     } else {
-      setProducts(products);
+      setProducts(allproducts);
     }
+    //Paginate();
   };
 
   const sortAsc = (arr, field) => {
@@ -392,11 +385,12 @@ const Shop = (props) => {
       return 0;
     });
     setProducts(ascdata);
+    Paginate();
   };
   const sortSale = (arr, field) => {
     const ascdata = arr.sort((a, b) => {
       console.log(arr, field);
-      if (a.p_price < a.p_net_product_price && a.p_price !== 0 && a.p_price !== "") {
+      if (a.p_price < a.p_net_product_price && a.p_price !== 0 && a.p_price != "" && a.p_price !== "") {
         console.log(a[field]);
         return -1;
       }
@@ -406,6 +400,7 @@ const Shop = (props) => {
       return 0;
     });
     setProducts(ascdata);
+    Paginate();
   };
   const sortDsc = (arr, field) => {
     const ascdata = arr.sort((a, b) => {
@@ -420,6 +415,7 @@ const Shop = (props) => {
       return 0;
     });
     setProducts(ascdata);
+    Paginate();
   };
 
   const getCategories = async () => {
@@ -507,21 +503,9 @@ const Shop = (props) => {
       console.log(finalDATa);
       setMcatFilterProd(finalDATa);
       setProducts(finalDATa);
-      // let sliced = finalDATa.slice(0, postsPerPage);
-      // _arrayForHoldingPosts = [..._arrayForHoldingPosts, ...sliced];
-      // setProducts(_arrayForHoldingPosts);
-      // setNext(postsPerPage);
-      // setEnd(0);
-      LoadMoreForFilteredProducts(true, finalDATa);
     } else {
-      // let sliced = filter.slice(0, postsPerPage);
-      // _arrayForHoldingPosts = [..._arrayForHoldingPosts, ...sliced];
-      // setProducts(_arrayForHoldingPosts);
-      // setNext(postsPerPage);
-      // setEnd(0);
       setMcatFilterProd(filter);
       setProducts(filter);
-      LoadMoreForFilteredProducts(true, filter);
     }
   };
 
@@ -539,7 +523,7 @@ const Shop = (props) => {
         <div className="dlab-bnr-inr overlay-black-light divbg" style={{ backgroundImage: "url(" + localStorage.getItem("bannerurl") + ")" }}>
           <div className="container">
             <div className="dlab-bnr-inr-entry">
-              <h1 className="text-white">{category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop"}</h1>
+              {searchFilter ? <h1 className="text-white">{"Search Result for : " + searchFilter}</h1> : <h1 className="text-white">{subcategory != undefined && subcategory != "" ? subcategory?.toUpperCase() : category != undefined ? (category == "all" ? "ALL PRODUCTS" : category.toUpperCase()) : "Shop"}</h1>}
 
               <div className="breadcrumb-row">
                 <ul className="list-inline">
@@ -641,12 +625,12 @@ const Shop = (props) => {
                               </Link>{" "}
                             </a>
                             <a class="dropdown-item" href="#">
-                              <Link to={"#"} onClick={(e) => sortDsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                              <Link to={"#"} onClick={(e) => sortAsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
                                 Name : A - Z
                               </Link>{" "}
                             </a>
                             <a class="dropdown-item" href="#">
-                              <Link to={"#"} onClick={(e) => sortAsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
+                              <Link to={"#"} onClick={(e) => sortDsc(products, "p_name")} className="px-3 btn btn-secondary btn-sm btnhover ">
                                 Name : Z - A
                               </Link>{" "}
                             </a>
@@ -654,7 +638,8 @@ const Shop = (props) => {
                         </div>
                       </div>
                     </div>
-                    <div className="col align-self-center">
+
+                    <div className="col align-self-center d-none">
                       <input type="text" className="form-control" placeholder="Filter Products" name="searchbox" id="searchbox" onChange={(e) => applyFilter(e.target.value)}></input>
                     </div>
                   </div>
@@ -663,25 +648,20 @@ const Shop = (props) => {
                   <div>
                     {!loading && (
                       <div className="p-2">
-                        {products.length + "/" + totalProduct} Products found.{" "}
-                        {end <= filter.length + postsPerPage && (
-                          <a href="#" className="p-2 bold text-primary" onClick={handleShowMorePosts}>
-                            <b> Load more</b>
-                          </a>
-                        )}
+                        {products.length}/{totalProduct} Products found.{" "}
                       </div>
                     )}
                     <div className="row m-1 ">
                       {!loading ? (
-                        !loading && products && products.length > 0 ? (
-                          products.map((product) => (
+                        !loading && currentItem && currentItem.length > 0 ? (
+                          currentItem.map((product) => (
                             <div className="col-lg-3">
                               <div className="item-box shop-item mr-1 style text-white shadow rounded">
                                 <div className="item-img1">
                                   <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>
                                     <div className="homeimagerecentdivimg" style={product.p_image ? { backgroundImage: "url(" + product.p_image + ")" } : { backgroundImage: "url(" + config.defaultimage + ")" }}></div>
                                   </Link>
-                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "" ? (
+                                  {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
                                     <>
                                       <div className="sale bg-primary text-light">Sale</div>
                                     </>
@@ -691,11 +671,13 @@ const Shop = (props) => {
                                 </div>
                                 <div className="item-info text-center">
                                   <p className="small mb-0 textoverflow1">
-                                    <h6 className="px-1">
+                                    <h6 className="px-1 py-0">
                                       <Link to={{ pathname: `/shop-product-details/${product.p_id}` }}>{product.p_name}</Link>
+                                      <br />
+                                      <span className="text-primary small">{product.p_maincategory + " | " + product.p_category}</span>
                                     </h6>{" "}
                                   </p>
-
+                                  {/* p_price is offer price  */}
                                   {product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? (
                                     <>
                                       <div className="text-primary pricefont">
@@ -716,7 +698,7 @@ const Shop = (props) => {
                                     </div>
                                   )}
                                   {product.p_quantity > 0 || product.p_quantity != 0 ? (
-                                    <button disabled={product.p_quantity > 0 ? false : true} onClick={(e) => addItemsToCart(product.p_id, product.p_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
+                                    <button disabled={product.p_quantity > 0 ? false : true} onClick={(e) => addItemsToCart(product.p_id, product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price != "" ? product.p_price : product.p_net_product_price, product)} className="btn btn-secondary btn-sm btnhover mb-3 px-1">
                                       <div className="d-flex align-items-center">
                                         <div className="pl-1">Add to cart</div>
                                         <div className="align-self-center">
@@ -735,14 +717,11 @@ const Shop = (props) => {
                           ))
                         ) : (
                           <div className="p-2">
-                            {" "}
-                            {allproducts.length} Products found.
-                            <br />
                             <div>
                               {" "}
-                              <Link className="btn btn-sm btnhover" onClick={(e) => getAllProductDetails()}>
+                              <a className="btn btn-sm btnhover" href="/shop?maincategory=all&category=all">
                                 View All
-                              </Link>
+                              </a>
                             </div>
                           </div>
                         )
@@ -755,23 +734,10 @@ const Shop = (props) => {
                         </div>
                       )}
                     </div>
-                    {!loading && (
-                      <div className="aligncenter">
-                        {!loading && <div className="p-1">{products.length + "/" + totalProduct} Products found.</div>}
-                        {end <= filter.length + postsPerPage && (
-                          <a href="#" className="dbtn-primary" onClick={handleShowMorePosts}>
-                            Load more
-                          </a>
-                        )}
-                        <span class="px-2"></span>
-                        {/* <Link className="btn btn-sm btnhover px-2" onClick={(e) => getAllProductDetails()}>
-                        View all Products
-                      </Link> */}
-                        <Link className="dbtn-primary" onClick={(e) => localStorage.setItem("queryurl", "maincategory=all&category=all")} to={{ pathname: "/shop", search: "maincategory=all&category=all" }}>
-                          View all Products
-                        </Link>
-                      </div>
-                    )}
+                    {/* 
+                    {!loading && <Pagination contentPerPage={postsPerPage} totalContent={products.length} paginate={paginate} currentPage={currentPage} productperpage={postsPerPage} />} */}
+
+                    {!loading && <Pagination dataPerPage={postsPerPage} totalDataCount={products.length} paginate={paginate} currentPage={currentPage} />}
                   </div>
                 </div>
               </div>
