@@ -304,10 +304,10 @@ const Shop = (props) => {
         p_id: product.p_id,
         p_quantity: 1,
         updateddate: new Date(),
-        p_price: product.p_price,
+        p_price_c: product.p_price < product.p_net_product_price && product.p_price !== 0 && product.p_price !== "0" && product.p_price !== "" ? product.p_price : product.p_net_product_price,
         id: uuid(),
       };
-
+      console.log("cart items before db", data);
       fetch(config.service_url + "addCart", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ data }) })
         .then((response) => response.json())
         .then((data) => {
