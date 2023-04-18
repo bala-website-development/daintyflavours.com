@@ -237,7 +237,7 @@ const Shop = (props) => {
   };
 
   useEffect(() => {
-    console.log("bala shop");
+    console.log("bala categorydes", props.location.categorydes);
     //const queries = queryString.parse(queryurl);
     const queries = queryString.parse(props.location.search);
     if (daintyproducts && daintyproducts.length <= 0 && allproducts.length <= 0) getAllProductDetails();
@@ -247,7 +247,7 @@ const Shop = (props) => {
     setLoading((loading) => !loading);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location?.searchFilter, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, currentItem_.length, products.length, allproducts.length, currentItem_ && currentItem_[0]?.p_category != query.get("category")]);
+  }, [props.location?.searchFilter, props.location?.categorydes, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, currentItem_.length, products.length, allproducts.length, currentItem_ && currentItem_[0]?.p_category != query.get("category")]);
 
   const handleVisible = () => {
     setSmShow(true);
@@ -599,7 +599,7 @@ const Shop = (props) => {
                     </aside>
                   </div>
                 </div>
-                <div className="p-2 text-center">{categoryDes === "undefined" ? "" : (categoryDes !== "undefined" || categoryDes !== undefined) && category !== "all" ? categoryDes : ""}</div>
+                <div className="p-2 text-center">{categoryDes === "undefined" ? "" : (categoryDes !== "undefined" || categoryDes !== undefined) && category !== "all" ? props.location.categorydes || categoryDes : ""}</div>
                 <div className="mb-4">
                   <div className="row border br30 p-2 m-0 bg-secondary-light">
                     <div className="col align-self-center bg-secondary-light">

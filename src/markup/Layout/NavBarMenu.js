@@ -212,7 +212,7 @@ const NavBarMenu = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) { });
+        .catch(function (error) {});
     };
     getOffer();
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
@@ -415,9 +415,12 @@ const NavBarMenu = () => {
                                         pathname: "/shop",
                                         search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category,
                                         bannerimage: mc?.banner_image,
+                                        categorydes: mc?.categorydes,
                                       }}
                                     >
-                                      <span className="text-nowrap">{mc?.category} {menuSubCategory && menuSubCategory.filter((f) => f.maincategory === mmc.maincategory && f.category === mc.category)?.length > 0 ? "»" : ""} </span>
+                                      <span className="text-nowrap">
+                                        {mc?.category} {menuSubCategory && menuSubCategory.filter((f) => f.maincategory === mmc.maincategory && f.category === mc.category)?.length > 0 ? "»" : ""}{" "}
+                                      </span>
                                     </Link>
 
                                     <ul class="list-unstyled" aria-labelledby={"navbarDropdownMenuAvatar" + mc.category}>
@@ -433,6 +436,7 @@ const NavBarMenu = () => {
                                                   pathname: "/shop",
                                                   search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category + "&subcategory=" + sm.subcategory,
                                                   bannerimage: mc?.banner_image,
+                                                  categorydes: mc?.categorydes,
                                                 }}
                                               >
                                                 <span className="text-nowrap">{sm?.subcategory}</span>
@@ -470,6 +474,7 @@ const NavBarMenu = () => {
                                     pathname: "/shop",
                                     search: "?brand=" + brand.brand,
                                     bannerimage: brand?.banner_image,
+                                    categorydes: brand?.categorydes,
                                   }}
                                 >
                                   <span className="text-nowrap">{brand?.brand}</span>

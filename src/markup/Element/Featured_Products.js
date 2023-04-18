@@ -99,8 +99,7 @@ const Featured_Product = (props) => {
                     data-size="xlarge"
                     className="w-100"
                     href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
-                    onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes)
-                      , localStorage.setItem("queryurl", "category=" + fProduct.category))}
+                    onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes), localStorage.setItem("queryurl", "category=" + fProduct.category))}
                     style={{
                       backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                       backgroundSize: "100%",
@@ -108,9 +107,7 @@ const Featured_Product = (props) => {
                       overflow: "hidden",
                     }}
                   >
-                    <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
-                      onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes)
-                        , localStorage.setItem("queryurl", "category=" + fProduct.category))}>
+                    <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image} onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes), localStorage.setItem("queryurl", "category=" + fProduct.category))}>
                       <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                         <span>
                           {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
@@ -124,8 +121,7 @@ const Featured_Product = (props) => {
                     data-size="large"
                     className="w-100"
                     href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
-                    onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes)
-                      , localStorage.setItem("queryurl", "category=" + fProduct.category))}
+                    onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes), localStorage.setItem("queryurl", "category=" + fProduct.category))}
                     style={{
                       backgroundImage: "url(" + fProduct.thumbnail_image + ")",
                       backgroundSize: "100%",
@@ -133,9 +129,7 @@ const Featured_Product = (props) => {
                       overflow: "hidden",
                     }}
                   >
-                    <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
-                      onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes)
-                        , localStorage.setItem("queryurl", "category=" + fProduct.category))}>
+                    <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image} onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes), localStorage.setItem("queryurl", "category=" + fProduct.category))}>
                       <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
                         <span>
                           {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
@@ -150,57 +144,53 @@ const Featured_Product = (props) => {
             )
           ) : // for mobile view
 
-            products && products.length > 0 ? (
-              products.map((fProduct, index) =>
-                index === 0 || index === 7 ? (
-                  <div
-                    data-role="tile"
-                    data-size="xlarge"
-                    className="w-100"
-                    style={{
-                      backgroundImage: "url(" + fProduct.thumbnail_image + ")",
-                      backgroundSize: "100%",
-                      backgroundSize: "cover",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
-                      onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes)
-                        , localStorage.setItem("queryurl", "category=" + fProduct.category))}>
-                      <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
-                        <span>
-                          {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
-                        </span>
-                      </div>
-                    </a>
-                  </div>
-                ) : (
-                  <div
-                    data-role="tile"
-                    data-size="large"
-                    className="w-100"
-                    style={{
-                      backgroundImage: "url(" + fProduct.thumbnail_image + ")",
-                      backgroundSize: "100%",
-                      backgroundSize: "cover",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image}
-                      onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes)
-                        , localStorage.setItem("queryurl", "category=" + fProduct.category))}>
-                      <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
-                        <span>
-                          {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
-                        </span>
-                      </div>
-                    </a>
-                  </div>
-                )
+          products && products.length > 0 ? (
+            products.map((fProduct, index) =>
+              index === 0 || index === 7 ? (
+                <div
+                  data-role="tile"
+                  data-size="xlarge"
+                  className="w-100"
+                  style={{
+                    backgroundImage: "url(" + fProduct.thumbnail_image + ")",
+                    backgroundSize: "100%",
+                    backgroundSize: "cover",
+                    overflow: "hidden",
+                  }}
+                >
+                  <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image} onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes), localStorage.setItem("queryurl", "category=" + fProduct.category))}>
+                    <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                      <span>
+                        {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              ) : (
+                <div
+                  data-role="tile"
+                  data-size="large"
+                  className="w-100"
+                  style={{
+                    backgroundImage: "url(" + fProduct.thumbnail_image + ")",
+                    backgroundSize: "100%",
+                    backgroundSize: "cover",
+                    overflow: "hidden",
+                  }}
+                >
+                  <a href={"/shop?category=" + fProduct.category + "&bannerimage=" + fProduct.banner_image} onClick={(e) => (localStorage.setItem("bannerurl", fProduct?.banner_image), localStorage.setItem("categorydes", fProduct?.categorydes == undefined ? "" : fProduct?.categorydes), localStorage.setItem("queryurl", "category=" + fProduct.category))}>
+                    <div className="p-1 py-3 font-weight-bold bg-primary-opacity text-white text-center">
+                      <span>
+                        {fProduct.category} <i className="fa fa-angle-double-right m-r10"></i>{" "}
+                      </span>
+                    </div>
+                  </a>
+                </div>
               )
-            ) : (
-              <span className="container row w-100">Loading...</span>
-            )}
+            )
+          ) : (
+            <span className="container row w-100">Loading...</span>
+          )}
         </div>
       </div>
       {/* not in use */}
