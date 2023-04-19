@@ -245,7 +245,7 @@ const Shop = (props) => {
     Paginate();
     //getCategories();// un comment if you need you see the category in side bar
     setLoading((loading) => !loading);
-
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location?.searchFilter, props.location?.categorydes, queryurl, localStorage.getItem("bannerurl"), query.get("category") != queryString.parse(queryurl)?.category, currentPage, currentItem_.length, products.length, allproducts.length, currentItem_ && currentItem_[0]?.p_category != query.get("category")]);
 
@@ -651,6 +651,7 @@ const Shop = (props) => {
                         {products.length}/{totalProduct} Products found.{" "}
                       </div>
                     )}
+                    {!loading && <Pagination dataPerPage={postsPerPage} totalDataCount={products.length} paginate={paginate} currentPage={currentPage} />}
                     <div className="row m-1 ">
                       {!loading ? (
                         !loading && currentItem && currentItem.length > 0 ? (

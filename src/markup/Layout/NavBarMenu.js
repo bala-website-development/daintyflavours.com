@@ -47,7 +47,7 @@ const NavBarMenu = () => {
   }
   const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(secureLocalStorage.getItem("daintycart")));
   const [toggleShow, setToggleShow] = useState(false);
-  const [cartDetails, setCartDetails] = useState(false);
+  const [cartDetails, setCartDetails] = useState([]);
   const [cartUpdated, setCartUpdated] = useState(localStorage.getItem("cartUpdated"));
   const [menuMainCategory, setMenuMainCategory] = useState([]);
   const [offer, setOffer] = useState([]);
@@ -291,9 +291,7 @@ const NavBarMenu = () => {
                 <i class="fas fa-shopping-cart d-none"></i>
                 <img src={scart} className="iconsize1" />
                 <span class="badge rounded-pill badge-notification mx-1">
-                  <span class="badge rounded-pill badge-notification bg-danger d-none">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
-
-                  <span class="badge rounded-pill badge-notification bg-danger"> {cartcount}</span>
+                  <span class="badge rounded-pill badge-notification bg-danger"> {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? cartcount : cartDetails && cartDetails?.length > 0 ? cartDetails.length : 0}</span>
                 </span>
               </Link>
 
