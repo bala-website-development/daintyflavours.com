@@ -47,7 +47,7 @@ const NavBarMenu = () => {
   }
   const [lsDaintyCart, setlsDaintyCart] = useState(JSON.parse(secureLocalStorage.getItem("daintycart")));
   const [toggleShow, setToggleShow] = useState(false);
-  const [cartDetails, setCartDetails] = useState(false);
+  const [cartDetails, setCartDetails] = useState([]);
   const [cartUpdated, setCartUpdated] = useState(localStorage.getItem("cartUpdated"));
   const [menuMainCategory, setMenuMainCategory] = useState([]);
   const [offer, setOffer] = useState([]);
@@ -212,7 +212,7 @@ const NavBarMenu = () => {
           console.log("cart details", data);
           setCartUpdated(false);
         })
-        .catch(function (error) { });
+        .catch(function (error) {});
     };
     getOffer();
     if (localStorage.getItem("uuid") !== undefined && localStorage.getItem("uuid") !== null) {
@@ -291,9 +291,7 @@ const NavBarMenu = () => {
                 <i class="fas fa-shopping-cart d-none"></i>
                 <img src={scart} className="iconsize1" />
                 <span class="badge rounded-pill badge-notification mx-1">
-                  <span class="badge rounded-pill badge-notification bg-danger d-none">{cartDetails && cartDetails.length > 0 ? cartDetails.length : 0}</span>
-
-                  <span class="badge rounded-pill badge-notification bg-danger"> {cartcount}</span>
+                  <span class="badge rounded-pill badge-notification bg-danger"> {localStorage.getItem("uuid") === undefined || localStorage.getItem("uuid") === null ? cartcount : cartDetails && cartDetails?.length > 0 ? cartDetails.length : 0}</span>
                 </span>
               </Link>
 
@@ -415,9 +413,12 @@ const NavBarMenu = () => {
                                         pathname: "/shop",
                                         search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category,
                                         bannerimage: mc?.banner_image,
+                                        categorydes: mc?.categorydes,
                                       }}
                                     >
-                                      <span className="text-nowrap">{mc?.category} {menuSubCategory && menuSubCategory.filter((f) => f.maincategory === mmc.maincategory && f.category === mc.category)?.length > 0 ? "»" : ""} </span>
+                                      <span className="text-nowrap">
+                                        {mc?.category} {menuSubCategory && menuSubCategory.filter((f) => f.maincategory === mmc.maincategory && f.category === mc.category)?.length > 0 ? "»" : ""}{" "}
+                                      </span>
                                     </Link>
 
                                     <ul class="list-unstyled" aria-labelledby={"navbarDropdownMenuAvatar" + mc.category}>
@@ -433,6 +434,7 @@ const NavBarMenu = () => {
                                                   pathname: "/shop",
                                                   search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category + "&subcategory=" + sm.subcategory,
                                                   bannerimage: mc?.banner_image,
+                                                  categorydes: mc?.categorydes,
                                                 }}
                                               >
                                                 <span className="text-nowrap">{sm?.subcategory}</span>
@@ -470,6 +472,7 @@ const NavBarMenu = () => {
                                     pathname: "/shop",
                                     search: "?brand=" + brand.brand,
                                     bannerimage: brand?.banner_image,
+                                    categorydes: brand?.categorydes,
                                   }}
                                 >
                                   <span className="text-nowrap">{brand?.brand}</span>

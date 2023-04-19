@@ -178,6 +178,7 @@ const Shopproduct = (props) => {
 
     getProductDetailsByProductID();
     getProductReviews();
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -332,7 +333,7 @@ const Shopproduct = (props) => {
                       <i className="icon-dot c-square"></i>
                     </div>
                     <div className="py-2">
-                      <div>{productDtl?.p_brand == "" || productDtl?.p_brand == undefined ? "" : " Brand Name - " + productDtl?.p_brand}</div>
+                      <div>{productDtl?.p_brand == "" || productDtl?.p_brand == undefined ? "" : " Brand Name - " + productDtl?.p_brand.toUpperCase()}</div>
                     </div>
                     <div className="py-2 d-none">
                       <div> Expiry Date - {productDtl.p_expirydate === "" || productDtl.p_expirydate === undefined || productDtl.p_expirydate === "0001-01-01" ? "N/A" : productDtl.p_expirydate}</div>
