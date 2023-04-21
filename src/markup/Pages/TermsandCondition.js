@@ -76,7 +76,7 @@ class About extends Component {
                   </div>
                 </div>
                 <div className="row sp30">
-                  <div className="col-lg-12 col-md-12 m-b30">
+                  <div className="col-lg-12 col-md-12 m-b30 d-none">
                     <div className="">
                       <p>{config.tc1}</p>
                       <p>{config.tc2}</p>
@@ -87,6 +87,7 @@ class About extends Component {
                       <p>{config.tc7}</p>
                     </div>
                   </div>
+                  <iframe src={config.termsandconditionurl} width="100%" height="900px" frameborder="0"></iframe>
                 </div>
 
                 <div className="row">
