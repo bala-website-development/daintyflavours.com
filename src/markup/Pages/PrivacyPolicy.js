@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, Component } from "react";
 import { Link } from "react-router-dom";
 import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
@@ -41,71 +41,74 @@ const teamInfo = [
   },
 ];
 
-class About extends Component {
-  render() {
-    return (
-      <div>
-        <Header active="about" />
+const Policy = (props) => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-        <div className="page-content bg-white">
-          <div className="dlab-bnr-inr" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
-            <div className="container">
-              <div className="dlab-bnr-inr-entry">
-                <h1 className="text-white">Privacy Policy</h1>
+  return (
+    <div>
+      <Header active="about" />
 
-                <div className="breadcrumb-row">
-                  <ul className="list-inline">
-                    <li>
-                      <Link to={"/"}>HOME</Link>
-                    </li>
-                    <li>Privacy Policy</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="page-content bg-white">
+        <div className="dlab-bnr-inr" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
+          <div className="container">
+            <div className="dlab-bnr-inr-entry">
+              <h1 className="text-white">Privacy Policy</h1>
 
-          <div className="content-block">
-            <div className="section-full bg-white content-inner">
-              <div className="container">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="section-head text-center">
-                      <h3>Privacy Policy</h3>
-                    </div>
-                  </div>
-                </div>
-                <div className="row sp30">
-                  <iframe src={config.privacypolicyurl} width="100%" height="900" frameborder="0"></iframe>
-                </div>
-              </div>
-            </div>
-
-            <div className="section-full  bg-white">
-              <div className="p-tb50">
-                <div className="container">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="section-head text-center">
-                        <h3>Thank you for reaching out to us</h3>
-                        <p>We love our customers, so feel free to contact us.</p>
-                        <Link to={"contact"} className="btn-secondry   btn btnhover btn-md">
-                          <i className="fas fas-cart"></i>Contact us
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* <OurPartners /> */}
+              <div className="breadcrumb-row">
+                <ul className="list-inline">
+                  <li>
+                    <Link to={"/"}>HOME</Link>
+                  </li>
+                  <li>Privacy Policy</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
 
-        <Footer />
-      </div>
-    );
-  }
-}
+        <div className="content-block">
+          <div className="section-full bg-white content-inner">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="section-head text-center">
+                    <h3>Privacy Policy</h3>
+                  </div>
+                </div>
+              </div>
+              <div className="row sp30">
+                <iframe src={config.privacypolicyurl} width="100%" height="900" frameborder="0"></iframe>
+              </div>
+            </div>
+          </div>
 
-export default About;
+          <div className="section-full  bg-white">
+            <div className="p-tb50">
+              <div className="container">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="section-head text-center">
+                      <h3>Thank you for reaching out to us</h3>
+                      <p>We love our customers, so feel free to contact us.</p>
+                      <Link to={"contact"} className="btn-secondry   btn btnhover btn-md">
+                        <i className="fas fas-cart"></i>Contact us
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* <OurPartners /> */}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Policy;
