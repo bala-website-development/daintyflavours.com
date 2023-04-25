@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import { TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
@@ -64,8 +65,8 @@ const Popupss = (props) => {
       .then((data) => {
         if (data.status === 200) {
           console.log("brands", data);
-          let _filter = data.data.filter((_d) => _d.type === "product" && _d.brand !== undefined);
-          // _filter.push({ Expiration: moment().add(1, "d") });
+          let _filter = data.data.filter((_d) => _d.type === "product" && _d.brand !== "undefined");
+          _filter.push({ Expiration: moment().add(1, "d") });
           localStorage.setItem("brand", JSON.stringify(_filter));
           setBrand(_filter);
         } else if (data.status === 400) {
@@ -170,8 +171,9 @@ const Popupss = (props) => {
                       JSON.parse(localStorage.getItem("brand"))
                         ?.filter((b) => b)
                         .map(
-                          (brand) =>
-                            brand !== null && (
+                          (brand, index) =>
+                            brand !== null &&
+                            brand.brand !== undefined && (
                               <div className="col-sm-2 m-b30">
                                 <div className="item-box shop-item style2">
                                   <div className="">
@@ -197,7 +199,7 @@ const Popupss = (props) => {
                                     <div className="cart-btn">
                                       <Link
                                         className="text-uppercase btn btnhover p-1 px-2 "
-                                        onClick={(e) => (localStorage.setItem("bannerurl", brand?.banner_image), localStorage.setItem("categorydes", brand?.categorydes == undefined ? "" : brand?.categorydes), localStorage.setItem("queryurl", "brand=" + brand.brand))}
+                                        onClick={(e) => (localStorage.setItem("bannerurl", brand?.banner_image), localStorage.setItem("categorydes", brand?.categorydes == undefined ? "" : brand?.categorydes), localStorage.setItem("queryurl", "brand=" + brand?.brand))}
                                         to={{
                                           pathname: "/shop",
                                           search: "?brand=" + brand.brand,

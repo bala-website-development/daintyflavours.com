@@ -462,8 +462,9 @@ const NavBarMenu = () => {
                       {JSON.parse(localStorage.getItem("brand"))
                         ?.filter((b) => b)
                         .map(
-                          (brand) =>
-                            brand !== null && (
+                          (brand, index) =>
+                            brand !== null &&
+                            brand.brand !== undefined && (
                               <li className="small">
                                 <Link
                                   className="dropdown-item text-uppercase"
