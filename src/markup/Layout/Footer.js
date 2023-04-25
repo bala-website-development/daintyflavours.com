@@ -90,7 +90,7 @@ class Footer extends Component {
                         <Link to={"/shop-register"}>Register</Link>
                       </li>
                       <li>
-                        <Link to={"/termsandcondition"}>Terms and Condition</Link>
+                        <Link to={"/termsandcondition"}>Terms and Conditions</Link>
                       </li>
                       <li>
                         <Link to={"/privacypolicy"}>Privacy Policy</Link>

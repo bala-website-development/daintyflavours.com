@@ -237,9 +237,9 @@ const Index1 = () => {
             </div>
             <div className="container my-4">
               {/* <OurPartners /> */}
-              <div className="section-head text-center">
+              <div className="section-head text-center ">
                 <h3>
-                  <a href={config.insta} target="_blank">
+                  <a href={config.insta} className="text-primary" target="_blank">
                     Find Us on Instagram
                   </a>
                 </h3>

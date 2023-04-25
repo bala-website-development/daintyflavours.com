@@ -51,14 +51,14 @@ class About extends Component {
           <div className="dlab-bnr-inr" style={{ backgroundImage: "url(" + config.bannerimg1 + ")" }}>
             <div className="container">
               <div className="dlab-bnr-inr-entry">
-                <h1 className="text-white">Terms and Condition</h1>
+                <h1 className="text-white">Terms and Conditions</h1>
 
                 <div className="breadcrumb-row">
                   <ul className="list-inline">
                     <li>
                       <Link to={"/"}>HOME</Link>
                     </li>
-                    <li>Terms and Condition</li>
+                    <li>Terms and Conditions</li>
                   </ul>
                 </div>
               </div>
@@ -71,7 +71,7 @@ class About extends Component {
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="section-head text-center">
-                      <h3>Terms and Condition</h3>
+                      <h3>Terms and Conditions</h3>
                     </div>
                   </div>
                 </div>
@@ -90,7 +90,7 @@ class About extends Component {
                   <iframe src={config.termsandconditionurl} width="100%" height="900px" frameborder="0"></iframe>
                 </div>
 
-                <div className="row">
+                <div className="row d-none">
                   <div className="col-lg-12">
                     <div className="section-head">
                       <div className="my-4 d-none">
