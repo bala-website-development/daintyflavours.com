@@ -316,7 +316,7 @@ const Shopchekout = () => {
                   </div>
                   <div className="form-group">
                     Phonenumber +91-
-                    <input id="phonenumber" type="tel" min={0} maxlength="10" name="phonenumber" placeholder="Phonenumber" defaultValue={userAddress[0]?.phonenumber} className="form-control" {...register("phonenumber")} required onChange={(e) => setPhonenumber(e.target.value)} />
+                    <input id="phonenumber" type="tel" min={0} maxlength="10" minlength="10" name="phonenumber" placeholder="Phonenumber" defaultValue={userAddress[0]?.phonenumber} className="form-control" {...register("phonenumber")} required onChange={(e) => setPhonenumber(e.target.value)} />
                   </div>
                   <div className="form-group">
                     Full Shipping Address
@@ -333,7 +333,7 @@ const Shopchekout = () => {
                     </div>
                     <div className="form-group col-md-6">
                       Pincode
-                      <input id="pincode" type="tel" min={0} maxlength="6" className="form-control" placeholder="Pincode" defaultValue={userAddress[0]?.pincode} name="pincode" {...register("pincode")} required onChange={(e) => setPincode(e.target.value)} />
+                      <input id="pincode" type="tel" min={0} maxlength="6" minlength="6" className="form-control" placeholder="Pincode" defaultValue={userAddress[0]?.pincode} name="pincode" {...register("pincode")} required onChange={(e) => setPincode(e.target.value)} />
                     </div>
                     <div className="form-group">
                       <select id="country" className="form-control" {...register("country")} required name="country" defaultValue={userAddress[0]?.country}>
@@ -366,7 +366,7 @@ const Shopchekout = () => {
                       </div>
                       <div className="form-group">
                         Phonenumber +91-
-                        <input id="user_phonenumber" type="tel" min={0} maxlength="10" name="user_phonenumber" disabled={checked} value={phonenumber} placeholder="Phonenumber" className="form-control" {...register("user_phonenumber")} required onChange={(e) => setPhonenumber(e.target.value)} />
+                        <input id="user_phonenumber" type="tel" min={0} maxlength="10" minlength="10" name="user_phonenumber" disabled={checked} value={phonenumber} placeholder="Phonenumber" className="form-control" {...register("user_phonenumber")} required onChange={(e) => setPhonenumber(e.target.value)} />
                       </div>
                       <div className="form-group">
                         Full Shipping Address
@@ -383,7 +383,7 @@ const Shopchekout = () => {
                         </div>
                         <div className="form-group col-md-6">
                           Pincode
-                          <input id="user_pincode" type="number" min={0} maxlength="6" className="form-control" disabled={checked} value={pincode} placeholder="Pincode" name="user_pincode" {...register("user_pincode")} required onChange={(e) => setPincode(e.target.value)} />
+                          <input id="user_pincode" type="number" maxlength="6" minlength="6" className="form-control" disabled={checked} value={pincode} placeholder="Pincode" name="user_pincode" {...register("user_pincode")} required onChange={(e) => setPincode(e.target.value)} />
                         </div>
                         <div className="form-group col-md-6">
                           <label>GST Number (Optional)</label>
