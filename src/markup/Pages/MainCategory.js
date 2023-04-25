@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
@@ -8,6 +8,10 @@ import config from "../../config.json";
 import Tab from "./../Pages/Tab";
 
 const Success = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div>
       <div>

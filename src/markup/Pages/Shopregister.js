@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "./../Layout/NavBarMenu";
 import Footer from "./../Layout/Footer";
@@ -49,6 +49,10 @@ const Shopregister = ({ history }) => {
         setValMessage("Something went wrong, Please try again later!!");
       });
   };
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>

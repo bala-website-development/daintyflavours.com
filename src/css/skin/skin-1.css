@@ -44,6 +44,9 @@ color: white !important;
 .divbg {
   background-color: var(--color-secondry) !important;
 }
+.divbg1 {
+  background-color: #d392b6 !important;
+}
 .footer-top {
   background-color: #fae3ee;
 }

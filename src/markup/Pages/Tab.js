@@ -11,6 +11,7 @@ const Popupss = (props) => {
   const [networkError, setNetworkError] = useState("");
   const [smShow, setSmShow] = useState(false);
   const [masterCategory, setMasterCategory] = useState([]);
+  const [brand, setBrand] = useState([]);
   const toggle = (tab) => {
     console.log("tab", tab);
     if (activeTab !== tab) setActiveTab(tab);
@@ -56,6 +57,26 @@ const Popupss = (props) => {
         console.log(networkError);
       });
   };
+  const getBrands = async () => {
+    console.log("entered");
+    await fetch(config.service_url + "getusersbrand")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === 200) {
+          console.log("brands", data);
+          let _filter = data.data.filter((_d) => _d.type === "product" && _d.brand !== undefined);
+          // _filter.push({ Expiration: moment().add(1, "d") });
+          localStorage.setItem("brand", JSON.stringify(_filter));
+          setBrand(_filter);
+        } else if (data.status === 400) {
+          //setMenuMainCategory([]);
+        }
+      })
+      .catch((err) => {
+        // setNetworkError("Something went wrong, Please try again later!!");
+        // console.log(networkError);
+      });
+  };
 
   useEffect(() => {
     getMainCategories();
@@ -68,7 +89,7 @@ const Popupss = (props) => {
   return (
     <div class="section-full bg-white pizza-full-menu" style={{ backgroundImage: "url(" + config.pagebgimage + ")", backgroundSize: "100%" }}>
       <div tabs>
-        <div className="bg-primary pizza-items">
+        <div className="divbg1 pizza-items">
           <div className="container">
             <ul className="nav nav-tabs pizza-items filters">
               {masterMainCategory &&
@@ -76,7 +97,7 @@ const Popupss = (props) => {
                   <li className="nav-item item">
                     <input type="radio" />
                     <Link
-                      className={classnames({ active: activeTab === index }, "item-icon-box nav-link")}
+                      className={classnames({ active: activeTab === index }, "item-icon-box nav-link px-1 ")}
                       onClick={() => {
                         toggle(index);
                       }}
@@ -102,20 +123,41 @@ const Popupss = (props) => {
                   <div className={activeTab === index ? "row tab-pane fade show active" : "row tab-pane fade"}>
                     {masterCategory &&
                       masterCategory
-                        ?.filter((filter) => filter.maincategory === mmc.maincategory && mmc.type === "product")
+                        ?.filter((filter) => filter.maincategory === mmc.maincategory && mmc.type === "product" && filter.maincategory != "brands")
                         ?.map((mc) => (
                           <div className="col-sm-2 m-b30">
                             <div className="item-box shop-item style2">
                               <div className="">
                                 <img src={mc.thumbnail_image ? mc.thumbnail_image : config.defaultimage} className="img-fluid " alt={config.websitetitle} />
                               </div>
+
                               <div className="item-info text-center">
-                                <span className="item-title font-weight-normal">
-                                  <Link to={{ pathname: "/shop", category: mc.category }}>{mc.category}</Link>
+                                <span className="font-weight-normal">
+                                  <Link
+                                    className="text-uppercase"
+                                    onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))}
+                                    to={{
+                                      pathname: "/shop",
+                                      search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category,
+                                      bannerimage: mc?.banner_image,
+                                      categorydes: mc?.categorydes,
+                                    }}
+                                  >
+                                    <span className="text-nowrap">{mc?.category}</span>
+                                  </Link>
                                 </span>
 
                                 <div className="cart-btn">
-                                  <Link to={{ pathname: "/shop", category: mc.category }} className="btn btnhover p-1 px-2">
+                                  <Link
+                                    className="text-uppercase btn btnhover p-1 px-2 "
+                                    onClick={(e) => (localStorage.setItem("bannerurl", mc?.banner_image), localStorage.setItem("categorydes", mc?.categorydes == undefined ? "" : mc?.categorydes), localStorage.setItem("queryurl", "maincategory=" + mmc.maincategory + "&category=" + mc.category))}
+                                    to={{
+                                      pathname: "/shop",
+                                      search: "?maincategory=" + mmc.maincategory + "&category=" + mc.category,
+                                      bannerimage: mc?.banner_image,
+                                      categorydes: mc?.categorydes,
+                                    }}
+                                  >
                                     View all <i className="ti-angle-double-right"></i>
                                   </Link>
                                 </div>
@@ -123,6 +165,54 @@ const Popupss = (props) => {
                             </div>
                           </div>
                         ))}
+
+                    {mmc.maincategory == "BRANDS" &&
+                      JSON.parse(localStorage.getItem("brand"))
+                        ?.filter((b) => b)
+                        .map(
+                          (brand) =>
+                            brand !== null && (
+                              <div className="col-sm-2 m-b30">
+                                <div className="item-box shop-item style2">
+                                  <div className="">
+                                    <img src={config.defaultimage} className="img-fluid " alt={config.websitetitle} />
+                                  </div>
+
+                                  <div className="item-info text-center">
+                                    <span className="font-weight-normal">
+                                      <Link
+                                        className="text-uppercase"
+                                        onClick={(e) => (localStorage.setItem("bannerurl", brand?.banner_image), localStorage.setItem("categorydes", brand?.categorydes == undefined ? "" : brand?.categorydes), localStorage.setItem("queryurl", "brand=" + brand.brand))}
+                                        to={{
+                                          pathname: "/shop",
+                                          search: "?brand=" + brand.brand,
+                                          bannerimage: brand?.banner_image,
+                                          categorydes: brand?.categorydes,
+                                        }}
+                                      >
+                                        <span className="text-nowrap">{brand?.brand}</span>
+                                      </Link>
+                                    </span>
+
+                                    <div className="cart-btn">
+                                      <Link
+                                        className="text-uppercase btn btnhover p-1 px-2 "
+                                        onClick={(e) => (localStorage.setItem("bannerurl", brand?.banner_image), localStorage.setItem("categorydes", brand?.categorydes == undefined ? "" : brand?.categorydes), localStorage.setItem("queryurl", "brand=" + brand.brand))}
+                                        to={{
+                                          pathname: "/shop",
+                                          search: "?brand=" + brand.brand,
+                                          bannerimage: brand?.banner_image,
+                                          categorydes: brand?.categorydes,
+                                        }}
+                                      >
+                                        View all <i className="ti-angle-double-right"></i>
+                                      </Link>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                        )}
                   </div>
                 </TabPane>
               ))}

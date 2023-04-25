@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -50,7 +50,10 @@ const Contact = () => {
       console.log(err);
     }
   };
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div>
       <Header active="contact" />
@@ -173,7 +176,7 @@ const Contact = () => {
                             <span>Submit</span>{" "}
                           </button>
                         </div>
-                        <div className="p-1 mt-1 border rounded">{successMsg}</div>
+                        <div className="p-1 mt-1  ">{successMsg}</div>
                       </div>
                     </form>
                   </div>
