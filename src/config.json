@@ -75,9 +75,9 @@
   "featuredproduct": 10,
   "newarrivalsproduct": 8,
   "saleproduct": 8,
-  "freeshippingcost": 3000,
+  "freeshippingcost": 35000,
   "freeshippingmessage": "Free shipping for the order over, ",
-  "shippingmessage": "Delivery Estimate with in India:  2 - 4 business days",
+  "shippingmessage": "Delivery Estimate with in India:  4 - 7 business days",
   "internationalshippingmessage": "Please contact us for internation shopping. Charges may vary.",
   "whatsappurl": "https://wa.me/919353373641",
   "taxpercentage": 0,
@@ -103,5 +103,11 @@
   "siteconstruction": false,
   "homeslider": true,
   "offertext": "Offers: No offers currently available.",
-  "showoffertext": true
+  "showoffertext": true,
+  "paymentgatewaylist_notinuse": "paytm,razorpay,qrupipay",
+  "paymentgateway": "qrupipay",
+  "qrcodeserviceurl": "https://upiqr.in/api/qr",
+  "paymentname": "Dainty Flavors",
+  "upicode1_notinuse": "9353373641-1@okbizaxis,xyz@oksbi",
+  "upicode": "9353373641-1@okbizaxis"
 }

@@ -56,11 +56,13 @@ const Shopcart = () => {
       }
     }
     //console.log("lsDaintyCartforupdatequatity", lsDaintyCart);
+    var newlsDaintyCart = lsDaintyCart;
     setlsDaintyCart(lsDaintyCart);
+
     //localStorage.removeItem("daintycart");
     secureLocalStorage.removeItem("daintycart");
     //localStorage.setItem("daintycart", JSON.stringify(lsDaintyCart_));
-    secureLocalStorage.setItem("daintycart", JSON.stringify(lsDaintyCart));
+    secureLocalStorage.setItem("daintycart", JSON.stringify(newlsDaintyCart));
     //console.log("lsDaintyCartforupdatequatitynew", JSON.stringify(lsDaintyCart));
     setCartUpdated((cartUpdated) => !cartUpdated);
   };
@@ -373,6 +375,29 @@ const Shopcart = () => {
                       </tr>
                       <tr>
                         <td>Shipping</td>
+                        {subTotal > config.freeshippingcost ? (
+                          <td class="">
+                            <i class="fa fa-inr"></i> {subTotal < config.freeshippingcost ? config.shippingcost : 0}
+                            <br />
+                            <span className={subTotal < config.freeshippingcost ? "small" : "d-none"}>
+                              {config.freeshippingmessage} <i class="fa fa-inr"></i> {config.freeshippingcost}
+                            </span>
+                          </td>
+                        ) : (
+                          <td>
+                            <i class="fa fa-inr"></i> {productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000.0) * config.shippingcost)}
+                            <br />
+                            <span className={"small"}>
+                              Total Product Weight: {productWeight / 1000.0} Kgs. ; Cost/Kg:{" "}
+                              <span className="text-nowrap">
+                                <i class="fa fa-inr"></i> {config.shippingcost}
+                              </span>
+                            </span>
+                          </td>
+                        )}
+                      </tr>
+                      <tr className="d-none">
+                        <td>Shipping</td>
                         <td class="d-none">
                           <i class="fa fa-inr"></i> {subTotal < config.freeshippingcost ? config.shippingcost : 0}
                           <br />
@@ -400,7 +425,7 @@ const Shopcart = () => {
                       <tr className="bg-primary-light text-primary">
                         <td>Total</td>
                         <td>
-                          <i class="fa fa-inr"></i> {Number(subTotal + (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000.0) * config.shippingcost))).toFixed(2)}
+                          <i class="fa fa-inr"></i> {Number(subTotal + (subTotal < config.freeshippingcost ? (productWeight / 1000.0 <= 1 ? config.shippingcost : Math.ceil((productWeight / 1000.0) * config.shippingcost)) : 0)).toFixed(2)}
                         </td>
                       </tr>
                     </tbody>

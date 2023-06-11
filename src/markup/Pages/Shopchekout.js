@@ -44,7 +44,7 @@ const Shopchekout = () => {
           .map((total) => {
             // return parseInt(total.p_net_product_price === undefined ? total.p_price : total.p_net_product_price) * total.p_quantity || 0;
             // return parseInt(total.p_price * total.p_quantity) + total.p_price * total.p_quantity * ((total.p_tax === undefined ? 0 : parseInt(total.p_tax)) / 100);
-            return parseInt(total.p_price < total.p_net_product_price && total.p_price !== 0 && total.p_price !== "0" && total.p_price !== "" ? total.p_price : total.p_net_product_price * total.p_quantity);
+            return parseInt(total.p_price < total.p_net_product_price && total.p_price !== 0 && total.p_price !== "0" && total.p_price !== "" ? total.p_price * total.p_quantity : total.p_net_product_price * total.p_quantity);
           })
           .reduce((a, b) => a + b, 0)
       );
@@ -56,7 +56,7 @@ const Shopchekout = () => {
           .reduce((a, b) => a + b, 0)
       );
       //setLoading((loading) => !loading);
-      console.log("cart details", data);
+      console.log("cart details", subTotal);
     } catch {}
   };
   const fetchCartDetails = () => {
@@ -196,17 +196,9 @@ const Shopchekout = () => {
       grosstotal: grossTotal,
       userid: userid_,
       usernotes: notes,
+      othernotes:"",
       billingaddress: userAddress[0],
       billingaddress: {
-        // address: !checked ? address : data.user_address === "" ? userAddress[0].address : data.user_address,
-        // name: !checked ? name : data.user_name === "" ? userAddress[0].name : data.user_name,
-        // email: !checked ? email : data.user_email === "" ? userAddress[0].email : data.user_email,
-        // city: !checked ? city : data.user_city === "" ? userAddress[0].city : data.user_city,
-        // state: !checked ? state : data.user_state === "" ? userAddress[0].state : data.user_state,
-        // pincode: !checked ? pincode : data.user_pincode === "" ? userAddress[0].pincode : data.user_pincode,
-        // phonenumber: !checked ? phonenumber : data.user_phonenumber === "" ? userAddress[0].phonenumber : data.user_phonenumber,
-        // gstnumber: !data.user_gstnumber === "" || undefined ? 0 : data.user_gstnumber,
-
         address: address,
         name: name,
         email: email,
@@ -288,9 +280,9 @@ const Shopchekout = () => {
             <form className="shop-form" onSubmit={handleSubmit(onSubmit)}>
               <div className="row">
                 <div className="row p-3">
-                  <div className="col-lg-8">
+                  <div className="col-lg-8  ">
                     <input type="checkbox" id="pickup" name="pickup" value="pickup" onClick={(e) => setPickup(e.target.checked)}></input>
-                    <label for="pickup">Check here, if you are picking the order</label>
+                   <label for="pickup" className="text-primary"><b>Check the box here, if you are picking the order</b></label>
                     {pickup ? " Pick up Address: " + config.pickup_address : ""}
                   </div>
                   <div className="col-lg-4">
@@ -441,7 +433,7 @@ const Shopchekout = () => {
                                 </div>
                               </td>
                               <td className="product-item-totle">
-                                <i class="fa fa-inr"></i> {parseInt(cart.p_price < cart.p_net_product_price && cart.p_price !== 0 && cart.p_price !== "0" && cart.p_price !== "" ? cart.p_price : cart.p_net_product_price * cart.p_quantity)}
+                                <i class="fa fa-inr"></i> {parseInt(cart.p_price < cart.p_net_product_price && cart.p_price !== 0 && cart.p_price !== "0" && cart.p_price !== "" ? cart.p_price * cart.p_quantity : cart.p_net_product_price * cart.p_quantity)}
                               </td>
                             </tr>
                           ))

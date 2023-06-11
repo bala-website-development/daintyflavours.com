@@ -10,90 +10,88 @@ const Payment = (props) => {
   const [paymentResponse, setPaymentResponse] = useState([]);
   useEffect(() => {
     if (orderidSession !== 0) {
-      displayRazorPay();
+      makepayment();
     } else {
-      console.log("out of Razor pay");
+      console.log("out of Paytm ");
       history.push("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function displayRazorPay() {
-    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-    if (!res) {
-      alert("Failed, please check your network");
-      return;
-    }
-    // call api for order api,  orderid, amount
-
-    let _data = {
-      //key_id: config.key_id,
-      //key_secret: config.key_secret,
-      amount: props.amount * 100, // get from order total
-      currency: "INR",
-      orderid: props.orderid, // get from orderid
-      payment_capture: 1,
-    };
-    let methodname = props.userLoggedin ? "payment" : "gpayment";
-    fetch(config.service_url + methodname, { method: "POST", headers: { "Content-Type": "application/json", authorization: localStorage.getItem("accessToken") }, body: JSON.stringify({ data: _data }) })
+  const getPaytm = (data) => {
+    let methodname = "payment_paytm";
+    return fetch(config.service_url + methodname, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("accessToken"),
+      },
+      body: JSON.stringify(data),
+    })
       .then((response) => response.json())
-      .then((data) => {
-        console.log("payment", data);
-        if (data.status === 200) {
-          // call payemnt
-          //setPaymentResponse(data.data);
-          console.log("orderid", data.data.id);
-          const options = {
-            amount: props.amount * 100,
-            currency: "INR",
-            name: config.title,
-            description: config.description,
-            image: config.faviconimage,
-            order_id: data.data.id,
-            handler: function (response) {
-              console.log("razorpay response", response);
-              UpdateOrderPayemntStatus(props.orderid, "Received", "Completed");
-              //call order api to update the order sucess
-              sendEmail(props.name, props.email, props.orderid, "Received", "Completed", props.amount, props.deliverymethod);
-              history.push("/success");
-              secureLocalStorage.setItem("daintycart", JSON.stringify([]));
-            },
-            prefill: {
-              name: props.name,
-              email: props.email,
-              contact: props.contactno,
-            },
-            notes: {
-              address: config.contact_address,
-            },
-            theme: {
-              color: config.themecolor,
-            },
-          };
-          const paymentobj = new window.Razorpay(options);
-          paymentobj.open();
-          paymentobj.on("payment.failed", function (response) {
-            // log failure message
-            UpdateOrderPayemntStatus(props.orderid, "Failed", "Pending");
-            // email service
-            sendEmail(props.name, props.email, props.orderid, "Failed", "Pending", props.amount, props.deliverymethod);
-            console.log("payement failed");
-            // update payment failed in order page
-          });
-
-          setorderidSession(0);
-        } else if (data?.status === 400) {
-          console.log("orderid", "400");
-          history.push("/shop-checkout");
-        } else {
-          console.log("orderid", "else");
-          history.push("/shop-checkout");
-        }
-      })
       .catch((err) => {
-        console.log(err.message);
+        console.log(err);
+        // log failure message
+        UpdateOrderPayemntStatus(props.orderid, "Failed", "Pending");
+        // email service
+        sendEmail(props.name, props.email, props.orderid, "Failed", "Pending", props.amount, props.deliverymethod);
+        console.log("payement failed");
       });
+  };
+  ////// paytm
+  function isDate(val) {
+    // Cross realm comptatible
+    return Object.prototype.toString.call(val) === "[object Date]";
   }
+
+  function isObj(val) {
+    return typeof val === "object";
+  }
+
+  function stringifyValue(val) {
+    if (isObj(val) && !isDate(val)) {
+      return JSON.stringify(val);
+    } else {
+      return val;
+    }
+  }
+
+  function buildForm({ action, params }) {
+    const form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", action);
+
+    Object.keys(params).forEach((key) => {
+      const input = document.createElement("input");
+      input.setAttribute("type", "hidden");
+      input.setAttribute("name", key);
+      input.setAttribute("value", stringifyValue(params[key]));
+      form.appendChild(input);
+    });
+
+    return form;
+  }
+
+  function post(details) {
+    const form = buildForm(details);
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
+  }
+
+  ////
+
+  const makepayment = () => {
+    getPaytm({ amount: props.amount, email: "vbalakumar.cse@gmail.com" }).then((res) => {
+      var information = {
+        action: "https://securegw-stage.paytm.in/order/process",
+        params: res,
+      };
+      post(information);
+    });
+  };
+
   function loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -157,8 +155,8 @@ const Payment = (props) => {
   };
   return (
     <div>
-      <button className="btn button-lg btnhover btn-block w-auto" type="button" onClick={displayRazorPay}>
-        Razorpay Payment is {paymentResponse?.data?.status ? paymentResponse?.data?.status : "pending. Please Wait. Do not Refresh"}
+      <button className="btn button-lg btnhover btn-block w-auto" type="button">
+        Paytm payment is {paymentResponse?.data?.status ? paymentResponse?.data?.status : "pending. Please Wait. Do not Refresh"}
       </button>
     </div>
   );
