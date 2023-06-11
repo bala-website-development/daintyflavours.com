@@ -105,9 +105,9 @@ const Payment = (props) => {
       paymentstatus: paymentstatus,
       paymentmethod: "UPI Online",
       orderstatus: orderstatus,
-      othernotes: upipaymentnotes
+      othernotes: upipaymentnotes,
     };
-console.log("update order", _data);
+    console.log("update order", _data);
     await fetch(config.service_url + "updateorderbyuser", {
       method: "POST",
       headers: { "Content-Type": "application/json", authorization: localStorage.getItem("accessToken") },
@@ -172,11 +172,13 @@ console.log("update order", _data);
         </div>
         <div />
         <br />
-        Notes/UPI Transaction ID : <input type="text" className="form-control" aria-required="true" placeholder="Please Share your notes / queries along with payment transaction id" size="30" name="upitransactionid" required id="upitransactionid" onChange={(e)=>setNotes(e.target.value)} />
+        Notes/UPI Transaction ID : <br/><textarea rows="6" className="form-control w-75" aria-required="true" placeholder="Enter your notes / transaction id" name="upitransactionid" required id="upitransactionid" onChange={(e) => setNotes(e.target.value)} ></textarea>
+
+        
         <br />
         <div>
           <button type="button" className="btn button-lg btnhover btn-block w-auto" onClick={(e) => UpdateOrderPayemntStatus(props.orderid, "Received", "Completed", notes)}>
-            Please Pay and Confirm your UPI payment here
+            Confirm your UPI payment
           </button>
         </div>
       </div>
