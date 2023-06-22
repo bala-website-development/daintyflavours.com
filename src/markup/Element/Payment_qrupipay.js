@@ -10,6 +10,8 @@ const Payment = (props) => {
   const [orderidSession, setorderidSession] = useState(props.orderid);
   const [paymentResponse, setPaymentResponse] = useState();
   const [notes, setNotes] = useState("");
+  const [upitransactionid, setUpitransactionid] = useState("");
+  const [msg, setMsg] = useState("");
   useEffect(
     () => {
       console.log("qrcode");
@@ -39,7 +41,7 @@ const Payment = (props) => {
         UpdateOrderPayemntStatus(props.orderid, "Failed", "Pending");
         // email service
         sendEmail(props.name, props.email, props.orderid, "Failed", "Pending", props.amount, props.deliverymethod);
-        console.log("payement failed");
+        console.log("payment failed");
       });
   };
   ////// paytm
@@ -99,13 +101,22 @@ const Payment = (props) => {
       document.body.appendChild(script);
     });
   }
-  const UpdateOrderPayemntStatus = async (orderid, paymentstatus, orderstatus, upipaymentnotes) => {
+  const UpdateOrderPayemntStatus = async (orderid, paymentstatus, orderstatus, upitransactionid, upinotes) => {
+    if (upitransactionid === "") {
+      setMsg("Please enter 12 digit UPI Transaction ID");
+      return;
+    }
+    if (upinotes === "") {
+      setMsg("Please enter notes/payment method (Gpay or Phone pay or UPI)");
+      return;
+    }
     let _data = {
       orderid: orderid,
       paymentstatus: paymentstatus,
       paymentmethod: "UPI Online",
       orderstatus: orderstatus,
-      othernotes: upipaymentnotes,
+      upitransactionid: upitransactionid,
+      othernotes: upinotes,
     };
     console.log("update order", _data);
     await fetch(config.service_url + "updateorderbyuser", {
@@ -153,12 +164,14 @@ const Payment = (props) => {
   return (
     <div>
       <div className="btn-block w-auto">
-        UPI payment is pending. Please do the payment for the below UPI and confirm below. <p>Once payment is done, we will verify and proceed with the shipping.</p>
+        <h2>
+          UPI payment is <b>pending</b>.<br /> Please do the payment for the below UPI and confirm below.{" "}
+        </h2>
+        <p>Once payment is done, we will verify and proceed with the shipping.</p>
       </div>
-      <br />
+
       <div align="center">
-        <br />
-        Name : {config.paymentname}
+        Name : <b>{config.paymentname}</b>
         <br />
         Payment UPI : <b>{config.upicode}</b>
         <br />
@@ -172,12 +185,15 @@ const Payment = (props) => {
         </div>
         <div />
         <br />
-        Notes/UPI Transaction ID : <br/><textarea rows="6" className="form-control w-75" aria-required="true" placeholder="Enter your notes / transaction id" name="upitransactionid" required id="upitransactionid" onChange={(e) => setNotes(e.target.value)} ></textarea>
-
-        
+        UPI Transaction ID :<input rows="6" className="form-control w-75" aria-required="true" maxlength="10" placeholder="Enter 12 digit Transaction ID (Ex: 123456789012)" name="upitransactionid" required id="upitransactionid" onChange={(e) => setUpitransactionid(e.target.value)}></input>
         <br />
+        Notes :<textarea rows="6" className="form-control w-75" aria-required="true" placeholder="Please enter your notes/payment method (Gpay or Phone pay or UPI)" name="notes" required id="notes" onChange={(e) => setNotes(e.target.value)}></textarea>
+        <br />
+        <span className="text-danger">{msg}</span>
+        <br />
+        <p></p>
         <div>
-          <button type="button" className="btn button-lg btnhover btn-block w-auto" onClick={(e) => UpdateOrderPayemntStatus(props.orderid, "Received", "Completed", notes)}>
+          <button type="button" className="btn button-lg btnhover btn-block w-auto" onClick={(e) => UpdateOrderPayemntStatus(props.orderid, "Received", "Completed", upitransactionid, notes)}>
             Confirm your UPI payment
           </button>
         </div>
