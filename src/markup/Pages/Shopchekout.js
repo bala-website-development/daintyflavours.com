@@ -196,7 +196,7 @@ const Shopchekout = () => {
       grosstotal: grossTotal,
       userid: userid_,
       usernotes: notes,
-      othernotes:"",
+      upinotes: "",
       billingaddress: userAddress[0],
       billingaddress: {
         address: address,
@@ -282,7 +282,9 @@ const Shopchekout = () => {
                 <div className="row p-3">
                   <div className="col-lg-8  ">
                     <input type="checkbox" id="pickup" name="pickup" value="pickup" onClick={(e) => setPickup(e.target.checked)}></input>
-                   <label for="pickup" className="text-primary"><b>Check the box here, if you are picking the order</b></label>
+                    <label for="pickup" className="text-primary">
+                      <b>Check the box here, if you are picking the order</b>
+                    </label>
                     {pickup ? " Pick up Address: " + config.pickup_address : ""}
                   </div>
                   <div className="col-lg-4">
