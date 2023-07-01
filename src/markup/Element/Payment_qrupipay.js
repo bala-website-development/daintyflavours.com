@@ -14,7 +14,7 @@ const Payment = (props) => {
   const [msg, setMsg] = useState("");
   useEffect(
     () => {
-      console.log("qrcode");
+      console.log("qrcode", upitransactionid);
       // qrcodeservice({ amount: props.amount, name: config.paymentname, vpa: config.upicode });
       //qrcodeservice({ name: config.paymentname, vpa: config.upicode, note: "Thanks for Shopping with Dainty Flavour" });
     },
@@ -38,7 +38,7 @@ const Payment = (props) => {
       .catch((err) => {
         console.log(err);
         // log failure message
-        UpdateOrderPayemntStatus(props.orderid, "Failed", "Pending");
+        UpdateOrderPayemntStatus(props.orderid, "Failed", "Pending", "", "");
         // email service
         sendEmail(props.name, props.email, props.orderid, "Failed", "Pending", props.amount, props.deliverymethod);
         console.log("payment failed");
@@ -103,12 +103,14 @@ const Payment = (props) => {
   }
   const UpdateOrderPayemntStatus = async (orderid, paymentstatus, orderstatus, upitransactionid, upinotes) => {
     if (upitransactionid === "") {
-      setMsg("Please enter 12 digit UPI Transaction ID");
+      setMsg("Please enter UPI Transaction ID/Phonenumber");
       return;
     }
+    // removing the condition
     if (upinotes === "") {
-      setMsg("Please enter notes/payment method (Gpay or Phone pay or UPI)");
-      return;
+      upinotes = "n/a";
+      // setMsg("Please enter notes/payment method (Gpay or Phone pay or UPI)");
+      // return;
     }
     let _data = {
       orderid: orderid,
@@ -116,9 +118,10 @@ const Payment = (props) => {
       paymentmethod: "UPI Online",
       orderstatus: orderstatus,
       upitransactionid: upitransactionid,
-      othernotes: upinotes,
+      upinotes: upinotes,
     };
     console.log("update order", _data);
+    setMsg("");
     await fetch(config.service_url + "updateorderbyuser", {
       method: "POST",
       headers: { "Content-Type": "application/json", authorization: localStorage.getItem("accessToken") },
@@ -163,19 +166,25 @@ const Payment = (props) => {
   };
   return (
     <div>
-      <div className="btn-block w-auto">
-        <h2>
-          UPI payment is <b>pending</b>.<br /> Please do the payment for the below UPI and confirm below.{" "}
-        </h2>
-        <p>Once payment is done, we will verify and proceed with the shipping.</p>
+      <div className="btn-block w-auto" align="left">
+        <h3>
+          UPI payment is <b>pending</b>.<br /> Please do the payment for the below UPI and confirm below. Once payment is done, we will verify and proceed with the shipping.
+        </h3>
       </div>
 
-      <div align="center">
-        Name : <b>{config.paymentname}</b>
-        <br />
-        Payment UPI : <b>{config.upicode}</b>
-        <br />
-        <span className="h1">₹. {props.amount}</span>
+      <div align="left">
+        <h2 className="p-1 py-0">
+          Name : <b> {config.paymentname}</b>
+        </h2>
+        <h2 className="p-1">
+          Payment UPI : <b className="text-primary text-nowrap"> {config.upicode}</b>
+        </h2>
+        <h2 className="p-1">
+          Amount :{" "}
+          <b>
+            <span className="text-primary ">₹. {props.amount}</span>{" "}
+          </b>
+        </h2>
         <div className=" row">
           <div className="col-lg-4"></div>
           <div className="col-lg-4 qrcodepayment d-none">
@@ -185,9 +194,9 @@ const Payment = (props) => {
         </div>
         <div />
         <br />
-        UPI Transaction ID :<input rows="6" className="form-control w-75" aria-required="true" maxlength="10" placeholder="Enter 12 digit Transaction ID (Ex: 123456789012)" name="upitransactionid" required id="upitransactionid" onChange={(e) => setUpitransactionid(e.target.value)}></input>
+        UPI Transaction ID / Phonenumber * :<input className="form-control w-75" type="number" placeholder="Enter Transaction ID/Phonenumber)" name="upitransactionid" id="upitransactionid" onChange={(e) => setUpitransactionid(e.target.value)}></input>
         <br />
-        Notes :<textarea rows="6" className="form-control w-75" aria-required="true" placeholder="Please enter your notes/payment method (Gpay or Phone pay or UPI)" name="notes" required id="notes" onChange={(e) => setNotes(e.target.value)}></textarea>
+        Notes (Optional) : <input rows="6" className="form-control w-75" aria-required="true" placeholder="Please enter payment method" name="notes" id="notes" onChange={(e) => setNotes(e.target.value)}></input>
         <br />
         <span className="text-danger">{msg}</span>
         <br />
